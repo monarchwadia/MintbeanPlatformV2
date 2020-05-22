@@ -1,21 +1,33 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
+const { User } = require('../db/models');
+
 module.exports = app => {
   passport.use(new LocalStrategy(
-    function(username, password, done) {
-      if (username === 'username' && password === 'password') {
-        done(null, { username: 'username' });
-      } else {
-        done(null, false, { message: 'Incorrect username + password combo.' })
-      }
-      // User.findOne({ username: username }, function(err, user) {
+    {
+      usernameField: 'email'
+    },
+    function(email, password, done) {
+      User.findOne({ where: { email }})
+        .then(user => {
+          // TODO: password bcrypt
+          if (user && user.password_hash === password) {
+            return done(null, user);
+          } else {
+            return done(null, false);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          return done(err);
+        });
+
+
+      // User.findOne({ where: { email } }, function(err, user) {
       //   if (err) { return done(err); }
-      //   if (!user) {
-      //     return done(null, false, { message: 'Incorrect username.' });
-      //   }
-      //   if (!user.validPassword(password)) {
-      //     return done(null, false, { message: 'Incorrect password.' });
+      //   if (!user || !user.validPassword(password)) {
+      //     return done(null, false, { message: 'Incorrect username/password combo.' });
       //   }
       //   return done(null, user);
       // });
@@ -29,15 +41,15 @@ module.exports = app => {
   // deserializing.
 
   passport.serializeUser(function(user, cb) {
-    cb(null, user.username);
+    cb(null, user.id);
   });
   
-  passport.deserializeUser(function(username, cb) {
-    cb(null, { username })
-    // db.users.findById(id, function (err, user) {
-    //   if (err) { return cb(err); }
-    //   cb(null, user);
-    // });
+  passport.deserializeUser(function(id, cb) {
+    // cb(null, { username })
+    User.findById(id, function (err, user) {
+      if (err) { return cb(err); }
+      cb(null, user);
+    });
   });
   
   app.use(passport.initialize());

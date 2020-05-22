@@ -8,8 +8,9 @@
     "start": "node ./index.js",
     "dev": "NODE_ENV=development nodemon ./index.js",
     "test": "jest",
-    "psql": "PGPASSWORD=password psql -U mintbean -d mintbean_development -h 0.0.0.0",
-    "sly": "NODE_ENV=development sequelize-cli"
+    "tdd": "jest --watch",
+    "sly": "NODE_ENV=development sequelize-cli",
+    "sly.test": "NODE_ENV=test sequelize-cli"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

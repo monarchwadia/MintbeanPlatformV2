@@ -2,15 +2,16 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 
+const initializePassport = require('./passport/initialize');
+
 const app = express();
 app.use(bodyParser.json());
 
-const initializePassport = require('./passport/initialize');
+initializePassport(app);
 
 const authRoute = require('./routers/auth');
 const userRoute = require('./routers/user');
 
-initializePassport(app);
 
 app.use('/auth', authRoute);
 app.use('/user', userRoute);

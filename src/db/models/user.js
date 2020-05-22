@@ -9,9 +9,23 @@ module.exports = (sequelize, DataTypes) => {
     github_id: DataTypes.STRING,
     twitter_id: DataTypes.STRING,
     stackoverflow_id: DataTypes.STRING
-  }, {});
+  }, 
+  {});
   User.associate = function(models) {
     // associations can be defined here
   };
+
+  // instance methods
+  Object.assign(User.prototype, {
+    toString: function() {
+      return this.toJSON();
+    },
+    toJSON: function() {
+      const values = Object.assign({}, this.get());
+      delete values.password_hash;
+      return values;
+    }
+  });
+  
   return User;
 };
