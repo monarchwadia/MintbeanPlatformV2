@@ -2,7 +2,7 @@ require('dotenv').config(); // this is important!
 
 const defaults = {
   username: 'mintbean',
-  password: process.env.DB_PASSWORD,
+  password: 'password',
   host: '127.0.0.1',
   dialect: 'postgres',
   operatorsAliases: false
@@ -16,6 +16,10 @@ module.exports = {
     database: 'mintbean_test'
   }),
   production: Object.assign({}, defaults, {
-    database: 'mintbean_production'
+    database: process.env.DB_DATABASE,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT
   })
 };

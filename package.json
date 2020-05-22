@@ -6,10 +6,10 @@
   "private": true,
   "scripts": {
     "start": "node ./index.js",
-    "dev": "nodemon ./index.js",
+    "dev": "NODE_ENV=development nodemon ./index.js",
     "test": "jest",
     "psql": "PGPASSWORD=password psql -U mintbean -d mintbean_development -h 0.0.0.0",
-    "sly": "sequelize-cli"
+    "sly": "NODE_ENV=development sequelize-cli"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

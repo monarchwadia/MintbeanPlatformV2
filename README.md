@@ -39,3 +39,12 @@ yarn install
 yarn dev
 ```
 
+## Environment Variables
+
+| Name        | Default    | Description | Environment |
+| ---- |          --- | ----------- | ----------- |
+| DB_DATABASE | None | Database to connect to | Production |
+| DB_USERNAME | None | DB username | Production |
+| DB_PASSWORD | None | Database to connect to | Production |
+| DB_HOST     | None | Database to connect to | Production |
+| DB_PORT     | None | Database to connect to | Production |
