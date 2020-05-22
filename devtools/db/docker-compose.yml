@@ -1,0 +1,23 @@
+# This file helps you bring up postgres
+version: "3.3"
+services:
+  db:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    volumes:
+      - "./data:/var/lib/postgresql/data"
+    networks:
+      - devnet
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+
+networks:
+  devnet:
+    driver: bridge

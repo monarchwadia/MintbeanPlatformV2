@@ -1,4 +1,5 @@
 const { Router } = require('express');
+require('../db/models');
 const passport = require('passport');
 
 const userRoute = new Router();
