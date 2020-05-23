@@ -1,18 +1,17 @@
 const request = require("supertest");
 const app = require("../src/app");
 const { User } = require('../src/db/models');
+const userFactory = require('../src/db/factories/user.factory');
 
 const TEST_EMAIL = 'test@mintbean.io';
 const TEST_PASSWORD = 'password';
 
 describe("Test the root path", () => {
   beforeEach(done => {
-    User.create({
+    User.create(userFactory.one({
       email: TEST_EMAIL,
-      password_hash: TEST_PASSWORD,
-      firstname: 'test',
-      lastname: 'user'
-    }).then(result => done())
+      password_hash: TEST_PASSWORD
+    })).then(result => done())
     .catch(err => {
       console.dir(err);
       done(err)
@@ -20,24 +19,25 @@ describe("Test the root path", () => {
   });
 
   afterEach(done => {
-    User.destroy({ where: {email: TEST_EMAIL }})
+    // delete all users
+    User.destroy({ where: {}})
       .then(result => done())
       .catch(err => {
         console.dir(err);
         done(err);
       })
-  })
+  });
 
   test("It should response the GET method", async () => {
     const response = await request(app).get("/");
     expect(response.statusCode).toBe(200);
-    expect(response.body.message).toBe('hello world');
+    expect(response.body.message).toBe('Welcome to the Mintbean Platform API');
   });
 
   test("It should authenticate", async () => {
     const response = await request(app)
-    .post("/auth/login")
-    .send({ email: TEST_EMAIL, password: TEST_PASSWORD });
+      .post("/auth/login")
+      .send({ email: TEST_EMAIL, password: TEST_PASSWORD });
 
     expect(response.statusCode).toBe(200);
   });

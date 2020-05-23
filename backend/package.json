@@ -8,7 +8,7 @@
     "start": "node ./index.js",
     "dev": "NODE_ENV=development nodemon ./index.js",
     "test": "jest",
-    "tdd": "jest --watch",
+    "tdd": "jest --watch --runInBand --detectOpenHandles",
     "sly": "NODE_ENV=development sequelize-cli",
     "sly.test": "NODE_ENV=test sequelize-cli"
   },
@@ -22,6 +22,7 @@
     "sequelize": "^5.21.10"
   },
   "devDependencies": {
+    "faker": "^4.1.0",
     "jest": "^26.0.1",
     "nodemon": "^2.0.4",
     "sequelize-cli": "^5.5.1",

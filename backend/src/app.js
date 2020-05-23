@@ -18,7 +18,7 @@ app.use('/user', userRoute);
 
 app.get("/", (req, res) => {
   res.json({
-    message: 'hello world'
+    message: 'Welcome to the Mintbean Platform API'
   })
 });
 
