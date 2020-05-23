@@ -7,3 +7,5 @@
 @function hstep($degree) {
   @return $horizontal-cadence * $degree;
 }
+
+$header-height: vstep(12)

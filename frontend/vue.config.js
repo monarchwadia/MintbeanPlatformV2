@@ -2,10 +2,10 @@
 module.exports = {
   // options...
   devServer: {
-    port: 3001,
+    port: process.env.PORT || 3000,
     proxy: {
       "^/api/v1": {
-        target: "http://localhost:3000",
+        target: "http://localhost:3001",
         changeOrigin: true,
         secure: false,
         pathRewrite: { "^/api/v1": "/api/v1" },

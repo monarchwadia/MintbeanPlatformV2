@@ -1,21 +1,65 @@
 <template>
-  <div id="nav" :class="{ ['u-center']: isHome }">
-    <router-link to="/">Home</router-link>
-    | <router-link to="/for-educators">For Educators</router-link>
-    <span v-if="isLoggedIn">
-      | {{username}} | <mb-a :href="logoutUrl">Log Out</mb-a>
-    </span>
-    <span v-else-if="!loginUrl"><!-- Waiting for login URL to arrive --></span>
-    <span v-else>
-      | <mb-a :href="loginUrl">Log In</mb-a>
-      | <mb-a :href="registerUrl">Register</mb-a>
-    </span>
+  <div :class="{ ['u-center']: isHome, nav: true }">
+    <router-link to="/">
+      <div class="nav-item">
+        Home
+      </div>
+    </router-link>
+    <router-link to="/for-educators">
+      <div class="nav-item">
+        For Educators
+      </div>
+    </router-link>
+    <router-link to="/auth/logout" v-if="isLoggedIn">
+      <div class="nav-item">
+        Log Out
+      </div>
+    </router-link>
+    <router-link to="/auth/login" v-if="!isLoggedIn">
+      <div class="nav-item">
+        Log In
+      </div>
+    </router-link>
+    <router-link to="/auth/register" v-if="!isLoggedIn">
+      <div class="nav-item">
+        Register
+      </div>
+    </router-link>
   </div>
 </template>
 
-<style scoped>
-.u-center {
-  text-align: center;
+<style lang="scss" scoped>
+@import "../styles/colors";
+@import "../styles/dimensions";
+
+.nav {
+  padding: 0;
+  margin: auto;
+  max-width: 100%;
+  background-color: $darker;
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: $header-height;
+  margin-bottom: 0;
+  padding-bottom: 0;
+
+  .nav-item {
+    $hpadding: 20px;
+    display: inline-block;
+    height: $header-height;
+    line-height: $header-height;
+    padding-left: $hpadding;
+    padding-right: $hpadding;
+    // background-color: Red;
+    margin: auto;
+
+    & > * {
+        height: 100%;
+        width: 100%;
+        color: red;
+    }
+  }
 }
 </style>
 
