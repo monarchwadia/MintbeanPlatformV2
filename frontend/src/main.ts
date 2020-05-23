@@ -3,13 +3,16 @@ import Vuex, { Store } from "vuex";
 
 import App from "./App.vue";
 import router from "./router";
-import { createStore, MbState } from "./store";
+import { createStore } from "./store";
 
 import mbA from "./components/mb-a.vue";
 import mbNav from "./components/mb-nav.vue";
 
 import "./styles/app.scss";
 import { AuthService } from './services/authService';
+import { MbState } from './types/MbState';
+import { ApiService } from './services/apiService';
+import { MbContext } from './types/MbContext';
 
 Vue.use(Vuex);
 
@@ -19,9 +22,12 @@ declare global {
   }
 }
 
-const authService = new AuthService();
+// create the store
+const apiService = new ApiService();
+const authService = new AuthService(apiService);
+const context: MbContext = { apiService, authService }
+const store = createStore(context);
 
-const store = createStore(authService);
 window.store = store;
 
 Vue.config.productionTip = false;

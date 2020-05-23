@@ -1,11 +1,11 @@
-export class AuthService {
-  checkAuth(): Promise<boolean> {
-    //TODO: build
-    return Promise.resolve(false);
-  }
+import { MbUser } from '@/types/MbUser';
+import { ApiService } from './apiService';
 
-  getUser(): Promise<any> {
-    //TODO: build
-    return Promise.resolve({});
+export class AuthService {
+  constructor(private apiService: ApiService) {
+  }
+  checkAuth(): Promise<MbUser> {
+    return this.apiService.get('/api/v1/auth/check')
+      .then(resp => resp.data);
   }
 }

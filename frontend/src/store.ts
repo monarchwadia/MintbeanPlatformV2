@@ -1,19 +1,8 @@
 import Vuex, { MutationTree, ActionTree } from "vuex";
 
 import { AuthService } from "./services/authService";
-
-export type MbUser = {
-  firstname: string;
-  lastname: string;
-  email: string;
-};
-
-export type MbState = {
-  user?: MbUser;
-  loginUrl?: string;
-  logoutUrl?: string;
-  registerUrl?: string;
-};
+import { MbState } from './types/MbState';
+import { MbContext } from './types/MbContext';
 
 const state: MbState = {
   user: undefined,
@@ -45,7 +34,7 @@ const createActions: (authservice: AuthService) => ActionTree<MbState, MbState> 
 
     if (isAuthenticated) {
       try {
-        user = await authService.getUser();
+        user = await authService.checkAuth();
       } catch (e) {
         console.error("Auth passed, but failed to fetch user data.", e);
       }
@@ -59,9 +48,12 @@ const createActions: (authservice: AuthService) => ActionTree<MbState, MbState> 
   }
 })
 
-export const createStore = (authService: AuthService) =>
-  new Vuex.Store({
+export const createStore = (mbContext: MbContext) => {
+  const { authService } = mbContext;
+
+  return new Vuex.Store({
     state,
     mutations,
     actions: createActions(authService)
   });
+}
