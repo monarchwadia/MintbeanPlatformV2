@@ -2,7 +2,7 @@ const app = require("./src/app");
 
 process.on('unhandledRejection', (reason, p) => {
   console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
-  console.dir(error.stack);
+  console.dir(reason.stack);
   // application specific logging, throwing an error, or other logic here
 });
 

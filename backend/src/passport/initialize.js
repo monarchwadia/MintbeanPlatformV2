@@ -45,11 +45,11 @@ module.exports = app => {
   });
   
   passport.deserializeUser(function(id, cb) {
-    // cb(null, { username })
-    User.findById(id, function (err, user) {
-      if (err) { return cb(err); }
-      cb(null, user);
-    });
+    console.log("Inside deserialize user", id);
+
+    User.findByPk(id)
+      .then(user => cb(null, user))
+      .catch(err => cb(err));
   });
   
   app.use(passport.initialize());

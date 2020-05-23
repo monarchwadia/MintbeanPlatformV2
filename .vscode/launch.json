@@ -8,8 +8,9 @@
       "type": "node",
       "request": "launch",
       "name": "Nodemon",
-      "runtimeExecutable": "${workspaceFolder}/node_modules/nodemon/bin/nodemon.js",
-      "program": "${workspaceFolder}/index.js",
+      "runtimeExecutable": "${workspaceFolder}/backend/node_modules/nodemon/bin/nodemon.js",
+      "program": "${workspaceFolder}/backend/index.js",
+      "cwd": "${workspaceFolder}/backend",
       "restart": true,
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
@@ -21,12 +22,12 @@
       "type": "node",
       "name": "TDD",
       "request": "launch",
-      "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+      "program": "${workspaceFolder}/backend/node_modules/jest/bin/jest",
       "args": [
         "--runInBand",
         "--watch"
       ],
-      "cwd": "${workspaceFolder}",
+      "cwd": "${workspaceFolder}/backend",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "disableOptimisticBPs": true

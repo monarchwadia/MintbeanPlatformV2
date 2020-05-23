@@ -1,4 +1,4 @@
-const request = require("supertest");
+const supertest = require("supertest");
 const app = require("../src/app");
 const { User } = require('../src/db/models');
 const userFactory = require('../src/db/factories/user.factory');
@@ -6,8 +6,12 @@ const userFactory = require('../src/db/factories/user.factory');
 const TEST_EMAIL = 'test@mintbean.io';
 const TEST_PASSWORD = 'password';
 
+let agent = null;
+
 describe("Test the root path", () => {
   beforeEach(done => {
+    agent = supertest.agent(app);
+
     User.create(userFactory.one({
       email: TEST_EMAIL,
       password_hash: TEST_PASSWORD
@@ -28,32 +32,43 @@ describe("Test the root path", () => {
       })
   });
 
-  test("It should response the GET method", async () => {
-    const response = await request(app).get("/");
-    expect(response.statusCode).toBe(200);
-    expect(response.body.message).toBe('Welcome to the Mintbean Platform API');
-  });
-
   test("It should authenticate", async () => {
-    const response = await request(app)
+    const loginResponse = await agent
       .post("/auth/login")
-      .send({ email: TEST_EMAIL, password: TEST_PASSWORD });
+      .send({ email: TEST_EMAIL, password: TEST_PASSWORD })
 
-    expect(response.statusCode).toBe(200);
+    expect(loginResponse.statusCode).toBe(200);
+    expect(loginResponse.body.email).toBe(TEST_EMAIL);
+    expect(loginResponse.body.password).toBeFalsy();
+
+    const selfResponse = await agent
+      .get("/auth/self")
+      .send();
+
+    expect(selfResponse.statusCode).toBe(200);
+    expect(selfResponse.body.email).toBe(TEST_EMAIL);
+    expect(loginResponse.body.password).toBeFalsy();
+
+    const logoutResponse = await agent
+      .post("/auth/logout")
+      .send();
+    
+    expect(logoutResponse.statusCode).toBe(200);
+
+    const selfResponseAfterLogout = await agent
+    .get("/auth/self")
+    .send();
+
+    console.log(selfResponseAfterLogout.body);
+
+    expect(selfResponseAfterLogout.statusCode).toBe(401);
   });
 
   test("It should fail authentication with the wrong password", async () => {
-    const response = await request(app)
+    const response = await agent
     .post("/auth/login")
     .send({ email: TEST_EMAIL, password: 'wrong-password' });
 
     expect(response.statusCode).toBe(401);
   });
-
-  // test("It should get the username from the user route", async () => {
-  //   const response = await request(app).get("/user");
-  //   console.log("Response body", response.body)
-  //   expect(response.statusCode).toBe(400);
-  //   expect(response.body.username).toBe('username')
-  // })
 });
