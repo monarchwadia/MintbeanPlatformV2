@@ -33,10 +33,6 @@ th, td {
 
 // header styles
 
-h1, h2, h3, h4, h5, h6, p, div, ul, ol, table {
-  margin-bottom: vstep(4);
-}
-
 h1 { font-size: vstep(7); }
 h2 { font-size: vstep(5); }
 h3 { font-size: vstep(3); }
@@ -67,5 +63,4 @@ li {
   padding: vstep(3) hstep(0);
   padding-top: $header-height;
   margin: auto;
-  max-width: 700px;
 }

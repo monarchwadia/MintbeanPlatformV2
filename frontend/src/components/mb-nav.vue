@@ -5,23 +5,18 @@
         Home
       </div>
     </router-link>
-    <router-link to="/for-educators">
-      <div class="nav-item">
-        For Educators
-      </div>
-    </router-link>
     <router-link to="/auth/logout" v-if="isLoggedIn">
-      <div class="nav-item">
+      <div class="nav-item u-right">
         Log Out
       </div>
     </router-link>
     <router-link to="/auth/login" v-if="!isLoggedIn">
-      <div class="nav-item">
+      <div class="nav-item u-right">
         Log In
       </div>
     </router-link>
     <router-link to="/auth/register" v-if="!isLoggedIn">
-      <div class="nav-item">
+      <div class="nav-item u-right">
         Register
       </div>
     </router-link>
@@ -59,6 +54,10 @@
         width: 100%;
         color: red;
     }
+  }
+
+  .u-right {
+    float: right;
   }
 }
 </style>
