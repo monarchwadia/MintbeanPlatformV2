@@ -1,35 +1,18 @@
 const supertest = require("supertest");
 const app = require("../src/app");
-const { User } = require('../src/db/models');
-const userFactory = require('../src/db/factories/user.factory');
-
-const TEST_EMAIL = 'test@mintbean.io';
-const TEST_PASSWORD = 'password';
+const { TEST_EMAIL, TEST_PASSWORD } = require("./test.constants");
+const userCreated = require('./stories/user.created');
 
 let agent = null;
 
 describe("Test the root path", () => {
   beforeEach(done => {
     agent = supertest.agent(app);
-
-    User.create(userFactory.one({
-      email: TEST_EMAIL,
-      password_hash: TEST_PASSWORD
-    })).then(result => done())
-    .catch(err => {
-      console.dir(err);
-      done(err)
-    });
+    userCreated.beforeEach(done);
   });
 
   afterEach(done => {
-    // delete all users
-    User.destroy({ where: {}})
-      .then(result => done())
-      .catch(err => {
-        console.dir(err);
-        done(err);
-      })
+    userCreated.afterEach(done);
   });
 
   test("It should authenticate", async () => {
