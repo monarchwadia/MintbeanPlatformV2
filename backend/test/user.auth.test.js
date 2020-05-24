@@ -59,8 +59,6 @@ describe("Test the root path", () => {
     .get("/auth/self")
     .send();
 
-    console.log(selfResponseAfterLogout.body);
-
     expect(selfResponseAfterLogout.statusCode).toBe(401);
   });
 
