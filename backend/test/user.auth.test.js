@@ -5,7 +5,7 @@ const userCreated = require('./stories/user.created');
 
 let agent = null;
 
-describe("Test the root path", () => {
+describe("User route", () => {
   beforeEach(done => {
     agent = supertest.agent(app);
     userCreated.beforeEach(done);
@@ -15,7 +15,15 @@ describe("Test the root path", () => {
     userCreated.afterEach(done);
   });
 
-  test("It should authenticate", async () => {
+  test("It should login and logout successfully", async () => {
+    // Should start logged-out
+    const selfResponseBeforeLogin = await agent
+    .get("/api/v1/auth/self")
+    .send();
+
+    expect(selfResponseBeforeLogin.statusCode).toBe(401);
+
+    // Login
     const loginResponse = await agent
       .post("/api/v1/auth/login")
       .send({ email: TEST_EMAIL, password: TEST_PASSWORD })
@@ -24,6 +32,7 @@ describe("Test the root path", () => {
     expect(loginResponse.body.email).toBe(TEST_EMAIL);
     expect(loginResponse.body.password).toBeFalsy();
 
+    // Check session
     const selfResponse = await agent
       .get("/api/v1/auth/self")
       .send();
@@ -32,12 +41,14 @@ describe("Test the root path", () => {
     expect(selfResponse.body.email).toBe(TEST_EMAIL);
     expect(loginResponse.body.password).toBeFalsy();
 
+    // Logout
     const logoutResponse = await agent
       .post("/api/v1/auth/logout")
       .send();
     
     expect(logoutResponse.statusCode).toBe(200);
 
+    // Check that we are logged out again
     const selfResponseAfterLogout = await agent
     .get("/api/v1/auth/self")
     .send();

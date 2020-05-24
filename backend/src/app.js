@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const authRoute = require('./routers/auth');
 const userRoute = require('./routers/user');
+const mbEventRoute = require('./routers/mb-event');
 const initializePassport = require('./passport/initialize');
 
 const app = express();
@@ -19,6 +20,7 @@ initializePassport(app);
 const rootRouter = new express.Router();
 rootRouter.use('/auth', authRoute);
 rootRouter.use('/user', userRoute);
+rootRouter.use('/mb-event', mbEventRoute);
 rootRouter.get("/", (req, res) => {
   res.json({
     message: 'Welcome to the Mintbean Platform API'

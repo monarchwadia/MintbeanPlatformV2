@@ -1,13 +1,11 @@
-function fill (props) {
-  const obj = {};
-
+function fill (props, obj={}) {
   Object.entries(props).forEach(([key, definition]) => {
     switch (typeof definition) {
       case 'function':
-        obj[key] = definition();
+        obj[key] = definition(obj);
         break;
       case 'object':
-        obj[key] = fill(definition);
+        obj[key] = fill(definition, obj);
         break;
       default:
         obj[key] = definition;
