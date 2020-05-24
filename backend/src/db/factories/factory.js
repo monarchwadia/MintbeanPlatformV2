@@ -1,5 +1,12 @@
 function fill (props, obj={}) {
   Object.entries(props).forEach(([key, definition]) => {
+    // since typeof null === 'object', it can't be handled by "case 'object'" below.
+    // handling it as a special case here.
+    if (definition === null) {
+      obj[key] = definition;
+      return;
+    }
+
     switch (typeof definition) {
       case 'function':
         obj[key] = definition(obj);
