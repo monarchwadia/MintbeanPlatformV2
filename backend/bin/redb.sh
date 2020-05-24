@@ -7,7 +7,10 @@ read go_ahead
 if [ $go_ahead == "y" ]
 then
   yarn sly db:create;
-  yarn sly db:drop && yarn sly db:create && yarn sly db:migrate && yarn sly db:seed:all;
+  yarn sly db:drop && yarn sly db:create;
+  # Create UUID extension, which requires superuser
+  PGPASSWORD=password psql -U postgres -d mintbean_development -h 0.0.0.0 -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"';
+  yarn sly db:migrate && yarn sly db:seed:all;
 else
   echo 'Aborted.'
 fi

@@ -2,6 +2,7 @@ const faker = require('faker');
 const factory = require('./factory');
 
 module.exports = factory({
+  // id: () => uuid(),
   title: () => faker.name.firstName(),
   description: () => faker.internet.email(),
   cover_image_url: () => faker.name.lastName(),

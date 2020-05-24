@@ -11,5 +11,8 @@ module.exports = (sequelize, DataTypes) => {
   MbEvent.associate = function(models) {
     // associations can be defined here
   };
+
+  // MbEvent.beforeCreate(mbEvent => mbEvent.id = uuid());
+
   return MbEvent;
 };

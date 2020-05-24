@@ -15,17 +15,15 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
   };
 
-  // instance methods
-  Object.assign(User.prototype, {
-    toString: function() {
-      return this.toJSON();
-    },
-    toJSON: function() {
-      const values = Object.assign({}, this.get());
-      delete values.password_hash;
-      return values;
-    }
-  });
+  User.prototype.toString = function() {
+    return this.toJSON();
+  }
+
+  User.prototype.toJSON = function() {
+    const values = Object.assign({}, this.get());
+    delete values.password_hash;
+    return values;
+  }
   
   return User;
 };
