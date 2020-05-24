@@ -2,7 +2,7 @@ First:
 ✔ LIST /mb-event @done(20-05-24 08:44)
 ✔ GET /project/:id @done(20-05-24 18:58)
 ✔ (loggedin) CREATE /project @done(20-05-24 19:24)
-☐ (loggedin) UPDATE /project/:id
+✔ (loggedin) UPDATE /project/:id @done(20-05-24 19:34)
 ☐ (loggedin) VOTE /project/:id/vote
 ☐ Home page: Show next hackathons
 ☐ Hackathon page: show (fetch this from existing array)

@@ -95,7 +95,7 @@ describe("Projects route", () => {
       });
 
       it('can get all of the projects of a logged-in user', async done => {
-        // fetch while not logged in
+        // fetch while logged in
         const response = await agent
           .get("/api/v1/project");
     
@@ -189,6 +189,43 @@ describe("Projects route", () => {
         expect(response.body.MbEventId).toBe(mbEvent.id);
         expect(response.body.UserId).toBe(user.id);
     
+        done();
+      });
+
+      it('can create and update a project for the logged-in user', async done => {
+        // GET BEFORE CREATE SHOULD BE EMPTY
+        const beforeResponse = await agent
+          .get("/api/v1/project");
+    
+        expect(beforeResponse.statusCode).toBe(200);
+        expect(beforeResponse.body.length).toBe(0);
+    
+        // CREATE
+        const projectPayload = {
+          title: 'testproject',
+          source_code_url: 'https://google.com',
+          live_url: 'https://google.com',
+          MbEventId: mbEvent.id
+        }
+
+        const createResponse = await agent
+          .post("/api/v1/project")
+          .send(projectPayload);
+    
+        expect(createResponse.statusCode).toBe(200);
+        expect(createResponse.body.MbEventId).toBe(mbEvent.id);
+        expect(createResponse.body.UserId).toBe(user.id);
+
+        // GET AFTER CREATE SHOULD HAVE THE OBJECT
+        const afterResponse = await agent
+        .get("/api/v1/project");
+  
+        expect(afterResponse.statusCode).toBe(200);
+        expect(afterResponse.body.length).toBe(1);
+        expect(afterResponse.body[0].id).toBe(createResponse.body.id);
+        expect(afterResponse.body[0].MbEventId).toBe(mbEvent.id);
+        expect(afterResponse.body[0].UserId).toBe(user.id);
+
         done();
       });
     });
