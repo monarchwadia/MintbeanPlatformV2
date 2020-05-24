@@ -4,9 +4,8 @@
       label Email
         input(name="email", v-model="email")
       label Password
-        input(name="password", v-model="password")
+        input(name="password", type="password", v-model="password")
       input(type="submit")
-
 </template>
 
 <style lang="scss" scoped>
@@ -24,8 +23,8 @@ export default {
   },
   methods: {
     onSubmit(evt) {
-      const { email, password } = this;
-      this.$store.dispatch('login', { email, password })
+      const { email, password, $router } = this;
+      this.$store.dispatch('login', { email, password, $router });
     }
   }
 };

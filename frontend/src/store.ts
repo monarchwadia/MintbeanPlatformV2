@@ -30,9 +30,14 @@ const createActions: (authservice: AuthService) => ActionTree<MbState, MbState> 
       });
   };
 
-  const login: Action<MbState, MbState> = async ({ commit }, { email, password }) => {
+  const login: Action<MbState, MbState> = async ({ commit }, { email, password, $router }) => {
     authService.login(email, password)
-      .then(user => commit("setProperty", ["user", user || undefined]))
+      .then(user => {
+        commit("setProperty", ["user", user || undefined]);
+        if (user) {
+          $router.push('/')
+        }
+      })
       .catch(e => {
         console.log("Failed to perform login call", e);
         alert('Login failed');
