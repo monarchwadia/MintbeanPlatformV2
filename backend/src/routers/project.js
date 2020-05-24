@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { requireAuth } = require('./routers.util');
-const { MbUser } = require('../db/models');
+const { MbUser, Project } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
 
@@ -12,21 +12,32 @@ projectRoute.get('/', requireAuth, async (req, res, next) => {
     .catch(e => next(err));
 });
 
-projectRoute.put('/', requireAuth, async (req, res, next) => {
-  MbUser.findAll()
-   .then(events => res.json(events))
-   .catch(err => {
-     next(err);
-   })
-});
+// projectRoute.put('/', requireAuth, async (req, res, next) => {
+//   MbUser.findAll()
+//    .then(events => res.json(events))
+//    .catch(err => {
+//      next(err);
+//    })
+// });
 
-projectRoute.post('/', requireAuth, async (req, res, next) => {
-  MbUser.findAll()
-   .then(events => res.json(events))
-   .catch(err => {
-     next(err);
-   })
-});
+projectRoute.post('/',
+  requireAuth, 
+  validator.body(Joi.object({
+    title: Joi.string().required(),
+    source_code_url: Joi.string().uri().required(),
+    live_url: Joi.string().uri().required(),
+    MbEventId: Joi.string().uuid().required()
+  })),
+  async (req, res, next) => {
+    const params = { title, source_code_url, live_url, mb_event_id, MbEventId } = req.body;
+    params.UserId = req.user.id;
+
+    Project.create(params)
+    .then(project => res.json(project))
+    .catch(err => {
+      next(err);
+    })
+  });
 
 // mbEventRoute.post('/', 
 //   validator.query(Joi.object({

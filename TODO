@@ -1,7 +1,7 @@
 First:
 ✔ LIST /mb-event @done(20-05-24 08:44)
-☐ GET /project/:id
-☐ (loggedin) CREATE /project
+✔ GET /project/:id @done(20-05-24 18:58)
+✔ (loggedin) CREATE /project @done(20-05-24 19:24)
 ☐ (loggedin) UPDATE /project/:id
 ☐ (loggedin) VOTE /project/:id/vote
 ☐ Home page: Show next hackathons
@@ -11,6 +11,7 @@ First:
 ☐ Hackathon page: list projects: vote
 ☐ Hackathon page: view project
 ☐ Hackathon page: view project: vote
+☐ Harden API
 
 After:
 ☐ bcrypt
