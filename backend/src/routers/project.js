@@ -1,17 +1,31 @@
 const { Router } = require('express');
-// const { requireAuth } = require('./routers.util');
+const { requireAuth } = require('./routers.util');
 const { MbUser } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
 
 const projectRoute = new Router();
 
-projectRoute.get('/', async (req, res, next) => {
-   MbUser.findAll()
-    .then(events => res.json(events))
-    .catch(err => {
-      next(err);
-    })
+projectRoute.get('/', requireAuth, async (req, res, next) => {
+  req.user.getProjects()
+    .then(projects => res.json(projects))
+    .catch(e => next(err));
+});
+
+projectRoute.put('/', requireAuth, async (req, res, next) => {
+  MbUser.findAll()
+   .then(events => res.json(events))
+   .catch(err => {
+     next(err);
+   })
+});
+
+projectRoute.post('/', requireAuth, async (req, res, next) => {
+  MbUser.findAll()
+   .then(events => res.json(events))
+   .catch(err => {
+     next(err);
+   })
 });
 
 // mbEventRoute.post('/', 
