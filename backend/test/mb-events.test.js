@@ -19,11 +19,32 @@ describe("MbEvents route", () => {
     MbEvent.destroy({where: {}}).then(() => done()).catch(done);
   });
 
-  test("It should fetch all the events", async () => {
+  test("GET / should fetch all the events", async () => {
     const response = await agent
     .get("/api/v1/mb-event");
 
     expect(response.statusCode).toBe(200);
     expect(response.body.length).toBe(10);
   });
+
+  // test("CREATE: should create an event", async () => {
+  //   const data = mbEventFactory.one();
+  //   const response = await agent
+  //     .post("/api/v1/mb-event")
+  //     .send(data);
+
+  //   console.log("DEBUG inside test, response.body", response.body);
+  //   expect(response.statusCode).toBe(200);
+  //   expect(response.id).toBe();
+  // });
+
+  // test("CREATE: should validate correctly", async () => {
+  //   const post = (overrides={}) => {
+  //     const model = mbEventFactory.one(overrides);
+  //     return agent.post("/api/v1/mb-event", model);
+  //   }
+
+  //   post({ title: null })
+  //     .expect(400);
+  // });
 });

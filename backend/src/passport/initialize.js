@@ -45,8 +45,6 @@ module.exports = app => {
   });
   
   passport.deserializeUser(function(id, cb) {
-    console.log("Inside deserialize user", id);
-
     User.findByPk(id)
       .then(user => cb(null, user))
       .catch(err => cb(err));

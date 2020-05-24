@@ -13,7 +13,8 @@ module.exports = {
     database: 'mintbean_development'
   }),
   test: Object.assign({}, defaults, {
-    database: 'mintbean_test'
+    database: 'mintbean_test',
+    logging: process.env.TEST_LOG_SQL === "true" ? true : false
   }),
   production: Object.assign({}, defaults, {
     database: process.env.DB_DATABASE,

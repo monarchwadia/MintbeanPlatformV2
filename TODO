@@ -1,2 +1,23 @@
+First:
+✔ LIST /mb-event @done(20-05-24 08:44)
+☐ GET /project/:id
+☐ (loggedin) CREATE /project
+☐ (loggedin) UPDATE /project/:id
+☐ (loggedin) DELETE /project/:id
+☐ (loggedin) VOTE /project/:id/vote
+☐ Home page: Show next hackathons
+☐ Hackathon page: show (fetch this from existing array)
+☐ Hackathon page: submit project
+☐ Hackathon page: list projects (incl. leaderboard)
+☐ Hackathon page: list projects: vote
+☐ Hackathon page: view project
+☐ Hackathon page: view project: vote
+
+After:
 ☐ bcrypt
 ☐ timestamp-related stuff
+
+After After:
+☐ (admin) CREATE /mb-event
+☐ (admin) UPDATE /mb-event/:id
+☐ (admin) DELETE /mb-event/:id
