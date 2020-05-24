@@ -24,7 +24,8 @@ export default {
   },
   methods: {
     onSubmit(evt) {
-      console.log(this.email, this.password);
+      const { email, password } = this;
+      this.$store.dispatch('login', { email, password })
     }
   }
 };

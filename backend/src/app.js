@@ -3,7 +3,8 @@ const express = require("express");
 const expressSession = require('express-session')
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-
+const authRoute = require('./routers/auth');
+const userRoute = require('./routers/user');
 const initializePassport = require('./passport/initialize');
 
 const app = express();
@@ -15,17 +16,16 @@ app.use(bodyParser.json());
 
 initializePassport(app);
 
-const authRoute = require('./routers/auth');
-const userRoute = require('./routers/user');
-
-
-app.use('/auth', authRoute);
-app.use('/user', userRoute);
-
-app.get("/", (req, res) => {
+const rootRouter = new express.Router();
+rootRouter.use('/auth', authRoute);
+rootRouter.use('/user', userRoute);
+rootRouter.get("/", (req, res) => {
   res.json({
     message: 'Welcome to the Mintbean Platform API'
   })
 });
+
+app.use('/api/v1', rootRouter);
+
 
 module.exports = app;

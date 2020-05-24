@@ -5,7 +5,14 @@ export class AuthService {
   constructor(private apiService: ApiService) {
   }
   checkAuth(): Promise<MbUser> {
-    return this.apiService.get('/api/v1/auth/check')
+    return this.apiService.get('/api/v1/auth/self')
       .then(resp => resp.data);
+  }
+  login(email: string, password: string): Promise<MbUser> {
+    return this.apiService.post('/api/v1/auth/login', { email, password })
+      .then(resp => resp.data);
+  }
+  logout(): Promise<any> {
+    return this.apiService.post('/api/v1/auth/logout', null);
   }
 }

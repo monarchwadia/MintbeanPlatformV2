@@ -5,11 +5,11 @@
         Home
       </div>
     </router-link>
-    <router-link to="/auth/logout" v-if="isLoggedIn">
+    <a href="#" v-on:click.prevent="logout" v-if="isLoggedIn">
       <div class="nav-item u-right">
         Log Out
       </div>
-    </router-link>
+    </a>
     <router-link to="/auth/login" v-if="!isLoggedIn">
       <div class="nav-item u-right">
         Log In
@@ -78,15 +78,11 @@ export default {
     },
     isLoggedIn() {
       return !!this.$store.state.user;
-    },
-    loginUrl() {
-      return this.$store.state.loginUrl;
-    },
-    logoutUrl() {
-      return this.$store.state.logoutUrl;
-    },
-    registerUrl() {
-      return this.$store.state.registerUrl;
+    }
+  },
+  methods: {
+    logout(evt) {
+      this.$store.dispatch('logout')
     }
   }
 };

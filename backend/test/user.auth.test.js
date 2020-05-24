@@ -34,7 +34,7 @@ describe("Test the root path", () => {
 
   test("It should authenticate", async () => {
     const loginResponse = await agent
-      .post("/auth/login")
+      .post("/api/v1/auth/login")
       .send({ email: TEST_EMAIL, password: TEST_PASSWORD })
 
     expect(loginResponse.statusCode).toBe(200);
@@ -42,7 +42,7 @@ describe("Test the root path", () => {
     expect(loginResponse.body.password).toBeFalsy();
 
     const selfResponse = await agent
-      .get("/auth/self")
+      .get("/api/v1/auth/self")
       .send();
 
     expect(selfResponse.statusCode).toBe(200);
@@ -50,13 +50,13 @@ describe("Test the root path", () => {
     expect(loginResponse.body.password).toBeFalsy();
 
     const logoutResponse = await agent
-      .post("/auth/logout")
+      .post("/api/v1/auth/logout")
       .send();
     
     expect(logoutResponse.statusCode).toBe(200);
 
     const selfResponseAfterLogout = await agent
-    .get("/auth/self")
+    .get("/api/v1/auth/self")
     .send();
 
     expect(selfResponseAfterLogout.statusCode).toBe(401);
@@ -64,7 +64,7 @@ describe("Test the root path", () => {
 
   test("It should fail authentication with the wrong password", async () => {
     const response = await agent
-    .post("/auth/login")
+    .post("/api/v1/auth/login")
     .send({ email: TEST_EMAIL, password: 'wrong-password' });
 
     expect(response.statusCode).toBe(401);

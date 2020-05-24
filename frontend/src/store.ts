@@ -1,4 +1,4 @@
-import Vuex, { MutationTree, ActionTree } from "vuex";
+import Vuex, { MutationTree, ActionTree, Action } from "vuex";
 
 import { AuthService } from "./services/authService";
 import { MbState } from './types/MbState';
@@ -21,32 +21,40 @@ const mutations: MutationTree<MbState> = {
   }
 };
 
-const createActions: (authservice: AuthService) => ActionTree<MbState, MbState> = authService => ({
-  async checkAuth({ commit }) {
-    let isAuthenticated;
-    let user;
+const createActions: (authservice: AuthService) => ActionTree<MbState, MbState> = authService => {
+  const checkAuth: Action<MbState, MbState> = async ({ commit }) => {
+    authService.checkAuth()
+      .then(user => commit("setProperty", ["user", user || undefined]))
+      .catch(e => {
+        console.log("Failed to perform auth", e);
+      });
+  };
 
-    try {
-      isAuthenticated = await authService.checkAuth();
-    } catch (e) {
-      console.error("Failed to initialize Auth Service", e);
-    }
-
-    if (isAuthenticated) {
-      try {
-        user = await authService.checkAuth();
-      } catch (e) {
-        console.error("Auth passed, but failed to fetch user data.", e);
-      }
-    }
-
-    if (user) {
-      commit("setProperty", ["user", user]);
-    } else {
-      commit("setProperty", ["user", undefined]);
-    }
+  const login: Action<MbState, MbState> = async ({ commit }, { email, password }) => {
+    authService.login(email, password)
+      .then(user => commit("setProperty", ["user", user || undefined]))
+      .catch(e => {
+        console.log("Failed to perform login call", e);
+        alert('Login failed');
+      });
   }
-})
+
+  const logout: Action<MbState, MbState> = async ({ commit }) => {
+    authService.logout()
+      .then(() => commit("setProperty", ["user", undefined]))
+      .catch(e => {
+        console.log("Failed to logout", e);
+      });
+  }
+
+  return {
+    checkAuth,
+    login,
+    logout
+  }
+}
+
+
 
 export const createStore = (mbContext: MbContext) => {
   const { authService } = mbContext;
