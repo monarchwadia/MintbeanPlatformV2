@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     end_time: DataTypes.DATE
   }, {});
   MbEvent.associate = function(models) {
+    MbEvent.hasMany(models.Project);
     // associations can be defined here
   };
 

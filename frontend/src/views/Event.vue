@@ -11,6 +11,28 @@ div.event-wrapper
         p {{ mbEvent.instructions }}
         h3 Schedule
         p {{ mbEvent.start_time }}
+        h3 Submissions
+        p(v-if="mbEvent.Projects.length === 0")
+          | Be the first to submit your project!
+        p(v-else v-for="project in mbEvent.Projects") 
+          router-link(:to="'/project/' + project.id") {{ project.title }}
+        section(v-if="$store.state.user")
+          form.submit-project-form(v-on:submit.prevent="handleSubmitProject")
+            h1 Submit a Project
+            label Title
+              input(name="title", v-model="title")
+            label Source Code URL
+              input(name="sourceCodeUrl", v-model="sourceCodeUrl")
+            label Deployment URL
+              input(name="liveUrl", v-model="liveUrl")
+              sourceCodeUrl
+            button(type="submit") Submit
+        section(v-else)
+          h1 You must be 
+            router-link(to="/auth/login") logged-in 
+            | &nbsp; to submit your project.
+          
+
 </template>
 
 <style lang="scss" scoped>
@@ -49,12 +71,23 @@ div.event-wrapper
     box-shadow: var(--box-shadow) var(--color-bg-secondary);
   }
 }
+
+form {
+  width: 100%;
+}
 </style>
 
 <script>
 // @ is an alias to /src
 export default {
   name: "Event",
+  data() {
+    return {
+      title: '',
+      sourceCodeUrl: '',
+      liveUrl: ''
+    }
+  },
   computed: {
     mbEvent: function() {
       const { id } = this.$route.params;
@@ -65,6 +98,20 @@ export default {
       }
 
       return this.$store.state.mbEvents.find(x => x.id === id);
+    }
+  },
+  methods: {
+    handleSubmitProject() {
+      const { title, sourceCodeUrl, liveUrl } = this;
+      confirm(`Submitting a project is final. Projects cannot currently be edited or deleted.
+Your project will have the following information:
+====
+Title: ${title}
+Source Code URL: ${sourceCodeUrl}
+Deployment URL: ${liveUrl}
+====
+Would you like to continue?`)
+      console.log(title, sourceCodeUrl, liveUrl);
     }
   }
 };
