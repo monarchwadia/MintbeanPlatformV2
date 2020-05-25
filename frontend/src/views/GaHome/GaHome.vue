@@ -14,7 +14,7 @@ div
         div.content-wrapper
           p.header-text The next hackathon is around the corner!
           p.body-text Mondays & Wednesdays at 12:00pm EST
-          button.u-minty-gradient
+          button(v-on:click.prevent="goToUpcomingEvent").u-minty-gradient
             i(v-if="nextEvent") Sign up for {{nextEvent.title}}!
             i(v-else) Sign up now!
       
@@ -87,7 +87,7 @@ div
 
       .header-text {
         font-size: xx-large;
-        font-style: italic;
+        font-weight: 900;
       }
 
       .body-text {
@@ -165,6 +165,11 @@ export default {
   computed: {
     nextEvent: function() {
       return this.$store.state.mbEvents && this.$store.state.mbEvents[0];
+    }
+  },
+  methods: {
+    goToUpcomingEvent: function() {
+      this.$router.push('/mb-event/' + this.nextEvent.id)
     }
   }
 };

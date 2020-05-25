@@ -6,11 +6,10 @@
           h1 Mintbean
         li
           span Write code. Get noticed. 
-            i.highlight Get hired ➔
+            span.highlight Get hired ➔
       ul
         li
           router-link(to="/") Home
-      ul
         li
           router-link(to="/mb-events") Events
         li
