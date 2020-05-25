@@ -38,7 +38,7 @@ div
         img(alt='HTML only' src='../../assets/sliders/repeat.png')
         h3 Get hired.
         p
-          | Our job boards, newsletters, social media channels and direct marketing efforts put employers directly in touch with you based on the contents of your developer portfolio.
+          | We market you directly to employers through our job board, newsletters, portfolios platform and social media channels so employers can get in touch with you easily.
     blockquote
       | I'm definitely coming back for another meet. I loved the exposure and the chance to break out of
       | my rut.

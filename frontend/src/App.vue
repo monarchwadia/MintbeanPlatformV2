@@ -2,7 +2,7 @@
   div#app
     mb-nav(:path="$route.path")
     router-view
-    footer Made by Mintbean, Copyright 2020 All Rights Reserved.
+    footer Made by Mintbean, Copyright 2020 All Rights Reserved. Aside images designed by Freepik.
 </template>
 
 <style lang="scss" scoped>
