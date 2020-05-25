@@ -11,12 +11,9 @@ First:
 ☐ Hackathon page: Hardcode GA img
 ☐ Hackathon page: see contestants and projects [extend GET /mb-event]
 ☐ Hackathon page: submit project (no images for now) [POST /mb-event/:id/project] [Warn that submitting is final (for now, at least)]
-
-
-After:
 ☐ bcrypt
 
-After After:
+After:
 ☐ (loggedin) LIST /mb-event/:id/projects [leaderboard]
 ☐ (loggedin) VOTE /vote { :projectId, :mbEventId, comment }
 ☐ Hackathon page: leaderboard + voting
