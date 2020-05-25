@@ -16,6 +16,11 @@ div
           p.body-text Mondays & Wednesdays at 12:00pm EST
           button.u-minty-gradient
             i Sign up now!
+      
+    blockquote
+      | Learned how to build a Chrome Extension. Participated in my first ever hackathon. Got familiar with the process. Enjoyed the heady rush of coding in a set timeframe. That's it in a nutshell!
+      footer
+        i - Posh G
     section.u-centered
       aside
         img(alt='HTML only' src='../../assets/sliders/build.png')
@@ -34,6 +39,11 @@ div
         h3 Get hired.
         p
           | Our job boards, newsletters, social media channels and direct marketing efforts put employers directly in touch with you based on the contents of your developer portfolio.
+    blockquote
+      | I'm definitely coming back for another meet. I loved the exposure and the chance to break out of
+      | my rut.
+      footer
+        i - M. Alaniz
 //- <div id="figure">
 //-     <header>
 //-         <h2>A decent MVP in no time</h2>
