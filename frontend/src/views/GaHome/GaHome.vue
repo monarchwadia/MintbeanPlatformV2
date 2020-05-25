@@ -27,8 +27,7 @@ div
         img(alt='HTML only' src='../../assets/sliders/build.png')
         h3 Write code.
         p
-          | Fill your portfolio with beautiful, eye-catching projects in 4-hour hackathons. Create beautiful projects that will impress
-          | your friends, loved ones, and potential employers.
+          | Join our easy, low-pressure 4-hour hackathons to fill your portfolio with beautiful, eye-catching projects that will impress potential employers and wow your friends.
       aside.u-centered
         img(alt='HTML only' src='../../assets/sliders/show.png')
         h3 Get noticed.
