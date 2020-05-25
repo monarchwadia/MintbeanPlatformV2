@@ -3,12 +3,14 @@ import Vuex, { MutationTree, ActionTree, Action } from "vuex";
 import { AuthService } from "./services/authService";
 import { MbState } from './types/MbState';
 import { MbContext } from './types/MbContext';
+import { MbEventService } from './services/mbEventService';
 
 const state: MbState = {
   user: undefined,
   loginUrl: undefined,
   logoutUrl: undefined,
-  registerUrl: undefined
+  registerUrl: undefined,
+  mbEvents: []
 };
 
 const mutations: MutationTree<MbState> = {
@@ -21,7 +23,7 @@ const mutations: MutationTree<MbState> = {
   }
 };
 
-const createActions: (authservice: AuthService) => ActionTree<MbState, MbState> = authService => {
+const createActions: (authservice: AuthService, mbEventService: MbEventService) => ActionTree<MbState, MbState> = (authService, mbEventService) => {
   const checkAuth: Action<MbState, MbState> = async ({ commit }) => {
     authService.checkAuth()
       .then(user => commit("setProperty", ["user", user || undefined]))
@@ -52,21 +54,30 @@ const createActions: (authservice: AuthService) => ActionTree<MbState, MbState> 
       });
   }
 
+  const fetchMbEvents: Action<MbState, MbState> = async ({ commit }) => {
+    mbEventService.getMbEvents()
+      .then(events => commit("setProperty", ["mbEvents", events]))
+      .catch(e => {
+        console.log("Failed to fetch events", e);
+      })
+  }
+
   return {
     checkAuth,
     login,
-    logout
+    logout,
+    fetchMbEvents
   }
 }
 
 
 
 export const createStore = (mbContext: MbContext) => {
-  const { authService } = mbContext;
+  const { authService, mbEventService } = mbContext;
 
   return new Vuex.Store({
     state,
     mutations,
-    actions: createActions(authService)
+    actions: createActions(authService, mbEventService)
   });
 }
