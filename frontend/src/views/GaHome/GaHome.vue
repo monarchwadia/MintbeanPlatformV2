@@ -17,11 +17,28 @@ div
           button(v-on:click.prevent="goToUpcomingEvent").u-minty-gradient
             i(v-if="nextEvent") Sign up for {{nextEvent.title}}!
             i(v-else) Sign up now!
-      
+    section
+      h2 Coming Up Next:
+
+    section.u-centered
+      aside(v-for="mbEvent in mbEvents")
+        img(:src="mbEvent.cover_image_url" height=200 width="100%")
+        h3 {{mbEvent.title}}
+        p {{mbEvent.description}}
+        b(v-if="getEventStatus(mbEvent) === 'upcoming'")
+          countdown(:time="getCountdownTime(mbEvent.start_time)")
+            template(slot-scope="props") Starts In: <br/>{{ props.days }}d {{ props.hours }}h {{ props.minutes }}m {{ props.seconds }}s.
+        b(v-if="getEventStatus(mbEvent) === 'ongoing'")
+          countdown(:time="getCountdownTime(mbEvent.start_time)")
+            template(slot-scope="props") Ends In: <br/>{{ props.days }}d {{ props.hours }}h {{ props.minutes }}m {{ props.seconds }}s.
+        b(v-if="getEventStatus(mbEvent) === 'ended'")
+          Event Ended
+
     blockquote
       | Learned how to build a Chrome Extension. Participated in my first ever hackathon. Got familiar with the process. Enjoyed the heady rush of coding in a set timeframe. That's it in a nutshell!
       footer
         i - Posh G
+
     section.u-centered
       aside
         img(alt='HTML only' src='../../assets/sliders/build.png')
@@ -44,30 +61,6 @@ div
       | my rut.
       footer
         i - M. Alaniz
-//- <div id="figure">
-//-     <header>
-//-         <h2>A decent MVP in no time</h2>
-//-         <p>More building and less designing with "set and forget" styling.</p>
-//-     </header>
-//-     <figure>
-//-         <img alt="Stock photo" src="./img/stock.jpg">
-//-         <figcaption><i>"Uber for X" brainstorming session</i></figcaption>
-//-     </figure>
-//- </div>
-
-
-
-
-//- div
-//-   .hello
-//-     h1 Mintbean Talent Incubator
-//-     p We work to accelerate the careers, skillsets, and professional networks of software developers globally.
-//-   .this-week
-//-     h2 General Assembly Students & Alumni: Welcome to CareerHack Week!
-//-     .hero
-//-   div.leaderboard-wrapper
-//-     left-panel
-//-     right-panel
 </template>
 
 <style lang="scss" scoped>
@@ -96,66 +89,6 @@ div
     }
   }
 }
-// .ga-hero {
-//     min-height: 50vh;
-//     width: 100%;
-//     background-image: url("../../assets/ga-hero.png");
-//     background-repeat: no-repeat;
-//     // background-attachment: fixed;
-//     background-position: center;
-//     background-size: contain; 
-// }
-// @import "../../styles/colors";
-// @import "../../styles/dimensions";
-// @import "../../styles/mixins";
-
-// .essential-links {
-//   ul {
-//     list-style-type: none;
-//   }
-//   li {
-//     @include respond-to("small") {
-//       display: inline-block;
-//       width: 100%;
-//       margin: vstep(1) hstep(0);
-//     }
-//     display: inline-block;
-//     margin: vstep(3) hstep(2);
-//   }
-// }
-
-// .this-week {
-//   color: $lightest;
-//   background-color: $darkest;
-//   .hero {
-//     min-height: 50vh;
-//     width: 100%;
-//     background-image: url("../../assets/ga-hero.png");
-//     background-repeat: no-repeat;
-//     // background-attachment: fixed;
-//     background-position: center;
-//     background-size: contain; 
-//   }
-// }
-
-// .leaderboard-wrapper {
-//   width: 100%;
-//   background-color: $lightest;
-
-//   & > * {
-//     padding: vstep(12) hstep(12);
-//     display: inline-block;
-//   }
-
-//   .left-panel {
-//     width: 80%;
-//   }
-  
-//   .right-panel {
-//     width: 20%;
-//     background-color: $blue;
-//   }
-// }
 </style>
 
 <script>
@@ -163,11 +96,31 @@ div
 export default {
   name: "Home",
   computed: {
+    mbEvents: function() {
+      return this.$store.state.mbEvents || [];
+    },
     nextEvent: function() {
       return this.$store.state.mbEvents && this.$store.state.mbEvents[0];
     }
   },
   methods: {
+    getEventStatus(mbEvent) {
+      const timeToStart = new Date(mbEvent.start_time) - new Date();
+      const timeToEnd = new Date(mbEvent.end_time) - new Date();
+
+      if (timeToStart > 0) {
+        return "upcoming";
+      } else {
+        if (timeToEnd > 0) {
+          return "ongoing";
+        } else {
+          return "ended"
+        }
+      }
+    },
+    getCountdownTime: function(mbEventStartTime) {
+      return new Date(mbEventStartTime) - new Date()
+    },
     goToUpcomingEvent: function() {
       this.$router.push('/mb-event/' + this.nextEvent.id)
     }

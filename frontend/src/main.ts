@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex, { Store } from "vuex";
+import VueCountdown from '@chenfengyuan/vue-countdown';
 
 import App from "./App.vue";
 import router from "./router";
@@ -36,6 +37,7 @@ Vue.config.productionTip = false;
 
 Vue.component("mb-a", mbA);
 Vue.component("mb-nav", mbNav);
+Vue.component(VueCountdown.name, VueCountdown)
 
 new Vue({
   router,
