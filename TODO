@@ -8,22 +8,22 @@ First:
 ✔ Auth: Login @done(20-05-25 06:53)
 ✔ Auth: Sign  Up @done(20-05-25 08:22)
 
-☐ Hackathon page: sign up
-☐ Hackathon page: see contestants and projects
-☐ Hackathon page: submit project (no images for now)
-☐ Hackathon page: edit project (no images for now)
-☐ Hackathon page: view project
+☐ Hackathon page: Hardcode GA img
+☐ Hackathon page: see contestants and projects [extend GET /mb-event]
+☐ Hackathon page: submit project (no images for now) [POST /mb-event/:id/project] [Warn that submitting is final (for now, at least)]
 
-☐ (loggedin) LIST /mb-event/:id/projects [leaderboard]
-☐ (loggedin) VOTE /vote { :projectId, :mbEventId, comment }
-☐ Hackathon page: leaderboard + voting
 
 After:
 ☐ bcrypt
-☐ timestamp-related stuff
-☐ Harden API
 
 After After:
+☐ (loggedin) LIST /mb-event/:id/projects [leaderboard]
+☐ (loggedin) VOTE /vote { :projectId, :mbEventId, comment }
+☐ Hackathon page: leaderboard + voting
+☐ Hackathon page: edit project (no images for now) [PUT /mb-event/:id/project]
+☐ Hackathon page: register for hackathon [POST /mb-event/:id/projects] [if not loggedin, redirect to register page]
+☐ Harden API
+☐ timestamp-related stuff
 ☐ Add can-email checkbox
 ☐ (admin) CREATE /mb-event
 ☐ (admin) UPDATE /mb-event/:id
@@ -32,3 +32,5 @@ After After:
 ☐ Fix the weird API interfaces (snake_case interspersed with UpperCamelCase is weird)
 ☐ User: See Profile
 ☐ Captcha on register
+☐ Send calendar invite on register
+☐ Add links between Login & Register forms ("Already have an account? Sign in here" / "Don't have an account?...")
