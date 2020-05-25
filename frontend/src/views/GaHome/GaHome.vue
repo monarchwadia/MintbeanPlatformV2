@@ -15,7 +15,8 @@ div
           p.header-text The next hackathon is around the corner!
           p.body-text Mondays & Wednesdays at 12:00pm EST
           button.u-minty-gradient
-            i Sign up now!
+            i(v-if="nextEvent") Sign up for {{nextEvent.title}}!
+            i(v-else) Sign up now!
       
     blockquote
       | Learned how to build a Chrome Extension. Participated in my first ever hackathon. Got familiar with the process. Enjoyed the heady rush of coding in a set timeframe. That's it in a nutshell!
@@ -168,6 +169,11 @@ export default {
   components: {
     "left-panel": LeftPanel,
     "right-panel": RightPanel
+  },
+  computed: {
+    nextEvent: function() {
+      return this.$store.state.mbEvents && this.$store.state.mbEvents[0];
+    }
   }
 };
 </script>
