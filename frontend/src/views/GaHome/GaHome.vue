@@ -13,35 +13,27 @@ div
           img(src='../../assets/logo.png')
         div.content-wrapper
           p.header-text The next hackathon is around the corner!
-          p.body-text Mondays & Wednesdays at Noon (EST)
-          button
+          p.body-text Mondays & Wednesdays at 12:00pm EST
+          button.u-minty-gradient
             i Sign up now!
-    section
+    section.u-centered
       aside
         img(alt='HTML only' src='../../assets/sliders/build.png')
-        h3 HTML and You&apos;re Done
+        h3 Write code.
         p
-          | MVP styles your root HTML elements, so you don&apos;t need to learn a new CSS framework or naming
-          | conventions.
-        p
-          a(href='https://www.w3schools.com/TAGS/ref_byfunc.asp' target='_blank')
-            em
-              | HTML Guide
-              | &nearr;
-      aside
+          | Fill your portfolio with beautiful, eye-catching projects in 4-hour hackathons. Create beautiful projects that will impress
+          | your friends, loved ones, and potential employers.
+      aside.u-centered
         img(alt='HTML only' src='../../assets/sliders/show.png')
-        h3 Mobile-friendly UI
+        h3 Get noticed.
         p
-          | MVP is designed to look great on all browsers and devices out of the box for rapid prototyping.
-        p
-          | It&apos;s like an amped up CSS reset that you can toss into any project to get decent styling.
-      aside
+          | Your portfolio is your #1 weapon when it comes to finding a job. Don't keep it a secret! We help you market
+          | yourself through systematic social media marketing workshops. 
+      aside.u-centered
         img(alt='HTML only' src='../../assets/sliders/repeat.png')
-        h3 MIT License
+        h3 Get hired.
         p
-          | MVP is released under the permissive MIT license so you can freely use it however you&apos;d like.
-        p
-          | That means personal projects, commercial ventures, remixes and more are all welcome.
+          | Our job boards, newsletters, social media channels and direct marketing efforts put employers directly in touch with you based on the contents of your developer portfolio.
 //- <div id="figure">
 //-     <header>
 //-         <h2>A decent MVP in no time</h2>
@@ -71,13 +63,15 @@ div
 <style lang="scss" scoped>
 .call-to-action-outer {
   .call-to-action-inner {
-    width: 100%; display: inline;
+    width: 100%;
+    display: inline;
 
     .image-wrapper {
       display: inline-block;
     }
 
     .content-wrapper {
+      max-width: 100%;
       display: inline-block;
       vertical-align: top;
 

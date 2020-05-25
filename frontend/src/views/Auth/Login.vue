@@ -5,7 +5,7 @@
         input(name="email", v-model="email")
       label Password
         input(name="password", type="password", v-model="password")
-      input(type="submit")
+      button(type="submit") Submit
 </template>
 
 <style lang="scss" scoped>

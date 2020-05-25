@@ -1,12 +1,15 @@
-<template>
-  <div id="app">
-    <mb-nav :path="$route.path" />
-    <router-view />
-  </div>
+<template lang="pug">
+  div#app
+    mb-nav(:path="$route.path")
+    router-view
+    footer Made by Mintbean, Copyright 2020 All Rights Reserved.
 </template>
 
 <style lang="scss" scoped>
-
+@import "./styles/colors";
+  footer {
+    color: $lightest;
+  }
 </style>
 
 <script>

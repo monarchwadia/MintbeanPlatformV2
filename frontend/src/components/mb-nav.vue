@@ -5,7 +5,8 @@
         li 
           h1 Mintbean
         li
-          span Build. Show. Repeat.
+          span Write code. Get noticed. 
+            i.highlight Get hired ➔
       ul
         li
           router-link(to="/") Home
@@ -18,8 +19,15 @@
 </template>
 
 <style lang="scss" scoped>
+@import "../styles/colors";
   header {
     max-height: 100px
+  }
+
+  .highlight {
+    background-color: $mintiest;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 </style>
 
