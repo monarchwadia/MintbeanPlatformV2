@@ -14,14 +14,15 @@ div
         div.content-wrapper
           p.header-text The next hackathon is around the corner!
           p.body-text Mondays & Wednesdays at 12:00pm EST
-          button(v-on:click.prevent="goToUpcomingEvent").u-minty-gradient
-            i(v-if="nextEvent") Sign up for {{nextEvent.title}}!
-            i(v-else) Sign up now!
+          button(v-if="nextEvent" v-on:click.prevent="() => goToUpcomingEvent(nextEvent.id)").u-minty-gradient
+            i Sign up for {{nextEvent.title}}!
+          button(v-else v-on:click.prevent="() => $router.push('/auth/login')").u-minty-gradient
+            i Sign up now!
     section
       h2 Coming Up Next:
 
     section.u-centered
-      aside(v-for="mbEvent in mbEvents")
+      aside(v-for="mbEvent in mbEvents" class="hackathon-card" v-on:click.prevent="() => goToUpcomingEvent(mbEvent.id)")
         img(:src="mbEvent.cover_image_url" height=200 width="100%")
         h3 {{mbEvent.title}}
         p {{mbEvent.description}}
@@ -89,6 +90,10 @@ div
     }
   }
 }
+
+.hackathon-card {
+  cursor: pointer;
+}
 </style>
 
 <script>
@@ -121,8 +126,10 @@ export default {
     getCountdownTime: function(mbEventStartTime) {
       return new Date(mbEventStartTime) - new Date()
     },
-    goToUpcomingEvent: function() {
-      this.$router.push('/mb-event/' + this.nextEvent.id)
+    goToUpcomingEvent: function(id) {
+      if (id) {
+        this.$router.push('/mb-event/' + id)
+      }
     }
   }
 };
