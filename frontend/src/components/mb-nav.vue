@@ -11,8 +11,6 @@
         li
           router-link(to="/") Home
         li
-          router-link(to="/mb-events") Events
-        li
           a(href="#", v-on:click.prevent="logout" v-if="isLoggedIn") Log Out
         li
           router-link(to="/auth/login" v-if="!isLoggedIn") Log In
