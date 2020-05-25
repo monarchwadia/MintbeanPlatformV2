@@ -3,22 +3,24 @@ First:
 ✔ GET /project/:id @done(20-05-24 18:58)
 ✔ (loggedin) CREATE /project @done(20-05-24 19:24)
 ✔ (loggedin) UPDATE /project/:id @done(20-05-24 19:34)
-☐ (loggedin) VOTE /project/:id/vote
 ☐ Home page: Show next hackathons
 ☐ Hackathon page: show (fetch this from existing array)
 ☐ Hackathon page: submit project
-☐ Hackathon page: list projects (incl. leaderboard)
-☐ Hackathon page: list projects: vote
 ☐ Hackathon page: view project
+☐ (loggedin) LIST /mb-event/:id/projects [leaderboard]
+☐ (loggedin) VOTE /vote { :projectId, :mbEventId, comment }
+☐ Hackathon page: list projects (incl. leaderboard)
 ☐ Hackathon page: view project: vote
-☐ Harden API
+☐ Hackathon page: list projects: vote
 
 After:
 ☐ bcrypt
 ☐ timestamp-related stuff
+☐ Harden API
 
 After After:
 ☐ (admin) CREATE /mb-event
 ☐ (admin) UPDATE /mb-event/:id
 ☐ (admin) DELETE /mb-event/:id
 ☐ (loggedin) DELETE /project/:id
+☐ Fix the weird API interfaces (snake_case interspersed with UpperCamelCase is weird)
