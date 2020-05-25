@@ -1,7 +1,11 @@
 <template lang="pug">
   section
     form.login-form(v-on:submit.prevent="onSubmit")
-      h1 Login
+      h1 Register
+      label First Name
+        input(name="firstname", v-model="firstname")
+      label Last Name
+        input(name="lastname", v-model="lastname")
       label Email
         input(name="email", v-model="email")
       label Password
@@ -19,13 +23,15 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      firstname: '',
+      lastname: ''
     }
   },
   methods: {
     onSubmit(evt) {
-      const { email, password, $router } = this;
-      this.$store.dispatch('login', { email, password, $router });
+      const { email, password, firstname, lastname, $router } = this;
+      this.$store.dispatch('register', { email, password, firstname, lastname, $router });
     }
   }
 };

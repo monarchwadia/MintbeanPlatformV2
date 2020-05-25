@@ -6,7 +6,7 @@ First:
 ✔ Home page: Show next hackathons @done(20-05-25 06:37)
 ✔ Hackathon page: show (fetch this from existing array) @done(20-05-25 06:37)
 ✔ Auth: Login @done(20-05-25 06:53)
-☐ Auth: Sign  Up
+✔ Auth: Sign  Up @done(20-05-25 08:22)
 
 ☐ Hackathon page: sign up
 ☐ Hackathon page: see contestants and projects
@@ -24,9 +24,11 @@ After:
 ☐ Harden API
 
 After After:
+☐ Add can-email checkbox
 ☐ (admin) CREATE /mb-event
 ☐ (admin) UPDATE /mb-event/:id
 ☐ (admin) DELETE /mb-event/:id
 ☐ (loggedin) DELETE /project/:id
 ☐ Fix the weird API interfaces (snake_case interspersed with UpperCamelCase is weird)
 ☐ User: See Profile
+☐ Captcha on register

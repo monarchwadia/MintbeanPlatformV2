@@ -41,8 +41,24 @@ const createActions: (authservice: AuthService, mbEventService: MbEventService) 
         }
       })
       .catch(e => {
-        console.log("Failed to perform login call", e);
-        alert('Login failed');
+        const message = e && e.response && e.response.data && e.response.data.message || '';
+        console.log("Login failed", message, e);
+        alert('Login failed. ' + message);
+      });
+  }
+
+  const register: Action<MbState, MbState> = async ({ commit }, { email, password, firstname, lastname, $router }) => {
+    authService.register(firstname, lastname, email, password)
+      .then(user => {
+        commit("setProperty", ["user", user || undefined]);
+        if (user) {
+          $router.push('/')
+        }
+      })
+      .catch(e => {
+        const message = e && e.response && e.response.data && e.response.data.message || '';
+        console.log("Registration failed", message, e);
+        alert('Registration failed. ' + message);
       });
   }
 
@@ -66,6 +82,7 @@ const createActions: (authservice: AuthService, mbEventService: MbEventService) 
     checkAuth,
     login,
     logout,
+    register,
     fetchMbEvents
   }
 }

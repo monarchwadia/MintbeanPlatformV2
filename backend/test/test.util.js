@@ -7,7 +7,7 @@ const createUser = () => User.create(userFactory.one({
     password_hash: TEST_PASSWORD
   }));
 
-const destroyUser = () => User.destroy({ where: {email: TEST_EMAIL}});
+const destroyUsers = () => User.destroy({ where: {}});
 
 const donify =  (promise, done) => {
   promise
@@ -20,6 +20,6 @@ const donify =  (promise, done) => {
 
 module.exports = {
   createUser,
-  destroyUser,
+  destroyUsers,
   donify
 }
