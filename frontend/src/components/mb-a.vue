@@ -18,9 +18,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/colors";
 
-a:visited {
-  color: $bluer;
-}
 </style>

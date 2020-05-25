@@ -4,9 +4,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../../styles/colors";
-@import "../../styles/dimensions";
-@import "../../styles/mixins";
 
 </style>
 

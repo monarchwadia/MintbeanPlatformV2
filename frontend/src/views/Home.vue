@@ -18,28 +18,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/colors";
-@import "../styles/dimensions";
-@import "../styles/mixins";
 
-* {
-  text-align: center;
-}
-
-.essential-links {
-  ul {
-    list-style-type: none;
-  }
-  li {
-    @include respond-to("small") {
-      display: inline-block;
-      width: 100%;
-      margin: vstep(1) hstep(0);
-    }
-    display: inline-block;
-    margin: vstep(3) hstep(2);
-  }
-}
 </style>
 
 <script>
