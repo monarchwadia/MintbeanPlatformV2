@@ -10,6 +10,9 @@
       ul
         li
           router-link(to="/") Home
+      ul
+        li
+          router-link(to="/mb-events") Events
         li
           a(href="#", v-on:click.prevent="logout" v-if="isLoggedIn") Log Out
         li

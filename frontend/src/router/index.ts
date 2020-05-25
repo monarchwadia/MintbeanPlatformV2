@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Home from "../views/GaHome/GaHome.vue";
+import Event from "../views/Event.vue";
 import Login from "../views/Auth/Login.vue";
 import NotFound from "../views/NotFound.vue";
 
@@ -16,6 +17,11 @@ const routes: Array<RouteConfig> = [
     path: "/auth/login",
     name: "Login",
     component: Login
+  },
+  {
+    path: "/mb-event/:id",
+    name: "Event",
+    component: Event
   },
   {
     path: "*",

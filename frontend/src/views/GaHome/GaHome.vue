@@ -160,16 +160,9 @@ div
 </style>
 
 <script>
-import LeftPanel from "./LeftPanel.vue";
-import RightPanel from "./RightPanel.vue";
-
 // @ is an alias to /src
 export default {
   name: "Home",
-  components: {
-    "left-panel": LeftPanel,
-    "right-panel": RightPanel
-  },
   computed: {
     nextEvent: function() {
       return this.$store.state.mbEvents && this.$store.state.mbEvents[0];
