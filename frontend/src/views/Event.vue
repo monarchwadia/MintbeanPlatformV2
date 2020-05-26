@@ -16,7 +16,7 @@ div.event-wrapper
           | Be the first to submit your project!
         p(v-else v-for="project in mbEvent.Projects") 
           router-link(:to="'/project/' + project.id") {{ project.title }}
-        section(v-if="$store.state.user")
+        section(v-if="submitFormState.enabled")
           form.submit-project-form(v-on:submit.prevent="handleSubmitProject")
             h1 Submit a Project
             label Title
@@ -27,9 +27,10 @@ div.event-wrapper
               input(name="live_url", v-model="live_url")
             button(type="submit") Submit
         section(v-else)
-          h1 You must be 
-            router-link(to="/auth/login") logged-in 
-            | &nbsp; to submit your project.
+          h1 {{ submitFormState.disabledMessage }}
+        section(v-if="submitFormState.showLoginButton")
+          router-link(to="/auth/login")
+            button Login
           
 
 </template>
@@ -97,6 +98,31 @@ export default {
       }
 
       return this.$store.state.mbEvents.find(x => x.id === id);
+    },
+    submitFormState: function() {
+      const { user } = this.$store.state;
+
+      if (!user) {
+        return {
+          enabled: false,
+          disabledMessage: "You must be logged in to submit a project.",
+          showLoginButton: true
+        }
+      }
+
+      if (this.mbEvent.Projects.find(project => project.UserId === user.id)) {
+        return {
+          enabled: false,
+          disabledMessage: "Thank you for submitting your project.",
+          showLoginButton: false
+        }
+      }
+
+      return {
+        enabled: true,
+        disabledMessage: undefined,
+        showLoginButton: false
+      }
     }
   },
   methods: {
