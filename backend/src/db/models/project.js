@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Project.belongsTo(models.MbEvent);
     Project.belongsTo(models.User);
+    Project.hasMany(models.Vote);
   };
   return Project;
 };
