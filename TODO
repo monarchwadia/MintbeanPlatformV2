@@ -8,12 +8,13 @@ First:
 ✔ Auth: Login @done(20-05-25 06:53)
 ✔ Auth: Sign  Up @done(20-05-25 08:22)
 
-☐ Hackathon page: Hardcode GA img
+Disabled ☐ Hackathon page: Hardcode GA img
 ✔ Hackathon page: see contestants and projects [extend GET /mb-event] @done(20-05-26 06:22)
 ✔ Hackathon page: submit project (no images for now) [POST /mb-event/:id/project] [Warn that submitting is final (for now, at least)] @done(20-05-26 07:19)
 ✔ Users cannot submit multiple projects (frontend) @done(20-05-26 07:50)
-☐ (loggedin) VOTE /vote { :projectId, :mbEventId, comment }
-☐ ensure re=nofollow..etc on vote links
+✔ (loggedin) VOTE /vote { :projectId, :mbEventId, comment } @done(20-05-26 13:23)
+✔ ensure re=nofollow..etc on vote links @done(20-05-26 13:23)
+☐ Admin page for managing things
 ☐ bcrypt
 
 After:

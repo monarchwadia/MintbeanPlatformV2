@@ -2,26 +2,30 @@
 
 const mbEventFactory = require('../factories/mb-event.factory');
 const projectFactory = require('../factories/project.factory');
-const { User, MbEvent } = require('../models');
+const voteFactory = require('../factories/vote.factory');
+const { User, Project, Vote } = require('../models');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return new Promise(async (resolve, reject) => {
       try {
         const users = await User.findAll({where: {}});
-        const mbEvents = await MbEvent.findAll({ where: {} });
+        const projects = await Project.findAll({ where: {} });
 
-        const projects = [];
+        const votes = [];
         users.forEach(user => {
-          mbEvents.forEach(mbEvent => {
-            projects.push(projectFactory.one({
+          projects.forEach(project => {
+            if (Math.random() <= 0.4) {
+              return;
+            }
+            votes.push(voteFactory.one({
               UserId: user.id,
-              MbEventId: mbEvent.id
+              ProjectId: project.id
             }))
           })
         });
 
-        queryInterface.bulkInsert('Projects', projects)
+        queryInterface.bulkInsert('Votes', votes)
           .then(resolve)
           .catch(e => {
             console.log(e);
@@ -33,7 +37,7 @@ module.exports = {
       }
     })
 
-    const users = mbEventFactory.bulk(10);
+    // const users = mbEventFactory.bulk(10);
 
 
     /*

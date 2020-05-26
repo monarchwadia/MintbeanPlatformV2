@@ -28,6 +28,7 @@ authRoute.post('/register', validator.body(Joi.object({
   }
 
   const { email, password, firstname, lastname } = req.body;
+  const isAdmin = false; // just being defensive
 
   let user;
   try {
@@ -41,7 +42,7 @@ authRoute.post('/register', validator.body(Joi.object({
   }
 
   try {
-    user = await User.create({ email, password_hash: password, firstname, lastname });
+    user = await User.create({ email, password_hash: password, firstname, lastname, isAdmin });
   } catch (e) {
     next(e);
   }

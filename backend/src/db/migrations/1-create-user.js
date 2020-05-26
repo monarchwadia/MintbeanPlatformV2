@@ -8,6 +8,11 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.literal('uuid_generate_v4()')
       },
+      isAdmin: {
+        allowNull: false,
+        defaultValue: false,
+        type: Sequelize.BOOLEAN
+      },
       firstname: {
         allowNull: false,
         type: Sequelize.STRING

@@ -1,6 +1,6 @@
 const { Router } = require('express');
 // const { requireAuth } = require('./routers.util');
-const { MbEvent, User, Project } = require('../db/models');
+const { MbEvent, User, Project, Vote } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
 
@@ -14,7 +14,14 @@ mbEventRoute.get('/', async (req, res, next) => {
     include: [
       {
         model:  Project,
-        include: [ User ]
+        include: [
+          {
+            model: User
+          },
+          {
+            model: Vote
+          }
+        ]
       }
     ]
   })

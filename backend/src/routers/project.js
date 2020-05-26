@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { requireAuth } = require('./routers.util');
-const { MbEvent, User, Project } = require('../db/models');
+const { MbEvent, User, Project, Vote } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
 
@@ -10,6 +10,27 @@ projectRoute.get('/', requireAuth, async (req, res, next) => {
   req.user.getProjects()
     .then(projects => res.json(projects))
     .catch(e => next(err));
+});
+
+projectRoute.get('/:id', validator.params(Joi.object({id: Joi.string().required()})), async (req, res, next) => {
+  const { id } = req.params;
+
+  Project.findOne({ 
+    where: { id },
+    include: [
+      {
+        model: Vote,
+        include: [{
+          model: User
+        }]
+      },
+      {
+        model: User
+      }
+    ]
+  })
+    .then(project => res.json(project))
+    .catch(err => next(err));
 });
 
 // projectRoute.put('/', requireAuth, async (req, res, next) => {

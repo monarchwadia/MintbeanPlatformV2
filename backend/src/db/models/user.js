@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,
+    isAdmin: DataTypes.BOOLEAN,
     email: DataTypes.STRING,
     password_hash: DataTypes.STRING,
     linkedin_id: DataTypes.STRING,
@@ -24,6 +25,13 @@ module.exports = (sequelize, DataTypes) => {
   User.prototype.toJSON = function() {
     const values = Object.assign({}, this.get());
     delete values.password_hash;
+
+    // only show isAdmin if it is true
+    // just being more defensive
+    if (!values.isAdmin) {
+      delete values.isAdmin;
+    }
+
     return values;
   }
   

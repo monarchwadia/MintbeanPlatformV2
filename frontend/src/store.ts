@@ -10,6 +10,7 @@ const state: MbState = {
   loginUrl: undefined,
   logoutUrl: undefined,
   registerUrl: undefined,
+  project: undefined,
   mbEvents: [],
   votes: []
 };
@@ -99,16 +100,32 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
       })
   }
 
+  const fetchProject: Action<MbState, MbState> = async ({ commit, dispatch }, projectId: string) => {
+    mbContext.projectService.fetchProject(projectId)
+      .then(dto => {
+        commit('setProperty', ["project", dto || undefined]);
+      })
+      .catch(e => {
+        const message = e && e.response && e.response.data && e.response.data.message || '';
+        console.log("Failed to fetch project", message, e);
+        alert('Failed to fetch project');
+      })
+  }
+
   // TODO: remove any
   const vote: Action<MbState, MbState> = async ({ commit, dispatch }, obj: any) => {
     mbContext.projectService.vote(obj)
       .then(dto => {
-        dispatch('fetchVotes');
+        alert('Thanks for voting!');
+        dispatch('fetchProject', obj.ProjectId);
       })
       .catch(e => {
         const message = e && e.response && e.response.data && e.response.data.message || '';
         console.log("Voting failed", message, e);
         alert('Voting failed. ' + message);
+        if (obj && obj.ProjectId) {
+          dispatch('fetchProject', obj.ProjectId);
+        }
       })
   }
 
@@ -120,7 +137,8 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
     fetchMbEvents,
     submitProject,
     fetchVotes,
-    vote
+    vote,
+    fetchProject
   }
 }
 

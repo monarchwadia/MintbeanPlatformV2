@@ -19,20 +19,7 @@ div.event-wrapper
           aside(v-for="project in mbEvent.Projects")
             h2 {{ project.title }}
             p
-              mb-a(:href="project.source_code_url") Source Code
-            p
-              mb-a(:href="project.live_url") Live Page
-            form.vote-project(v-on:submit.prevent="function(evt){ handleVoteProject(project.id) }")
-              h3 Vote
-              code(v-if="voteforms[project.id].votedVote") Your rating: {{voteforms[project.id].votedVote.rating}}/10
-              code(v-if="voteforms[project.id].votedVote") Your comment: {{voteforms[project.id].votedVote.comment}}
-                
-              label Rating (1 - 10)
-                input(name="rating", v-model="voteforms[project.id].rating")
-              label Comment
-                textarea(name="comment", v-model="voteforms[project.id].comment")
-              input(type="submit")
-
+              router-link(:to="'/project/' + project.id") View Project
         section(v-if="submitFormState.enabled")
           form.submit-project-form(v-on:submit.prevent="handleSubmitProject")
             h1 Submit a Project
@@ -102,10 +89,8 @@ export default {
   name: "Event",
   data() {
     return {
-      title: '',
-      source_code_url: '',
-      live_url: '',
-      voteforms: {}
+      rating: 7,
+      comment: ''
     }
   },
   computed: {
@@ -128,22 +113,6 @@ export default {
 
 
       const mbEvent = this.$store.state.mbEvents.find(x => x.id === id);
-      // TODO: REMOVE, HACK
-
-      mbEvent && mbEvent.Projects.forEach(project => {
-        this.voteforms[project.id] = this.voteforms[project.id]  || {};
-
-
-        const votedVote = votes.find(votes => {
-          return votes.ProjectId === project.id
-        })
-
-        if (votedVote) {
-          this.voteforms[project.id].votedVote = votedVote;
-        } else {
-          this.voteforms[project.id].votedVote = undefined;
-        }
-      })
 
       return mbEvent;
     },
@@ -174,16 +143,6 @@ export default {
     }
   },
   methods: {
-    handleVoteProject(ProjectId) {
-      const { comment, rating } = this.voteforms[ProjectId];
-      const obj = {
-        ProjectId, comment, rating
-      }
-
-      // debugger;
-      console.log(obj);
-      this.$store.dispatch('vote', obj);
-    },
     handleSubmitProject() {
       const { title, source_code_url, live_url } = this;
       confirm(`Submitting a project is final. Projects cannot currently be edited or deleted.
