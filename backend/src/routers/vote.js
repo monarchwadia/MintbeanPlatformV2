@@ -6,6 +6,14 @@ const validator = require('../validator');
 
 const voteRoute = new Router();
 
+voteRoute.get('/', requireAuth, (req, res, next) => {
+  Vote.findAll({ where: {
+    UserId: req.user.id
+  }})
+  .then(x => res.json(x))
+  .catch(e => next(e));
+})
+
 voteRoute.post('/',
   requireAuth, 
   validator.body(Joi.object({
@@ -14,12 +22,12 @@ voteRoute.post('/',
     comment: Joi.string().optional()
   })),
   async (req, res, next) => {
-    let vote = await Vote.findOne({ where: {
-      UserId: req.user.id,
-      ProjectId: req.body.ProjectId
-    }});
-
     try {
+      let vote = await Vote.findOne({ where: {
+        UserId: req.user.id,
+        ProjectId: req.body.ProjectId
+      }});
+
       if (vote) {
         vote = await vote.update({
           rating: req.body.rating,
@@ -30,11 +38,11 @@ voteRoute.post('/',
         params.UserId = req.user.id;
         vote = await Vote.create(params);
       }
+
+      res.json(vote);
     } catch (e) {
       return next(e);
     }
-
-    res.json(vote);
   }
 );
 

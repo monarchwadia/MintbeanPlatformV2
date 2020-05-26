@@ -36,20 +36,22 @@ describe("Votes model", () => {
     try {
       await Vote.destroy({ where: {} })
       await Project.destroy({where: {}});
-      await User.destroy({where: {}});
       await MbEvent.destroy({where: {}});
+      await User.destroy({where: {}});
       done();
     } catch (e) {
       done(e);
     }
   });
 
-  it('Can be created with associations', () => {
+  it('Can be created with associations', done => {
     expect(vote.comment).toBeTruthy();
     expect(vote.rating).toBeTruthy();
+
+    done();
   });
 
-  it('Will create multiple votes for the same project', async () => {
+  it('Will create multiple votes for the same project', async done => {
     const users = await User.bulkCreate(userFactory.bulk(10));
     for (u in users) {
       await Vote.create(voteFactory.one({
@@ -57,9 +59,10 @@ describe("Votes model", () => {
         ProjectId: project.id
       }));
     }
+    done();
   })
 
-  it('Will create multiple votes for the same user', async () => {
+  it('Will create multiple votes for the same user', async done => {
     const projects = await Project.bulkCreate(projectFactory.bulk(10));
     for (p in projects) {
       await Vote.create(voteFactory.one({
@@ -67,9 +70,11 @@ describe("Votes model", () => {
         ProjectId: p.id
       }));
     }
+
+    done();
   });
 
-  it('Will not let the same user vote for the same project', async () => {
+  it('Will not let the same user vote for the same project', async done => {
     let error = null;
 
     try {
@@ -84,6 +89,8 @@ describe("Votes model", () => {
     expect(error.name).toBe("SequelizeUniqueConstraintError");
     expect(error.errors.find(e => e.path === "UserId")).toBeTruthy();
     expect(error.errors.find(e => e.path === "ProjectId")).toBeTruthy();
+
+    done();
   })
 });
 
@@ -93,32 +100,26 @@ describe("Projects route", () => {
   describe("Vote route", () => {
     beforeEach(async done => {
       agent = supertest.agent(app);
-      try {
-        user = await User.create(userFactory.one({ email: TEST_EMAIL, password: TEST_PASSWORD }));
-        mbEvent = await MbEvent.create(mbEventFactory.one());
-        const projectPayload = projectFactory.one({
-          UserId: user.id,
-          MbEventId: mbEvent.id
-        });
-        
-        project = await Project.create(projectPayload);
-        done();
-      } catch (e) {
-        done(e);
-      }
+
+      user = await User.create(userFactory.one({ email: TEST_EMAIL, password: TEST_PASSWORD }));
+      mbEvent = await MbEvent.create(mbEventFactory.one());
+      const projectPayload = projectFactory.one({
+        UserId: user.id,
+        MbEventId: mbEvent.id
+      });
+      
+      project = await Project.create(projectPayload);
+      done();
+
     })
   
-    afterEach(async done => {
-      try {
-        await Vote.destroy({ where: {} })
-        await Project.destroy({where: {}});
-        await User.destroy({where: {}});
-        await MbEvent.destroy({where: {}});
-        done();
-      } catch (e) {
-        done(e);
-      }
-    });
+    // afterEach(async done => {
+    //   await Vote.destroy({ where: {} })
+    //   await Project.destroy({where: {}});
+    //   await User.destroy({where: {}});
+    //   await MbEvent.destroy({where: {}});
+    //   done();
+    // });
 
     it('needs to be logged in', async done => {
       // fetch while not logged in
@@ -133,13 +134,46 @@ describe("Projects route", () => {
 
     describe("When logged in", () => {
       beforeEach(async done => {
-        const response = await agent
+        const response = await (agent
           .post("/api/v1/auth/login")
-          .send({ email: TEST_EMAIL, password: TEST_PASSWORD });
-        
+          .send({ email: TEST_EMAIL, password: TEST_PASSWORD }));
+          
         expect(response.body.email).toBe(TEST_EMAIL);
         done();
       });
+
+      it('retrieves my votes', async done => {
+        const users = await User.bulkCreate(userFactory.bulk(3));
+        const events = await MbEvent.bulkCreate(mbEventFactory.bulk(3));
+
+        const projects = [];
+        for (u in users) {
+          for (mbe in events) {
+            const p = await Project.create(projectFactory.one({
+              UserId: u.id,
+              MbEventId: mbe.id
+            }));
+
+            projects.push(p);
+          }
+        }
+
+        for (p in projects) {
+          await Vote.create(voteFactory.one({
+            UserId: u.id,
+            ProjectId: p.id
+          }))
+        }
+
+        const response = await agent
+          .get('/api/v1/vote');
+        
+        expect(response.statusCode).toBe(200);
+        expect(response.body.length).toBe(9);
+
+        done();
+      })
+     
 
       it('creates the vote', async done => {
         const RATING = 1;

@@ -9,13 +9,27 @@ div.event-wrapper
         p {{ mbEvent.description }}
         h3 Instructions
         p {{ mbEvent.instructions }}
-        h3 Schedule
-        p {{ mbEvent.start_time }}
+        h3 Date & Time
+        p {{ prettyDate }}
         h3 Submissions
-        p(v-if="mbEvent.Projects.length === 0")
-          | Be the first to submit your project!
-        p(v-else v-for="project in mbEvent.Projects") 
-          router-link(:to="'/project/' + project.id") {{ project.title }}
+        section(v-if="mbEvent.Projects.length === 0")
+          p
+            No submissions yet. Be the first to submit a project!
+        section(v-else)
+          aside(v-for="project in mbEvent.Projects")
+            h2 {{ project.title }}
+            p
+              mb-a(:href="project.source_code_url") Source Code
+            p
+              mb-a(:href="project.live_url") Live Page
+            form.vote-project(v-on:submit.prevent="function(evt){ handleVoteProject(project.id) }")
+              h3 Vote
+              label Rating (1 - 10)
+                input(name="rating", v-model="voteforms[project.id].rating")
+              label Comment
+                textarea(name="comment", v-model="voteforms[project.id].comment")
+              input(type="submit")
+
         section(v-if="submitFormState.enabled")
           form.submit-project-form(v-on:submit.prevent="handleSubmitProject")
             h1 Submit a Project
@@ -78,6 +92,8 @@ form {
 </style>
 
 <script>
+import moment from 'moment';
+
 // @ is an alias to /src
 export default {
   name: "Event",
@@ -85,10 +101,17 @@ export default {
     return {
       title: '',
       source_code_url: '',
-      live_url: ''
+      live_url: '',
+      voteforms: {}
     }
   },
   computed: {
+    prettyDate: function() {
+      if (!this.mbEvent.start_time) {
+        return '';
+      }
+      return moment(this.mbEvent.start_time).format("dddd, MMMM Do YYYY, h:mm:ss a");
+    },
     mbEvent: function() {
       const { id } = this.$route.params;
       const { mbEvents } = this.$store.state;
@@ -97,7 +120,14 @@ export default {
         return;
       }
 
-      return this.$store.state.mbEvents.find(x => x.id === id);
+
+      const mbEvent = this.$store.state.mbEvents.find(x => x.id === id);
+      // TODO: REMOVE, HACK
+      mbEvent.Projects.forEach(project => {
+        this.voteforms[project.id] = this.voteforms[project.id]  || {};
+      })
+
+      return mbEvent;
     },
     submitFormState: function() {
       const { user } = this.$store.state;
@@ -126,6 +156,16 @@ export default {
     }
   },
   methods: {
+    handleVoteProject(ProjectId) {
+      const { comment, rating } = this.voteforms[ProjectId];
+      const obj = {
+        ProjectId, comment, rating
+      }
+
+      debugger;
+      console.log(obj);
+      this.$store.dispatch('vote', obj);
+    },
     handleSubmitProject() {
       const { title, source_code_url, live_url } = this;
       confirm(`Submitting a project is final. Projects cannot currently be edited or deleted.

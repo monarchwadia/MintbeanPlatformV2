@@ -38,12 +38,14 @@ describe("Projects model", () => {
     }
   });
 
-  it('Can be created with associations', async () => {
+  it('Can be created with associations', async done => {
     const user = await project.getUser();
     const event = await project.getMbEvent();
     expect(project.id).toBeTruthy();
     expect(user).toBeTruthy();
     expect(event).toBeTruthy();
+
+    done();
   })
 });
 

@@ -90,13 +90,27 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
       })
   }
 
+  // TODO: remove any
+  const vote: Action<MbState, MbState> = async ({ commit, dispatch }, obj: any) => {
+    mbContext.projectService.vote(obj)
+      .then(dto => {
+        // dispatch('fetchVotes');
+      })
+      .catch(e => {
+        const message = e && e.response && e.response.data && e.response.data.message || '';
+        console.log("Voting failed", message, e);
+        alert('Voting failed. ' + message);
+      })
+  }
+
   return {
     checkAuth,
     login,
     logout,
     register,
     fetchMbEvents,
-    submitProject
+    submitProject,
+    vote
   }
 }
 

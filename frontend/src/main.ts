@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex, { Store } from "vuex";
-import VueCountdown from '@chenfengyuan/vue-countdown';
+const VueCountdown: any = require('@chenfengyuan/vue-countdown');
 
 import App from "./App.vue";
 import router from "./router";
