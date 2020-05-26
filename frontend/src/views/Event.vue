@@ -12,7 +12,7 @@ div.event-wrapper
         h3 Date & Time
         p {{ prettyDate }}
         h3 Submissions
-        section(v-if="mbEvent.Projects.length === 0")
+        section(v-if="mbEvent && mbEvent.Projects.length === 0")
           p
             No submissions yet. Be the first to submit a project!
         section(v-else)
@@ -24,6 +24,9 @@ div.event-wrapper
               mb-a(:href="project.live_url") Live Page
             form.vote-project(v-on:submit.prevent="function(evt){ handleVoteProject(project.id) }")
               h3 Vote
+              code(v-if="voteforms[project.id].votedVote") Your rating: {{voteforms[project.id].votedVote.rating}}/10
+              code(v-if="voteforms[project.id].votedVote") Your comment: {{voteforms[project.id].votedVote.comment}}
+                
               label Rating (1 - 10)
                 input(name="rating", v-model="voteforms[project.id].rating")
               label Comment
@@ -114,7 +117,10 @@ export default {
     },
     mbEvent: function() {
       const { id } = this.$route.params;
-      const { mbEvents } = this.$store.state;
+      const { state } = this.$store;
+      const { mbEvents } = state;
+      const votes = state.votes || [];
+      console.log("VOTES", votes);
 
       if (!id || !mbEvents) {
         return;
@@ -123,8 +129,20 @@ export default {
 
       const mbEvent = this.$store.state.mbEvents.find(x => x.id === id);
       // TODO: REMOVE, HACK
-      mbEvent.Projects.forEach(project => {
+
+      mbEvent && mbEvent.Projects.forEach(project => {
         this.voteforms[project.id] = this.voteforms[project.id]  || {};
+
+
+        const votedVote = votes.find(votes => {
+          return votes.ProjectId === project.id
+        })
+
+        if (votedVote) {
+          this.voteforms[project.id].votedVote = votedVote;
+        } else {
+          this.voteforms[project.id].votedVote = undefined;
+        }
       })
 
       return mbEvent;
@@ -162,7 +180,7 @@ export default {
         ProjectId, comment, rating
       }
 
-      debugger;
+      // debugger;
       console.log(obj);
       this.$store.dispatch('vote', obj);
     },

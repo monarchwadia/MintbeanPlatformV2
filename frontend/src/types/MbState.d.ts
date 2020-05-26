@@ -7,4 +7,6 @@ export interface MbState {
   logoutUrl?: string;
   registerUrl?: string;
   mbEvents: MbEvent[];
+  // TODO; fix types;
+  votes: any[];
 }
