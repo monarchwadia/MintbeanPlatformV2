@@ -8,8 +8,8 @@ module.exports = factory({
   title: () => faker.company.bsBuzz(),
   source_code_url: () => faker.internet.url(),
   live_url: () => faker.internet.url(),
-  User: () => null,
-  MbEvent: () => null,
+  UserId: () => null,
+  MbEventId: () => null,
   createdAt: () => new Date(),
   updatedAt: () => new Date()
 });

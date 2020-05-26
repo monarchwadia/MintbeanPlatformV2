@@ -15,9 +15,11 @@ describe("Projects model", () => {
     try {
       user = await User.create(userFactory.one());
       mbEvent = await MbEvent.create(mbEventFactory.one());
-      const projectPayload = projectFactory.one(); // TODO: fix the id's
-      projectPayload.UserId = user.id;
-      projectPayload.MbEventId = mbEvent.id;
+      const projectPayload = projectFactory.one({
+        UserId: user.id,
+        MbEventId: mbEvent.id
+      });
+      
       project = await Project.create(projectPayload);
       done();
     } catch (e) {
@@ -55,9 +57,11 @@ describe("Projects route", () => {
       try {
         user = await User.create(userFactory.one({ email: TEST_EMAIL, password: TEST_PASSWORD }));
         mbEvent = await MbEvent.create(mbEventFactory.one());
-        const projectPayload = projectFactory.one();
-        projectPayload.UserId = user.id;
-        projectPayload.MbEventId = mbEvent.id;
+        const projectPayload = projectFactory.one({
+          UserId: user.id,
+          MbEventId: mbEvent.id
+        });
+        
         project = await Project.create(projectPayload);
         done();
       } catch (e) {
@@ -145,9 +149,10 @@ describe("Projects route", () => {
 
     it('needs to be logged in', async done => {
       // create while not logged in
-      const projectPayload = projectFactory.one();
-      projectPayload.UserId = user.id;
-      projectPayload.MbEventId = mbEvent.id;
+      const projectPayload = projectFactory.one({
+        UserId: user.id,
+        MbEventId: mbEvent.id
+      });
 
       const response = await agent
         .post("/api/v1/project")

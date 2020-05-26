@@ -9,7 +9,7 @@ First:
 ✔ Auth: Sign  Up @done(20-05-25 08:22)
 
 ☐ Hackathon page: Hardcode GA img
-☐ Hackathon page: see contestants and projects [extend GET /mb-event]
+✔ Hackathon page: see contestants and projects [extend GET /mb-event] @done(20-05-26 06:22)
 ☐ Hackathon page: submit project (no images for now) [POST /mb-event/:id/project] [Warn that submitting is final (for now, at least)]
 ☐ bcrypt
 
