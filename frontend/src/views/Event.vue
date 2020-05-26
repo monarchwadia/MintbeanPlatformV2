@@ -22,10 +22,9 @@ div.event-wrapper
             label Title
               input(name="title", v-model="title")
             label Source Code URL
-              input(name="sourceCodeUrl", v-model="sourceCodeUrl")
+              input(name="source_code_url", v-model="source_code_url")
             label Deployment URL
-              input(name="liveUrl", v-model="liveUrl")
-              sourceCodeUrl
+              input(name="live_url", v-model="live_url")
             button(type="submit") Submit
         section(v-else)
           h1 You must be 
@@ -84,8 +83,8 @@ export default {
   data() {
     return {
       title: '',
-      sourceCodeUrl: '',
-      liveUrl: ''
+      source_code_url: '',
+      live_url: ''
     }
   },
   computed: {
@@ -102,16 +101,26 @@ export default {
   },
   methods: {
     handleSubmitProject() {
-      const { title, sourceCodeUrl, liveUrl } = this;
+      const { title, source_code_url, live_url } = this;
       confirm(`Submitting a project is final. Projects cannot currently be edited or deleted.
 Your project will have the following information:
 ====
 Title: ${title}
-Source Code URL: ${sourceCodeUrl}
-Deployment URL: ${liveUrl}
+Source Code URL: ${source_code_url}
+Deployment URL: ${live_url}
 ====
-Would you like to continue?`)
-      console.log(title, sourceCodeUrl, liveUrl);
+Would you like to continue?`);
+
+      if (!confirm) {
+        return;
+      }
+
+      this.$store.dispatch('submitProject', {
+        title,
+        source_code_url,
+        live_url,
+        MbEventId: this.mbEvent.id
+      });
     }
   }
 };

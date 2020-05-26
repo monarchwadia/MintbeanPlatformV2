@@ -220,6 +220,8 @@ describe("Projects route", () => {
         expect(createResponse.statusCode).toBe(200);
         expect(createResponse.body.MbEventId).toBe(mbEvent.id);
         expect(createResponse.body.UserId).toBe(user.id);
+        expect(createResponse.body.MbEvent.id).toBe(mbEvent.id);
+        expect(createResponse.body.User.id).toBe(user.id);
 
         // GET AFTER CREATE SHOULD HAVE THE OBJECT
         const afterResponse = await agent

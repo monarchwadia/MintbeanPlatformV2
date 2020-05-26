@@ -15,6 +15,7 @@ import { MbState } from './types/MbState';
 import { ApiService } from './services/apiService';
 import { MbContext } from './types/MbContext';
 import { MbEventService } from './services/mbEventService';
+import { ProjectService } from './services/projectService';
 
 Vue.use(Vuex);
 
@@ -28,7 +29,8 @@ declare global {
 const apiService = new ApiService();
 const authService = new AuthService(apiService);
 const mbEventService = new MbEventService(apiService);
-const context: MbContext = { apiService, authService, mbEventService }
+const projectService = new ProjectService(apiService);
+const context: MbContext = { apiService, authService, mbEventService, projectService }
 const store = createStore(context);
 
 window.store = store;

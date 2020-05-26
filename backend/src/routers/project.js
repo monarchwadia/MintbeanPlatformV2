@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { requireAuth } = require('./routers.util');
-const { MbUser, Project } = require('../db/models');
+const { MbEvent, User, Project } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
 
@@ -32,11 +32,35 @@ projectRoute.post('/',
     const params = { title, source_code_url, live_url, mb_event_id, MbEventId } = req.body;
     params.UserId = req.user.id;
 
-    Project.create(params)
-    .then(project => res.json(project))
-    .catch(err => {
-      next(err);
-    })
+    let project;
+
+    try {
+      project = await Project.create(params);
+    } catch (e) {
+      return next(err);
+    }
+
+    try {
+      project = await Project.findOne({
+        where: { id: project.id },
+        include: [
+          { model: MbEvent },
+          { model: User }
+        ]
+      });
+    } catch (e) {
+      return next(e);
+    }
+
+    return res.json(project);
+
+
+
+    // Project.create(params)
+    // .then(project => res.json(project))
+    // .catch(err => {
+    //   next(err);
+    // })
   });
 
 // mbEventRoute.post('/', 

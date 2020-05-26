@@ -3,7 +3,7 @@ import Vuex, { MutationTree, ActionTree, Action } from "vuex";
 import { AuthService } from "./services/authService";
 import { MbState } from './types/MbState';
 import { MbContext } from './types/MbContext';
-import { MbEventService } from './services/mbEventService';
+import { Project } from './types/Project';
 
 const state: MbState = {
   user: undefined,
@@ -23,9 +23,9 @@ const mutations: MutationTree<MbState> = {
   }
 };
 
-const createActions: (authservice: AuthService, mbEventService: MbEventService) => ActionTree<MbState, MbState> = (authService, mbEventService) => {
+const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
   const checkAuth: Action<MbState, MbState> = async ({ commit }) => {
-    authService.checkAuth()
+    mbContext.authService.checkAuth()
       .then(user => commit("setProperty", ["user", user || undefined]))
       .catch(e => {
         console.log("Failed to perform auth", e);
@@ -33,7 +33,7 @@ const createActions: (authservice: AuthService, mbEventService: MbEventService) 
   };
 
   const login: Action<MbState, MbState> = async ({ commit }, { email, password, $router }) => {
-    authService.login(email, password)
+    mbContext.authService.login(email, password)
       .then(user => {
         commit("setProperty", ["user", user || undefined]);
         if (user) {
@@ -48,7 +48,7 @@ const createActions: (authservice: AuthService, mbEventService: MbEventService) 
   }
 
   const register: Action<MbState, MbState> = async ({ commit }, { email, password, firstname, lastname, $router }) => {
-    authService.register(firstname, lastname, email, password)
+    mbContext.authService.register(firstname, lastname, email, password)
       .then(user => {
         commit("setProperty", ["user", user || undefined]);
         if (user) {
@@ -63,7 +63,7 @@ const createActions: (authservice: AuthService, mbEventService: MbEventService) 
   }
 
   const logout: Action<MbState, MbState> = async ({ commit }) => {
-    authService.logout()
+    mbContext.authService.logout()
       .then(() => commit("setProperty", ["user", undefined]))
       .catch(e => {
         console.log("Failed to logout", e);
@@ -71,10 +71,22 @@ const createActions: (authservice: AuthService, mbEventService: MbEventService) 
   }
 
   const fetchMbEvents: Action<MbState, MbState> = async ({ commit }) => {
-    mbEventService.getMbEvents()
+    mbContext.mbEventService.getMbEvents()
       .then(events => commit("setProperty", ["mbEvents", events]))
       .catch(e => {
         console.log("Failed to fetch events", e);
+      })
+  }
+
+  const submitProject: Action<MbState, MbState> = async ({ commit, dispatch }, obj: Project) => {
+    mbContext.projectService.submitProject(obj)
+      .then(dto => {
+        dispatch('fetchMbEvents');
+      })
+      .catch(e => {
+        const message = e && e.response && e.response.data && e.response.data.message || '';
+        console.log("Project submission failed", message, e);
+        alert('Project submission failed. ' + message);
       })
   }
 
@@ -83,7 +95,8 @@ const createActions: (authservice: AuthService, mbEventService: MbEventService) 
     login,
     logout,
     register,
-    fetchMbEvents
+    fetchMbEvents,
+    submitProject
   }
 }
 
@@ -95,6 +108,6 @@ export const createStore = (mbContext: MbContext) => {
   return new Vuex.Store({
     state,
     mutations,
-    actions: createActions(authService, mbEventService)
+    actions: createActions(mbContext)
   });
 }
