@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Home from "../views/GaHome/GaHome.vue";
-import Event from "../views/Event.vue";
+import MbEvent from "../views/MbEvent.vue";
 import Login from "../views/Auth/Login.vue";
 import Register from "../views/Auth/Register.vue";
 import Project from "../views/Project.vue";
@@ -33,7 +33,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/mb-event/:id",
     name: "Event",
-    component: Event
+    component: MbEvent
   },
   {
     path: "*",

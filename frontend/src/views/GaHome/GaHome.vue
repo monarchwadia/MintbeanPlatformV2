@@ -18,28 +18,6 @@ div
             i Sign up for {{nextEvent.title}}!
           button(v-else v-on:click.prevent="() => $router.push('/auth/login')").u-minty-gradient
             i Sign up now!
-    section
-      h2 Coming Up Next:
-
-    section.u-centered
-      aside(v-for="mbEvent in mbEvents" class="hackathon-card" v-on:click.prevent="() => goToUpcomingEvent(mbEvent.id)")
-        img(:src="mbEvent.cover_image_url" height=200 width="100%")
-        h3 {{mbEvent.title}}
-        p {{mbEvent.description}}
-        b(v-if="getEventStatus(mbEvent) === 'upcoming'")
-          countdown(:time="getCountdownTime(mbEvent.start_time)")
-            template(slot-scope="props") Starts In: <br/>{{ props.days }}d {{ props.hours }}h {{ props.minutes }}m {{ props.seconds }}s.
-        b(v-if="getEventStatus(mbEvent) === 'ongoing'")
-          countdown(:time="getCountdownTime(mbEvent.start_time)")
-            template(slot-scope="props") Ends In: <br/>{{ props.days }}d {{ props.hours }}h {{ props.minutes }}m {{ props.seconds }}s.
-        b(v-if="getEventStatus(mbEvent) === 'ended'")
-          Event Ended
-
-    blockquote
-      | Learned how to build a Chrome Extension. Participated in my first ever hackathon. Got familiar with the process. Enjoyed the heady rush of coding in a set timeframe. That's it in a nutshell!
-      footer
-        i - Posh G
-
     section.u-centered
       aside
         img(alt='HTML only' src='../../assets/sliders/build.png')
@@ -58,10 +36,33 @@ div
         p
           | We market you directly to employers through our job board, newsletters, portfolios platform and social media channels so employers can get in touch with you easily.
     blockquote
+      | Learned how to build a Chrome Extension. Participated in my first ever hackathon. Got familiar with the process. Enjoyed the heady rush of coding in a set timeframe. That's it in a nutshell!
+      footer
+        i - Posh G
+
+    section
+      h2 Coming Up Next:
+
+    section.u-centered
+      aside(v-for="mbEvent in mbEvents" class="hackathon-card" v-on:click.prevent="() => goToUpcomingEvent(mbEvent.id)")
+        img(:src="mbEvent.cover_image_url" max-height=300 width="100%")
+        h3 {{mbEvent.title}}
+        p {{mbEvent.description}}
+        b(v-if="getEventStatus(mbEvent) === 'upcoming'")
+          countdown(:time="getCountdownTime(mbEvent.start_time)")
+            template(slot-scope="props") Starts In: <br/>{{ props.days }}d {{ props.hours }}h {{ props.minutes }}m {{ props.seconds }}s.
+        b(v-if="getEventStatus(mbEvent) === 'ongoing'")
+          countdown(:time="getCountdownTime(mbEvent.start_time)")
+            template(slot-scope="props") Ends In: <br/>{{ props.days }}d {{ props.hours }}h {{ props.minutes }}m {{ props.seconds }}s.
+        b(v-if="getEventStatus(mbEvent) === 'ended'")
+          | Event Ended
+
+    blockquote
       | I'm definitely coming back for another meet. I loved the exposure and the chance to break out of
       | my rut.
       footer
         i - M. Alaniz
+
 </template>
 
 <style lang="scss" scoped>
