@@ -10,9 +10,4 @@ export class MbEventService {
         return (new Date(a.start_time).getTime()) - (new Date(b.start_time).getTime())
       }));
   }
-
-  //TODO: fix types and move to its own service
-  getVotes(): Promise<any> {
-    return this.apiService.get('/api/v1/vote').then(resp => resp.data);
-  }
 }

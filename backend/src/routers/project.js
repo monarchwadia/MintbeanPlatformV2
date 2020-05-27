@@ -58,7 +58,7 @@ projectRoute.post('/',
     try {
       project = await Project.create(params);
     } catch (e) {
-      return next(err);
+      return next(e);
     }
 
     try {

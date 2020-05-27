@@ -8,17 +8,18 @@ First:
 ✔ Auth: Login @done(20-05-25 06:53)
 ✔ Auth: Sign  Up @done(20-05-25 08:22)
 
-Disabled ☐ Hackathon page: Hardcode GA img
 ✔ Hackathon page: see contestants and projects [extend GET /mb-event] @done(20-05-26 06:22)
 ✔ Hackathon page: submit project (no images for now) [POST /mb-event/:id/project] [Warn that submitting is final (for now, at least)] @done(20-05-26 07:19)
 ✔ Users cannot submit multiple projects (frontend) @done(20-05-26 07:50)
 ✔ (loggedin) VOTE /vote { :projectId, :mbEventId, comment } @done(20-05-26 13:23)
 ✔ ensure re=nofollow..etc on vote links @done(20-05-26 13:23)
-☐ Admin page for managing things
+✔ Fix unit tests @done(20-05-27 18:40)
 ☐ bcrypt
+☐ Move production to production mode
+☐ Admin page for managing things
 
 After:
-  ☐ Users cannot submit multiple projects (backend safety checks)
+☐ Users cannot submit multiple projects (backend safety checks)
 ☐ (loggedin) LIST /mb-event/:id/projects [leaderboard]
 ☐ Hackathon page: leaderboard + voting
 ☐ Hackathon page: edit project (no images for now) [PUT /mb-event/:id/project]

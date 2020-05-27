@@ -36,7 +36,6 @@ app.use('/api/v1', rootRouter);
 // After your routes add a standard express error handler. This will be passed the Joi
 // error, plus an extra "type" field so we can tell what type of validation failed
 app.use((err, req, res, next) => {
-  console.log(err);
   if (err && err.error && err.error.isJoi) {
     // we had a joi error, let's return a custom 400 json response
     res.status(400).json({
@@ -45,6 +44,7 @@ app.use((err, req, res, next) => {
     });
   } else {
     // pass on to another error handler
+    console.log(err);
     next(err);
   }
 });

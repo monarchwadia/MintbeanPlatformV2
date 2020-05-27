@@ -80,14 +80,6 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
       })
   }
 
-  const fetchVotes: Action<MbState, MbState> = async ({ commit }) => {
-    mbContext.mbEventService.getVotes()
-      .then(votes => commit("setProperty", ["votes", votes]))
-      .catch(e => {
-        console.log("Failed to fetch votes", e);
-      })
-  }
-
   const submitProject: Action<MbState, MbState> = async ({ commit, dispatch }, obj: Project) => {
     mbContext.projectService.submitProject(obj)
       .then(dto => {
@@ -136,7 +128,6 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
     register,
     fetchMbEvents,
     submitProject,
-    fetchVotes,
     vote,
     fetchProject
   }

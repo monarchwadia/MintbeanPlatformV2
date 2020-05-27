@@ -1,18 +1,10 @@
 const { Router } = require('express');
 const { requireAuth } = require('./routers.util');
-const { MbEvent, User, Project, Vote } = require('../db/models');
+const { Vote } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
 
 const voteRoute = new Router();
-
-voteRoute.get('/', requireAuth, (req, res, next) => {
-  Vote.findAll({ where: {
-    UserId: req.user.id
-  }})
-  .then(x => res.json(x))
-  .catch(e => next(e));
-})
 
 voteRoute.post('/',
   requireAuth, 
