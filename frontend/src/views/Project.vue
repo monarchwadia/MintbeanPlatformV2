@@ -11,13 +11,13 @@ div.project-wrapper
         mb-a(:href="project.source_code_url") Click here to see source code
         h3(v-if="project.live_url") View Project
         mb-a(:href="project.live_url") Click here to view the project
+        h1 Score: {{averageScore}} / 10
         h1 Votes
         section(v-if="!project.Votes || project.Votes.length === 0")
           p No comments yet
         section(v-else)
           aside(v-for="vote in project.Votes" style="width: 100%;")
             h2 {{vote.User.firstname + ' ' + vote.User.lastname}}
-            h3 Rating: {{ vote.rating }} / 10
             h3 Comments:
             p {{ vote.comment }}
         section(v-if="$store.state.user")
@@ -105,6 +105,17 @@ export default {
       if (!project.Votes) return;
 
       return (project.Votes.find(p => p.User.id === user.id))
+    },
+    averageScore: function() {
+      debugger;
+      const { project } = this;
+      if (!project) return null;
+
+      const { Votes } = project;
+      if (!Votes || Votes.length === 0) return null;
+
+      const score = Votes.reduce((prev, curr) => prev + curr.rating, 0) / Votes.length;
+      return score.toPrecision(2);
     },
     project: function() {
       return this.$store.state.project;
