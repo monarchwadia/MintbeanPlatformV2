@@ -1,2 +1,6 @@
 node_modules/
 devtools/db/data
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+.pnp.*
