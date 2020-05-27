@@ -10,7 +10,8 @@
     "test": "jest",
     "tdd": "TEST_LOG_SQL=false jest --watch --runInBand --detectOpenHandles",
     "sly": "NODE_ENV=development sequelize-cli",
-    "sly.test": "NODE_ENV=test sequelize-cli"
+    "sly.test": "NODE_ENV=test sequelize-cli",
+    "repl": "node ./bin/repl.js"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",

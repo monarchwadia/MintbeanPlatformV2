@@ -4,8 +4,7 @@ const defaults = {
   username: 'mintbean',
   password: 'password',
   host: '127.0.0.1',
-  dialect: 'postgres',
-  operatorsAliases: false
+  dialect: 'postgres'
 };
 
 module.exports = {
