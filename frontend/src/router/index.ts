@@ -5,6 +5,7 @@ import MbEvent from "../views/MbEvent.vue";
 import Login from "../views/Auth/Login.vue";
 import Register from "../views/Auth/Register.vue";
 import Project from "../views/Project.vue";
+import UserProfile from "../views/UserProfile.vue";
 import NotFound from "../views/NotFound.vue";
 
 Vue.use(VueRouter);
@@ -34,6 +35,11 @@ const routes: Array<RouteConfig> = [
     path: "/mb-event/:id",
     name: "Event",
     component: MbEvent
+  },
+  {
+    path: "/user-profile/:id",
+    name: "User Profile",
+    component: UserProfile
   },
   {
     path: "*",

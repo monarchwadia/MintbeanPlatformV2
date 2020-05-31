@@ -4,7 +4,7 @@ const expressSession = require('express-session')
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const authRoute = require('./routers/auth');
-const userRoute = require('./routers/user');
+const userProfileRoute = require('./routers/user-profile');
 const mbEventRoute = require('./routers/mb-event');
 const projectRoute = require('./routers/project');
 const voteRoute = require('./routers/vote');
@@ -21,7 +21,7 @@ initializePassport(app);
 
 const rootRouter = new express.Router();
 rootRouter.use('/auth', authRoute);
-rootRouter.use('/user', userRoute);
+rootRouter.use('/user-profile', userProfileRoute);
 rootRouter.use('/mb-event', mbEventRoute);
 rootRouter.use('/project', projectRoute);
 rootRouter.use('/vote', voteRoute);
