@@ -1,0 +1,4 @@
+---
+# vars file for common
+date: "{{ lookup('pipe', 'date +%Y-%m-%d-%H-%M-%S') }}"
+backup_dir: /home/ubuntu/backups/frontend

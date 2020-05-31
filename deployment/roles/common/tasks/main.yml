@@ -1,0 +1,26 @@
+---
+- name: create frontend backups directory
+  file:
+    path: "{{ backup_dir }}"
+    state: directory
+
+- name: stat frontend_dist
+  stat:
+    path: /home/ubuntu/MintbeanPlatformV2/frontend/dist
+  register: frontend_dist
+
+  # Determine if a path exists and is a directory.  Note that we need to test
+  # both that p.stat.isdir actually exists, and also that it's set to true.
+- name: backup frontend
+  when: frontend_dist.stat.isdir is defined and frontend_dist.stat.isdir
+  copy:
+    remote_src: True
+    src: "{{ root_dir }}/frontend/dist"
+    dest: "{{ backup_dir }}/{{date}}"
+
+- name: pull from git
+  git:
+    repo: git@github.com:monarchwadia/MintbeanPlatformV2.git
+    dest: "{{ root_dir }}"
+    update: yes
+    version: master
