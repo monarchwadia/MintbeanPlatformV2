@@ -1,2 +1,5 @@
 ---
 # vars file for frontend
+date: "{{ lookup('pipe', 'date +%Y-%m-%d-%H-%M-%S') }}"
+root_dir: /home/ubuntu/MintbeanPlatformV2
+backup_dir: /home/ubuntu/backups/frontend
