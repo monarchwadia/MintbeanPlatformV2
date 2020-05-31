@@ -1,6 +1,6 @@
 ---
 - name: deploy or update latest frontend
-  hosts: web_staging
+  hosts: web
   roles:
     - frontend
   remote_user: ubuntu

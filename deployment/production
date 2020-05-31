@@ -1,0 +1,2 @@
+#!/bin/bash
+ANSIBLE_NOCOWS=1 ansible-playbook site.yml -i hosts/production
