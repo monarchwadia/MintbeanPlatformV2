@@ -8,21 +8,19 @@ module.exports = app => {
     {
       usernameField: 'email'
     },
-    function(email, password, done) {
-      User.findOne({ where: { email }})
-        .then(user => {
-          // TODO: password bcrypt
-          if (user && user.password_hash === password) {
-            return done(null, user);
-          } else {
-            return done(null, false);
-          }
-        })
-        .catch(err => {
-          console.log(err);
-          return done(err);
-        });
-
+    async function(email, password, done) {
+      try {
+        const user = await User.findOne({ where: { email }});
+        const correctPassword = user && await user.checkPassword(password);
+        if (!user || !correctPassword) {
+          return done(null, false);
+        } else {
+          return done(null, user);
+        }
+      } catch (err) {
+        console.log(err);
+        return done(err);
+      }
 
       // User.findOne({ where: { email } }, function(err, user) {
       //   if (err) { return done(err); }

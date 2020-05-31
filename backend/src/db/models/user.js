@@ -1,4 +1,7 @@
 'use strict';
+
+const {hash, compare} = require('../../utils/encryption');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     firstname: DataTypes.STRING,
@@ -11,7 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     twitter_id: DataTypes.STRING,
     stackoverflow_id: DataTypes.STRING
   }, 
-  {});
+  {
+    hooks: {
+      beforeCreate: async (user) => {
+        user.password_hash = await hash(user.password_hash);
+      }
+    }
+  });
+
   User.associate = function(models) {
     // associations can be defined here
     User.hasMany(models.Project);
@@ -35,5 +45,10 @@ module.exports = (sequelize, DataTypes) => {
     return values;
   }
   
+  User.prototype.checkPassword = async function(password) {
+    if (!password) return false;
+    return await compare(password, this.password_hash);
+  }
+
   return User;
 };
