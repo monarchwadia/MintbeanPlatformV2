@@ -14,6 +14,7 @@ First:
 ✔ (loggedin) VOTE /vote { :projectId, :mbEventId, comment } @done(20-05-26 13:23)
 ✔ ensure re=nofollow..etc on vote links @done(20-05-26 13:23)
 ✔ Fix unit tests @done(20-05-27 18:40)
+☐ Automated deployment scripts
 ☐ bcrypt
 ☐ Move production to production mode
 ☐ Admin page for managing things
