@@ -1,2 +1,14 @@
 ---
 # tasks file for backend
+- name: stop pm2
+  shell: . ~/.profile && cd {{root_dir}}/backend && pm2 stop backend
+  ignore_errors: true
+
+- name: build backend
+  shell: . ~/.profile && cd {{root_dir}}/backend && yarn install
+
+- name: migrate
+  shell: . ~/.profile && cd {{root_dir}}/backend && yarn sly db:migrate
+
+- name: start pm2
+  shell: . ~/.profile && cd {{root_dir}}/backend && pm2 start --name "backend" ./index.js
