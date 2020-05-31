@@ -1,7 +1,6 @@
 ---
 - name: deploy or update latest frontend
   hosts: web
-  remote_user: ubuntu
   vars:
     root_dir: /home/ubuntu/MintbeanPlatformV2
   roles:
