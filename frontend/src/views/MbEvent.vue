@@ -23,13 +23,18 @@ div.event-wrapper
         section(v-if="submitFormState.enabled")
           form.submit-project-form(v-on:submit.prevent="handleSubmitProject")
             h1 Submit a Project
-            label Title
-              input(name="title", v-model="title")
-            label Source Code URL
-              input(name="source_code_url", v-model="source_code_url")
-            label Deployment URL
-              input(name="live_url", v-model="live_url")
-            button(type="submit") Submit
+            div.flex
+              label Title
+                input(name="title", v-model="title")
+              label Source Code URL
+                input(name="source_code_url", v-model="source_code_url")
+              label Deployment URL
+                input(name="live_url", v-model="live_url")
+              button(type="submit") Submit
+            div.flex
+              label Screenshots & Videos
+                mb-file-upload
+              
         section(v-else)
           h1 {{ submitFormState.disabledMessage }}
         section(v-if="submitFormState.showLoginButton")
@@ -76,8 +81,34 @@ div.event-wrapper
   }
 }
 
-form {
+form.submit-project-form {
   width: 100%;
+  max-width: unset;
+  margin: 20px;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  display: flex;
+
+  background-color: $less-blue;
+  color: white;
+
+  input {
+    width: 80%;
+  }
+
+  & > h1 {
+    width: 100%;
+  }
+
+  & > .flex {
+    flex: 0 0 50%;
+    vertical-align: top;
+    min-width: var(--width-card-medium)
+  }
+
+  & > .inline {
+    flex: 0 0 100%;
+  }
 }
 </style>
 

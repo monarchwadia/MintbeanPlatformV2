@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex, { Store } from "vuex";
 const VueCountdown: any = require('@chenfengyuan/vue-countdown');
+const Cloudinary: any = require('cloudinary-vue');
+
 
 import App from "./App.vue";
 import router from "./router";
@@ -8,6 +10,7 @@ import { createStore } from "./store";
 
 import mbA from "./components/mb-a.vue";
 import mbNav from "./components/mb-nav.vue";
+import mbFileUpload from "./components/mb-file-upload.vue";
 
 import "./styles/app.scss";
 import { AuthService } from './services/authService';
@@ -19,6 +22,7 @@ import { ProjectService } from './services/projectService';
 import { UserProfileService } from './services/userProfileService';
 
 Vue.use(Vuex);
+Vue.use(Cloudinary);
 
 declare global {
   interface Window {
@@ -47,6 +51,7 @@ Vue.config.productionTip = false;
 
 Vue.component("mb-a", mbA);
 Vue.component("mb-nav", mbNav);
+Vue.component("mb-file-upload", mbFileUpload);
 Vue.component(VueCountdown.name, VueCountdown)
 
 new Vue({

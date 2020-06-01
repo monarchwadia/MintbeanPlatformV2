@@ -38,5 +38,6 @@ module.exports = {
   dbTestLogSql: hoc('DB_TEST_LOG_SQL'),
   bcryptSaltRounds: hoc('BCRYPT_SALT_ROUNDS', { convert: CONVERTERS.toNumber }),
   appPort: hoc('APP_PORT', { convert: CONVERTERS.toNumber }),
-  appSessionSecret: hoc('APP_SESSION_SECRET')
+  appSessionSecret: hoc('APP_SESSION_SECRET'),
+  cloudinaryUrl: hoc('CLOUDINARY_URL')
 }
