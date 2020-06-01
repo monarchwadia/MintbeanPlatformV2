@@ -4,3 +4,4 @@ devtools/db/data
 !.yarn/releases
 !.yarn/plugins
 .pnp.*
+.env

@@ -1,4 +1,5 @@
 //app.js
+const config = require('./utils/config');
 const express = require("express");
 const expressSession = require('express-session')
 const bodyParser = require('body-parser');
@@ -11,7 +12,7 @@ const voteRoute = require('./routers/vote');
 const initializePassport = require('./passport/initialize');
 
 const app = express();
-const sessionOptions = { secret: process.env.SESSION_SECRET || 'password' };
+const sessionOptions = { secret: config.appSessionSecret() };
 
 app.use(cookieParser());
 app.use(expressSession(sessionOptions)); // TODO: Tune security

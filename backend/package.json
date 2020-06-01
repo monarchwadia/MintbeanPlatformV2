@@ -7,8 +7,8 @@
   "scripts": {
     "start": "node ./index.js",
     "dev": "NODE_ENV=development nodemon ./index.js",
-    "test": "jest",
-    "tdd": "TEST_LOG_SQL=false jest --watch --runInBand --detectOpenHandles",
+    "test": "jest        --runInBand --detectOpenHandles",
+    "tdd": "jest --watch --runInBand --detectOpenHandles",
     "sly": "NODE_ENV=development sequelize-cli",
     "sly.test": "NODE_ENV=test sequelize-cli",
     "repl": "node ./bin/repl.js"

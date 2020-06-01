@@ -1,5 +1,6 @@
+const config = require('../utils/config');
 const bcrypt = require('bcrypt');
-const SALT_ROUNDS =  process.env.NODE_ENV === "test" ? 1 : 12;
+const SALT_ROUNDS = config.bcryptSaltRounds()
 
 module.exports = {
   hash: async password => bcrypt.hash(password, SALT_ROUNDS),
