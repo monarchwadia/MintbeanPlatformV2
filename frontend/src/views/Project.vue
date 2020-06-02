@@ -107,7 +107,6 @@ export default {
       return (project.Votes.find(p => p.User.id === user.id))
     },
     averageScore: function() {
-      debugger;
       const { project } = this;
       if (!project) return null;
 
@@ -135,7 +134,6 @@ export default {
         ProjectId: id, comment, rating
       }
 
-      // debugger;
       console.log(obj);
       this.$store.dispatch('vote', obj);
     },

@@ -43,10 +43,8 @@ export default {
     }
   },
   created: function() {
-    debugger;
     this.$mbContext.userProfileService.fetchUserProfile(this.$route.params.id)
       .then(userProfile => {
-        debugger;
         this.userProfile = userProfile
       })
       .catch(e => alert('Failed to fetch user profile'))  ;

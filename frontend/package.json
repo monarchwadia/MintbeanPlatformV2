@@ -11,6 +11,7 @@
   "dependencies": {
     "@chenfengyuan/vue-countdown": "^1.1.5",
     "axios": "^0.19.2",
+    "cloudinary-core": "^2.8.2",
     "cloudinary-vue": "^1.0.1",
     "core-js": "^3.6.4",
     "current-script-polyfill": "^1.0.0",

@@ -33,7 +33,7 @@ div.event-wrapper
               button(type="submit") Submit
             div.flex
               label Screenshots & Videos
-                mb-file-upload
+                mb-file-upload(:files="myFiles" name="files" ref="mbFileUpload")
               
         section(v-else)
           h1 {{ submitFormState.disabledMessage }}
@@ -120,8 +120,10 @@ export default {
   name: "Event",
   data() {
     return {
-      rating: 7,
-      comment: ''
+      source_code_url: '',
+      title: '',
+      live_url: '',
+      myFiles: []
     }
   },
   computed: {
@@ -176,7 +178,7 @@ export default {
   methods: {
     handleSubmitProject() {
       const { title, source_code_url, live_url } = this;
-      confirm(`Submitting a project is final. Projects cannot currently be edited or deleted.
+      const isConfirmed = confirm(`Submitting a project is final. Projects cannot currently be edited or deleted.
 Your project will have the following information:
 ====
 Title: ${title}
@@ -185,16 +187,27 @@ Deployment URL: ${live_url}
 ====
 Would you like to continue?`);
 
-      if (!confirm) {
+debugger;
+
+      if (!isConfirmed) {
         return;
       }
+      
+      const files = this.$refs.mbFileUpload.getFiles();
 
-      this.$store.dispatch('submitProject', {
-        title,
-        source_code_url,
-        live_url,
-        MbEventId: this.mbEvent.id
-      });
+      // de-duplicate
+      // const files = Array.from(new Set(this.myFiles.map(f => f.serverId)));
+
+      debugger;
+      
+
+      // this.$store.dispatch('submitProject', {
+      //   title,
+      //   source_code_url,
+      //   live_url,
+      //   MbEventId: this.mbEvent.id,
+      //   files
+      // });
     }
   }
 };
