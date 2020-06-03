@@ -11,6 +11,10 @@ div.project-wrapper
         mb-a(:href="project.source_code_url") Click here to see source code
         h3(v-if="project.live_url") View Project
         mb-a(:href="project.live_url") Click here to view the project
+        div
+          h2 Media
+          div(v-for="mediaAsset in project.MediaAssets")
+            mb-image-display(v-if="mediaAsset.cloudinaryPublicId" :publicId="mediaAsset.cloudinaryPublicId", width="1000" height="1000")
         h1 Score: {{averageScore}} / 10
         h1 Votes
         section(v-if="!project.Votes || project.Votes.length === 0")

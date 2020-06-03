@@ -10,6 +10,7 @@ module.exports = {
       },
       // the creator
       MediaAssetId: {
+        allowNull: false,
         type: Sequelize.UUID,
         references: {
           model: 'MediaAssets', // name of Target model
@@ -17,6 +18,7 @@ module.exports = {
         }
       },
       ProjectId: {
+        allowNull: false,
         type: Sequelize.UUID,
         references: {
           model: 'Projects', // name of Target model
@@ -24,6 +26,7 @@ module.exports = {
         }
       },
       listOrder: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       createdAt: {

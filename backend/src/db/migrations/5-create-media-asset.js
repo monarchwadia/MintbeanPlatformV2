@@ -14,6 +14,7 @@ module.exports = {
       },
       UserId: {
         type: Sequelize.UUID,
+        allowNull: false,
         references: {
           model: 'Users', // name of Target model
           key: 'id', // key in Target model that we're referencing

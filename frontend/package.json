@@ -16,6 +16,7 @@
     "core-js": "^3.6.4",
     "current-script-polyfill": "^1.0.0",
     "filepond": "^4.14.0",
+    "filepond-plugin-file-validate-size": "^2.2.1",
     "filepond-plugin-file-validate-type": "^1.2.5",
     "filepond-plugin-image-preview": "^4.6.4",
     "moment": "^2.26.0",

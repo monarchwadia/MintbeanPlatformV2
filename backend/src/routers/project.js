@@ -51,11 +51,12 @@ projectRoute.post('/',
 
     const result = await sequelize.transaction(async transaction => {
       project = await Project.create({ title, source_code_url, live_url, mb_event_id, MbEventId, UserId }, { transaction });
-      const mediaAssets = await MediaAsset.bulkCreate(MediaAssets, { transaction });
+      const mediaAssets = await MediaAsset.bulkCreate(MediaAssets.map(({ cloudinaryPublicId }) => ({ cloudinaryPublicId, UserId  })), { transaction });
       const projectMediaAssets = await ProjectMediaAsset.bulkCreate(mediaAssets.map((ma, i) => ({
         MediaAssetId: ma.id,
         ProjectId: project.id,
-        order: i
+        UserId,
+        listOrder: i
       })), { transaction })
     })
 

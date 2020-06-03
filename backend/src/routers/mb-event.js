@@ -1,6 +1,6 @@
 const { Router } = require('express');
 // const { requireAuth } = require('./routers.util');
-const { MbEvent, User, Project, Vote } = require('../db/models');
+const { MbEvent, User, Project, Vote, MediaAsset } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
 
@@ -20,6 +20,9 @@ mbEventRoute.get('/', async (req, res, next) => {
           },
           {
             model: Vote
+          },
+          {
+            model: MediaAsset
           }
         ]
       }

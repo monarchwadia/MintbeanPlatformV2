@@ -13,10 +13,10 @@ div.event-wrapper
         p {{ prettyDate }}
         h3 Submissions
         section(v-if="mbEvent && mbEvent.Projects.length === 0")
-          p
-            No submissions yet. Be the first to submit a project!
+          p No submissions yet. Be the first to submit a project!
         section(v-else)
           aside(v-for="project in mbEvent.Projects")
+            mb-image-display(:publicId="project.MediaAssets && project.MediaAssets[0] && project.MediaAssets[0].cloudinaryPublicId" height="285" width="285")
             h2 {{ project.title }}
             p
               router-link(:to="'/project/' + project.id") View Project
@@ -178,7 +178,7 @@ export default {
   methods: {
     handleSubmitProject() {
       const { title, source_code_url, live_url } = this;
-      const isConfirmed = confirm(`Submitting a project is final. Projects cannot currently be edited or deleted.
+      const isConfirmed = confirm(`Submitting a project is final. PROJECTS CANNOT CURRENTLY BE EDITED OR DELETED AFTER SUBMISSION!
 Your project will have the following information:
 ====
 Title: ${title}
@@ -186,8 +186,6 @@ Source Code URL: ${source_code_url}
 Deployment URL: ${live_url}
 ====
 Would you like to continue?`);
-
-debugger;
 
       if (!isConfirmed) {
         return;

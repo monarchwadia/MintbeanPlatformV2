@@ -3,10 +3,12 @@
       :name="name"
       ref="pond"
       label-idle="Drop files here..."
-      v-bind:allow-multiple="true"
+      v-bind:allow-multiple="false"
       :accepted-file-types="['image/*']"
       v-bind:server="server"
       instant-upload="true"
+      :allow-file-size-validation="true"
+      max-file-size="200kb"
       v-on:init="handleFilePondInit"
       v-on:processfile="handleProcessFile"
       v-on:removefile="handleRemoveFile"
@@ -31,9 +33,10 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css
 // Import image preview and file type validation plugins
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
  
 // Create component
-const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview);
+const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview, FilePondPluginFileValidateSize);
  
 export default {
     name: 'mb-file-upload',
