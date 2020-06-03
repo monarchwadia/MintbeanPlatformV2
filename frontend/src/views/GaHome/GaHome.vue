@@ -10,6 +10,7 @@ div
     section.call-to-action-outer
       aside.call-to-action-inner
         div.image-wrapper
+          mb-image-display(serverId="c58b49717bb0118438ee4a47e4ed2038")
           img(src='../../assets/logo.png')
         div.content-wrapper
           p.header-text The next hackathon is around the corner!

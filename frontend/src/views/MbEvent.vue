@@ -193,21 +193,17 @@ debugger;
         return;
       }
       
-      const files = this.$refs.mbFileUpload.getFiles();
+      const MediaAssets = this.$refs.mbFileUpload.getFiles().map(f => ({
+        cloudinaryPublicId: f.public_id
+      }));
 
-      // de-duplicate
-      // const files = Array.from(new Set(this.myFiles.map(f => f.serverId)));
-
-      debugger;
-      
-
-      // this.$store.dispatch('submitProject', {
-      //   title,
-      //   source_code_url,
-      //   live_url,
-      //   MbEventId: this.mbEvent.id,
-      //   files
-      // });
+      this.$store.dispatch('submitProject', {
+        title,
+        source_code_url,
+        live_url,
+        MbEventId: this.mbEvent.id,
+        MediaAssets
+      });
     }
   }
 };

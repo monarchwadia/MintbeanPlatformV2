@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     Project.belongsTo(models.MbEvent);
     Project.belongsTo(models.User);
     Project.hasMany(models.Vote);
+    Project.belongsToMany(models.MediaAsset, { through: models.ProjectMediaAsset });
   };
   return Project;
 };

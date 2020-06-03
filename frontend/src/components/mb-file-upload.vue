@@ -1,6 +1,4 @@
 <template>
-  <div id="app">
- 
     <file-pond
       :name="name"
       ref="pond"
@@ -15,8 +13,6 @@
       v-on:updatefiles="handleFilePondUpdateFiles"
       :drop-on-page="true"
     />
- 
-  </div>
 </template>
  
 <script>

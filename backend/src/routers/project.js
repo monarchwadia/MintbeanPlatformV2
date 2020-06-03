@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { requireAuth } = require('./routers.util');
-const { MbEvent, User, Project, Vote } = require('../db/models');
+const { MbEvent, User, Project, Vote, MediaAsset, ProjectMediaAsset, sequelize } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
 
@@ -24,22 +24,13 @@ projectRoute.get('/:id', validator.params(Joi.object({id: Joi.string().required(
           model: User
         }]
       },
-      {
-        model: User
-      }
+      { model: User },
+      { model: MediaAsset }
     ]
   })
     .then(project => res.json(project))
     .catch(err => next(err));
 });
-
-// projectRoute.put('/', requireAuth, async (req, res, next) => {
-//   MbUser.findAll()
-//    .then(events => res.json(events))
-//    .catch(err => {
-//      next(err);
-//    })
-// });
 
 projectRoute.post('/',
   requireAuth, 
@@ -47,26 +38,42 @@ projectRoute.post('/',
     title: Joi.string().required(),
     source_code_url: Joi.string().uri().required(),
     live_url: Joi.string().uri().required(),
-    MbEventId: Joi.string().uuid().required()
+    MbEventId: Joi.string().uuid().required(),
+    MediaAssets: Joi.array().items(Joi.object({
+      cloudinaryPublicId: Joi.string().min(5).max(20).required()
+    })).min(1).max(5).required()
   })),
   async (req, res, next) => {
-    const params = { title, source_code_url, live_url, mb_event_id, MbEventId } = req.body;
-    params.UserId = req.user.id;
+    const params = { title, source_code_url, live_url, mb_event_id, MbEventId, MediaAssets } = req.body;
+    const UserId = req.user.id;
 
     let project;
 
-    try {
-      project = await Project.create(params);
-    } catch (e) {
-      return next(e);
-    }
+    const result = await sequelize.transaction(async transaction => {
+      project = await Project.create({ title, source_code_url, live_url, mb_event_id, MbEventId, UserId }, { transaction });
+      const mediaAssets = await MediaAsset.bulkCreate(MediaAssets, { transaction });
+      const projectMediaAssets = await ProjectMediaAsset.bulkCreate(mediaAssets.map((ma, i) => ({
+        MediaAssetId: ma.id,
+        ProjectId: project.id,
+        order: i
+      })), { transaction })
+    })
+
+    // try {
+    //   project = await Project.create(params, {
+    //     include: [MediaAsset, MbEventId]
+    //   });
+    // } catch (e) {
+    //   return next(e);
+    // }
 
     try {
       project = await Project.findOne({
         where: { id: project.id },
         include: [
           { model: MbEvent },
-          { model: User }
+          { model: User },
+          { model: MediaAsset }
         ]
       });
     } catch (e) {
@@ -74,33 +81,7 @@ projectRoute.post('/',
     }
 
     return res.json(project);
-
-
-
-    // Project.create(params)
-    // .then(project => res.json(project))
-    // .catch(err => {
-    //   next(err);
-    // })
   });
 
-// mbEventRoute.post('/', 
-//   validator.query(Joi.object({
-//     title: Joi.string().required(),
-//     description: Joi.string().required(),
-//     cover_image_url: Joi.string().required(),
-//     instructions: Joi.string().required(),
-//     start_time: Joi.date().required(),
-//     end_time: Joi.date().required()
-//   })),
-//   async (req, res, next) => {
-//     console.log(req.body);
-//     MbEvent.create({ title, description, cover_image_url, instructions, start_time, end_time } = req.body)
-//       .then(resp => res.json(resp))
-//       .catch(err => {
-//         console.log(err);
-//         next(err)
-//       });
-// })
 
 module.exports = projectRoute;

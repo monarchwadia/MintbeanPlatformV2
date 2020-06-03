@@ -1,4 +1,5 @@
 #!/bin/bash
+
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 # This script differs from redb.sh

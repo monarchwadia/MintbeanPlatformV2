@@ -4,4 +4,5 @@ export interface Project {
   live_url: string;
   MbEventId: string;
   UserId?: string;
+  files: string[];
 }
