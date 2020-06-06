@@ -13,6 +13,8 @@
         li
           a(href="#", v-on:click.prevent="logout" v-if="isLoggedIn") Log Out
         li
+          router-link(to="/admin" v-if="isLoggedIn && isAdmin") Admin
+        li
           router-link(to="/auth/login" v-if="!isLoggedIn") Log In
         li
           router-link(to="/auth/register" v-if="!isLoggedIn") Register
@@ -38,15 +40,20 @@ export default {
     path: String
   },
   computed: {
+    user() {
+      return this.$store.state && this.$store.state.user;
+    },
     isHome() {
       return this.path === "/";
     },
+    isAdmin() {
+      return this.user && this.user.isAdmin
+    },
     username() {
-      const user = this.$store.state.user;
-      return user.firstName + " " + user.lastName;
+      return this.user.firstName + " " + this.user.lastName;
     },
     isLoggedIn() {
-      return !!this.$store.state.user;
+      return !!this.user;
     }
   },
   methods: {
