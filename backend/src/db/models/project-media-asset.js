@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const ProjectMediaAsset = sequelize.define('ProjectMediaAsset', {
-    listOrder: DataTypes.INTEGER
+
   }, {});
   ProjectMediaAsset.associate = function(models) {
     // associations can be defined here

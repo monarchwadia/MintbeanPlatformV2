@@ -25,10 +25,6 @@ module.exports = {
           key: 'id', // key in Target model that we're referencing
         }
       },
-      listOrder: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -55,8 +55,7 @@ projectRoute.post('/',
       const projectMediaAssets = await ProjectMediaAsset.bulkCreate(mediaAssets.map((ma, i) => ({
         MediaAssetId: ma.id,
         ProjectId: project.id,
-        UserId,
-        listOrder: i
+        UserId
       })), { transaction })
     })
 

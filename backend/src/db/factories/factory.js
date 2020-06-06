@@ -1,5 +1,5 @@
 function fill (props, obj={}) {
-  Object.entries(props).forEach(([key, definition]) => {
+  Object.entries(props).forEach(([key, definition], index) => {
     // since typeof null === 'object', it can't be handled by "case 'object'" below.
     // handling it as a special case here.
     if (definition === null) {
@@ -9,7 +9,7 @@ function fill (props, obj={}) {
 
     switch (typeof definition) {
       case 'function':
-        obj[key] = definition(obj);
+        obj[key] = definition(obj, index);
         break;
       case 'object':
         obj[key] = fill(definition, obj);
