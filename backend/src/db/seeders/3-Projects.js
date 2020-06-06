@@ -14,6 +14,9 @@ module.exports = {
         const projects = [];
         users.forEach(user => {
           mbEvents.forEach(mbEvent => {
+            // slim down. reject 80% of matches.
+            if (Math.random() > 0.8) return;
+            
             projects.push(projectFactory.one({
               UserId: user.id,
               MbEventId: mbEvent.id
@@ -32,8 +35,6 @@ module.exports = {
         reject(e);
       }
     })
-
-    const users = mbEventFactory.bulk(10);
 
 
     /*

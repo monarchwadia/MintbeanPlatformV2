@@ -15,8 +15,9 @@ module.exports = {
       const u = users[i];
       u.email = TEST_EMAIL.replace('$', i);
       u.password_hash = TEST_PASSWORD; // TODO: change
-      await (User.create(u));
     }
+
+    await User.bulkCreate(users);
 
     /*
       Add altering commands here.

@@ -12,6 +12,13 @@ module.exports = {
       password_hash: TEST_PASSWORD
     }));
 
+    // create admin@mintbean.io
+    await User.create(userFactory.one({
+      email: 'admin@mintbean.io',
+      isAdmin: true,
+      password_hash: TEST_PASSWORD
+    }));
+
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.

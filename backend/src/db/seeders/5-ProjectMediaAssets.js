@@ -5,6 +5,7 @@ const projectFactory = require('../factories/project.factory');
 const mediaAssetFactory = require('../factories/media-asset.factory');
 const voteFactory = require('../factories/vote.factory');
 const { User, Project, Vote, MediaAsset } = require('../models');
+const uuid = require('uuid').v4;
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -15,12 +16,14 @@ module.exports = {
           
           const mediaAsset = await MediaAsset.create(mediaAssetFactory.one({
             UserId: p.UserId
-          }))
+          }));
 
           p.addMediaAsset(mediaAsset);
 
           await p.save();
-        })
+        });
+
+        resolve();
 
         // const votes = [];
         // users.forEach(user => {
