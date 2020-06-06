@@ -20,8 +20,11 @@ First:
 ☐ Deploy images
 ☐ Move production to production mode
 ☐ Admin page for managing things
+  ☐ Create/Read/Update/Archive MbEvent, including image upload
+☐ Add Markdown support for creating events
 
 Lined up:
+☐ Compliance
 ☐ Users cannot submit multiple projects (backend safety checks)
 ☐ Main page should show curated projects
 ☐ 
