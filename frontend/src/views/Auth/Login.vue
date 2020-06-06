@@ -3,7 +3,7 @@
     form.login-form(v-on:submit.prevent="onSubmit")
       h1 Login
       label Email
-        input(name="email", v-model="email")
+        input(name="email", v-model="email" ref="emailInput")
       label Password
         input(name="password", type="password", v-model="password")
       button(type="submit") Submit
@@ -27,6 +27,9 @@ export default {
       const { email, password, $router } = this;
       this.$store.dispatch('login', { email, password, $router });
     }
+  },
+  mounted() {
+    this.$refs.emailInput && this.$refs.emailInput.focus();
   }
 };
 </script>
