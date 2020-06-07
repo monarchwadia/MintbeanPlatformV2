@@ -22,6 +22,7 @@ First:
 ☐ Admin page for managing things
   ☐ Create/Read/Update/Archive MbEvent, including image upload
 ☐ Add Markdown support for creating events
+☐ Create tests for frontend projects
 
 Lined up:
 ☐ Compliance

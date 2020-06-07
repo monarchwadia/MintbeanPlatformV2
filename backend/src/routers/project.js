@@ -12,6 +12,12 @@ projectRoute.get('/', requireAuth, async (req, res, next) => {
     .catch(e => next(err));
 });
 
+projectRoute.get('/frontpage', async (req, res, next) => {
+  Project.findAll({where:{}, include: ['MediaAssets']})
+    .then(projects => res.json(projects))
+    .catch(err => next(err));
+})
+
 projectRoute.get('/:id', validator.params(Joi.object({id: Joi.string().required()})), async (req, res, next) => {
   const { id } = req.params;
 

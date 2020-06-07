@@ -15,6 +15,11 @@ export class ProjectService {
     return queryResponse.data;
   }
 
+  async fetchFrontpageProjects(): Promise<Project[]> {
+    const queryResponse = await this.apiService.get('/api/v1/project/frontpage');
+    return queryResponse.data;
+  }
+
   // TODO; install types
   async vote(obj: any): Promise<any> {
     const { ProjectId, rating, comment } = obj;

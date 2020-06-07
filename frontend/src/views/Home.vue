@@ -1,29 +1,58 @@
 <template lang="pug">
-  div
-    img(alt="Vue logo" src="../assets/logo.png")
-    .hello
-      h1 Mintbean
-      h3 A Software Developer Talent Incubator
-      p We work to accelerate the careers, skillsets, and professional networks of software developers globally. 
-      h2 Essential Links
-      ul.essential-links
-        li
-          mb-a(href="https://www.eventbrite.ca/o/mintbean-28752300031") Upcoming Events
-        li
-          mb-a(href="https://github.com/MintbeanHackathons") MintbeanHackathons Github
-        li
-          mb-a(href="https://www.eventbrite.ca/o/mintbean-28752300031") Upcoming Events
-        li
-          mb-a(href="https://github.com/MintbeanHackathons") Github
+main
+  mb-project-grid
+
 </template>
 
 <style lang="scss" scoped>
-
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  
+  .grid-item {
+    gap: 1rem;
+  }
+}
 </style>
 
 <script>
 // @ is an alias to /src
 export default {
-  name: "Home"
+  name: "Home",
+  computed: {
+    mbEvents: function() {
+      return this.$store.state.mbEvents || [];
+    },
+    nextEvent: function() {
+      return this.$store.state.mbEvents && this.$store.state.mbEvents[0];
+    }
+  },
+  methods: {
+    getEventStatus(mbEvent) {
+      const timeToStart = new Date(mbEvent.start_time) - new Date();
+      const timeToEnd = new Date(mbEvent.end_time) - new Date();
+
+      if (timeToStart > 0) {
+        return "upcoming";
+      } else {
+        if (timeToEnd > 0) {
+          return "ongoing";
+        } else {
+          return "ended"
+        }
+      }
+    },
+    getCountdownTime: function(mbEventStartTime) {
+      return new Date(mbEventStartTime) - new Date()
+    },
+    goToUpcomingEvent: function(id) {
+      if (id) {
+        this.$router.push('/mb-event/' + id)
+      }
+    }
+  },
+  mounted() {
+    this.$store.dispatch('fetchFrontpageProjects');
+  }
 };
 </script>

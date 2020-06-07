@@ -9,6 +9,7 @@ export interface MbState {
   registerUrl?: string;
   mbEvents: MbEvent[];
   project?: Project;
+  frontpageProjects: Project[];
   // TODO; fix types;
   votes: any[];
 }
