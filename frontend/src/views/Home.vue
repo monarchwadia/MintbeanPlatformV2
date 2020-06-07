@@ -1,10 +1,22 @@
 <template lang="pug">
 main
+  header.hero
+    h1 Write code. Get noticed. Get hired.
+    p Mintbean is a place to find & showcase software development projects.
+
   mb-project-grid
 
 </template>
 
 <style lang="scss" scoped>
+@import "../styles/colors";
+
+.hero {
+  margin-bottom: 50px;
+  background: rgb(255,255,255);
+  background: linear-gradient(195deg, rgba(255,255,255,1) 0%, $basemint 100%);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -12,6 +24,12 @@ main
   .grid-item {
     gap: 1rem;
   }
+}
+
+header {
+  text-align: left;
+  background-color: var(--color-bg-secondary);
+  padding: 100px;
 }
 </style>
 
