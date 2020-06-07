@@ -2,7 +2,7 @@
 <div>
   <cld-context cloudName="mintbean">
     <cld-image :publicId="publicId" secure="true">
-      <cld-transformation :width="width" :height="height" crop="limit" />
+      <cld-transformation :width="width" :height="height" crop="crop" />
     </cld-image>
   </cld-context>
 </div>

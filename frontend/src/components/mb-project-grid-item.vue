@@ -1,12 +1,15 @@
 <template lang="pug">
 div.mb-project-grid-item
-  div.inner
+  div.inner(v-on:click.prevent="() => visitProject(project)")
     div.screenshot
       div.overlay
         div.project-title {{ project.title }}
-      mb-image-display(:publicId="cloudinaryPublicIdFor(project)" height="500" width="350")
+      mb-image-display(:publicId="cloudinaryPublicIdFor(project)" height="300" width="400")
     div.user
-      | {{ username }}
+      div.username {{ username }}
+      div.projectinfo 
+        fa(icon="comment")
+        | &nbsp; {{ voteCount }}
 </template>
 
 <style lang="scss" scoped>
@@ -19,12 +22,11 @@ div.mb-project-grid-item
 // $border-radius: 15px;
 // $background-color: white;
 
-$text-left: 25px;
-$text-right: 25px;
+
 $width: 400px;
 $screenshot-height: 300px;
-$gap: 10px;
-$user-height: 50px;
+$gap: 5px;
+$user-height: 25px;
 $height: $screenshot-height + $gap + $user-height;
 $border-radius: 6px;
 $background-color: white;
@@ -40,7 +42,7 @@ $background-color: white;
 
     .screenshot {
       overflow: hidden;
-      box-shadow: 6px 12px 25px var(--color-border);
+      // box-shadow: 6px 12px 25px var(--color-border);
       border-radius: $border-radius;
       height: $screenshot-height;
       width: $width;
@@ -63,8 +65,8 @@ $background-color: white;
           bottom: 10px;
           font-weight: bold;;
           color: white;
-          left: $text-left;
-          right: $text-right;
+          left: 25px;
+          right: 25px;
           text-overflow: ellipsis;
         }
   
@@ -82,18 +84,27 @@ $background-color: white;
       left: 0px;
       width: $width;
       margin: auto;
+      font-size: 12px;
+      font-weight: bolder;
       height: $user-height;
       line-height: $user-height;
       text-overflow: ellipsis;
       border-radius: $border-radius;
-      box-shadow: 6px 12px 25px var(--color-border);
+      // box-shadow: 6px 12px 25px var(--color-border);
       z-index: 1001;
       background-color: $background-color;
-      padding-left: $text-left;
-      padding-right: $text-right;
+      padding-left: 5px;
+      padding-right: 5px;
       box-sizing: border-box;
       // margin-top: $user-margin * 2;
       // margin-bottom: 0;
+
+      .username {
+        float: left;
+      }
+      .projectinfo {
+        float: right;
+      }
     }
   }
 }
@@ -108,11 +119,17 @@ export default {
   computed: {
     username() {
       return this.project.User.firstname + ' ' + this.project.User.lastname;
+    },
+    voteCount() {
+      return this.project.Votes.length;
     }
   },
   methods: {
     cloudinaryPublicIdFor(project) {
       return project && project.MediaAssets && project.MediaAssets[0] && project.MediaAssets[0].cloudinaryPublicId;
+    },
+    visitProject(project) {
+      this.$router.push('/project/' + project.id);
     }
   },
 };

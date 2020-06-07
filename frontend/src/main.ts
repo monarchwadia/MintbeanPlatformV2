@@ -12,6 +12,7 @@ import { createStore } from "./store";
 
 import "./styles/app.scss";
 import { MbState } from './types/MbState';
+import registerFontAwesome from './config/registerFontAwesome';
 
 declare global {
   interface Window {
@@ -23,6 +24,7 @@ Vue.use(Vuex);
 Vue.use(Cloudinary);
 
 registerComponents(Vue);
+registerFontAwesome(Vue);
 
 const context = makeContext();
 Vue.prototype.$mbContext = context;
