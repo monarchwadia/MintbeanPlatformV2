@@ -2,7 +2,9 @@
 div.mb-project-grid-item
   div.inner
     div.overlay
-    mb-image-display(:publicId="imagePublicId" height="500" width="350")
+    mb-image-display(:publicId="cloudinaryPublicIdFor(project)" height="500" width="350")
+    div.user
+      | {{ username }}
 </template>
 
 <style lang="scss" scoped>
@@ -28,6 +30,12 @@ div.mb-project-grid-item
         // background-color: rgba(255,255,255,0.5);
         opacity: 0.6;
       }
+
+    }
+    .user {
+      position: absolute;
+      bottom: 0;
+      left: 10px;
     }
   }
 }
@@ -38,6 +46,16 @@ div.mb-project-grid-item
 <script>
 export default {
   name: "MbProjectGridItem",
-  props: ['imagePublicId']
+  props: ['project'],
+  computed: {
+    username() {
+      return this.project.User.firstname + ' ' + this.project.User.lastname;
+    }
+  },
+  methods: {
+    cloudinaryPublicIdFor(project) {
+      return project && project.MediaAssets && project.MediaAssets[0] && project.MediaAssets[0].cloudinaryPublicId;
+    }
+  },
 };
 </script>

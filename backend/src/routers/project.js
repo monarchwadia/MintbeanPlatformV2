@@ -13,7 +13,7 @@ projectRoute.get('/', requireAuth, async (req, res, next) => {
 });
 
 projectRoute.get('/frontpage', async (req, res, next) => {
-  Project.findAll({where:{}, include: ['MediaAssets']})
+  Project.findAll({where:{}, include: ['MediaAssets', 'User']})
     .then(projects => res.json(projects))
     .catch(err => next(err));
 })

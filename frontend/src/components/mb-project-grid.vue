@@ -1,7 +1,7 @@
 <template lang="pug">
 
   div.mb-project-grid
-    mb-project-grid-item(v-for="project in projects" :imagePublicId="cloudinaryPublicIdFor(project)")
+    mb-project-grid-item(v-for="project in projects" :project="project")
 </template>
 
 <style lang="scss" scoped>
@@ -22,11 +22,6 @@ export default {
   computed:{
     projects: function() {
       return this.$store.state.frontpageProjects;
-    }
-  },
-  methods: {
-    cloudinaryPublicIdFor(project) {
-      return project && project.MediaAssets && project.MediaAssets[0] && project.MediaAssets[0].cloudinaryPublicId;
     }
   },
   components: {
