@@ -2,7 +2,7 @@
 div
   header.hero
     h1 Write code. Get noticed. Get hired.
-    p At Mintbean, you can build & showcase projects, get noticed, and find jobs.
+    p At Mintbean, you build & showcase projects, get noticed, and find jobs.
   
   main
     h3 Check out some great recent projects

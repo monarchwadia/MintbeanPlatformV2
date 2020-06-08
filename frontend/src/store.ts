@@ -131,7 +131,6 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
   }
 
   const deleteMediaAsset: Action<MbState, MbState> = async ({ commit, dispatch }, obj: { ProjectId: string, MediaAssetId: string }) => {
-    debugger;
     mbContext.projectService.deleteMediaAsset(obj)
       .then(() => {
         alert('Deletion successful.');
@@ -147,6 +146,21 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
       })
   }
 
+  const uploadMediaAssets: Action<MbState, MbState> = async ({ commit, dispatch }, obj: { ProjectId: string, MediaAssets: any }) => {
+    mbContext.projectService.uploadMediaAssets(obj)
+      .then(() => {
+        alert('Upload successful.');
+        dispatch('fetchProject', obj.ProjectId);
+      })
+      .catch(e => {
+        const message = e && e.response && e.response.data && e.response.data.message || '';
+        console.log("Upload failed", message, e);
+        alert('Upload  failed. ' + message);
+        if (obj && obj.ProjectId) {
+          dispatch('fetchProject', obj.ProjectId);
+        }
+      })
+  }
   return {
     checkAuth,
     login,
@@ -157,7 +171,8 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
     vote,
     fetchProject,
     fetchFrontpageProjects,
-    deleteMediaAsset
+    deleteMediaAsset,
+    uploadMediaAssets
   }
 }
 

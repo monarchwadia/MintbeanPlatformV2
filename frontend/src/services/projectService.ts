@@ -32,4 +32,9 @@ export class ProjectService {
     const queryResponse = await this.apiService.post('/api/v1/project/deleteMediaAsset', obj);
     return queryResponse.data;
   }
+
+  async uploadMediaAssets(obj: { ProjectId: string, MediaAssets: any[] }): Promise<void> {
+    const queryResponse = await this.apiService.post('/api/v1/project/uploadMediaAssets', obj);
+    return queryResponse.data;
+  }
 }

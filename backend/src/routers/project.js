@@ -154,7 +154,9 @@ projectRoute.get('/:id', validator.params(Joi.object({id: Joi.string().required(
       { model: MediaAsset }
     ]
   })
-    .then(project => res.json(project))
+    .then(project => {
+      res.json(project)
+    })
     .catch(err => next(err));
 });
 
@@ -209,22 +211,81 @@ projectRoute.post('/',
     return res.json(project);
   });
 
-  projectRoute.post('/deleteMediaAsset',
+projectRoute.post('/uploadMediaAssets',
+  requireAdmin,
+  validator.body(Joi.object({
+    ProjectId: Joi.string().uuid().required(),
+    MediaAssets: Joi.array().items(Joi.object({
+      cloudinaryPublicId: Joi.string().min(5).max(20).required()
+    })).required().min(1).max(1)
+  })),
+  async (req, res, next) => {
+    try {
+      const params = { ProjectId, MediaAssets } = req.body;
+
+      const project = await Project.findOne({ where: {id: ProjectId }});
+      const UserId = project.UserId;
+  
+      const result = await sequelize.transaction(async transaction => {
+        const mediaAssets = await MediaAsset.bulkCreate(MediaAssets.map(({ cloudinaryPublicId }) => ({ cloudinaryPublicId, UserId  })), { transaction });
+        const projectMediaAssets = await ProjectMediaAsset.bulkCreate(mediaAssets.map((ma, i) => ({
+          MediaAssetId: ma.id,
+          ProjectId: project.id,
+          UserId
+        })), { transaction })
+      });
+
+      res.json({ message: 'ok' })
+    } catch (e) {
+      console.log("Error while trying to upload media asset to existing project", e);
+      return next(e);
+    }
+
+    // try {
+    //   project = await Project.create(params, {
+    //     include: [MediaAsset, MbEventId]
+    //   });
+    // } catch (e) {
+    //   return next(e);
+    // }
+
+    // try {
+    //   project = await Project.findOne({
+    //     where: { id: project.id },
+    //     include: [
+    //       { model: MbEvent },
+    //       { model: User },
+    //       { model: MediaAsset }
+    //     ]
+    //   });
+    // } catch (e) {
+    //   return next(e);
+    // }
+
+    // return res.json(project);
+  });
+
+projectRoute.post('/deleteMediaAsset',
   requireAdmin,
   validator.body(Joi.object({
     ProjectId: Joi.string().uuid().required(),
     MediaAssetId: Joi.string().uuid().required()
   })),
   async (req, res, next) => {
-    const { ProjectId, MediaAssetId } = req.body;
-
-    const projectMediaAsset = await ProjectMediaAsset.findOne({ where: { ProjectId, MediaAssetId }});
-
-    if (!projectMediaAsset) {
-      return res.status(404).json({ message: 'No such assets found' });
-    } else {
-      const deleted = await projectMediaAsset.destroy();
-      return res.json(deleted);
+    try {
+      const { ProjectId, MediaAssetId } = req.body;
+  
+      const projectMediaAsset = await ProjectMediaAsset.findOne({ where: { ProjectId, MediaAssetId }});
+  
+      if (!projectMediaAsset) {
+        return res.status(404).json({ message: 'No such assets found' });
+      } else {
+        const deleted = await projectMediaAsset.destroy();
+        return res.json(deleted);
+      }
+    } catch (e) {
+      console.log(`Error while deleting media asset, ProjectId=[${ProjectId}] MediaAssetId=[${MediaAssetId}]`);
+      next(e);
     }
     
   });
