@@ -16,7 +16,7 @@ export class ProjectService {
   }
 
   async fetchFrontpageProjects(): Promise<Project[]> {
-    const queryResponse = await this.apiService.get('/api/v1/project/frontpage');
+    const queryResponse = await this.apiService.get('/api/v1/project/search');
     return queryResponse.data;
   }
 

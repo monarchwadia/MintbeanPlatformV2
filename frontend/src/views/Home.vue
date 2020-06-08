@@ -2,7 +2,7 @@
 main
   header.hero
     h1 Write code. Get noticed. Get hired.
-    p Mintbean is a place to find & showcase software development projects.
+    p At Mintbean, you can build & showcase projects, get noticed, and find jobs.
 
   mb-project-grid
 

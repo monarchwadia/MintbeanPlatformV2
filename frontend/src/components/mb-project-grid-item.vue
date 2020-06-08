@@ -10,6 +10,8 @@ div.mb-project-grid-item
       div.projectinfo 
         fa(icon="comment")
         | &nbsp; {{ voteCount }}
+        fa(icon="star")
+        | &nbsp; {{ voteAverage }}
 </template>
 
 <style lang="scss" scoped>
@@ -121,7 +123,10 @@ export default {
       return this.project.User.firstname + ' ' + this.project.User.lastname;
     },
     voteCount() {
-      return this.project.Votes.length;
+      return this.project.ratingCount;
+    },
+    voteAverage() {
+      return this.project.ratingAverage.toPrecision(2);
     }
   },
   methods: {

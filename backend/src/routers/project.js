@@ -43,7 +43,7 @@ projectRoute.get('/search',
 
   const sorting = {
     field: 'ratingAverage',
-    descending: false 
+    descending: true 
   }
   
   const doIf = (value, callback) => value !== undefined && callback(value);
@@ -67,16 +67,19 @@ projectRoute.get('/search',
       },
       {
         model: User,
-        attributes: [],
+        attributes: ['firstname', 'lastname'],
         where: where.users
       },
+      // {
+      //   model: MbEvent,
+      //   attributes: [],
+      //   where: where.mbEvents
+      // },
       {
-        model: MbEvent,
-        attributes: [],
-        where: where.mbEvents
+        model: MediaAsset
       }
     ],
-    group: ['Project.id']
+    group: ['Project.id', 'User.id', 'MediaAssets.id', 'MediaAssets.ProjectMediaAsset.id']
   })
   .then(resp => {
     return resp.sort((a, b) => {

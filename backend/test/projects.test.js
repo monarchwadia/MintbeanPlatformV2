@@ -172,6 +172,8 @@ describe("Projects route", () => {
   
       done();
     });
+
+    // TODO: Write more tests to cover the search method
   })
 
   describe("CREATE Project route", () => {
