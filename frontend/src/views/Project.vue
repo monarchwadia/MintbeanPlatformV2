@@ -123,12 +123,6 @@ export default {
     project: function() {
       return this.$store.state.project;
     }
-    // prettyDate: function() {
-    //   if (!this.mbEvent.start_time) {
-    //     return '';
-    //   }
-    //   return moment(this.mbEvent.start_time).format("dddd, MMMM Do YYYY, h:mm:ss a");
-    // }
   },
   methods: {
     handleVoteProject(ProjectId) {
