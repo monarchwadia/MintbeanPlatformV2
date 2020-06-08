@@ -11,10 +11,11 @@ div.project-wrapper
         mb-a(:href="project.source_code_url") Click here to see source code
         h3(v-if="project.live_url") View Project
         mb-a(:href="project.live_url") Click here to view the project
-        div
+        div.screenshots
           h2 Media
-          div(v-for="mediaAsset in project.MediaAssets")
-            mb-image-display(v-if="mediaAsset.cloudinaryPublicId" :publicId="mediaAsset.cloudinaryPublicId", width="1000" height="1000")
+          section
+            aside(v-for="mediaAsset in project.MediaAssets")
+              mb-image-display(v-if="mediaAsset.cloudinaryPublicId" :publicId="mediaAsset.cloudinaryPublicId", width="1000" height="1000")
         h1 Score: {{averageScore}} / 10
         h1 Votes
         section(v-if="!project.Votes || project.Votes.length === 0")
@@ -47,6 +48,10 @@ div.project-wrapper
 
 <style lang="scss" scoped>
 @import "../styles/colors";
+
+main {
+  width: var(--width-card-wide);
+}
 
 .background-banner {
   background: rgb(2,237,157);
@@ -82,9 +87,14 @@ div.project-wrapper
   }
 }
 
+.screenshots section {
+  justify-content: left;
+}
+
 form {
   width: 100%;
 }
+
 </style>
 
 <script>

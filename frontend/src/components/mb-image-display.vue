@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="mb-image-display">
   <cld-context cloudName="mintbean">
     <cld-image :publicId="publicId" secure="true">
       <cld-transformation :width="width" :height="height" crop="crop" />
@@ -8,6 +8,12 @@
 </div>
 
 </template>
+
+<style>
+  .mb-image-display .cld-context .cld-image img {
+    max-width: 100%;
+  }
+</style>
  
 <script>
 import {CldContext, CldImage, CldVideo, CldTransformation, CldPoster} from 'cloudinary-vue';
