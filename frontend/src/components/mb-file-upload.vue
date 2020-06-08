@@ -8,7 +8,7 @@
       v-bind:server="server"
       instant-upload="true"
       :allow-file-size-validation="true"
-      max-file-size="200kb"
+      max-file-size="1024kb"
       v-on:init="handleFilePondInit"
       v-on:processfile="handleProcessFile"
       v-on:removefile="handleRemoveFile"
