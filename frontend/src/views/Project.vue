@@ -16,6 +16,7 @@ div.project-wrapper
           section
             aside(v-for="mediaAsset in project.MediaAssets")
               mb-image-display(v-if="mediaAsset.cloudinaryPublicId" :publicId="mediaAsset.cloudinaryPublicId", width="1000" height="1000")
+              button(v-if="isAdmin" v-on:click.prevent="handleDeleteMediaAsset(mediaAsset)") delete
         h1 Score: {{averageScore}} / 10
         h1 Votes
         section(v-if="!project.Votes || project.Votes.length === 0")
@@ -132,6 +133,9 @@ export default {
     },
     project: function() {
       return this.$store.state.project;
+    },
+    isAdmin: function() {
+      return this.$store.state.user && this.$store.state.user.isAdmin;
     }
   },
   methods: {
@@ -145,6 +149,19 @@ export default {
       console.log(obj);
       this.$store.dispatch('vote', obj);
     },
+    handleDeleteMediaAsset(MediaAsset) {
+      debugger;
+      if (!confirm('Are you sure you want to delete this media asset? This action is not reversible.')) {
+        return;
+      }
+
+      const ProjectId = this.$store.state.project.id;
+      const MediaAssetId = MediaAsset.id;
+
+      if (ProjectId && MediaAssetId) {
+        this.$store.dispatch('deleteMediaAsset', { ProjectId, MediaAssetId })
+      }
+    }
   },
   mounted() {
     this.$store.dispatch("fetchProject", this.$route.params.id);

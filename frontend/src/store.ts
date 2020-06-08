@@ -130,6 +130,23 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
       })
   }
 
+  const deleteMediaAsset: Action<MbState, MbState> = async ({ commit, dispatch }, obj: { ProjectId: string, MediaAssetId: string }) => {
+    debugger;
+    mbContext.projectService.deleteMediaAsset(obj)
+      .then(() => {
+        alert('Deletion successful.');
+        dispatch('fetchProject', obj.ProjectId);
+      })
+      .catch(e => {
+        const message = e && e.response && e.response.data && e.response.data.message || '';
+        console.log("Deletion failed", message, e);
+        alert('Deletion failed. ' + message);
+        if (obj && obj.ProjectId) {
+          dispatch('fetchProject', obj.ProjectId);
+        }
+      })
+  }
+
   return {
     checkAuth,
     login,
@@ -139,7 +156,8 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
     submitProject,
     vote,
     fetchProject,
-    fetchFrontpageProjects
+    fetchFrontpageProjects,
+    deleteMediaAsset
   }
 }
 

@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { requireAuth } = require('./routers.util');
+const { requireAuth, requireAdmin } = require('./routers.util');
 const { MbEvent, User, Project, Vote, MediaAsset, ProjectMediaAsset, sequelize } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
@@ -207,6 +207,26 @@ projectRoute.post('/',
     }
 
     return res.json(project);
+  });
+
+  projectRoute.post('/deleteMediaAsset',
+  requireAdmin,
+  validator.body(Joi.object({
+    ProjectId: Joi.string().uuid().required(),
+    MediaAssetId: Joi.string().uuid().required()
+  })),
+  async (req, res, next) => {
+    const { ProjectId, MediaAssetId } = req.body;
+
+    const projectMediaAsset = await ProjectMediaAsset.findOne({ where: { ProjectId, MediaAssetId }});
+
+    if (!projectMediaAsset) {
+      return res.status(404).json({ message: 'No such assets found' });
+    } else {
+      const deleted = await projectMediaAsset.destroy();
+      return res.json(deleted);
+    }
+    
   });
 
 

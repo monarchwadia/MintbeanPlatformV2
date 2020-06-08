@@ -27,4 +27,9 @@ export class ProjectService {
     const queryResponse = await this.apiService.post('/api/v1/vote', { ProjectId, rating, comment });
     return queryResponse.data;
   }
+
+  async deleteMediaAsset(obj: { ProjectId: string, MediaAssetId: string }): Promise<void> {
+    const queryResponse = await this.apiService.post('/api/v1/project/deleteMediaAsset', obj);
+    return queryResponse.data;
+  }
 }
