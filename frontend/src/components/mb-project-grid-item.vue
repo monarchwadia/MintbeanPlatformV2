@@ -123,10 +123,10 @@ export default {
       return this.project.User.firstname + ' ' + this.project.User.lastname;
     },
     voteCount() {
-      return this.project.ratingCount;
+      return this.project.ratingCount ? this.project.ratingCount : '-';
     },
     voteAverage() {
-      return this.project.ratingAverage.toPrecision(2);
+      return this.project.ratingAverage ? this.project.ratingAverage.toPrecision(2) : '-';
     }
   },
   methods: {
