@@ -13,10 +13,10 @@ projectRoute.get('/', requireAuth, async (req, res, next) => {
 });
 
 projectRoute.get('/search', 
-  validator.params(Joi.object({
+  validator.query(Joi.object({
     filter_userId: Joi.string().uuid().min(1),
     filter_mbEventId: Joi.string().uuid().min(1),
-    sort_order: Joi.string().valid('ascending', 'descending'),
+    sort_descending: Joi.bool(),
     sort_field: Joi.string().valid('createdAt', 'ratingAverage', 'ratingCount')
   })),
   async (req, res, next) => {
@@ -34,21 +34,23 @@ projectRoute.get('/search',
   - score
   */
 
+ 
+  // set filters
   const where = {
-    projects: {},
     users: {},
-    votes: {},
     mbEvents: {}
   };
 
-  const setIf = (value, callback) => {
-    if (value !== undefined) {
-      callback(value);
-    }
+  const sorting = {
+    field: 'ratingAverage',
+    descending: false 
   }
-
-  setIf(req.params.filter_userId, val => where.users.id = val);
-  setIf(req.params.filter_mbEventId, val => where.mbEvents.id = val);
+  
+  const doIf = (value, callback) => value !== undefined && callback(value);
+  doIf(req.query.filter_userId, val => where.users.id = val);
+  doIf(req.query.filter_mbEventId, val => where.mbEvents.id = val);
+  doIf(req.query.sort_field, val => sorting.field = val)
+  doIf(req.query.sort_descending, val => sorting.descending = val)
 
 
   Project.findAll({
@@ -62,9 +64,27 @@ projectRoute.get('/search',
       {
         model: Vote,
         attributes: []
+      },
+      {
+        model: User,
+        attributes: [],
+        where: where.users
+      },
+      {
+        model: MbEvent,
+        attributes: [],
+        where: where.mbEvents
       }
     ],
     group: ['Project.id']
+  })
+  .then(resp => {
+    return resp.sort((a, b) => {
+      const { field, descending } = sorting;
+      console.log(field, descending);
+      const result = a.dataValues[field] > b.dataValues[field] ? 1 : -1;
+      return descending ? -result : result;
+    })
   })
   .then(resp => res.json(resp))
   .catch(err => next(err));
