@@ -16,7 +16,7 @@ export class ProjectService {
   }
 
   async fetchFrontpageProjects(): Promise<Project[]> {
-    const queryResponse = await this.apiService.get('/api/v1/project/search');
+    const queryResponse = await this.apiService.get('/api/v1/project/search?limit=10');
     return queryResponse.data;
   }
 

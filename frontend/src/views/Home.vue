@@ -1,10 +1,14 @@
 <template lang="pug">
-main
+div
   header.hero
     h1 Write code. Get noticed. Get hired.
     p At Mintbean, you can build & showcase projects, get noticed, and find jobs.
+  
+  main
+    h3 Upcoming events
+    mb-project-grid
 
-  mb-project-grid
+    h3 Here are some upcoming events.
 
 </template>
 

@@ -58,30 +58,28 @@ projectRoute.get('/search',
   }
 
   const pagination = {
-    limit: req.params.limit || 25,
-    offset: req.params.offset || 0
+    limit: req.query.limit || 25,
+    offset: req.query.offset || 0
   }
 
   const ifParam = (paramName, callback) => {
-    const value = req.params[paramName];
+    const value = req.query[paramName];
     if (!!value) {
       callback(value);
     }
   }
   
-  // Handle req.params.filter_userId
+  // Handle req.query.filter_userId
   ifParam('filter_userId', userId => where.users.id = userId);
 
-  // Handle req.params.filter_mbEventId
+  // Handle req.query.filter_mbEventId
   ifParam('filter_mbEventId', mbEventId => where.mbEvents.id = mbEventId);
   
-  // Handle req.params.sort_direction
+  // Handle req.query.sort_direction
   ifParam('sort_direction', sortDirection => orderBy.field = VALID_SORT_DIRECTIONS[sortDirection]);
   
-  // Handle req.params.sort_field
+  // Handle req.query.sort_field
   ifParam('sort_field', sortField => orderBy.field = VALID_SORT_FIELDS[sortField]);
-  // Handle req.params.limit
-  // Handle req.params.offset
   
   const doIf = (value, callback) => value !== undefined && callback(value);
   doIf(req.query.filter_userId, val => where.users.id = val);
@@ -91,7 +89,7 @@ projectRoute.get('/search',
 
   let orderByString = '';
   if (!orderBy.field || !orderBy.direction) {
-    return next(new Error('Incorrect parameters ' + JSON.stringify(req.params)));
+    return next(new Error('Incorrect parameters ' + JSON.stringify(req.query)));
   } else {
     orderByString = `"ratingAverage" ${orderBy.direction}`;
     // orderByString = `"${orderBy.field}" ${orderBy.direction}`;
