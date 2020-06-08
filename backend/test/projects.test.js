@@ -130,6 +130,50 @@ describe("Projects route", () => {
     });
   })
 
+  describe("Search Project route", () => {
+    beforeEach(async done => {
+      agent = supertest.agent(app);
+      try {
+        user = await User.create(userFactory.one({ email: TEST_EMAIL, password: TEST_PASSWORD }));
+        mbEvent = await MbEvent.create(mbEventFactory.one());
+        const projectPayload = projectFactory.one({
+          UserId: user.id,
+          MbEventId: mbEvent.id
+        });
+        
+        project = await Project.create(projectPayload);
+        done();
+      } catch (e) {
+        done(e);
+      }
+    })
+  
+    afterEach(async done => {
+      try {
+        await ProjectMediaAsset.destroy({ where: {} });
+        await MediaAsset.destroy({ where: {} });
+        await Project.destroy({where: {}});
+        await User.destroy({where: {}});
+        await MbEvent.destroy({where: {}});
+        done();
+      } catch (e) {
+        done(e);
+      }
+    });
+
+    it('can get all of the projects', async done => {
+      // fetch while logged in
+      const response = await agent
+        .get("/api/v1/project/search");
+  
+      expect(response.statusCode).toBe(200);
+      expect(response.body.length).toBe(1);
+      expect(response.body[0].id).toBe(project.id);
+  
+      done();
+    });
+  })
+
   describe("CREATE Project route", () => {
     beforeEach(async done => {
       agent = supertest.agent(app);

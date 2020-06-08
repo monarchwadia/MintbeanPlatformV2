@@ -12,6 +12,153 @@ projectRoute.get('/', requireAuth, async (req, res, next) => {
     .catch(e => next(err));
 });
 
+projectRoute.get('/search', 
+  validator.params(Joi.object({
+    filter_userId: Joi.string().uuid().min(1),
+    filter_mbEventId: Joi.string().uuid().min(1),
+    sort_order: Joi.string().valid('ascending', 'descending'),
+    sort_field: Joi.string().valid('createdAt', 'ratingAverage', 'ratingCount')
+  })),
+  async (req, res, next) => {
+    
+  /*
+  Supported params:
+  Filter
+  - userId
+  - mbEventId
+  - search string
+  
+  Sort
+  - ascending/descending
+  - created time
+  - score
+  */
+
+  const where = {
+    projects: {},
+    users: {},
+    votes: {},
+    mbEvents: {}
+  };
+
+  const setIf = (value, callback) => {
+    if (value !== undefined) {
+      callback(value);
+    }
+  }
+
+  setIf(req.params.filter_userId, val => where.users.id = val);
+  setIf(req.params.filter_mbEventId, val => where.mbEvents.id = val);
+
+
+  Project.findAll({
+    attributes: {
+      include: [
+        [sequelize.cast(sequelize.fn('AVG', sequelize.col('Votes.rating')), 'float'), 'ratingAverage'],
+        [sequelize.cast(sequelize.fn('COUNT', sequelize.col('Votes.id')), 'int'), 'ratingCount'],
+      ]
+    },
+    include: [
+      {
+        model: Vote,
+        attributes: []
+      }
+    ],
+    group: ['Project.id']
+  })
+  .then(resp => res.json(resp))
+  .catch(err => next(err));
+
+  // Project.findAll({
+  //   where: {},
+  //   attributes: {
+  //     include: [
+  //       [sequelize.fn('AVG', sequelize.col('Votes.rating')), 'avgRating']
+  //     ]
+  //   },
+  //   include: [
+  //     {
+  //       model: Vote,
+  //       group: ['ProjectId']
+  //     }
+  //   ],
+  //   group: ['Project.id', 'Votes.id']
+  // })
+  // .then(resp => res.json(resp))
+  // .catch(err => next(err));
+
+  // // // WORKS!
+  // Vote.findAll({
+  //   where: {},
+  //   attributes: [
+  //     "ProjectId",
+  //     [sequelize.fn('AVG', sequelize.col('rating')), 'avgRating']
+  //   ],
+  //   group: ['ProjectId']
+  // })
+  // .then(resp => res.json(resp))
+  // .catch(err => next(err));
+
+
+
+
+
+  // Project.findAll({
+  //   where: {},
+  //   attributes: {
+  //     // attributes: {
+  //         // include: [
+  //         //   [sequelize.fn('COUNT', sequelize.col('Votes.rating')), 'avgRating']
+  //         // ]
+  //       // }
+  //   },
+  //   include: [
+  //     {
+  //       model: Vote,
+  //       // attributes: {
+  //       //   include: [
+  //       //     [sequelize.fn('COUNT', sequelize.col('rating')), 'avgRating']
+  //       //   ]
+  //       // }
+  //       attributes: {
+  //         include: [
+  //           [sequelize.fn('COUNT', sequelize.col('rating')), 'avgRating']
+  //         ],
+  //       },
+  //       // groupBy: ['id']
+  //     }
+  //   ]
+  // })
+  // .then(resp => res.json(resp))
+  // .catch(err => next(err));
+
+  // Project.findAll({
+  //   // where: where.projects,
+  //   attributes: [
+  //     ...Object.keys(Project.rawAttributes),
+  //     [ sequelize.fn('AVG', sequelize.col('votes.rating')), 'votesRatingAverage' ],
+  //     [ sequelize.fn('COUNT', sequelize.col('votes.rating')), 'votesRatingCount' ],
+  //   ],
+  //   include: [
+  //     {
+  //       model: MediaAsset
+  //     },
+  //     {
+  //       model: User
+  //     },
+  //     {
+  //       model: Vote
+  //     },
+  //     {
+  //       model: MbEvent
+  //     }
+  //   ]
+  // })
+  // .then(resp => res.json(resp))
+  // .catch(err => next(err));
+});
+
+
 projectRoute.get('/frontpage', async (req, res, next) => {
   Project.findAll({where:{}, include: ['MediaAssets', 'User', 'Votes']})
     .then(projects => res.json(projects))
