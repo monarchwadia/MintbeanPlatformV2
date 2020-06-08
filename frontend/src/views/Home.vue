@@ -6,7 +6,7 @@ div
   
   main
     h3 Check out some great recent projects
-    mb-project-grid
+    mb-project-grid(:projects="projects")
 
     section.call-to-action-outer
       aside.call-to-action-inner
@@ -131,6 +131,9 @@ export default {
     },
     nextEvent: function() {
       return this.$store.state.mbEvents.find(mbEvent => this.getEventStatus(mbEvent) === "upcoming");
+    },
+    projects: function() {
+      return this.$store.state.frontpageProjects;
     }
   },
   methods: {
