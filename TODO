@@ -17,18 +17,21 @@ First:
 ✔ Database backups @done(20-05-31 02:39)
 ✔ bcrypt @done(20-05-31 22:35)
 ✔ Automated deployment scripts @done(20-05-31 22:35)
-☐ Deploy images
-☐ Move production to production mode
+✔ Deploy images @done(20-06-09 18:10)
+✔ Move production to production mode @done(20-06-09 18:10)
+☐ Fix logo
+☐ Beautify the project view
+☐ Fix image preview
+☐ Create user profile view
 ☐ Admin page for managing things
   ☐ Create/Read/Update/Archive MbEvent, including image upload
-☐ Add Markdown support for creating events
+☐ Compliance
 ☐ Create tests for frontend projects
+☐ Users cannot submit multiple projects (backend safety checks)
 
 Lined up:
-☐ Compliance
-☐ Users cannot submit multiple projects (backend safety checks)
+☐ Add Markdown support for creating events
 ☐ Main page should show curated projects
-☐ 
 
 After:
 ☐ (loggedin) LIST /mb-event/:id/projects [leaderboard]
