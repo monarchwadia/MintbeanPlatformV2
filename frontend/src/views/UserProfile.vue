@@ -18,13 +18,13 @@ div.wrapper
   background: whitesmoke;
   min-height: 100vh;
   padding-top: 50px;
-  border: 1px solid var(--color-bg-secondary);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow) var(--color-shadow);
+  border: 1px solid $color-bg-secondary;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow $color-shadow;
   // margin: 1rem;
   padding: 1.25rem;
   &:hover {
-    box-shadow: var(--box-shadow) var(--color-bg-secondary);
+    box-shadow: $box-shadow $color-bg-secondary;
   }
 }
 

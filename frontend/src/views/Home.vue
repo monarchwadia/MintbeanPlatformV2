@@ -13,7 +13,7 @@ div
         div.inner-wrapper
           div.image-wrapper
             mb-image-display(serverId="c58b49717bb0118438ee4a47e4ed2038")
-            img.signup-bean(src='../assets/logo.png')
+            img.signup-bean(src='../assets/bean.png')
           div.content-wrapper
             p.header-text The next hackathon is around the corner!
             p.body-text Mondays & Wednesdays at 12:00pm EST
@@ -73,7 +73,7 @@ div
 
 header {
   text-align: left;
-  background-color: var(--color-bg-secondary);
+  background-color: $color-bg-secondary;
   padding: 100px;
 }
 

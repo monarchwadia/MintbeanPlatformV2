@@ -44,7 +44,6 @@ $background-color: white;
 
     .screenshot {
       overflow: hidden;
-      // box-shadow: 6px 12px 25px var(--color-border);
       border-radius: $border-radius;
       height: $screenshot-height;
       width: $width;
@@ -92,7 +91,6 @@ $background-color: white;
       line-height: $user-height;
       text-overflow: ellipsis;
       border-radius: $border-radius;
-      // box-shadow: 6px 12px 25px var(--color-border);
       z-index: 1001;
       background-color: $background-color;
       padding-left: 5px;

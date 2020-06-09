@@ -2,7 +2,7 @@
 nav.mb-nav
   ul
     li
-      div(style="font-weight: bolder") Mintbean
+      img.logo(:src="mintbeanLogo")
   ul
     li
       a(href="#", v-on:click.prevent="logout" v-if="isLoggedIn") Log Out
@@ -29,18 +29,24 @@ $navbar-height: 100px;
     padding-right: 10px;
   }
 }
+
+.logo {
+  max-height: 100px;
+  height: 100px;
+  vertical-align: inherit;
+}
 </style>
 
 <script>
-import logo from "../../src/assets/logo-small.png";
+import mintbeanLogo from "../../src/assets/mintbean-logo.png";
 
 export default {
   props: {
     path: String
   },
   computed: {
-    logo() {
-      return logo;
+    mintbeanLogo() {
+      return mintbeanLogo;
     },
     user() {
       return this.$store.state && this.$store.state.user;
