@@ -1,17 +1,16 @@
 <template lang="pug">
 nav.mb-nav
-  ul
-    li
-      img.logo(:src="mintbeanLogo")
-  ul
-    li
-      a(href="#", v-on:click.prevent="logout" v-if="isLoggedIn") Log Out
-    li
-      router-link(to="/admin" v-if="isLoggedIn && isAdmin") Admin
-    li
-      router-link(to="/auth/login" v-if="!isLoggedIn") Log In
-    li
-      router-link(to="/auth/register" v-if="!isLoggedIn") Register
+  router-link(to="/")
+    img.logo(:src="mintbeanLogo")
+  div.links
+    a(v-if="isLoggedIn" href="#" v-on:click.prevent="logout")
+      div Log Out
+    router-link(to="/admin" v-if="isLoggedIn && isAdmin") 
+      div Admin
+    router-link(to="/auth/login" v-if="!isLoggedIn") 
+      div Log In
+    router-link(to="/auth/register" v-if="!isLoggedIn") 
+      div Register
 </template>
 
 <style lang="scss" scoped>
@@ -21,19 +20,37 @@ $navbar-height: 100px;
 
 .mb-nav {
   max-height: $navbar-height;
-  line-height: $navbar-height;
   margin-bottom: 0px;
-  .highlight {
-    background-color: $mintiest;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
 }
 
 .logo {
-  max-height: 100px;
-  height: 100px;
-  vertical-align: inherit;
+  max-height: 50px;
+  padding-bottom: 20px;
+  height: $navbar-height;
+  vertical-align: middle;
+  line-height: initial;
+  padding-left: 25px;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  & > * {
+    border-radius: 25px;
+    box-sizing: border-box;
+    padding: 0 25px;
+    margin: 0 5px;
+    transition: background-color 1s;
+    line-height: $navbar-height;
+    &:hover {
+      background-color: $minty;
+    }
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
 }
 </style>
 
