@@ -1,10 +1,16 @@
 <template lang="pug">
 div.mb-project-grid-item
-  div.inner(v-on:click.prevent="() => visitProject(project)")
+  div.inner
     div.screenshot
       div.overlay
-        div.project-title {{ project.title }}
-      mb-image-display(:publicId="cloudinaryPublicIdFor(project)" height="300" width="400")
+        div.project-title 
+          | {{ project.title }}
+        div.project-buttons
+          button(v-on:click.prevent="expandProject") Expand
+          mb-a(:href="projectDeployedUrl")
+            button Visit
+          button Score
+      mb-image-display(:publicId="cloudinaryPublicId" height="300" width="400")
     div.user
       div.username {{ username }}
       div.projectinfo 
@@ -17,15 +23,6 @@ div.mb-project-grid-item
 <style lang="scss" scoped>
 @import "../styles/colors";
 @import "../styles/mixins";
-
-// $width: 400px;
-// $user-margin: 10px;
-// $user-height: 75px - $user-margin;
-// $screenshot-height: 300px - $user-margin;
-// $height: $screenshot-height + $user-height;
-// $border-radius: 15px;
-// $background-color: white;
-
 
 $width: 400px;
 $screenshot-height: 300px;
@@ -64,22 +61,40 @@ $background-color: white;
         transition: opacity 0.5s;
         background: linear-gradient(180deg, rgba(237,2,2,0) 0%, rgba(0,0,0,0.8) 100%);
         opacity: 0;
-
-        .project-title {
-          position: absolute;
-          bottom: 10px;
-          font-weight: bold;;
-          color: white;
-          left: 25px;
-          right: 25px;
-          text-overflow: ellipsis;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        
+        & * {
+          display: none;
         }
-  
+
         &:hover {
           // background-color: rgba(255,255,255,0.5);
           opacity: 0.8;
+          & * {
+
+            display: inline-block;
+          }
         }
-  
+
+        .project-title {
+          font-weight: bold;;
+          color: white;
+          text-overflow: ellipsis;
+          flex-grow: 5;
+          padding-left: 10px;
+        }
+
+        .project-buttons {
+          padding-right: 10px;
+          flex-grow: 2;
+          display: flex;
+          justify-content: space-between;;
+          & button {
+            padding: 5px 10px;
+          }
+        }  
       }
     }
 
@@ -129,13 +144,20 @@ export default {
     },
     voteAverage() {
       return this.project.ratingAverage ? this.project.ratingAverage.toPrecision(2) : '-';
+    },
+    projectDeployedUrl() {
+      return this.project.live_url;
+    },
+    cloudinaryPublicId() {
+      const { project } = this;
+      if (!project) return;
+      return project && project.MediaAssets && project.MediaAssets[0] && project.MediaAssets[0].cloudinaryPublicId;
     }
   },
   methods: {
-    cloudinaryPublicIdFor(project) {
-      return project && project.MediaAssets && project.MediaAssets[0] && project.MediaAssets[0].cloudinaryPublicId;
-    },
-    visitProject(project) {
+    expandProject() {
+      const { project } = this;
+      if (!project) return;
       this.$router.push('/project/' + project.id);
     }
   },
