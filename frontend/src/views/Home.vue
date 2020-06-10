@@ -21,19 +21,19 @@ div
     h3 Check out some great recent projects
     mb-project-grid(:projects="projects")
 
-    h3 Here are some upcoming events.
+    h3 Past events.
     section.u-centered
       aside(v-for="mbEvent in mbEvents" class="hackathon-card" v-on:click.prevent="() => goToEvent(mbEvent.id)")
         img(:src="mbEvent.cover_image_url" max-height=300 width="100%")
         h3 {{mbEvent.title}}
-        b(v-if="getEventStatus(mbEvent) === 'upcoming'")
-          countdown(:time="getCountdownTime(mbEvent.start_time)")
-            template(slot-scope="props") Starts In: <br/>{{ props.days }}d {{ props.hours }}h {{ props.minutes }}m {{ props.seconds }}s.
-        b(v-if="getEventStatus(mbEvent) === 'ongoing'")
-          countdown(:time="getCountdownTime(mbEvent.end_time)")
-            template(slot-scope="props") Ends In: <br/>{{ props.days }}d {{ props.hours }}h {{ props.minutes }}m {{ props.seconds }}s.
-        b(v-if="getEventStatus(mbEvent) === 'ended'")
-          | Event Ended
+        //- b(v-if="getEventStatus(mbEvent) === 'upcoming'")
+        //-   countdown(:time="getCountdownTime(mbEvent.start_time)")
+        //-     template(slot-scope="props") Starts In: <br/>{{ props.days }}d {{ props.hours }}h {{ props.minutes }}m {{ props.seconds }}s.
+        //- b(v-if="getEventStatus(mbEvent) === 'ongoing'")
+        //-   countdown(:time="getCountdownTime(mbEvent.end_time)")
+        //-     template(slot-scope="props") Ends In: <br/>{{ props.days }}d {{ props.hours }}h {{ props.minutes }}m {{ props.seconds }}s.
+        //- b(v-if="getEventStatus(mbEvent) === 'ended'")
+        //-   | Event Ended
         p {{mbEvent.description}}
 
     section.u-centered
