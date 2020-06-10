@@ -1,26 +1,26 @@
 <template lang="pug">
 div
   header.hero
-    h1 Write code. Get noticed. Get hired.
-    p At Mintbean, you build & showcase projects, get noticed, and find jobs.
+    div.left
+      h1 Write code.
+      h1 Get noticed.
+      h1 Get hired.
+      p Come for the jobs. Stay for the community.
+    div.right
+      div
+        mb-image-display(serverId="c58b49717bb0118438ee4a47e4ed2038")
+        img.signup-bean(src='../assets/bean.png')
+      div
+        h1 The next hackathon is around the corner!
+        p Mondays & Wednesdays at 12:00pm EST
+        button(v-if="nextEvent" v-on:click.prevent="() => goToEvent(nextEvent.id)").u-pulse
+          i Sign up for {{nextEvent.title}}!
+        button(v-else v-on:click.prevent="() => $router.push('/auth/login')").u-pulse
+          i Sign up now!
   
   main
     h3 Check out some great recent projects
     mb-project-grid(:projects="projects")
-
-    section.call-to-action-outer
-      aside.call-to-action-inner
-        div.inner-wrapper
-          div.image-wrapper
-            mb-image-display(serverId="c58b49717bb0118438ee4a47e4ed2038")
-            img.signup-bean(src='../assets/bean.png')
-          div.content-wrapper
-            p.header-text The next hackathon is around the corner!
-            p.body-text Mondays & Wednesdays at 12:00pm EST
-            button(v-if="nextEvent" v-on:click.prevent="() => goToEvent(nextEvent.id)").u-minty-gradient.u-pulse
-              i Sign up for {{nextEvent.title}}!
-            button(v-else v-on:click.prevent="() => $router.push('/auth/login')").u-minty-gradient.u-pulse
-              i Sign up now!
 
     h3 Here are some upcoming events.
     section.u-centered
@@ -57,9 +57,32 @@ div
 @import "../styles/colors";
 
 .hero {
+  justify-content: space-evenly;
+  display: flex;
   margin-bottom: 50px;
   background: rgb(255,255,255);
-  background: linear-gradient(195deg, rgba(255,255,255,1) 0%, $basemint 100%);
+  background: linear-gradient(0deg, $least-minty 0%, rgba(255,255,255,1) 50%);
+  text-align: left;
+  background-color: $color-bg-secondary;
+  padding: 100px;
+  flex-wrap: wrap;;
+
+  .left {
+    align-content: center;;
+    min-width: 350px;
+    h1 {
+      font-size: 3.5em;
+      padding: 0 0;
+      margin: 0;
+    }
+  }
+
+  .right {
+    width: 600px;
+    min-width: 350px;
+    display: flex;
+    vertical-align: middle;;
+  }
 }
 
 .grid {
@@ -71,53 +94,16 @@ div
   }
 }
 
-header {
-  text-align: left;
-  background-color: $color-bg-secondary;
-  padding: 100px;
-}
-
-.call-to-action-outer {
-  margin-top: 100px;
-  margin-bottom: 100px;
-
-  .call-to-action-inner {
-    width: 100%;
-
-    .inner-wrapper {
-      display: block;
-      width: 100%;
-      max-width: 1000px;
-      margin: auto;
-  
-      .image-wrapper {
-        display: inline-block;
-      }
-  
-      .content-wrapper {
-        max-width: 100%;
-        display: inline-block;
-        vertical-align: top;
-  
-        .header-text {
-          font-size: xx-large;
-          font-weight: 900;
-        }
-  
-        .body-text {
-          font-size: x-large;
-        }
-      }
-    }
-  }
-}
-
 .signup-bean {
   padding: 0 50px;
 }
 
 .hackathon-card {
   cursor: pointer;
+}
+
+main {
+  max-width: 1500px;
 }
 </style>
 

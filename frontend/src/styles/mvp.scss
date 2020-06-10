@@ -82,11 +82,10 @@ section {
   flex-wrap: wrap;
   justify-content: $justify-important;
   aside {
-    border: 1px solid $color-bg-secondary;
-    border-radius: $border-radius;
     margin: 1rem;
     padding: 1.25rem;
     width: $width-card;
+    @include has-border;
     @include has-box-shadow;
 
     img {
@@ -130,8 +129,7 @@ nav {
       }
       ul {
         background: $color-bg;
-        border: 1px solid $color-bg-secondary;
-        border-radius: $border-radius;
+        @include has-border;
         @include has-box-shadow;
         display: none;
         height: auto;

@@ -9,3 +9,8 @@
     box-shadow: $box-shadow $color-bg-secondary;
   }
 }
+
+@mixin has-border {
+  border: 1px solid $color-bg-secondary;
+  border-radius: $border-radius;
+}

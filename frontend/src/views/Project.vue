@@ -62,7 +62,7 @@ div.project-wrapper
 @import "../styles/mixins";
 
 main {
-  width: $width-card-wide;
+  max-width: $width-card-wide;
 }
 
 .background-banner {
