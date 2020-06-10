@@ -1,0 +1,19 @@
+#!/bin/bash
+# Select * from \"Users\"
+
+ssh MintbeanProduction "\
+  psql -h localhost -d mintbean_development -U mintbean -c '\
+    SELECT COUNT('*') FROM \"Users\"; \
+  '";
+
+# ssh MintbeanStaging "sudo -u postgres psql -c 'select "firstname", \
+#        "lastname", \
+#        "email", \
+#        "Users"."createdAt", \
+#        CONCAT(\'https://mintbean.io/projects/\', "Projects"."id") AS projectUrl, \
+#        "MbEvents"."title" as projectTitle, \
+#        "Projects"."id" \
+# from "Users" \
+# RIGHT JOIN "Projects" ON "Projects"."UserId" = "Users"."id" \
+# JOIN "MbEvents" ON "Projects"."MbEventId" = "MbEvents"."id" \
+# ORDER BY "createdAt" DESC;'"
