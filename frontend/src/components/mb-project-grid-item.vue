@@ -6,7 +6,7 @@ div.mb-project-grid-item
         div.project-title 
           | {{ project.title }}
         div.project-buttons
-          button(v-on:click.prevent="expandProject") Expand
+          button(v-on:click.prevent="expandProject") Details
           mb-a(:href="projectDeployedUrl")
             button Visit
           //- button Score

@@ -14,12 +14,7 @@ div.event-wrapper
         h3 Submissions
         section(v-if="mbEvent && mbEvent.Projects.length === 0")
           p No submissions yet. Be the first to submit a project!
-        section(v-else)
-          aside(v-for="project in mbEvent.Projects")
-            mb-image-display(:publicId="project.MediaAssets && project.MediaAssets[0] && project.MediaAssets[0].cloudinaryPublicId" height="285" width="285")
-            h2 {{ project.title }}
-            p
-              router-link(:to="'/project/' + project.id") View Project
+        mb-project-grid(v-else :projects="mbEvent.Projects")
         section(v-if="submitFormState.enabled")
           form.submit-project-form(v-on:submit.prevent="handleSubmitProject")
             h1 Submit a Project

@@ -3,6 +3,7 @@ const { Router } = require('express');
 const { MbEvent, User, Project, Vote, MediaAsset } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
+const sequelize = require('sequelize');
 
 const mbEventRoute = new Router();
 
@@ -14,6 +15,12 @@ mbEventRoute.get('/', async (req, res, next) => {
     include: [
       {
         model:  Project,
+        attributes: {
+          include: [
+            [sequelize.cast(sequelize.fn('AVG', sequelize.col('Projects.Votes.rating')), 'float'), 'ratingAverage'],
+            [sequelize.cast(sequelize.fn('COUNT', sequelize.col('Projects.Votes.id')), 'int'), 'ratingCount'],
+          ]
+        },
         include: [
           {
             model: User
@@ -26,7 +33,9 @@ mbEventRoute.get('/', async (req, res, next) => {
           }
         ]
       }
-    ]
+    ],
+    group: ['MbEvent.id', 'Projects.id', 'Projects.User.id', 'Projects.MediaAssets.id', 'Projects.MediaAssets.ProjectMediaAsset.id', 'Projects.Votes.id'],
+    subQuery: false
   })
     .then(events => res.json(events))
     .catch(err => {
