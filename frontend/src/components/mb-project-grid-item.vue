@@ -9,7 +9,7 @@ div.mb-project-grid-item
           button(v-on:click.prevent="expandProject") Expand
           mb-a(:href="projectDeployedUrl")
             button Visit
-          button Score
+          //- button Score
       mb-image-display(:publicId="cloudinaryPublicId" height="300" width="400")
     div.user
       div.username {{ username }}
@@ -82,16 +82,15 @@ $background-color: white;
           font-weight: bold;;
           color: white;
           text-overflow: ellipsis;
-          flex-grow: 5;
           padding-left: 10px;
         }
 
         .project-buttons {
           padding-right: 10px;
-          flex-grow: 2;
           display: flex;
-          justify-content: space-between;;
+          justify-content: end;;
           & button {
+            margin: 5px;
             padding: 5px 10px;
           }
         }  
