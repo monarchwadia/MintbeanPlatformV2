@@ -40,7 +40,6 @@ $navbar-height: 100px;
     box-sizing: border-box;
     padding: 0 25px;
     margin: 0 5px;
-    transition: background-color 1s;
     line-height: $navbar-height;
     &:hover {
       background-color: $minty;

@@ -12,11 +12,10 @@ div
         img.signup-bean(src='../assets/bean.png')
       div
         h1 The next hackathon is around the corner!
+        p Frontend & Full Stack Hackathons
         p Mondays & Wednesdays at 12:00pm EST
-        button(v-if="nextEvent" v-on:click.prevent="() => goToEvent(nextEvent.id)").u-pulse
-          i Sign up for {{nextEvent.title}}!
-        button(v-else v-on:click.prevent="() => $router.push('/auth/login')").u-pulse
-          i Sign up now!
+        mb-a(href="https://www.eventbrite.ca/e/careerhack-javascript-hackathons-for-job-seeking-developers-4-hours-registration-103523802480")
+          button.u-pulse Sign up now!
   
   main
     h3 Check out some great recent projects
@@ -55,6 +54,10 @@ div
 
 <style lang="scss" scoped>
 @import "../styles/colors";
+
+button {
+  outline: none;
+}
 
 .hero {
   justify-content: space-evenly;
