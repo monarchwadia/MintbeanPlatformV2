@@ -1,0 +1,11 @@
+@import "./colors";
+
+@mixin has-box-shadow {
+  $box-shadow: 2px 2px 10px;
+  border: 1px solid $color-bg-secondary;
+  box-shadow: $box-shadow $color-shadow;
+  transition: box-shadow 0.1s;
+  &:hover {
+    box-shadow: $box-shadow $color-bg-secondary;
+  }
+}

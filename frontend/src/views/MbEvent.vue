@@ -46,6 +46,7 @@ div.event-wrapper
 
 <style lang="scss" scoped>
 @import "../styles/colors";
+@import "../styles/mixins";
 
 .background-banner {
   background: rgb(2,237,157);
@@ -73,12 +74,9 @@ div.event-wrapper
   padding-top: 50px;
   border: 1px solid $color-bg-secondary;
   border-radius: $border-radius;
-  box-shadow: $box-shadow $color-shadow;
+  @include has-box-shadow;
   // margin: 1rem;
   padding: 1.25rem;
-  &:hover {
-    box-shadow: $box-shadow $color-bg-secondary;
-  }
 }
 
 form.submit-project-form {

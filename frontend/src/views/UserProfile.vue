@@ -9,6 +9,8 @@ div.wrapper
 
 <style lang="scss" scoped>
 @import "../styles/colors";
+@import "../styles/mixins";
+
 .event-wrapper-inner {
   padding-top: 100px;
   position: relative;
@@ -20,12 +22,9 @@ div.wrapper
   padding-top: 50px;
   border: 1px solid $color-bg-secondary;
   border-radius: $border-radius;
-  box-shadow: $box-shadow $color-shadow;
+  @include has-box-shadow;
   // margin: 1rem;
   padding: 1.25rem;
-  &:hover {
-    box-shadow: $box-shadow $color-bg-secondary;
-  }
 }
 
 form {

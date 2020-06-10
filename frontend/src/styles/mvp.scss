@@ -1,31 +1,8 @@
 /* MVP.css v1.6.2 - https://github.com/andybrewer/mvp */
-/*
-@media (prefers-color-scheme: dark) {
-  :root {
-      $color: #0097fc;
-      $color-accent: #0097fc4f;
-      $color-bg: #333;
-      $color-bg-secondary: #555;
-      $color-secondary: #e20de9;
-      $color-secondary-accent: #e20de94f;
-      $color-shadow: #bbbbbb20;
-      $color-text: #f7f7f7;
-      $color-text-secondary: #aaa;
-  }
-}
-*/
-/* Layout */
-/* Headers */
-/* Nav */
-/* Nav Dropdown */
-/* Typography */
-/* Links */
-/* Images */
-/* Forms */
-/* Tables */
-/* Quotes */
 
 @import "./variables";
+@import "./colors";
+@import "./mixins";
 
 article {
   aside {
@@ -107,13 +84,11 @@ section {
   aside {
     border: 1px solid $color-bg-secondary;
     border-radius: $border-radius;
-    box-shadow: $box-shadow $color-shadow;
     margin: 1rem;
     padding: 1.25rem;
     width: $width-card;
-    &:hover {
-      box-shadow: $box-shadow $color-bg-secondary;
-    }
+    @include has-box-shadow;
+
     img {
       max-width: 100%;
     }
@@ -157,7 +132,7 @@ nav {
         background: $color-bg;
         border: 1px solid $color-bg-secondary;
         border-radius: $border-radius;
-        box-shadow: $box-shadow $color-shadow;
+        @include has-box-shadow;
         display: none;
         height: auto;
         left: -2px;
@@ -407,7 +382,7 @@ button[disabled] {
 form {
   border: 1px solid $color-bg-secondary;
   border-radius: $border-radius;
-  box-shadow: $box-shadow $color-shadow;
+  @include has-box-shadow;
   display: block;
   max-width: $width-card-wide;
   min-width: $width-card;

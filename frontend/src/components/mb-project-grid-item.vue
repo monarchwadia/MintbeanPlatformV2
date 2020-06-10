@@ -15,6 +15,8 @@ div.mb-project-grid-item
 </template>
 
 <style lang="scss" scoped>
+@import "../styles/colors";
+@import "../styles/mixins";
 
 // $width: 400px;
 // $user-margin: 10px;
@@ -45,6 +47,8 @@ $background-color: white;
     .screenshot {
       overflow: hidden;
       border-radius: $border-radius;
+      border: 1px solid $color-bg-secondary;
+      @include has-box-shadow;
       height: $screenshot-height;
       width: $width;
       position: absolute;
