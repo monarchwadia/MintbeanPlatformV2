@@ -3,11 +3,12 @@ const { requireAuth, requireAdmin } = require('./routers.util');
 const { MbEvent, User, Project, Vote, MediaAsset, ProjectMediaAsset, sequelize } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
+const projectService = require('../services/projectService');
 
 const projectRoute = new Router();
 
 projectRoute.get('/', requireAuth, async (req, res, next) => {
-  req.user.getProjects()
+  projectService.search({ UserId: req.user.id })
     .then(projects => res.json(projects))
     .catch(e => next(err));
 });

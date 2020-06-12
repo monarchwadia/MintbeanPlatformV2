@@ -116,6 +116,21 @@ describe("Projects route", () => {
         done();
       });
 
+      it('does not return projects that do not belong to the user', async done => {
+        const otherUser = await User.create(userFactory.one());
+        await Project.create(projectFactory.one({ UserId: otherUser.id }));
+        
+        // fetch while logged in
+        const response = await agent
+          .get("/api/v1/project");
+    
+        expect(response.statusCode).toBe(200);
+        expect(response.body.length).toBe(1);
+        expect(response.body[0].id).toBe(project.id);
+    
+        done();
+      });
+
       // it('can get all of the projects of a logged-in user', async done => {
       //   // fetch while not logged in
       //   const response = await agent
