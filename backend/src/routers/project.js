@@ -13,9 +13,8 @@ projectRoute.get('/', requireAuth, async (req, res, next) => {
     .catch(e => next(err));
 });
 
-
 const VALID_SORT_FIELDS = {
-  'CREATED_AT': '"Project"."createdAt"',
+  'CREATED_AT': 'p."createdAt"',
   'RATING_AVERAGE': '"ratingAverage"',
   'RATING_COUNT': '"ratingCount"'
 }
@@ -23,115 +22,71 @@ const VALID_SORT_DIRECTIONS = {
   'desc': 'desc',
   'asc': 'asc'
 }
-projectRoute.get('/search', 
-  validator.query(Joi.object({
-    filter_userId: Joi.string().uuid().min(1),
-    filter_mbEventId: Joi.string().uuid().min(1),
-    sort_direction: Joi.string().valid(...Object.keys(VALID_SORT_DIRECTIONS)),
-    sort_field: Joi.string().valid(...Object.keys(VALID_SORT_FIELDS)),
-    limit: Joi.number().max(100),
-    offset: Joi.number().min(0)
+projectRoute.get('/search',  validator.query(Joi.object({
+    filter_userId: Joi.string().uuid().min(1).optional(),
+    filter_mbEventId: Joi.string().uuid().min(1).optional(),
+    filter_ratingAverage_min: Joi.number().min(0).max(10).optional(),
+    filter_ratingCount_min: Joi.number().min(0).max(10).optional(),
+    sort_direction: Joi.string().valid(...Object.keys(VALID_SORT_DIRECTIONS)).optional().default('desc'),
+    sort_field: Joi.string().valid(...Object.keys(VALID_SORT_FIELDS)).optional().default('RATING_AVERAGE'),
+    limit: Joi.number().max(100).optional().default(25),
+    offset: Joi.number().min(0).optional().default(0)
   })),
   async (req, res, next) => {
-    
-  /*
-  Supported params:
-  Filter
-  - userId
-  - mbEventId
-  - search string
-  
-  Sort
-  - ascending/descending
-  - created time
-  - score
-  */
- 
-  // set filters
-  const where = {
-    users: {},
-    mbEvents: {}
-  };
-
-  const orderBy = {
-    field: '"ratingAverage"',
-    direction: 'DESC' 
-  }
-
-  const pagination = {
-    limit: req.query.limit || 25,
-    offset: req.query.offset || 0
-  }
-
-  const ifParam = (paramName, callback) => {
-    const value = req.query[paramName];
-    if (!!value) {
-      callback(value);
+    const defaults = {
+      filter_userId: undefined,
+      filter_mbEventId: undefined,
+      filter_ratingCount_min: undefined,
+      filter_ratingAverage_min: undefined,
+      sort_direction: 'desc',
+      sort_field: 'RATING_AVERAGE',
+      limit: 25,
+      offset: 0
     }
-  }
-  
-  // Handle req.query.filter_userId
-  ifParam('filter_userId', userId => where.users.id = userId);
 
-  // Handle req.query.filter_mbEventId
-  ifParam('filter_mbEventId', mbEventId => where.mbEvents.id = mbEventId);
-  
-  // Handle req.query.sort_direction
-  ifParam('sort_direction', sortDirection => orderBy.field = VALID_SORT_DIRECTIONS[sortDirection]);
-  
-  // Handle req.query.sort_field
-  ifParam('sort_field', sortField => orderBy.field = VALID_SORT_FIELDS[sortField]);
-  
-  const doIf = (value, callback) => value !== undefined && callback(value);
-  doIf(req.query.filter_userId, val => where.users.id = val);
-  doIf(req.query.filter_mbEventId, val => where.mbEvents.id = val);
-  doIf(req.query.sort_field, val => orderBy.field = VALID_SORT_FIELDS[val])
-  doIf(req.query.sort_direction, val => orderBy.direction = VALID_SORT_DIRECTIONS[val]);
+    // generate defaults
+    const bindings = {};
+    Object.entries(defaults).forEach(([field, defaultValue]) => {
+      const queryValue = req.query[field];
+      bindings[field] = queryValue === undefined ? defaultValue : queryValue;
+    });
 
-  let orderByString = '';
-  if (!orderBy.field || !orderBy.direction) {
-    return next(new Error('Incorrect parameters ' + JSON.stringify(req.query)));
-  } else {
-    orderByString = `"ratingAverage" ${orderBy.direction}`;
-    // orderByString = `"${orderBy.field}" ${orderBy.direction}`;
-  }
+    // set sort field
+    bindings.sort_field = VALID_SORT_FIELDS[bindings.sort_field || defaults.sort_field];
+    bindings.sort_direction = VALID_SORT_DIRECTIONS[bindings.sort_direction || defaults.sort_direction];
 
-  Project.findAll({
-    attributes: {
-      include: [
-        [sequelize.cast(sequelize.fn('AVG', sequelize.col('Votes.rating')), 'float'), 'ratingAverage'],
-        [sequelize.cast(sequelize.fn('COUNT', sequelize.col('Votes.id')), 'int'), 'ratingCount'],
-      ]
-    },
-    include: [
-      {
-        model: Vote,
-        attributes: []
-      },
-      {
-        model: User,
-        attributes: ['firstname', 'lastname'],
-        where: where.users
-      },
-      // {
-      //   model: MbEvent,
-      //   attributes: [],
-      //   where: where.mbEvents
-      // },
-      {
-        model: MediaAsset
-      }
-    ],
-    group: ['Project.id', 'User.id', 'MediaAssets.id', 'MediaAssets.ProjectMediaAsset.id'],
-    order: [sequelize.literal(orderByString)],
-    limit: pagination.limit,
-    offset: pagination.offset,
-    subQuery: false
-  })
-  .then(resp => res.json(resp))
-  .catch(err => next(err));
-});
+    let sql = `
+      SELECT  p.*,
+              COUNT(v.*) AS "ratingCount",
+              TRUNC(AVG(v.rating), 2) AS "ratingAverage"
+      FROM "Projects" AS p
+        LEFT JOIN "Users" AS u ON p."UserId" = u."id"
+        LEFT JOIN "MbEvents" AS mbe ON p."MbEventId" = mbe.id
+        LEFT JOIN "Votes" AS v ON v."ProjectId" = p.id
+      WHERE 1 = 1 
+      ${bindings.filter_userId !== undefined ? "AND  u.id = COALESCE($filter_userId, u.id)" : ''}
+      ${bindings.filter_mbEventId !== undefined ? 'AND  mbe.id = COALESCE($filter_mbEventId, mbe.id)' : ''}
+      ${bindings.filter_ratingCount_min !== undefined ? 'AND  "ratingCount" >= COALESCE($filter_ratingCount_min, 0)' : ''}
+      ${bindings.filter_ratingAverage_min !== undefined ? 'AND  "ratingAverage" >= COALESCE($filter_ratingAverage_min, 0)' : ''}
+      GROUP BY p."id"
+      ORDER BY ${bindings.sort_field} ${bindings.sort_direction}
+      LIMIT $limit OFFSET $offset;
+    `;
 
+    try {
+      const results = await sequelize.query(sql, {
+        model: Project,
+        mapToModel: true,
+        bind: bindings
+      });
+      
+      res.json(results);
+    } catch (e) {
+      return next(e);
+    }
+
+
+  });
 
 projectRoute.get('/frontpage', async (req, res, next) => {
   Project.findAll({where:{}, include: ['MediaAssets', 'User', 'Votes']})
@@ -188,14 +143,6 @@ projectRoute.post('/',
       })), { transaction })
     })
 
-    // try {
-    //   project = await Project.create(params, {
-    //     include: [MediaAsset, MbEventId]
-    //   });
-    // } catch (e) {
-    //   return next(e);
-    // }
-
     try {
       project = await Project.findOne({
         where: { id: project.id },
@@ -241,29 +188,6 @@ projectRoute.post('/uploadMediaAssets',
       console.log("Error while trying to upload media asset to existing project", e);
       return next(e);
     }
-
-    // try {
-    //   project = await Project.create(params, {
-    //     include: [MediaAsset, MbEventId]
-    //   });
-    // } catch (e) {
-    //   return next(e);
-    // }
-
-    // try {
-    //   project = await Project.findOne({
-    //     where: { id: project.id },
-    //     include: [
-    //       { model: MbEvent },
-    //       { model: User },
-    //       { model: MediaAsset }
-    //     ]
-    //   });
-    // } catch (e) {
-    //   return next(e);
-    // }
-
-    // return res.json(project);
   });
 
 projectRoute.post('/deleteMediaAsset',

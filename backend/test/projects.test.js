@@ -7,25 +7,24 @@ const projectFactory = require('../src/db/factories/project.factory');
 const voteFactory = require('../src/db/factories/vote.factory');
 const { User, MbEvent, Project, MediaAsset, ProjectMediaAsset, Vote } = require('../src/db/models');
 
+let user;
+let mbEvent;
+let project;
+
 const clear = async (done) => {
-  try {
-    await Vote.destroy({where: {}});
-    await ProjectMediaAsset.destroy({ where: {} });
-    await MediaAsset.destroy({ where: {} });
-    await Project.destroy({where: {}});
-    await User.destroy({where: {}});
-    await MbEvent.destroy({where: {}});
-    done();
-  } catch (e) {
-    done(e);
-  }
+  await Vote.destroy({where: {}});
+  await ProjectMediaAsset.destroy({ where: {} });
+  await MediaAsset.destroy({ where: {} });
+  await Project.destroy({where: {}});
+  await User.destroy({where: {}});
+  await MbEvent.destroy({where: {}});
+  user = undefined;
+  mbEvent = undefined;
+  project = undefined;
+  done();
 }
 
 describe("Projects model", () => {
-  let user;
-  let mbEvent;
-  let project;
-
   beforeAll(done => {
     clear(done);
   })
@@ -35,19 +34,16 @@ describe("Projects model", () => {
   })
 
   beforeEach(async (done) => {
-    try {
-      user = await User.create(userFactory.one());
-      mbEvent = await MbEvent.create(mbEventFactory.one());
-      const projectPayload = projectFactory.one({
-        UserId: user.id,
-        MbEventId: mbEvent.id
-      });
-      
-      project = await Project.create(projectPayload);
-      done();
-    } catch (e) {
-      done(e);
-    }
+  
+    user = await User.create(userFactory.one());
+    mbEvent = await MbEvent.create(mbEventFactory.one());
+    const projectPayload = projectFactory.one({
+      UserId: user.id,
+      MbEventId: mbEvent.id
+    });
+    
+    project = await Project.create(projectPayload);
+    done();
   });
   
   afterEach(async (done) => {
@@ -72,19 +68,15 @@ describe("Projects route", () => {
   describe("Get Project route", () => {
     beforeEach(async done => {
       agent = supertest.agent(app);
-      try {
-        user = await User.create(userFactory.one({ email: TEST_EMAIL, password: TEST_PASSWORD }));
-        mbEvent = await MbEvent.create(mbEventFactory.one());
-        const projectPayload = projectFactory.one({
-          UserId: user.id,
-          MbEventId: mbEvent.id
-        });
-        
-        project = await Project.create(projectPayload);
-        done();
-      } catch (e) {
-        done(e);
-      }
+      user = await User.create(userFactory.one({ email: TEST_EMAIL, password: TEST_PASSWORD }));
+      mbEvent = await MbEvent.create(mbEventFactory.one());
+      const projectPayload = projectFactory.one({
+        UserId: user.id,
+        MbEventId: mbEvent.id
+      });
+      
+      project = await Project.create(projectPayload);
+      done();
     })
   
     afterEach(async done => {
@@ -154,225 +146,180 @@ describe("Projects route", () => {
   describe("Search Project route", () => {
     beforeEach(async done => {
       agent = supertest.agent(app);
-      try {
-        user = await User.create(userFactory.one({ email: TEST_EMAIL, password: TEST_PASSWORD }));
-        mbEvent = await MbEvent.create(mbEventFactory.one());
-        const projectPayload = projectFactory.one({
-          UserId: user.id,
-          MbEventId: mbEvent.id
-        });
-        
-        project = await Project.create(projectPayload);
-        done();
-      } catch (e) {
-        done(e);
-      }
+      user = await User.create(userFactory.one({ email: TEST_EMAIL, password: TEST_PASSWORD }));
+      mbEvent = await MbEvent.create(mbEventFactory.one());
+      const projectPayload = projectFactory.one({
+        UserId: user.id,
+        MbEventId: mbEvent.id
+      });
+      
+      project = await Project.create(projectPayload);
+      done();
     })
   
     afterEach(async done => {
       clear(done);
     });
 
-    it('can get all of the projects', async done => {
-      try {
-        // fetch while logged in
-        const response = await agent
-          .get("/api/v1/project/search");
-    
-        expect(response.statusCode).toBe(200);
-        expect(response.body.length).toBe(1);
-        expect(response.body[0].id).toBe(project.id);
-      } catch (e) {
-        return done(e);
-      }
-  
-      done();
-    });
-
-    // TODO: Write more tests to cover the search method
-
     it('Can sort rating average descending', async done => {
-      try {
-        // clear projects
-        await Project.destroy({where: {id: project.id}});
-        const voter = await User.create(userFactory.one());
-        const projects = await Project.bulkCreate(projectFactory.bulk(4, {
-          UserId: user.id,
-          title: (obj, i) => `Project ${i}`
-        }));
-  
-        await Vote.bulkCreate(voteFactory.bulk(4, {
-          UserId: voter.id,
-          ProjectId: (obj, i) => {
-            return projects[i].id;
-          },
-          rating: (obj, i) => i
-        }));
-        
-        // fetch while logged in
-        const response = await agent
-          .get("/api/v1/project/search?sort_field=RATING_AVERAGE&sort_direction=desc");
-  
-        expect(response.body.length).toBe(4);
-        expect(response.body[0].ratingAverage).toBe(3);
-        expect(response.body[1].ratingAverage).toBe(2);
-        expect(response.body[2].ratingAverage).toBe(1);
-        expect(response.body[3].ratingAverage).toBe(0);
+      // clear projects
+      await Project.destroy({where: {id: project.id}});
+      const voter = await User.create(userFactory.one());
+      const projects = await Project.bulkCreate(projectFactory.bulk(4, {
+        UserId: user.id,
+        title: (obj, i) => `Project ${i}`
+      }));
 
-        done();
-      } catch (e) {
-        console.log(e);
-        return done(e);
-      }
+      await Vote.bulkCreate(voteFactory.bulk(4, {
+        UserId: voter.id,
+        ProjectId: (obj, i) => {
+          return projects[i].id;
+        },
+        rating: (obj, i) => i
+      }));
+      
+      // fetch while logged in
+      const response = await agent
+        .get("/api/v1/project/search?sort_field=RATING_AVERAGE&sort_direction=desc");
+
+      expect(response.body.length).toBe(4);
+      expect(response.body[0].ratingAverage).toBe(3);
+      expect(response.body[1].ratingAverage).toBe(2);
+      expect(response.body[2].ratingAverage).toBe(1);
+      expect(response.body[3].ratingAverage).toBe(0);
+
+      done();
     })
 
     it('sorts rating average descending by default', async done => {
-      try {
-        // clear projects
-        await Project.destroy({where: {id: project.id}});
-        const voter = await User.create(userFactory.one());
-        const projects = await Project.bulkCreate(projectFactory.bulk(4, {
-          UserId: user.id,
-          title: (obj, i) => `Project ${i}`
-        }));
-  
-        await Vote.bulkCreate(voteFactory.bulk(4, {
-          UserId: voter.id,
-          ProjectId: (obj, i) => {
-            return projects[i].id;
-          },
-          rating: (obj, i) => i
-        }));
-        
-        // fetch while logged in
-        const response = await agent
-          .get("/api/v1/project/search");
-  
-        expect(response.body.length).toBe(4);
-        expect(response.body[0].ratingAverage).toBe(3);
-        expect(response.body[1].ratingAverage).toBe(2);
-        expect(response.body[2].ratingAverage).toBe(1);
-        expect(response.body[3].ratingAverage).toBe(0);
+      // clear projects
+      await Project.destroy({where: {id: project.id}});
+      const voter = await User.create(userFactory.one());
+      const projects = await Project.bulkCreate(projectFactory.bulk(4, {
+        UserId: user.id,
+        title: (obj, i) => `Project ${i}`
+      }));
 
-        done();
-      } catch (e) {
-        console.log(e);
-        return done(e);
-      }
+      await Vote.bulkCreate(voteFactory.bulk(4, {
+        UserId: voter.id,
+        ProjectId: (obj, i) => {
+          return projects[i].id;
+        },
+        rating: (obj, i) => i
+      }));
+      
+      // fetch while logged in
+      const response = await agent
+        .get("/api/v1/project/search");
+
+      expect(response.statusCode).toBe(200);
+      expect(response.body.length).toBe(4);
+      expect(response.body[0].ratingAverage).toBe(3);
+      expect(response.body[1].ratingAverage).toBe(2);
+      expect(response.body[2].ratingAverage).toBe(1);
+      expect(response.body[3].ratingAverage).toBe(0);
+
+      done();
     })
 
     it('Can sort rating average ascending', async done => {
-      try {
-        // clear projects
-        await Project.destroy({where: {id: project.id}});
-        const voter = await User.create(userFactory.one());
-        const projects = await Project.bulkCreate(projectFactory.bulk(4, {
-          UserId: user.id,
-          title: (obj, i) => `Project ${i}`
-        }));
-  
-        await Vote.bulkCreate(voteFactory.bulk(4, {
-          UserId: voter.id,
-          ProjectId: (obj, i) => {
-            return projects[i].id;
-          },
-          rating: (obj, i) => 10 - i
-        }));
-        
-        // fetch while logged in
-        const response = await agent
-          .get("/api/v1/project/search?sort_field=RATING_AVERAGE&sort_direction=asc");
-  
-        expect(response.body.length).toBe(4);
-        expect(response.body[0].ratingAverage).toBe(7);
-        expect(response.body[1].ratingAverage).toBe(8);
-        expect(response.body[2].ratingAverage).toBe(9);
-        expect(response.body[3].ratingAverage).toBe(10);
+    
+      // clear projects
+      await Project.destroy({where: {id: project.id}});
+      const voter = await User.create(userFactory.one());
+      const projects = await Project.bulkCreate(projectFactory.bulk(4, {
+        UserId: user.id,
+        title: (obj, i) => `Project ${i}`
+      }));
 
-        done();
-      } catch (e) {
-        console.log(e);
-        return done(e);
-      }
+      await Vote.bulkCreate(voteFactory.bulk(4, {
+        UserId: voter.id,
+        ProjectId: (obj, i) => {
+          return projects[i].id;
+        },
+        rating: (obj, i) => 10 - i
+      }));
+      
+      // fetch while logged in
+      const response = await agent
+        .get("/api/v1/project/search?sort_field=RATING_AVERAGE&sort_direction=asc");
+
+      expect(response.body.length).toBe(4);
+      expect(response.body[0].ratingAverage).toBe(7);
+      expect(response.body[1].ratingAverage).toBe(8);
+      expect(response.body[2].ratingAverage).toBe(9);
+      expect(response.body[3].ratingAverage).toBe(10);
+
+      done();
     })
 
     it('can filter by user id', async done => {
-      try {
-        // clear projects
-        await Project.destroy({where: {id: project.id}});
+      // clear projects
+      await Project.destroy({where: {id: project.id}});
 
-        const createUserWithProject = async () => {
-          const thisUser = await User.create(userFactory.one());
-          await Project.create(projectFactory.one({
-            UserId: thisUser.id
-          }));
-          return thisUser;
-        }
-
-        const doTest = async theUser => {
-          // fetch while logged in
-          const response = await agent.get(`/api/v1/project/search?filter_userId=${theUser.id}`);
-          expect(response.body.length).toBe(1);
-          expect(response.body[0].UserId).toBe(theUser.id);
-        }
-
-        const user1 = await createUserWithProject();
-        const user2 = await createUserWithProject();
-        const user3 = await createUserWithProject();
-        const user4 = await createUserWithProject();
-
-        await doTest(user1);
-        await doTest(user2);
-        await doTest(user3);
-        await doTest(user4);
-
-        done();
-      } catch (e) {
-        console.log(e);
-        return done(e);
+      const createUserWithProject = async () => {
+        const thisUser = await User.create(userFactory.one());
+        await Project.create(projectFactory.one({
+          UserId: thisUser.id
+        }));
+        return thisUser;
       }
+
+      const doTest = async theUser => {
+        // fetch while logged in
+        const response = await agent.get(`/api/v1/project/search?filter_userId=${theUser.id}`);
+        expect(response.body.length).toBe(1);
+        expect(response.body[0].UserId).toBe(theUser.id);
+      }
+
+      const user1 = await createUserWithProject();
+      const user2 = await createUserWithProject();
+      const user3 = await createUserWithProject();
+      const user4 = await createUserWithProject();
+
+      await doTest(user1);
+      await doTest(user2);
+      await doTest(user3);
+      await doTest(user4);
+
+      done();
     })
 
     it('can filter by MbEvent ID', async done => {
-      try {
-        // clear projects
-        await Project.destroy({where: {id: project.id}});
-        await MbEvent.destroy({where: {id: mbEvent.id}});
-        
-        const fooMbEvent = await MbEvent.create(mbEventFactory.one());
-        const fooProject = await Project.create(projectFactory.one({
-          UserId: user.id,
-          MbEventId: fooMbEvent.id
-        }));
+      // clear projects
+      await Project.destroy({where: {id: project.id}});
+      await MbEvent.destroy({where: {id: mbEvent.id}});
+      
+      const fooMbEvent = await MbEvent.create(mbEventFactory.one());
+      const fooProject = await Project.create(projectFactory.one({
+        UserId: user.id,
+        MbEventId: fooMbEvent.id
+      }));
 
-        const barMbEvent = await MbEvent.create(mbEventFactory.one());
-        const barProject = await Project.create(projectFactory.one({
-          UserId: user.id,
-          MbEventId: barMbEvent.id
-        }));
+      const barMbEvent = await MbEvent.create(mbEventFactory.one());
+      const barProject = await Project.create(projectFactory.one({
+        UserId: user.id,
+        MbEventId: barMbEvent.id
+      }));
 
-        const bazMbEvent = await MbEvent.create(mbEventFactory.one());
-        const bazProject = await Project.create(projectFactory.one({
-          UserId: user.id,
-          MbEventId: bazMbEvent.id
-        }));
+      const bazMbEvent = await MbEvent.create(mbEventFactory.one());
+      const bazProject = await Project.create(projectFactory.one({
+        UserId: user.id,
+        MbEventId: bazMbEvent.id
+      }));
 
-        const doTest = async mbEvent => {
-          // fetch while logged in
-          const response = await agent.get(`/api/v1/project/search?filter_mbEventId=${mbEvent.id}`);
-          expect(response.body.length).toBe(1);
-          expect(response.body[0].MbEventId).toBe(mbEvent.id);
-        }
-
-        await doTest(fooMbEvent);
-        await doTest(barMbEvent);
-        await doTest(bazMbEvent);
-
-        done();
-      } catch (e) {
-        console.log(e);
-        return done(e);
+      const doTest = async mbEvent => {
+        // fetch while logged in
+        const response = await agent.get(`/api/v1/project/search?filter_mbEventId=${mbEvent.id}`);
+        expect(response.body.length).toBe(1);
+        expect(response.body[0].MbEventId).toBe(mbEvent.id);
       }
+
+      await doTest(fooMbEvent);
+      await doTest(barMbEvent);
+      await doTest(bazMbEvent);
+
+      done();
     })
     
   })
@@ -380,13 +327,9 @@ describe("Projects route", () => {
   describe("CREATE Project route", () => {
     beforeEach(async done => {
       agent = supertest.agent(app);
-      try {
-        user = await User.create(userFactory.one({ email: TEST_EMAIL, password: TEST_PASSWORD }));
-        mbEvent = await MbEvent.create(mbEventFactory.one());
-        done();
-      } catch (e) {
-        done(e);
-      }
+      user = await User.create(userFactory.one({ email: TEST_EMAIL, password: TEST_PASSWORD }));
+      mbEvent = await MbEvent.create(mbEventFactory.one());
+      done();
     })
   
     afterEach(async done => {

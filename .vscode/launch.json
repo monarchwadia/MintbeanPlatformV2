@@ -40,7 +40,9 @@
       "args": [
         "--runInBand",
         "--watch",
-        "--detectOpenHandles"
+        "--detectOpenHandles",
+        "--unhandled-rejections=strict",
+        "test/projects.test.js"
       ],
       "cwd": "${workspaceFolder}/backend",
       "console": "integratedTerminal",
