@@ -14,7 +14,7 @@ div.event-wrapper
         h3 Submissions
         section(v-if="mbEvent && mbEvent.Projects.length === 0")
           p No submissions yet. Be the first to submit a project!
-        mb-project-grid(v-else :projects="mbEvent.Projects")
+        mb-project-grid(v-else :projects="projects")
         section(v-if="submitFormState.enabled")
           form.submit-project-form(v-on:submit.prevent="handleSubmitProject")
             h1 Submit a Project
@@ -120,6 +120,9 @@ export default {
     }
   },
   computed: {
+    projects: function() {
+      return this.mbEvent && this.mbEvent.Projects;
+    },
     prettyDate: function() {
       if (!this.mbEvent.start_time) {
         return '';
