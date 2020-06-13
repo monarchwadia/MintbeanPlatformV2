@@ -1,5 +1,5 @@
-function fill (props, obj={}) {
-  Object.entries(props).forEach(([key, definition], index) => {
+function fill (props, obj={}, index=0) {
+  Object.entries(props).forEach(([key, definition]) => {
     // since typeof null === 'object', it can't be handled by "case 'object'" below.
     // handling it as a special case here.
     if (definition === null) {
@@ -24,12 +24,12 @@ function fill (props, obj={}) {
 }
 
 module.exports = (defaults={}) => {
-  const one = (overrides = {}) => fill(Object.assign({}, defaults, overrides));
+  const one = (overrides = {}, index) => fill(Object.assign({}, defaults, overrides), {}, index);
 
   const bulk = (count=10, overrides = {}) => {
     const arr = [];
     for (let i = 0; i < count; i++) {
-      arr.push(one(overrides));
+      arr.push(one(overrides, i));
     }
     return arr;
   }
