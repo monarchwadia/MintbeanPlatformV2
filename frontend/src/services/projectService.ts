@@ -1,5 +1,5 @@
 import { ApiService } from './apiService';
-import { Project } from '@/types/Project';
+import { Project, ProjectSearchResult, ProjectSearchQuery } from '@/types/Project';
 
 export class ProjectService {
   constructor(private apiService: ApiService) {
@@ -15,7 +15,7 @@ export class ProjectService {
     return queryResponse.data;
   }
 
-  async fetchFrontpageProjects(): Promise<Project[]> {
+  async fetchFrontpageProjects(query: ProjectSearchQuery): Promise<ProjectSearchResult[]> {
     const queryResponse = await this.apiService.get('/api/v1/project/search?limit=10');
     return queryResponse.data;
   }

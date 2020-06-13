@@ -56,7 +56,11 @@ projectRoute.get('/search',  validator.query(Joi.object({
     bindings.sort_direction = VALID_SORT_DIRECTIONS[bindings.sort_direction || defaults.sort_direction];
 
     let sql = `
-      SELECT  p.*,
+      SELECT  p.id AS "id",
+              p."title" AS "title",
+              p."live_url" AS "live_url",
+              mbe."cover_image_url" AS "cover_image_url",
+              CONCAT(u."firstname", ' ', u."lastname") AS "user_fullname",
               COUNT(v.*) AS "ratingCount",
               TRUNC(AVG(v.rating), 2) AS "ratingAverage"
       FROM "Projects" AS p
@@ -68,7 +72,7 @@ projectRoute.get('/search',  validator.query(Joi.object({
       ${bindings.filter_mbEventId !== undefined ? 'AND  mbe.id = COALESCE($filter_mbEventId, mbe.id)' : ''}
       ${bindings.filter_ratingCount_min !== undefined ? 'AND  "ratingCount" >= COALESCE($filter_ratingCount_min, 0)' : ''}
       ${bindings.filter_ratingAverage_min !== undefined ? 'AND  "ratingAverage" >= COALESCE($filter_ratingAverage_min, 0)' : ''}
-      GROUP BY p."id"
+      GROUP BY p."id", u."id", mbe."id"
       ORDER BY ${bindings.sort_field} ${bindings.sort_direction}
       LIMIT $limit OFFSET $offset;
     `;
@@ -77,7 +81,12 @@ projectRoute.get('/search',  validator.query(Joi.object({
       const results = await sequelize.query(sql, {
         model: Project,
         mapToModel: true,
-        bind: bindings
+        bind: bindings,
+        include: [
+          {
+            model: User
+          }
+        ]
       });
       
       res.json(results);

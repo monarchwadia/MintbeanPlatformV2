@@ -114,15 +114,17 @@ main {
 // @ is an alias to /src
 export default {
   name: "Home",
+  data() {
+    return {
+      projects: []
+    }
+  },
   computed: {
     mbEvents: function() {
       return this.$store.state.mbEvents || [];
     },
     nextEvent: function() {
       return this.$store.state.mbEvents.find(mbEvent => this.getEventStatus(mbEvent) === "upcoming");
-    },
-    projects: function() {
-      return this.$store.state.frontpageProjects;
     }
   },
   methods: {
@@ -150,7 +152,12 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('fetchFrontpageProjects');
+    const self = this;
+    this.$mbContext.projectService.fetchFrontpageProjects()
+      .then(results => {
+        self.projects = results
+      })
+      .catch(e => { console.log("Failed to fetch frontpage projects") })
   }
 };
 </script>

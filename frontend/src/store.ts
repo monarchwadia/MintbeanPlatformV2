@@ -11,7 +11,6 @@ const state: MbState = {
   logoutUrl: undefined,
   registerUrl: undefined,
   project: undefined,
-  frontpageProjects: [],
   mbEvents: [],
   votes: []
 };
@@ -78,14 +77,6 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
       .then(events => commit("setProperty", ["mbEvents", events]))
       .catch(e => {
         console.log("Failed to fetch events", e);
-      })
-  }
-
-  const fetchFrontpageProjects: Action<MbState, MbState> = async ({ commit }) => {
-    mbContext.projectService.fetchFrontpageProjects()
-      .then(projects => commit("setProperty", ["frontpageProjects", projects]))
-      .catch(e => {
-        console.log("Failed to fetch frontpage projects");
       })
   }
 
@@ -170,7 +161,6 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
     submitProject,
     vote,
     fetchProject,
-    fetchFrontpageProjects,
     deleteMediaAsset,
     uploadMediaAssets
   }

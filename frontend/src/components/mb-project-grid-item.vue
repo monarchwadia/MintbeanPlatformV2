@@ -136,7 +136,7 @@ export default {
   props: ['project'],
   computed: {
     username() {
-      return this.project.User.firstname + ' ' + this.project.User.lastname;
+      return this.project.user_fullname;
     },
     voteCount() {
       return this.project.ratingCount ? this.project.ratingCount : '-';
@@ -148,9 +148,7 @@ export default {
       return this.project.live_url;
     },
     cloudinaryPublicId() {
-      const { project } = this;
-      if (!project) return;
-      return project && project.MediaAssets && project.MediaAssets[0] && project.MediaAssets[0].cloudinaryPublicId;
+      return this.project.cover_image_url;
     }
   },
   methods: {
