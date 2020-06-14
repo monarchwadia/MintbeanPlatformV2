@@ -12,7 +12,7 @@ div.event-wrapper
         h3 Date & Time
         p {{ prettyDate }}
         h3 Submissions
-        section(v-if="mbEvent && mbEvent.Projects.length === 0")
+        section(v-if="projects && projects.length === 0")
           p No submissions yet. Be the first to submit a project!
         mb-project-grid(v-else :projects="projects")
         section(v-if="submitFormState.enabled")
@@ -111,8 +111,10 @@ import moment from 'moment';
 // @ is an alias to /src
 export default {
   name: "Event",
-  data() {
+  data() {  
     return {
+      mbEvent: null,
+      projects: [],
       source_code_url: '',
       title: '',
       live_url: '',
@@ -120,31 +122,31 @@ export default {
     }
   },
   computed: {
-    projects: function() {
-      return this.mbEvent && this.mbEvent.Projects;
-    },
+    // projects: function() {
+    //   return this.mbEvent && this.mbEvent.Projects;
+    // },
     prettyDate: function() {
       if (!this.mbEvent.start_time) {
         return '';
       }
       return moment(this.mbEvent.start_time).format("dddd, MMMM Do YYYY, h:mm:ss a");
     },
-    mbEvent: function() {
-      const { id } = this.$route.params;
-      const { state } = this.$store;
-      const { mbEvents } = state;
-      const votes = state.votes || [];
-      console.log("VOTES", votes);
+    // mbEvent: function() {
+    //   const { id } = this.$route.params;
+    //   const { state } = this.$store;
+    //   const { mbEvents } = state;
+    //   const votes = state.votes || [];
+    //   console.log("VOTES", votes);
 
-      if (!id || !mbEvents) {
-        return;
-      }
+    //   if (!id || !mbEvents) {
+    //     return;
+    //   }
 
 
-      const mbEvent = this.$store.state.mbEvents.find(x => x.id === id);
+    //   const mbEvent = this.$store.state.mbEvents.find(x => x.id === id);
 
-      return mbEvent;
-    },
+    //   return mbEvent;
+    // },
     submitFormState: function() {
       const { user } = this.$store.state;
 
@@ -172,6 +174,30 @@ export default {
     }
   },
   methods: {
+    fetchMbEvent() {
+      const self = this;
+      const { id } = this.$route.params;
+
+      this.$mbContext.mbEventService.fetchMbEvent(id)
+        .then(mbEvent => self.mbEvent = mbEvent)
+        .catch(e => {
+          console.error(e);
+          alert("Failed to fetch event");
+        })
+    },
+    fetchProjects() {
+      const self = this;
+      const { id } = this.$route.params;
+
+      this.$mbContext.projectService.fetchFrontpageProjects({
+        mbEventId: id
+      })
+        .then(projects => self.projects = projects)
+        .catch(e => {
+          console.error(e);
+          alert("Failed to fetch event");
+        })
+    },
     handleSubmitProject() {
       const { title, source_code_url, live_url } = this;
       const isConfirmed = confirm(`Submitting a project is final. PROJECTS CANNOT CURRENTLY BE EDITED OR DELETED AFTER SUBMISSION!
@@ -199,6 +225,10 @@ Would you like to continue?`);
         MediaAssets
       });
     }
+  },
+  mounted() {
+    this.fetchMbEvent();
+    this.fetchProjects();
   }
 };
 </script>

@@ -1,5 +1,36 @@
 import { ApiService } from './apiService';
-import { Project, ProjectSearchResult, ProjectSearchQuery } from '@/types/Project';
+import { Project, ProjectSearchResult } from '@/types/Project';
+
+// filter_userId: Joi.string().uuid().min(1).optional(),
+// filter_mbEventId: Joi.string().uuid().min(1).optional(),
+// filter_ratingAverage_min: Joi.number().min(0).max(10).optional(),
+// filter_ratingCount_min: Joi.number().min(0).max(10).optional(),
+// sort_direction: Joi.string().valid(...Object.keys(VALID_SORT_DIRECTIONS)).optional().default('desc'),
+// sort_field: Joi.string().valid(...Object.keys(VALID_SORT_FIELDS)).optional().default('RATING_AVERAGE'),
+// limit: Joi.number().max(100).optional().default(25),
+// offset: Joi.number().min(0).optional().default(0)
+
+interface ProjectSearchOptions {
+  userId: string
+  mbEventId: string
+  ratingAverageMin: number
+  ratingCountMin: number
+  sortDirection: 'asc' | 'desc'
+  sortField: 'CREATED_AT' | 'RATING_AVERAGE' | 'RATING_COUNT'
+  limit: number
+  offset: number
+}
+
+const mapProjectSearchOptions = (pso: ProjectSearchOptions) => ({
+  filter_userId: pso.userId,
+  filter_mbEventId: pso.mbEventId,
+  filter_ratingAverage_min: pso.ratingAverageMin,
+  filter_ratingCount_min: pso.ratingCountMin,
+  sort_direction: pso.sortDirection,
+  sort_field: pso.sortField,
+  limit: pso.limit,
+  offset: pso.offset,
+})
 
 export class ProjectService {
   constructor(private apiService: ApiService) {
@@ -15,8 +46,9 @@ export class ProjectService {
     return queryResponse.data;
   }
 
-  async fetchFrontpageProjects(query: ProjectSearchQuery): Promise<ProjectSearchResult[]> {
-    const queryResponse = await this.apiService.get('/api/v1/project/search?limit=10');
+  async fetchFrontpageProjects(options: ProjectSearchOptions): Promise<ProjectSearchResult[]> {
+    const params = mapProjectSearchOptions(options)
+    const queryResponse = await this.apiService.get('/api/v1/project/search', { params });
     return queryResponse.data;
   }
 

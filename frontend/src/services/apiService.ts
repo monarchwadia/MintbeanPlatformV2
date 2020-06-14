@@ -1,8 +1,12 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 export class ApiService {
-  get(url: string) {
-    return axios.get(url);
+  get(url: string, config?: AxiosRequestConfig) {
+    if (config) {
+      return axios.get(url, config);
+    } else {
+      return axios.get(url);
+    }
   }
   post(url: string, data: any) {
     return axios.post(url, data);

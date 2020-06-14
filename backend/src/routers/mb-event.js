@@ -43,6 +43,16 @@ mbEventRoute.get('/', async (req, res, next) => {
     })
 });
 
+mbEventRoute.get('/:id', validator.params(Joi.object({
+  id: Joi.string().required()
+})), (req, res, next) => {
+  const { id } = req.params;
+
+  MbEvent.findOne({where: { id }})
+    .then(obj => res.json(obj))
+    .catch(e => next(e));
+})
+
 // mbEventRoute.post('/', 
 //   validator.query(Joi.object({
 //     title: Joi.string().required(),
