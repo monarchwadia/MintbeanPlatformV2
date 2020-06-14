@@ -165,7 +165,7 @@ export default {
         self.projects = results;
       })
       .catch(e => {
-        console.log("Failed to fetch frontpage projects");
+        console.error("Failed to fetch frontpage projects", e);
       });
   }
 };

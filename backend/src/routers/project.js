@@ -15,8 +15,8 @@ projectRoute.get('/', requireAuth, async (req, res, next) => {
 
 const VALID_SORT_FIELDS = {
   'CREATED_AT': 'p."createdAt"',
-  'RATING_AVERAGE': '"ratingAverage"',
-  'RATING_COUNT': '"ratingCount"'
+  'RATING_AVERAGE': 'TRUNC(AVG(v.rating), 2)',
+  'RATING_COUNT': 'COUNT(v.*)'
 }
 const VALID_SORT_DIRECTIONS = {
   'desc': 'desc',
@@ -56,23 +56,28 @@ projectRoute.get('/search',  validator.query(Joi.object({
     bindings.sort_direction = VALID_SORT_DIRECTIONS[bindings.sort_direction || defaults.sort_direction];
 
     let sql = `
-      SELECT  p.id AS "id",
-              p."title" AS "title",
-              p."live_url" AS "live_url",
-              mbe."cover_image_url" AS "cover_image_url",
-              CONCAT(u."firstname", ' ', u."lastname") AS "user_fullname",
-              COUNT(v.*) AS "ratingCount",
-              TRUNC(AVG(v.rating), 2) AS "ratingAverage"
+      SELECT  
+        p.id AS "id",
+        p."title" AS "title",
+        p."live_url" AS "live_url",
+        mbe."cover_image_url" AS "mbevent_cover_image_url",
+        ma."cloudinaryPublicId" AS "cloudinaryPublicId",
+        CONCAT(u."firstname", ' ', u."lastname") AS "user_fullname",
+        COUNT(v.*) AS "ratingCount",
+        TRUNC(AVG(v.rating), 2) AS "ratingAverage"
       FROM "Projects" AS p
         LEFT JOIN "Users" AS u ON p."UserId" = u."id"
         LEFT JOIN "MbEvents" AS mbe ON p."MbEventId" = mbe.id
         LEFT JOIN "Votes" AS v ON v."ProjectId" = p.id
+        LEFT JOIN "ProjectMediaAssets" AS pma ON pma."ProjectId" = p.id
+        LEFT JOIN "MediaAssets" AS ma ON pma."MediaAssetId" = ma.id
       WHERE 1 = 1 
-      ${bindings.filter_userId !== undefined ? "AND  u.id = COALESCE($filter_userId, u.id)" : ''}
-      ${bindings.filter_mbEventId !== undefined ? 'AND  mbe.id = COALESCE($filter_mbEventId, mbe.id)' : ''}
-      ${bindings.filter_ratingCount_min !== undefined ? 'AND  "ratingCount" >= COALESCE($filter_ratingCount_min, 0)' : ''}
-      ${bindings.filter_ratingAverage_min !== undefined ? 'AND  "ratingAverage" >= COALESCE($filter_ratingAverage_min, 0)' : ''}
-      GROUP BY p."id", u."id", mbe."id"
+        ${bindings.filter_userId !== undefined ? "AND  u.id = COALESCE($filter_userId, u.id)" : ''}
+        ${bindings.filter_mbEventId !== undefined ? 'AND  mbe.id = COALESCE($filter_mbEventId, mbe.id)' : ''}
+      GROUP BY p."id", u."id", mbe."id", ma."cloudinaryPublicId"
+      HAVING 1 = 1
+        ${bindings.filter_ratingCount_min !== undefined ? 'AND COUNT(v.*) >= COALESCE($filter_ratingCount_min, 0)' : ''}
+        ${bindings.filter_ratingAverage_min !== undefined ? 'AND  TRUNC(AVG(v.rating), 2) >= COALESCE($filter_ratingAverage_min, 0)' : ''}
       ORDER BY ${bindings.sort_field} ${bindings.sort_direction}
       LIMIT $limit OFFSET $offset;
     `;

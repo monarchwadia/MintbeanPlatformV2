@@ -21,19 +21,21 @@ interface ProjectSearchOptions {
   offset: number;
 }
 
-const mapProjectSearchOptions = (pso: ProjectSearchOptions) => ({
-  filter_userId: pso.userId,
-  filter_mbEventId: pso.mbEventId,
-  filter_ratingAverage_min: pso.ratingAverageMin,
-  filter_ratingCount_min: pso.ratingCountMin,
-  sort_direction: pso.sortDirection,
-  sort_field: pso.sortField,
-  limit: pso.limit,
-  offset: pso.offset
-});
+const mapProjectSearchOptions = (pso: ProjectSearchOptions) => {
+  return {
+    filter_userId: pso.userId,
+    filter_mbEventId: pso.mbEventId,
+    filter_ratingAverage_min: pso.ratingAverageMin,
+    filter_ratingCount_min: pso.ratingCountMin,
+    sort_direction: pso.sortDirection,
+    sort_field: pso.sortField,
+    limit: pso.limit,
+    offset: pso.offset
+  }
+}
 
 export class ProjectService {
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) { }
 
   async submitProject(obj: Project): Promise<Project> {
     const queryResponse = await this.apiService.post("/api/v1/project", obj);
@@ -47,13 +49,25 @@ export class ProjectService {
     return queryResponse.data;
   }
 
-  async fetchFrontpageProjects(
-    options: ProjectSearchOptions
-  ): Promise<ProjectSearchResult[]> {
-    const params = mapProjectSearchOptions(options);
+  async fetchFrontpageProjects(options: ProjectSearchOptions): Promise<ProjectSearchResult[]> {
+    // apply against defaults
+    const opts: ProjectSearchOptions = Object.assign({
+      userId: undefined,
+      mbEventId: undefined,
+      ratingAverageMin: undefined,
+      ratingCountMin: 3,
+      sortDirection: "desc",
+      sortField: "RATING_AVERAGE",
+      limit: 25,
+      offset: 0
+    }, options);
+
+    const params = mapProjectSearchOptions(opts);
+
     const queryResponse = await this.apiService.get("/api/v1/project/search", {
       params
     });
+
     return queryResponse.data;
   }
 

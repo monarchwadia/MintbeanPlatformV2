@@ -151,7 +151,8 @@ export default {
       return this.project.live_url;
     },
     cloudinaryPublicId() {
-      return this.project.cover_image_url;
+      const { cloudinaryPublicId, mbevent_cover_image_url } = this.project;
+      return cloudinaryPublicId || mbevent_cover_image_url;
     }
   },
   methods: {
