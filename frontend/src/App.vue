@@ -40,17 +40,14 @@ export default {
   },
 
   mounted() {
-    debugger;
     if (this.user) {
       this.$intercom.boot(intercomPayload(this.user));
     } else {
       this.$intercom.boot();
     }
-    this.$intercom.show();
   },
   watch: {
     user() {
-      debugger;
       if (this.user) {
         this.$intercom.update(intercomPayload(this.user));
         } else {
