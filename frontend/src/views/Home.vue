@@ -14,7 +14,7 @@ div
         h1 The next hackathon is around the corner!
         p Frontend & Full Stack Hackathons
         p Mondays & Wednesdays at 12:00pm EST
-        mb-a(href="https://www.eventbrite.ca/e/careerhack-javascript-hackathons-for-job-seeking-developers-4-hours-registration-103523802480")
+        mb-a(href="https://www.eventbrite.ca/o/mintbean-28752300031")
           button.u-pulse Sign up now!
   
   main
