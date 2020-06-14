@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex, { Store } from "vuex";
 
 const Cloudinary: any = require("cloudinary-vue");
+const Intercom: any = require("vue-intercom");
 
 import makeContext from "./config/makeContext";
 import registerComponents from "./config/registerComponents";
@@ -21,6 +22,7 @@ declare global {
 
 Vue.use(Vuex);
 Vue.use(Cloudinary);
+Vue.use(Intercom, { appId: 'cnqttk95' })
 
 registerComponents(Vue);
 registerFontAwesome(Vue);

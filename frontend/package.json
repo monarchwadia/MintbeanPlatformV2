@@ -25,6 +25,7 @@
     "moment": "^2.26.0",
     "vue": "^2.6.11",
     "vue-filepond": "^6.0.2",
+    "vue-intercom": "^1.0.14",
     "vue-router": "^3.1.6",
     "vuex": "^3.4.0"
   },
