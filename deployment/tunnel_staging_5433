@@ -1,0 +1,3 @@
+#!/bin/bash
+ssh -N -L 5433:localhost:5432 MintbeanStaging &
+echo $!

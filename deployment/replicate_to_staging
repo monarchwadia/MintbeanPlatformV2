@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Bcrypt hash of the password 'password'
+PASSWORD='$2a$12$iQbL/z9WuGssjs0fahAnae647TnJlGKk6E27qLfIWxBhC1qQZ06ae'
+DROP_SCRIPT="select 'drop database "'||datname||'";' from pg_database where datistemplate=false;"
+
+TARGET_DATABASE=mintbean_development
+TARGET_PORT=5433
+PG_USER=mintbean
+
+echo "Enter password for psql user $PG_USER"
+read -s PG_PASSWORD
+
+# dump production
+echo "Starting to dump production"
+prod_dumpfile=$(./pgdump_production);
+echo "Production dumped to $prod_dumpfile";
+
+echo "Opening tunnel on port 5433"
+tunnel_pid=$(./tunnel_staging_5433)
+echo "Tunnel to staging opened on port $tunnel_pid"
+
+echo "Wiping staging database"
+PGPASSWORD=$PG_PASSWORD psql -U mintbean -d postgres -p $TARGET_PORT -h localhost -c "DROP DATABASE $TARGET_DATABASE"
+
+echo "Creating staging database"
+PGPASSWORD=$PG_PASSWORD psql -U mintbean -d postgres -p $TARGET_PORT -h localhost -c "CREATE DATABASE $TARGET_DATABASE"
+
+echo "Creating staging database"
+PGPASSWORD=$PG_PASSWORD psql -U mintbean -d $TARGET_DATABASE -p $TARGET_PORT -h localhost -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
+
+echo "Dumping production into staging"
+PGPASSWORD=$PG_PASSWORD psql -U mintbean -d $TARGET_DATABASE -p $TARGET_PORT -h localhost < "$prod_dumpfile"
+
+echo "Setting password for all staging users to 'password'"
+PGPASSWORD=$PG_PASSWORD psql -U mintbean -d $TARGET_DATABASE -p $TARGET_PORT -h localhost -c "UPDATE \"Users\" SET \"password_hash\" = '$PASSWORD'"
+
+echo "Killing the tunnel"
+kill $tunnel_pid
+
+echo "Done!"

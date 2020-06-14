@@ -1,5 +1,6 @@
 CREATE USER mintbean WITH PASSWORD 'password';
 ALTER USER mintbean CREATEDB;
+ALTER USER mintbean SUPERUSER;
 
 CREATE DATABASE mintbean_development;
 \c mintbean_development;

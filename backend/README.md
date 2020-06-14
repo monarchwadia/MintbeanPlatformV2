@@ -21,6 +21,7 @@ You probably won't need this. But just in case you do:
 ### Application client user
 
 ```
+# MUST BE SUPERUSER
 Username: mintbean
 Password: password
 Database: mintbean_development
