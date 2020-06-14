@@ -269,7 +269,7 @@ describe("Projects route", () => {
         // fetch while logged in
         const response = await agent.get(`/api/v1/project/search?filter_userId=${theUser.id}`);
         expect(response.body.length).toBe(1);
-        expect(response.body[0].UserId).toBe(theUser.id);
+        expect(response.body[0].user_fullname).toBe(theUser.firstname + ' ' + theUser.lastname);
       }
 
       const user1 = await createUserWithProject();
@@ -312,7 +312,7 @@ describe("Projects route", () => {
         // fetch while logged in
         const response = await agent.get(`/api/v1/project/search?filter_mbEventId=${mbEvent.id}`);
         expect(response.body.length).toBe(1);
-        expect(response.body[0].MbEventId).toBe(mbEvent.id);
+        expect(response.body[0].mbevent_cover_image_url).toBe(mbEvent.cover_image_url);
       }
 
       await doTest(fooMbEvent);
