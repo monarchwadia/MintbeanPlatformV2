@@ -121,16 +121,16 @@ export default {
         if (timeToEnd > 0) {
           return "ongoing";
         } else {
-          return "ended"
+          return "ended";
         }
       }
     },
     getCountdownTime: function(mbEventStartTime) {
-      return new Date(mbEventStartTime) - new Date()
+      return new Date(mbEventStartTime) - new Date();
     },
     goToUpcomingEvent: function(id) {
       if (id) {
-        this.$router.push('/mb-event/' + id)
+        this.$router.push("/mb-event/" + id);
       }
     }
   }

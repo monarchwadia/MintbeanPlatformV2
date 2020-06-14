@@ -9,23 +9,21 @@
       button(type="submit") Submit
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
 
 <script>
 export default {
   name: "Login",
   data() {
     return {
-      email: '',
-      password: ''
-    }
+      email: "",
+      password: ""
+    };
   },
   methods: {
     onSubmit(evt) {
       const { email, password, $router } = this;
-      this.$store.dispatch('login', { email, password, $router });
+      this.$store.dispatch("login", { email, password, $router });
     }
   },
   mounted() {

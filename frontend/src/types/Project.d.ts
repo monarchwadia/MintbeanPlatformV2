@@ -33,8 +33,8 @@ export interface ProjectSearchQuery {
   mbEventId?: string;
   ratingCountMin?: number;
   ratingAverageMin?: number;
-  sortDirection?: 'asc' | 'desc';
-  sortField?: 'CREATED_AT' | 'RATING_AVERAGE' | 'RATING_COUNT';
+  sortDirection?: "asc" | "desc";
+  sortField?: "CREATED_AT" | "RATING_AVERAGE" | "RATING_COUNT";
   limit?: number;
   offset?: number;
 }

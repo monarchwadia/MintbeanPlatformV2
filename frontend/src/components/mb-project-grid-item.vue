@@ -59,12 +59,16 @@ $background-color: white;
         height: 100%;
         width: 100%;
         transition: opacity 0.5s;
-        background: linear-gradient(180deg, rgba(237,2,2,0) 0%, rgba(0,0,0,0.8) 100%);
+        background: linear-gradient(
+          180deg,
+          rgba(237, 2, 2, 0) 0%,
+          rgba(0, 0, 0, 0.8) 100%
+        );
         opacity: 0;
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
-        
+
         & * {
           display: none;
         }
@@ -73,13 +77,12 @@ $background-color: white;
           // background-color: rgba(255,255,255,0.5);
           opacity: 0.8;
           & * {
-
             display: inline-block;
           }
         }
 
         .project-title {
-          font-weight: bold;;
+          font-weight: bold;
           color: white;
           text-overflow: ellipsis;
           padding-left: 10px;
@@ -88,12 +91,12 @@ $background-color: white;
         .project-buttons {
           padding-right: 10px;
           display: flex;
-          justify-content: end;;
+          justify-content: end;
           & button {
             margin: 5px;
             padding: 5px 10px;
           }
-        }  
+        }
       }
     }
 
@@ -126,23 +129,23 @@ $background-color: white;
     }
   }
 }
-
-
 </style>
 
 <script>
 export default {
   name: "MbProjectGridItem",
-  props: ['project'],
+  props: ["project"],
   computed: {
     username() {
       return this.project.user_fullname;
     },
     voteCount() {
-      return this.project.ratingCount ? this.project.ratingCount : '-';
+      return this.project.ratingCount ? this.project.ratingCount : "-";
     },
     voteAverage() {
-      return this.project.ratingAverage ? this.project.ratingAverage.toPrecision(2) : '-';
+      return this.project.ratingAverage
+        ? this.project.ratingAverage.toPrecision(2)
+        : "-";
     },
     projectDeployedUrl() {
       return this.project.live_url;
@@ -155,8 +158,8 @@ export default {
     expandProject() {
       const { project } = this;
       if (!project) return;
-      this.$router.push('/project/' + project.id);
+      this.$router.push("/project/" + project.id);
     }
-  },
+  }
 };
 </script>

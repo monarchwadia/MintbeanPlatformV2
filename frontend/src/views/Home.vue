@@ -63,15 +63,19 @@ button {
   justify-content: space-evenly;
   display: flex;
   margin-bottom: 50px;
-  background: rgb(255,255,255);
-  background: linear-gradient(0deg, $least-minty 0%, rgba(255,255,255,1) 50%);
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    $least-minty 0%,
+    rgba(255, 255, 255, 1) 50%
+  );
   text-align: left;
   background-color: $color-bg-secondary;
   padding: 100px;
-  flex-wrap: wrap;;
+  flex-wrap: wrap;
 
   .left {
-    align-content: center;;
+    align-content: center;
     min-width: 350px;
     h1 {
       font-size: 3.5em;
@@ -84,14 +88,14 @@ button {
     width: 600px;
     min-width: 350px;
     display: flex;
-    vertical-align: middle;;
+    vertical-align: middle;
   }
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  
+
   .grid-item {
     gap: 1rem;
   }
@@ -117,14 +121,16 @@ export default {
   data() {
     return {
       projects: []
-    }
+    };
   },
   computed: {
     mbEvents: function() {
       return this.$store.state.mbEvents || [];
     },
     nextEvent: function() {
-      return this.$store.state.mbEvents.find(mbEvent => this.getEventStatus(mbEvent) === "upcoming");
+      return this.$store.state.mbEvents.find(
+        mbEvent => this.getEventStatus(mbEvent) === "upcoming"
+      );
     }
   },
   methods: {
@@ -138,26 +144,29 @@ export default {
         if (timeToEnd > 0) {
           return "ongoing";
         } else {
-          return "ended"
+          return "ended";
         }
       }
     },
     getCountdownTime: function(mbEventStartTime) {
-      return new Date(mbEventStartTime) - new Date()
+      return new Date(mbEventStartTime) - new Date();
     },
     goToEvent: function(id) {
       if (id) {
-        this.$router.push('/mb-event/' + id)
+        this.$router.push("/mb-event/" + id);
       }
     }
   },
   mounted() {
     const self = this;
-    this.$mbContext.projectService.fetchFrontpageProjects()
+    this.$mbContext.projectService
+      .fetchFrontpageProjects()
       .then(results => {
-        self.projects = results
+        self.projects = results;
       })
-      .catch(e => { console.log("Failed to fetch frontpage projects") })
+      .catch(e => {
+        console.log("Failed to fetch frontpage projects");
+      });
   }
 };
 </script>

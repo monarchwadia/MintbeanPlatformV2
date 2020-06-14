@@ -44,10 +44,22 @@ div.event-wrapper
 @import "../styles/mixins";
 
 .background-banner {
-  background: rgb(2,237,157);
-  background: -moz-linear-gradient(175deg, rgba(2,237,157,1) 0%, rgba(0,155,226,1) 100%);
-  background: -webkit-linear-gradient(175deg, rgba(2,237,157,1) 0%, rgba(0,155,226,1) 100%);
-  background: linear-gradient(175deg, rgba(2,237,157,1) 0%, rgba(0,155,226,1) 100%);
+  background: rgb(2, 237, 157);
+  background: -moz-linear-gradient(
+    175deg,
+    rgba(2, 237, 157, 1) 0%,
+    rgba(0, 155, 226, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    175deg,
+    rgba(2, 237, 157, 1) 0%,
+    rgba(0, 155, 226, 1) 100%
+  );
+  background: linear-gradient(
+    175deg,
+    rgba(2, 237, 157, 1) 0%,
+    rgba(0, 155, 226, 1) 100%
+  );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#02ed9d",endColorstr="#009be2",GradientType=1);
   position: absolute;
   z-index: -100;
@@ -96,7 +108,7 @@ form.submit-project-form {
   & > .flex {
     flex: 0 0 50%;
     vertical-align: top;
-    min-width: $width-card-medium
+    min-width: $width-card-medium;
   }
 
   & > .inline {
@@ -106,20 +118,20 @@ form.submit-project-form {
 </style>
 
 <script>
-import moment from 'moment';
+import moment from "moment";
 
 // @ is an alias to /src
 export default {
   name: "Event",
-  data() {  
+  data() {
     return {
       mbEvent: null,
       projects: [],
-      source_code_url: '',
-      title: '',
-      live_url: '',
+      source_code_url: "",
+      title: "",
+      live_url: "",
       myFiles: []
-    }
+    };
   },
   computed: {
     // projects: function() {
@@ -127,9 +139,11 @@ export default {
     // },
     prettyDate: function() {
       if (!this.mbEvent.start_time) {
-        return '';
+        return "";
       }
-      return moment(this.mbEvent.start_time).format("dddd, MMMM Do YYYY, h:mm:ss a");
+      return moment(this.mbEvent.start_time).format(
+        "dddd, MMMM Do YYYY, h:mm:ss a"
+      );
     },
     // mbEvent: function() {
     //   const { id } = this.$route.params;
@@ -141,7 +155,6 @@ export default {
     //   if (!id || !mbEvents) {
     //     return;
     //   }
-
 
     //   const mbEvent = this.$store.state.mbEvents.find(x => x.id === id);
 
@@ -155,7 +168,7 @@ export default {
           enabled: false,
           disabledMessage: "You must be logged in to submit a project.",
           showLoginButton: true
-        }
+        };
       }
 
       if (this.mbEvent.Projects.find(project => project.UserId === user.id)) {
@@ -163,14 +176,14 @@ export default {
           enabled: false,
           disabledMessage: "Thank you for submitting your project.",
           showLoginButton: false
-        }
+        };
       }
 
       return {
         enabled: true,
         disabledMessage: undefined,
         showLoginButton: false
-      }
+      };
     }
   },
   methods: {
@@ -178,25 +191,27 @@ export default {
       const self = this;
       const { id } = this.$route.params;
 
-      this.$mbContext.mbEventService.fetchMbEvent(id)
-        .then(mbEvent => self.mbEvent = mbEvent)
+      this.$mbContext.mbEventService
+        .fetchMbEvent(id)
+        .then(mbEvent => (self.mbEvent = mbEvent))
         .catch(e => {
           console.error(e);
           alert("Failed to fetch event");
-        })
+        });
     },
     fetchProjects() {
       const self = this;
       const { id } = this.$route.params;
 
-      this.$mbContext.projectService.fetchFrontpageProjects({
-        mbEventId: id
-      })
-        .then(projects => self.projects = projects)
+      this.$mbContext.projectService
+        .fetchFrontpageProjects({
+          mbEventId: id
+        })
+        .then(projects => (self.projects = projects))
         .catch(e => {
           console.error(e);
           alert("Failed to fetch event");
-        })
+        });
     },
     handleSubmitProject() {
       const { title, source_code_url, live_url } = this;
@@ -212,12 +227,12 @@ Would you like to continue?`);
       if (!isConfirmed) {
         return;
       }
-      
+
       const MediaAssets = this.$refs.mbFileUpload.getFiles().map(f => ({
         cloudinaryPublicId: f.public_id
       }));
 
-      this.$store.dispatch('submitProject', {
+      this.$store.dispatch("submitProject", {
         title,
         source_code_url,
         live_url,

@@ -71,7 +71,7 @@ export default {
       return this.path === "/";
     },
     isAdmin() {
-      return this.user && this.user.isAdmin
+      return this.user && this.user.isAdmin;
     },
     username() {
       return this.user.firstName + " " + this.user.lastName;
@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     logout(evt) {
-      this.$store.dispatch('logout')
+      this.$store.dispatch("logout");
     }
   }
 };

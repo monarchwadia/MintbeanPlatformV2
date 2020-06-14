@@ -39,14 +39,15 @@ export default {
   data() {
     return {
       userProfile: null
-    }
+    };
   },
   created: function() {
-    this.$mbContext.userProfileService.fetchUserProfile(this.$route.params.id)
+    this.$mbContext.userProfileService
+      .fetchUserProfile(this.$route.params.id)
       .then(userProfile => {
-        this.userProfile = userProfile
+        this.userProfile = userProfile;
       })
-      .catch(e => alert('Failed to fetch user profile'))  ;
+      .catch(e => alert("Failed to fetch user profile"));
   }
 };
 </script>

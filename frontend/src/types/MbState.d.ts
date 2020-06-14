@@ -1,6 +1,6 @@
-import { MbUser } from './MbUser';
-import { MbEvent } from './MbEvent';
-import { Project } from './Project';
+import { MbUser } from "./MbUser";
+import { MbEvent } from "./MbEvent";
+import { Project } from "./Project";
 
 export interface MbState {
   user?: MbUser;

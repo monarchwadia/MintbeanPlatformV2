@@ -7,9 +7,9 @@
 
 <style lang="scss" scoped>
 @import "./styles/colors";
-  footer {
-    color: $lightest;
-  }
+footer {
+  color: $lightest;
+}
 </style>
 
 <script>

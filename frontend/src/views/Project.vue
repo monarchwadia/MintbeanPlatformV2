@@ -66,10 +66,22 @@ main {
 }
 
 .background-banner {
-  background: rgb(2,237,157);
-  background: -moz-linear-gradient(175deg, rgba(2,237,157,1) 0%, rgba(0,155,226,1) 100%);
-  background: -webkit-linear-gradient(175deg, rgba(2,237,157,1) 0%, rgba(0,155,226,1) 100%);
-  background: linear-gradient(175deg, rgba(2,237,157,1) 0%, rgba(0,155,226,1) 100%);
+  background: rgb(2, 237, 157);
+  background: -moz-linear-gradient(
+    175deg,
+    rgba(2, 237, 157, 1) 0%,
+    rgba(0, 155, 226, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    175deg,
+    rgba(2, 237, 157, 1) 0%,
+    rgba(0, 155, 226, 1) 100%
+  );
+  background: linear-gradient(
+    175deg,
+    rgba(2, 237, 157, 1) 0%,
+    rgba(0, 155, 226, 1) 100%
+  );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#02ed9d",endColorstr="#009be2",GradientType=1);
   position: absolute;
   z-index: -100;
@@ -103,20 +115,19 @@ main {
 form {
   width: 100%;
 }
-
 </style>
 
 <script>
-import moment from 'moment';
+import moment from "moment";
 
 // @ is an alias to /src
 export default {
   name: "Project",
   data() {
     return {
-      comment: '',
+      comment: "",
       rating: 7
-    }
+    };
   },
   computed: {
     userVote: function() {
@@ -127,7 +138,7 @@ export default {
 
       if (!project.Votes) return;
 
-      return (project.Votes.find(p => p.User.id === user.id))
+      return project.Votes.find(p => p.User.id === user.id);
     },
     averageScore: function() {
       const { project } = this;
@@ -136,7 +147,8 @@ export default {
       const { Votes } = project;
       if (!Votes || Votes.length === 0) return null;
 
-      const score = Votes.reduce((prev, curr) => prev + curr.rating, 0) / Votes.length;
+      const score =
+        Votes.reduce((prev, curr) => prev + curr.rating, 0) / Votes.length;
       return score.toPrecision(2);
     },
     project: function() {
@@ -151,14 +163,20 @@ export default {
       const { id } = this.$store.state.project;
       const { comment, rating } = this;
       const obj = {
-        ProjectId: id, comment, rating
-      }
+        ProjectId: id,
+        comment,
+        rating
+      };
 
       console.log(obj);
-      this.$store.dispatch('vote', obj);
+      this.$store.dispatch("vote", obj);
     },
     handleDeleteMediaAsset(MediaAsset) {
-      if (!confirm('Are you sure you want to delete this media asset? This action is not reversible.')) {
+      if (
+        !confirm(
+          "Are you sure you want to delete this media asset? This action is not reversible."
+        )
+      ) {
         return;
       }
 
@@ -166,7 +184,7 @@ export default {
       const MediaAssetId = MediaAsset.id;
 
       if (ProjectId && MediaAssetId) {
-        this.$store.dispatch('deleteMediaAsset', { ProjectId, MediaAssetId })
+        this.$store.dispatch("deleteMediaAsset", { ProjectId, MediaAssetId });
       }
     },
     handleUploadMediaAssets() {
@@ -174,29 +192,31 @@ export default {
       const ProjectId = this.project.id;
 
       if (!mbFileUpload) {
-        alert('Oops: Could not find file upload form');
+        alert("Oops: Could not find file upload form");
         return;
-      };
+      }
 
       const MediaAssets = this.$refs.mbFileUpload.getFiles().map(f => ({
         cloudinaryPublicId: f.public_id
       }));
 
       if (MediaAssets.length === 0) {
-        alert('Oops: Must have at least 1 file to submit');
+        alert("Oops: Must have at least 1 file to submit");
         return;
       }
 
       if (MediaAssets.length > 1) {
-        alert('Oops: Found more than 1 file. Currently we only support 1 file.');
+        alert(
+          "Oops: Found more than 1 file. Currently we only support 1 file."
+        );
         return;
       }
 
-      this.$store.dispatch('uploadMediaAssets', { ProjectId, MediaAssets })
+      this.$store.dispatch("uploadMediaAssets", { ProjectId, MediaAssets });
     }
   },
   mounted() {
     this.$store.dispatch("fetchProject", this.$route.params.id);
-  },
+  }
 };
 </script>

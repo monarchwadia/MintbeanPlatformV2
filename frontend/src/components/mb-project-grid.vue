@@ -20,7 +20,7 @@ import mbProjectGridItem from "./mb-project-grid-item.vue";
 // @ is an alias to /src
 export default {
   name: "MbProjectGrid",
-  props: ['projects'],
+  props: ["projects"],
   components: {
     "mb-project-grid-item": mbProjectGridItem
   }

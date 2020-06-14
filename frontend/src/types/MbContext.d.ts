@@ -5,9 +5,9 @@ import { ProjectService } from "@/services/projectService";
 import { UserProfileService } from "@/services/userProfileService";
 
 export interface MbContext {
-  apiService: ApiService,
-  authService: AuthService,
-  mbEventService: MbEventService,
-  projectService: ProjectService,
-  userProfileService: UserProfileService
+  apiService: ApiService;
+  authService: AuthService;
+  mbEventService: MbEventService;
+  projectService: ProjectService;
+  userProfileService: UserProfileService;
 }

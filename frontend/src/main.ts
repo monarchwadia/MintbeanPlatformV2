@@ -1,8 +1,7 @@
 import Vue from "vue";
 import Vuex, { Store } from "vuex";
 
-const Cloudinary: any = require('cloudinary-vue');
-
+const Cloudinary: any = require("cloudinary-vue");
 
 import makeContext from "./config/makeContext";
 import registerComponents from "./config/registerComponents";
@@ -11,8 +10,8 @@ import router from "./router";
 import { createStore } from "./store";
 
 import "./styles/app.scss";
-import { MbState } from './types/MbState';
-import registerFontAwesome from './config/registerFontAwesome';
+import { MbState } from "./types/MbState";
+import registerFontAwesome from "./config/registerFontAwesome";
 
 declare global {
   interface Window {
