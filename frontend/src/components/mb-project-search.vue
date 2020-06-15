@@ -22,6 +22,7 @@
           option 3
           option 2
           option 1
+          option 0
       label Minimum Average Rating
         select(v-model="search.ratingAverageMin")
           option 10
@@ -34,6 +35,7 @@
           option 3
           option 2
           option 1
+          option 0
     aside.right
       div.video-container(:style="{ display: status.loading ? 'initial' : 'none' }").searching
         <video autoplay muted loop>

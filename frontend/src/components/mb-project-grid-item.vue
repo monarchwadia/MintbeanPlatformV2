@@ -31,7 +31,7 @@ $gap: 5px;
 $user-height: 25px;
 $height: $screenshot-height + $gap + $user-height;
 $border-radius: 6px;
-$background-color: white;
+$background-color: transparent;
 
 .mb-project-grid-item {
   .inner {
