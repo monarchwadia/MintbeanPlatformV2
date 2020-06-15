@@ -10,6 +10,11 @@
 @import "./styles/variables";
 
 footer {
+  position: fixed;
+  background: transparent;
+  bottom: 0;
+  left: 0;
+  right: 0;
   color: $lightest;
   max-height: $footer-height;
   height: $footer-height;

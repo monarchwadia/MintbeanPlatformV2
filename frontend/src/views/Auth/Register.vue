@@ -1,5 +1,5 @@
 <template lang="pug">
-  section
+  section.auth
     form.login-form(v-on:submit.prevent="onSubmit")
       h1 Register
       label First Name
@@ -13,7 +13,21 @@
       button(type="submit") Submit
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import "../../styles/variables";
+
+.auth {
+  background-image: url("../../assets/auth-background.jpg");
+  height: calc(100vh - #{$navbar-height});
+  flex-direction: row-reverse;
+  justify-content: right;
+}
+
+.login-form {
+  background-color: white;
+  margin: 100px;
+}
+</style>
 
 <script>
 export default {

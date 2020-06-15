@@ -14,13 +14,14 @@
 
 .auth {
   background-image: url("../../assets/auth-background.jpg");
-  height: calc(100vh - #{$navbar-height + $footer-height});
+  height: calc(100vh - #{$navbar-height});
+  flex-direction: row-reverse;
+  justify-content: right;
 }
 
-.auth {
+.login-form {
   background-color: white;
-  padding: 100px;
-  justify-content: right;
+  margin: 100px;
 }
 </style>
 
