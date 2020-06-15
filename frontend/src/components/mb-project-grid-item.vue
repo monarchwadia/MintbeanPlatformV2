@@ -14,9 +14,9 @@ div.mb-project-grid-item
     div.user
       div.username {{ username }}
       div.projectinfo 
-        fa(icon="comment")
+        fa.icon(icon="comment")
         | &nbsp; {{ voteCount }}
-        fa(icon="star")
+        fa.icon(icon="star")
         | &nbsp; {{ voteAverage }}
 </template>
 
@@ -64,21 +64,12 @@ $background-color: white;
           rgba(237, 2, 2, 0) 0%,
           rgba(0, 0, 0, 0.8) 100%
         );
-        opacity: 0;
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
 
         & * {
-          display: none;
-        }
-
-        &:hover {
-          // background-color: rgba(255,255,255,0.5);
-          opacity: 0.8;
-          & * {
-            display: inline-block;
-          }
+          display: inline-block;
         }
 
         .project-title {
@@ -106,7 +97,7 @@ $background-color: white;
       left: 0px;
       width: $width;
       margin: auto;
-      font-size: 12px;
+      font-size: 16px;
       font-weight: bolder;
       height: $user-height;
       line-height: $user-height;
@@ -125,6 +116,10 @@ $background-color: white;
       }
       .projectinfo {
         float: right;
+      }
+
+      .icon {
+        color: $least-red;
       }
     }
   }

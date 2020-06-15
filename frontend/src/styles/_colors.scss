@@ -3,6 +3,7 @@
 $basetone: #466585;
 $basemint: #02ed9d;
 $baseblue: #009be2;
+$basered: rgb(241, 70, 104);
 
 $darkest: darken($basetone, 30%);
 $darker: darken($basetone, 20%);
@@ -22,6 +23,12 @@ $less-blue: darken($baseblue, 5%);
 $blue: $baseblue;
 $bluer: lighten($baseblue, 5%);
 $bluest: lighten($baseblue, 15%);
+
+$least-red: darken($basered, 15%);
+$less-red: darken($basered, 5%);
+$red: $basered;
+$more-red: lighten($basered, 5%);
+$most-red: lighten($basered, 15%);
 
 $color: #118bee;
 $color-accent: #118bee15;

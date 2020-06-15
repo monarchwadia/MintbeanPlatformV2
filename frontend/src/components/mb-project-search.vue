@@ -16,11 +16,11 @@
       label Minimum Average Rating
         input(type="number" v-model="search.ratingAverageMin")
     aside.right
-      div(:style="{ display: status.loading ? 'initial' : 'none' }").searching
+      div.video-container(:style="{ display: status.loading ? 'initial' : 'none' }").searching
         <video autoplay muted loop>
           <source :src="assets.searchVideo" type="video/mp4">
         </video>
-      div(:style="{ display: (!status.loading && !projects.length) ? 'initial' : 'none' }") 
+      div.video-container(:style="{ display: (!status.loading && !projects.length) ? 'initial' : 'none' }") 
         <video autoplay muted loop>
           <source :src="assets.notFoundVideo" type="video/mp4">
         </video>
@@ -64,6 +64,15 @@
     width: 100px;
   }
 
+}
+
+.video-container {
+  width: 100%;
+  height: auto;
+  video {
+    display: block;
+    margin: auto;
+  }
 }
 
 </style>

@@ -4,6 +4,8 @@ import mbNav from "../components/mb-nav.vue";
 import mbFileUpload from "../components/mb-file-upload.vue";
 import mbImageDisplay from "../components/mb-image-display.vue";
 import mbProjectGrid from "../components/mb-project-grid.vue";
+import mbProjectSearch from "../components/mb-project-search.vue";
+import mbModal from "../components/mb-modal.vue";
 import { VueConstructor } from "vue";
 
 export default (Vue: VueConstructor<Vue>) => {
@@ -12,5 +14,7 @@ export default (Vue: VueConstructor<Vue>) => {
   Vue.component("mb-file-upload", mbFileUpload);
   Vue.component("mb-image-display", mbImageDisplay);
   Vue.component("mb-project-grid", mbProjectGrid);
+  Vue.component("mb-project-search", mbProjectSearch);
+  Vue.component("mb-modal", mbModal);
   Vue.component(VueCountdown.name, VueCountdown);
 };

@@ -2,22 +2,36 @@
 @import "./utils";
 @import "./colors";
 @import "./mvp.scss";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-
+@import "./transitions";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 * {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
-button, input[type=submit] {
+button,
+input[type="submit"] {
   color: white;
   font-style: italic;
   border: none;
-  background: rgb(2,237,157);
-  background: -moz-linear-gradient(175deg, rgba(2,237,157,1) 0%, rgba(0,155,226,1) 100%);
-  background: -webkit-linear-gradient(175deg, rgba(2,237,157,1) 0%, rgba(0,155,226,1) 100%);
-  background: linear-gradient(175deg, rgba(2,237,157,1) 0%, rgba(0,155,226,1) 100%);
+  background: rgb(2, 237, 157);
+  background: -moz-linear-gradient(
+    175deg,
+    rgba(2, 237, 157, 1) 0%,
+    rgba(0, 155, 226, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    175deg,
+    rgba(2, 237, 157, 1) 0%,
+    rgba(0, 155, 226, 1) 100%
+  );
+  background: linear-gradient(
+    175deg,
+    rgba(2, 237, 157, 1) 0%,
+    rgba(0, 155, 226, 1) 100%
+  );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#02ed9d",endColorstr="#009be2",GradientType=1);
 }

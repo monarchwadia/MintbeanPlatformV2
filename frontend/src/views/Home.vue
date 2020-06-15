@@ -1,5 +1,7 @@
 <template lang="pug">
 div
+  mb-modal(:display="showSearchProjectsModal" v-on:close="closeSearchProjectsModal()")
+    mb-project-search
   header.hero
     div.left
       h1 Write code.
@@ -120,7 +122,8 @@ export default {
   name: "Home",
   data() {
     return {
-      projects: []
+      projects: [],
+      showSearchProjectsModal: false
     };
   },
   computed: {
@@ -134,6 +137,12 @@ export default {
     }
   },
   methods: {
+    openSearchProjectsModal() {
+      this.showSearchProjectsModal = true;
+    },
+    closeSearchProjectsModal() {
+      this.showSearchProjectsModal = false;
+    },
     getEventStatus(mbEvent) {
       const timeToStart = new Date(mbEvent.start_time) - new Date();
       const timeToEnd = new Date(mbEvent.end_time) - new Date();
