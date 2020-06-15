@@ -1,8 +1,8 @@
 <template lang="pug">
   div.mb-project-search
     aside.left
-      label Search {{search.searchString}}
-        input(type="text" v-model="search.searchString")
+      label Search {{search.searchQuery}}
+        input(type="text" v-model="search.searchQuery")
       b Sort By
       label Newest
         input(type="radio" id="CREATED_AT" value="CREATED_AT" v-model="search.sortField")
@@ -16,6 +16,14 @@
       label Minimum Average Rating
         input(type="number" v-model="search.ratingAverageMin")
     aside.right
+      div(:style="{ display: status.loading ? 'initial' : 'none' }").searching
+        <video autoplay muted loop>
+          <source :src="assets.searchVideo" type="video/mp4">
+        </video>
+      div(:style="{ display: (!status.loading && !projects.length) ? 'initial' : 'none' }") 
+        <video autoplay muted loop>
+          <source :src="assets.notFoundVideo" type="video/mp4">
+        </video>
       mb-project-grid(:projects="projects")
 </template>
 
@@ -55,14 +63,16 @@
   input[type="number"] {
     width: 100px;
   }
-}
 
+}
 
 </style>
 
 <script>
 import mbProjectGrid from "./mb-project-grid.vue";
 import debounce from "../helpers/debounce";
+import searchVideo from "../assets/search.mp4"
+import notFoundVideo from "../assets/notFound.mp4"
 
 // @ is an alias to /src
 export default {
@@ -70,11 +80,14 @@ export default {
   data() {
     return {
       search: {
-        searchString: '',
+        searchQuery: '',
         sortField: 'CREATED_AT',
         sortDirection: 'desc',
         ratingCountMin: 4,
         ratingAverageMin: 8
+      },
+      status: {
+        loading: false
       },
       projects: []
     };
@@ -82,24 +95,38 @@ export default {
   components: {
     "mb-project-grid": mbProjectGrid
   },
+  computed: {
+    assets() {
+      return { searchVideo, notFoundVideo }
+    }
+  },
   methods: {
     doSearch() {
       const self = this;
+
+      self.projects = [];
+      self.status.loading = true;
       this.debounce(() => self.doRequest())
     },
     doRequest() {
       const self = this;
+      self.status.loading = true;
+
       this.$mbContext.projectService
         .search(this.search)
-        .then(projects => (self.projects = projects))
+        .then(projects => {
+          self.status.loading = false;
+          self.projects = projects;
+        })
         .catch(err => {
+          self.status.loading = false;
           alert("Failed to fetch projects");
           console.error("Failed to fetch projects", err);
         });
     }
   },
   watch: {
-    'search.searchString'(val) {
+    'search.searchQuery'(val) {
       this.doSearch()
     },
     'search.sortField'(val) {

@@ -13,6 +13,7 @@ import { Project, ProjectSearchResult } from "@/types/Project";
 interface ProjectSearchOptions {
   userId: string;
   mbEventId: string;
+  searchQuery: string;
   ratingAverageMin: number;
   ratingCountMin: number;
   sortDirection: "asc" | "desc";
@@ -22,8 +23,8 @@ interface ProjectSearchOptions {
 }
 
 const mapProjectSearchOptions = (pso: ProjectSearchOptions) => {
-  debugger;
   return {
+    search_query: pso.searchQuery,
     filter_userId: pso.userId,
     filter_mbEventId: pso.mbEventId,
     filter_ratingAverage_min: pso.ratingAverageMin,
@@ -51,11 +52,10 @@ export class ProjectService {
   }
 
   async search(options: ProjectSearchOptions): Promise<ProjectSearchResult[]> {
-    debugger;
-
     // apply against defaults
     const opts: ProjectSearchOptions = Object.assign(
       {
+        searchQuery: undefined,
         userId: undefined,
         mbEventId: undefined,
         ratingAverageMin: undefined,

@@ -6,7 +6,7 @@ interface DebounceOptions {
   wait?: number;
 }
 
-const debounce = (wait = 500) => {
+const debounce = (wait = 1000) => {
   let timeout: any = null;
 
   const stopTimeout = () => {

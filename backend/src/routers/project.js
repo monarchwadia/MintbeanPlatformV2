@@ -23,6 +23,7 @@ const VALID_SORT_DIRECTIONS = {
   'asc': 'asc'
 }
 projectRoute.get('/search',  validator.query(Joi.object({
+    search_query: Joi.string().optional().default('').allow(''),
     filter_userId: Joi.string().uuid().min(1).optional(),
     filter_mbEventId: Joi.string().uuid().min(1).optional(),
     filter_ratingAverage_min: Joi.number().min(0).max(10).optional(),
@@ -34,6 +35,7 @@ projectRoute.get('/search',  validator.query(Joi.object({
   })),
   async (req, res, next) => {
     const defaults = {
+      search_query: undefined,
       filter_userId: undefined,
       filter_mbEventId: undefined,
       filter_ratingCount_min: undefined,
@@ -51,6 +53,18 @@ projectRoute.get('/search',  validator.query(Joi.object({
       bindings[field] = queryValue === undefined ? defaultValue : queryValue;
     });
 
+    // clean search_query to trim && remove empty strings
+    bindings.search_query = bindings.search_query
+      ? bindings.search_query.trim()
+      : undefined;
+
+    // coerce '' and other falseys to undefined
+    if (!bindings.search_query) {
+      bindings.search_query = undefined;
+    } else {
+      bindings.search_query = `%${bindings.search_query}%`
+    }
+
     // set sort field
     bindings.sort_field = VALID_SORT_FIELDS[bindings.sort_field || defaults.sort_field];
     bindings.sort_direction = VALID_SORT_DIRECTIONS[bindings.sort_direction || defaults.sort_direction];
@@ -62,7 +76,7 @@ projectRoute.get('/search',  validator.query(Joi.object({
         p."live_url" AS "live_url",
         mbe."cover_image_url" AS "mbevent_cover_image_url",
         ma."cloudinaryPublicId" AS "cloudinaryPublicId",
-        CONCAT(u."firstname", ' ', u."lastname") AS "user_fullname",
+        (u."firstname" || ' ' || u."lastname") AS "user_fullname",
         COUNT(v.*) AS "ratingCount",
         TRUNC(AVG(v.rating), 2) AS "ratingAverage"
       FROM "Projects" AS p
@@ -72,8 +86,21 @@ projectRoute.get('/search',  validator.query(Joi.object({
         LEFT JOIN "ProjectMediaAssets" AS pma ON pma."ProjectId" = p.id
         LEFT JOIN "MediaAssets" AS ma ON pma."MediaAssetId" = ma.id
       WHERE 1 = 1 
-        ${bindings.filter_userId !== undefined ? "AND  u.id = COALESCE($filter_userId, u.id)" : ''}
-        ${bindings.filter_mbEventId !== undefined ? 'AND  mbe.id = COALESCE($filter_mbEventId, mbe.id)' : ''}
+        ${bindings.search_query !== undefined 
+          ? "\
+            AND((u.\"firstname\" || ' ' || u.\"lastname\") ILIKE $search_query \
+            OR (p.\"title\" ILIKE $search_query)) \
+          " 
+          : ''
+        }
+        ${bindings.filter_userId !== undefined 
+          ? "AND  u.id = COALESCE($filter_userId, u.id)" 
+          : ''
+        }
+        ${bindings.filter_mbEventId !== undefined 
+          ? 'AND  mbe.id = COALESCE($filter_mbEventId, mbe.id)' 
+          : ''
+        }
       GROUP BY p."id", u."id", mbe."id", ma."cloudinaryPublicId"
       HAVING 1 = 1
         ${bindings.filter_ratingCount_min !== undefined ? 'AND COUNT(v.*) >= COALESCE($filter_ratingCount_min, 0)' : ''}
