@@ -171,7 +171,7 @@ export default {
         };
       }
 
-      if (this.mbEvent.Projects.find(project => project.UserId === user.id)) {
+      if (this.projects.find(project => project.UserId === user.id)) {
         return {
           enabled: false,
           disabledMessage: "Thank you for submitting your project.",

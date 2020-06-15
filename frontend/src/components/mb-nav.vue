@@ -3,6 +3,8 @@ nav.mb-nav
   router-link(to="/")
     img.logo(:src="mintbeanLogo")
   div.links
+    router-link(to="/") 
+      div Home
     a(v-if="isLoggedIn" href="#" v-on:click.prevent="logout")
       div Log Out
     router-link(to="/admin" v-if="isLoggedIn && isAdmin") 
@@ -35,7 +37,7 @@ nav.mb-nav
   display: flex;
   justify-content: space-between;
   & > * {
-    border-radius: 25px;
+    border-radius: 0px;
     box-sizing: border-box;
     padding: 0 25px;
     margin: 0 5px;

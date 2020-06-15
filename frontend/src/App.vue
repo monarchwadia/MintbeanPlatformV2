@@ -12,8 +12,11 @@
 footer {
   position: fixed;
   background: transparent;
+  opacity: 0.2;
+  float: right;
+  cursor: pointer;
+  pointer-events: none;
   bottom: 0;
-  left: 0;
   right: 0;
   color: $lightest;
   max-height: $footer-height;
