@@ -9279,6 +9279,11 @@ vue-filepond@^6.0.2:
   resolved "https://registry.yarnpkg.com/vue-filepond/-/vue-filepond-6.0.2.tgz#416cfaafe7e4356b169cbdf9e1c3cd3d2043d547"
   integrity sha512-HE1TvV2LrKMU3pFeIBbR9Uf6cryNLVnnl35uSL+HLsZ6rfZ3C1alfre3UcaSoKTVuxNsn41Ce4IR528UwdxZfw==
 
+vue-gtag@^1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/vue-gtag/-/vue-gtag-1.6.3.tgz#9ae2a0b88e57fa7f89fb21d48f042cc03029a66b"
+  integrity sha512-gFn09/j7kl6FxrhiASFO06YLKzTLPJkj6wpE2vg9OASFRhYr+BFM7dvvKMY0Qg76Ske/Ebv/hgXzyPSMKkd/WA==
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"

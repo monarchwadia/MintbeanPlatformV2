@@ -12,6 +12,7 @@ import { createStore } from "./store";
 
 import "./styles/app.scss";
 import { MbState } from "./types/MbState";
+import VueGtag from "vue-gtag";
 import registerFontAwesome from "./config/registerFontAwesome";
 
 declare global {
@@ -23,6 +24,12 @@ declare global {
 Vue.use(Vuex);
 Vue.use(Cloudinary);
 Vue.use(Intercom, { appId: "cnqttk95" });
+if (process.env.NODE_ENV === "production") {
+  console.log("Loading google analytics");
+  Vue.use(VueGtag, {
+    config: { id: "UA-159327705-1" },
+  });
+}
 
 registerComponents(Vue);
 registerFontAwesome(Vue);
@@ -38,5 +45,5 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount("#app");
