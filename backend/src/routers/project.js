@@ -26,7 +26,7 @@ projectRoute.get('/search',  validator.query(Joi.object({
     filter_userId: Joi.string().uuid().min(1).optional(),
     filter_mbEventId: Joi.string().uuid().min(1).optional(),
     filter_ratingAverage_min: Joi.number().min(0).max(10).optional(),
-    filter_ratingCount_min: Joi.number().min(0).max(10).optional(),
+    filter_ratingCount_min: Joi.number().min(0).optional(),
     sort_direction: Joi.string().valid(...Object.keys(VALID_SORT_DIRECTIONS)).optional().default('desc'),
     sort_field: Joi.string().valid(...Object.keys(VALID_SORT_FIELDS)).optional().default('RATING_AVERAGE'),
     limit: Joi.number().max(100).optional().default(25),

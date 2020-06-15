@@ -22,6 +22,7 @@ interface ProjectSearchOptions {
 }
 
 const mapProjectSearchOptions = (pso: ProjectSearchOptions) => {
+  debugger;
   return {
     filter_userId: pso.userId,
     filter_mbEventId: pso.mbEventId,
@@ -30,7 +31,7 @@ const mapProjectSearchOptions = (pso: ProjectSearchOptions) => {
     sort_direction: pso.sortDirection,
     sort_field: pso.sortField,
     limit: pso.limit,
-    offset: pso.offset
+    offset: pso.offset,
   };
 };
 
@@ -50,6 +51,8 @@ export class ProjectService {
   }
 
   async search(options: ProjectSearchOptions): Promise<ProjectSearchResult[]> {
+    debugger;
+
     // apply against defaults
     const opts: ProjectSearchOptions = Object.assign(
       {
@@ -60,7 +63,7 @@ export class ProjectService {
         sortDirection: "desc",
         sortField: "RATING_AVERAGE",
         limit: 25,
-        offset: 0
+        offset: 0,
       },
       options
     );
@@ -68,7 +71,7 @@ export class ProjectService {
     const params = mapProjectSearchOptions(opts);
 
     const queryResponse = await this.apiService.get("/api/v1/project/search", {
-      params
+      params,
     });
 
     return queryResponse.data;
@@ -81,7 +84,7 @@ export class ProjectService {
     const queryResponse = await this.apiService.post("/api/v1/vote", {
       ProjectId,
       rating,
-      comment
+      comment,
     });
     return queryResponse.data;
   }

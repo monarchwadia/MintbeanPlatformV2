@@ -81,21 +81,22 @@ section {
   display: flex;
   flex-wrap: wrap;
   justify-content: $justify-important;
-  aside {
-    margin: 1rem;
-    padding: 1.25rem;
-    width: $width-card;
-    @include has-border;
-    @include has-box-shadow;
+}
 
-    img {
-      max-width: 100%;
-    }
+aside {
+  margin: 1rem;
+  padding: 1.25rem;
+  width: $width-card;
+  @include has-border;
+  @include has-box-shadow;
+
+  img {
+    max-width: 100%;
   }
-  header {
-    padding-top: 0;
-    width: 100%;
-  }
+}
+header {
+  padding-top: 0;
+  width: 100%;
 }
 
 [hidden] {

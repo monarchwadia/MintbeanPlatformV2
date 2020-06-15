@@ -1,24 +1,22 @@
 <template lang="pug">
-  div.search
-    div.search-section
-      label.u-width-full Search {{search.searchString}}
-        input.search-input(type="text" v-model="search.searchString")
-    div.search-section
+  div.mb-project-search
+    aside.left
+      label Search {{search.searchString}}
+        input(type="text" v-model="search.searchString")
       b Sort By
-      br
-      label.inline Best Rated
-        input(type="radio" id="ratingAverage" value="RATING_AVERAGE" v-model="search.sortBy")
-      label.inline Most Voted
-        input(type="radio" id="ratingAverage" value="RATING_COUNT" v-model="search.sortBy")
-      label.inline Newest
-        input(type="radio" id="ratingAverage" value="CREATED_AT" v-model="search.sortBy" default)
-    div.search-section
+      label Newest
+        input(type="radio" id="CREATED_AT" value="CREATED_AT" v-model="search.sortField")
+      label Best Rated
+        input(type="radio" id="RATING_AVERAGE" value="RATING_AVERAGE" v-model="search.sortField")
+      label Most Voted
+        input(type="radio" id="RATING_COUNT" value="RATING_COUNT" v-model="search.sortField")
+    
       label Minimum Number of Votes
         input(type="number" v-model="search.ratingCountMin")
       label Minimum Average Rating
         input(type="number" v-model="search.ratingAverageMin")
-          
-    mb-project-grid(:projects="projects")
+    aside.right
+      mb-project-grid(:projects="projects")
 </template>
 
 <style lang="scss" scoped>
@@ -26,28 +24,40 @@
 @import "../styles/colors";
 
 .mb-project-search {
-  .search-container {
-    .search-section {
+  display: flex;
+  flex-wrap: wrap;
+  // grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  // justify-content: space-evenly;
+  // column-gap: 5px;
 
-      label, input {
-        max-width: none;
-      }
+  & > .left {
+    min-width: 400px;
+    flex-grow: 1;
+  }
 
-      label.inline {
-        margin: 0 25px 0 0;
-      }
+  & > .right {
+    flex-grow: 6;
+  }
 
-      input[type="text"] {
-        width: 100%;
-        max-width: 100%;
-      }
-      
-      input[type="number"] {
-        max-width: 50px;
-      }
-    }
+  label {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  input {
+    box-sizing: border-box;
+  }
+
+  input[type="text"] {
+    width: 100%;
+  }
+
+  input[type="number"] {
+    width: 100px;
   }
 }
+
+
 </style>
 
 <script>
@@ -61,8 +71,10 @@ export default {
     return {
       search: {
         searchString: '',
-        sortBy: 'CREATED_AT',
-        direction: 'desc'
+        sortField: 'CREATED_AT',
+        sortDirection: 'desc',
+        ratingCountMin: 4,
+        ratingAverageMin: 8
       },
       projects: []
     };
@@ -72,24 +84,40 @@ export default {
   },
   methods: {
     doSearch() {
-      this.debounce(() => {
-        console.log('search', JSON.stringify(this.search));
-      })
+      const self = this;
+      this.debounce(() => self.doRequest())
+    },
+    doRequest() {
+      const self = this;
+      this.$mbContext.projectService
+        .search(this.search)
+        .then(projects => (self.projects = projects))
+        .catch(err => {
+          alert("Failed to fetch projects");
+          console.error("Failed to fetch projects", err);
+        });
     }
   },
   watch: {
     'search.searchString'(val) {
       this.doSearch()
     },
-    'search.sortBy'(val) {
+    'search.sortField'(val) {
       this.doSearch()
     },
-    'search.direction '(val) {
+    'search.sortDirection'(val) {
+      this.doSearch()
+    },
+    'search.ratingCountMin'(val) {
+      this.doSearch()
+    },
+    'search.ratingAverageMin'(val) {
       this.doSearch()
     }
   },
   mounted() {
     this.debounce = debounce();
+    this.doRequest();
 
   // userId: string;
   // mbEventId: string;
@@ -100,14 +128,7 @@ export default {
   // limit: number;
   // offset: number;
 
-    const self = this;
-    this.$mbContext.projectService
-      .search()
-      .then(projects => (self.projects = projects))
-      .catch(err => {
-        alert("Failed to fetch projects");
-        console.error("Failed to fetch projects", err);
-      });
+
   }
 };
 </script>
