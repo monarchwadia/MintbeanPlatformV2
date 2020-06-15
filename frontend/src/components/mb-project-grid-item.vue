@@ -24,13 +24,13 @@ div.mb-project-grid-item
 <style lang="scss" scoped>
 @import "../styles/colors";
 @import "../styles/mixins";
+@import "../styles/variables";
 
 $width: 400px;
 $screenshot-height: 300px;
 $gap: 5px;
 $user-height: 25px;
 $height: $screenshot-height + $gap + $user-height;
-$border-radius: 6px;
 $background-color: transparent;
 
 .mb-project-grid-item {

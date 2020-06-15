@@ -37,7 +37,7 @@ nav.mb-nav
   display: flex;
   justify-content: space-between;
   & > * {
-    border-radius: 0px;
+    border-radius: $border-radius;
     box-sizing: border-box;
     padding: 0 25px;
     margin: 0 5px;

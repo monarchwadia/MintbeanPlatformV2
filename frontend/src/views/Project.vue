@@ -32,22 +32,32 @@ div.project-wrapper
         section(v-if="!project.Votes || project.Votes.length === 0")
           p No comments yet
         section(v-else)
-          aside(v-for="vote in project.Votes" style="width: 100%;")
-            h2 {{vote.User.firstname + ' ' + vote.User.lastname}}
-            h3 Comments:
+          div.vote-comment(v-for="vote in project.Votes" style="width: 100%;")
+            b {{vote.User.firstname + ' ' + vote.User.lastname}}
             p {{ vote.comment }}
         section(v-if="$store.state.user")
           form.vote-project(v-on:submit.prevent="function(evt){ handleVoteProject(project.id) }")
             h2 {{ userVote ? 'Edit' : 'Submit' }} a vote
             p {{ userVote ? 'Editing' : 'Editing' }} as {{ $store.state.user.firstname }} {{ $store.state.user.lastname }}
             label Rating (1 - 10)
-              input(name="rating", v-model="rating")
+              select(v-model="rating")
+                option 10
+                option 9
+                option 8
+                option 7
+                option 6
+                option 5
+                option 4
+                option 3
+                option 2
+                option 1
+                option 0
             label Comment
               textarea(name="comment", v-model="comment")
             input(type="submit" :value="userVote ? 'Edit' : 'Submit'")
         section(v-else)
           h2 You must be logged in to vote
-        section(v-if="userVote")
+        section.vote-submit-section(v-if="userVote")
           aside(style="width: 100%;")
             h3 (Your previous vote:)
             h2 {{userVote.User.firstname + ' ' + userVote.User.lastname}}
@@ -90,6 +100,21 @@ main {
   right: 0;
   height: 40vh;
   min-height: 300px;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+}
+
+
+.vote-comment {
+  padding: 5px;
+  margin: 0;
+  border: none;
+  &:nth-child(2n-1) {
+    background-color: white;
+  }
 }
 
 .project-wrapper-inner {
