@@ -42,7 +42,7 @@ projectRoute.get('/search',  validator.query(Joi.object({
       filter_ratingAverage_min: undefined,
       sort_direction: 'desc',
       sort_field: 'RATING_AVERAGE',
-      limit: 25,
+      limit: 10,
       offset: 0
     }
 

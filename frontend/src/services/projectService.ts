@@ -62,7 +62,7 @@ export class ProjectService {
         ratingCountMin: 3,
         sortDirection: "desc",
         sortField: "RATING_AVERAGE",
-        limit: 25,
+        limit: 50,
         offset: 0,
       },
       options

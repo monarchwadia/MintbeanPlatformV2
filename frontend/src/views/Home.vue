@@ -20,10 +20,10 @@ div
           button.u-pulse Sign up now!
   
   main
-    h3 Featured Projects
+    h2 Featured Projects
     mb-project-search(show-search-panel=false)
 
-    h3 Past events.
+    h2 Past events.
     section.u-centered
       aside(v-for="mbEvent in mbEvents" class="hackathon-card" v-on:click.prevent="() => goToEvent(mbEvent.id)")
         img(:src="mbEvent.cover_image_url" max-height=300 width="100%")
