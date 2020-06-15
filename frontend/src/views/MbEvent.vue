@@ -205,9 +205,12 @@ export default {
 
       this.$mbContext.projectService
         .search({
-          mbEventId: id
+          mbEventId: id,
+          ratingCountMin: 0
         })
-        .then(projects => (self.projects = projects))
+        .then(projects => {
+          self.projects = projects
+        })
         .catch(e => {
           console.error(e);
           alert("Failed to fetch event");
@@ -238,6 +241,8 @@ Would you like to continue?`);
         live_url,
         MbEventId: this.mbEvent.id,
         MediaAssets
+      }).then(() => {
+        self.fetchProjects();
       });
     }
   },

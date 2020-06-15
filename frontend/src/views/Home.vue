@@ -13,7 +13,7 @@ div
         mb-image-display(serverId="c58b49717bb0118438ee4a47e4ed2038")
         img.signup-bean(src='../assets/bean.png')
       div
-        h1 The next hackathon is around the corner!
+        h1 Beginners are welcome!
         p Frontend & Full Stack Hackathons
         p Mondays & Wednesdays at 12:00pm EST
         mb-a(href="https://www.eventbrite.ca/o/mintbean-28752300031")
