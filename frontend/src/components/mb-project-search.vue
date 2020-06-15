@@ -1,6 +1,6 @@
 <template lang="pug">
   div.mb-project-search
-    aside.left
+    aside.left(v-if="showSearchPanel")
       label Search {{search.searchQuery}}
         input(type="text" v-model="search.searchQuery")
       label Best
@@ -108,14 +108,15 @@ import notFoundVideo from "../assets/notFound.mp4"
 // @ is an alias to /src
 export default {
   name: "mb-project-search",
+  props: ['showSearchPanel'],
   data() {
     return {
       search: {
         searchQuery: '',
-        sortField: 'CREATED_AT',
+        sortField: 'RATING_AVERAGE',
         sortDirection: 'desc',
-        ratingCountMin: 8,
-        ratingAverageMin: 8
+        ratingCountMin: 9,
+        ratingAverageMin: 9
       },
       status: {
         loading: false

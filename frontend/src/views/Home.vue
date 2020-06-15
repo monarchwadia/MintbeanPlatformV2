@@ -1,7 +1,7 @@
 <template lang="pug">
 div
-  mb-modal(:display="showSearchProjectsModal" v-on:close="closeSearchProjectsModal()")
-    mb-project-search
+  //- mb-modal(:display="showSearchProjectsModal" v-on:close="closeSearchProjectsModal()")
+  //-   mb-project-search
   header.hero
     div.left
       h1 Write code.
@@ -20,7 +20,8 @@ div
           button.u-pulse Sign up now!
   
   main
-    mb-project-search
+    h3 Featured Projects
+    mb-project-search(show-search-panel=false)
 
     h3 Past events.
     section.u-centered

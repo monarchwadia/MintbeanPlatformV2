@@ -7,8 +7,12 @@
 
 <style lang="scss" scoped>
 @import "./styles/colors";
+@import "./styles/variables";
+
 footer {
   color: $lightest;
+  max-height: $footer-height;
+  height: $footer-height;
 }
 </style>
 

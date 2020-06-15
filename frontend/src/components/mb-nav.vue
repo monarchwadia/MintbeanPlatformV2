@@ -15,8 +15,7 @@ nav.mb-nav
 
 <style lang="scss" scoped>
 @import "../styles/colors";
-
-$navbar-height: 100px;
+@import "../styles/variables";
 
 .mb-nav {
   max-height: $navbar-height;
