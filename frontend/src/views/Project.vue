@@ -51,7 +51,6 @@ div.project-wrapper
                 option 3
                 option 2
                 option 1
-                option 0
             label Comment
               textarea(name="comment", v-model="comment")
             input(type="submit" :value="userVote ? 'Edit' : 'Submit'")
