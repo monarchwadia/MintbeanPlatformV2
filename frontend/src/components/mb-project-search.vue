@@ -3,18 +3,37 @@
     aside.left
       label Search {{search.searchQuery}}
         input(type="text" v-model="search.searchQuery")
-      b Sort By
+      label Best
+        input(type="radio" id="RATING_AVERAGE" value="RATING_AVERAGE" v-model="search.sortField")
+      label Popular
+        input(type="radio" id="RATING_COUNT" value="RATING_COUNT" v-model="search.sortField")
       label Newest
         input(type="radio" id="CREATED_AT" value="CREATED_AT" v-model="search.sortField")
-      label Best Rated
-        input(type="radio" id="RATING_AVERAGE" value="RATING_AVERAGE" v-model="search.sortField")
-      label Most Voted
-        input(type="radio" id="RATING_COUNT" value="RATING_COUNT" v-model="search.sortField")
     
       label Minimum Number of Votes
-        input(type="number" v-model="search.ratingCountMin")
+        select(v-model="search.ratingCountMin")
+          option 10
+          option 9
+          option 8
+          option 7
+          option 6
+          option 5
+          option 4
+          option 3
+          option 2
+          option 1
       label Minimum Average Rating
-        input(type="number" v-model="search.ratingAverageMin")
+        select(v-model="search.ratingAverageMin")
+          option 10
+          option 9
+          option 8
+          option 7
+          option 6
+          option 5
+          option 4
+          option 3
+          option 2
+          option 1
     aside.right
       div.video-container(:style="{ display: status.loading ? 'initial' : 'none' }").searching
         <video autoplay muted loop>
@@ -48,15 +67,16 @@
   }
 
   label {
-    box-sizing: border-box;
+    cursor: pointer;
     width: 100%;
   }
 
   input {
-    box-sizing: border-box;
+    cursor: pointer;
   }
 
   input[type="text"] {
+    cursor: text;
     width: 100%;
   }
 
@@ -92,7 +112,7 @@ export default {
         searchQuery: '',
         sortField: 'CREATED_AT',
         sortDirection: 'desc',
-        ratingCountMin: 4,
+        ratingCountMin: 8,
         ratingAverageMin: 8
       },
       status: {

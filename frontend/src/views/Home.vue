@@ -20,8 +20,7 @@ div
           button.u-pulse Sign up now!
   
   main
-    h3 Check out some great recent projects
-    mb-project-grid(:projects="projects")
+    mb-project-search
 
     h3 Past events.
     section.u-centered
@@ -37,21 +36,6 @@ div
         //- b(v-if="getEventStatus(mbEvent) === 'ended'")
         //-   | Event Ended
         p {{mbEvent.description}}
-
-    section.u-centered
-      h3 Mintbean is getting glowing reviews from the community!
-    section
-      aside
-        blockquote
-          | Learned how to build a Chrome Extension. Participated in my first ever hackathon. Got familiar with the process. Enjoyed the heady rush of coding in a set timeframe. That's it in a nutshell!
-          footer
-            i - Posh G
-      aside
-        blockquote
-          | I'm definitely coming back for another meet. I loved the exposure and the chance to break out of
-          | my rut.
-          footer
-            i - M. Alaniz
 </template>
 
 <style lang="scss" scoped>
@@ -112,7 +96,7 @@ button {
 }
 
 main {
-  max-width: 1500px;
+  max-width: 100%;
 }
 </style>
 

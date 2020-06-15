@@ -6,7 +6,8 @@ div.mb-project-grid-item
         div.project-title 
           | {{ project.title }}
         div.project-buttons
-          button(v-on:click.prevent="expandProject") Details
+          mb-a(:href="projectPlatformUrl")
+            button Comments
           mb-a(:href="projectDeployedUrl")
             button Visit
           //- button Score
@@ -144,6 +145,9 @@ export default {
     },
     projectDeployedUrl() {
       return this.project.live_url;
+    },
+    projectPlatformUrl() {
+      return "/project/" + this.project.id;
     },
     cloudinaryPublicId() {
       const { cloudinaryPublicId, mbevent_cover_image_url } = this.project;
