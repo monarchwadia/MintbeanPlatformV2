@@ -4,16 +4,18 @@
   text-align: center;
 }
 
-
 .u-pulse {
   animation: shadow-pulse 1.5s infinite;
 }
-@keyframes shadow-pulse
-{
-     0% {
-          box-shadow: 0 0 0 0px rgba(0, 255, 221, 1);
-     }
-     100% {
-          box-shadow: 0 0 0 50px rgba(0, 153, 255, 0);
-     }
+@keyframes shadow-pulse {
+  0% {
+    box-shadow: 0 0 0 0px rgba(0, 255, 221, 1);
+  }
+  100% {
+    box-shadow: 0 0 0 50px rgba(0, 153, 255, 0);
+  }
+}
+
+.u-width-full {
+  width: 100%;
 }

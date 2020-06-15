@@ -13,14 +13,13 @@ footer {
 </style>
 
 <script>
-
 const intercomPayload = user => {
   return {
     user_id: user.id,
     name: `${user.firstname} ${user.lastname}`,
     email: user.email
-  }
-}
+  };
+};
 
 export default {
   name: "App",
@@ -50,7 +49,7 @@ export default {
     user() {
       if (this.user) {
         this.$intercom.update(intercomPayload(this.user));
-        } else {
+      } else {
         this.$intercom.shutdown();
         this.$intercom.boot();
       }

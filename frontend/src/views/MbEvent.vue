@@ -204,7 +204,7 @@ export default {
       const { id } = this.$route.params;
 
       this.$mbContext.projectService
-        .fetchFrontpageProjects({
+        .search({
           mbEventId: id
         })
         .then(projects => (self.projects = projects))

@@ -22,7 +22,7 @@ declare global {
 
 Vue.use(Vuex);
 Vue.use(Cloudinary);
-Vue.use(Intercom, { appId: 'cnqttk95' })
+Vue.use(Intercom, { appId: "cnqttk95" });
 
 registerComponents(Vue);
 registerFontAwesome(Vue);

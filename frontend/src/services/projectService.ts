@@ -31,11 +31,11 @@ const mapProjectSearchOptions = (pso: ProjectSearchOptions) => {
     sort_field: pso.sortField,
     limit: pso.limit,
     offset: pso.offset
-  }
-}
+  };
+};
 
 export class ProjectService {
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {}
 
   async submitProject(obj: Project): Promise<Project> {
     const queryResponse = await this.apiService.post("/api/v1/project", obj);
@@ -49,18 +49,21 @@ export class ProjectService {
     return queryResponse.data;
   }
 
-  async fetchFrontpageProjects(options: ProjectSearchOptions): Promise<ProjectSearchResult[]> {
+  async search(options: ProjectSearchOptions): Promise<ProjectSearchResult[]> {
     // apply against defaults
-    const opts: ProjectSearchOptions = Object.assign({
-      userId: undefined,
-      mbEventId: undefined,
-      ratingAverageMin: undefined,
-      ratingCountMin: 3,
-      sortDirection: "desc",
-      sortField: "RATING_AVERAGE",
-      limit: 25,
-      offset: 0
-    }, options);
+    const opts: ProjectSearchOptions = Object.assign(
+      {
+        userId: undefined,
+        mbEventId: undefined,
+        ratingAverageMin: undefined,
+        ratingCountMin: 3,
+        sortDirection: "desc",
+        sortField: "RATING_AVERAGE",
+        limit: 25,
+        offset: 0
+      },
+      options
+    );
 
     const params = mapProjectSearchOptions(opts);
 

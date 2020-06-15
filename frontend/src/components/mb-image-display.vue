@@ -2,7 +2,12 @@
   <div class="mb-image-display">
     <cld-context cloudName="mintbean">
       <cld-image :publicId="publicId" secure="true">
-        <cld-transformation :width="width" :height="height" background="black" crop="pad" />
+        <cld-transformation
+          :width="width"
+          :height="height"
+          background="black"
+          crop="pad"
+        />
       </cld-image>
     </cld-context>
   </div>
@@ -24,7 +29,7 @@ import {
 } from "cloudinary-vue";
 
 export default {
-  name: "mb-file-upload",
+  name: "mb-image-display",
   props: {
     publicId: String,
     height: String,

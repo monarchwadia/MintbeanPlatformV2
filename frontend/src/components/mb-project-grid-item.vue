@@ -133,7 +133,7 @@ $background-color: white;
 
 <script>
 export default {
-  name: "MbProjectGridItem",
+  name: "mb-project-grid-item",
   props: ["project"],
   computed: {
     username() {

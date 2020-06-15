@@ -160,7 +160,7 @@ export default {
   mounted() {
     const self = this;
     this.$mbContext.projectService
-      .fetchFrontpageProjects()
+      .search()
       .then(results => {
         self.projects = results;
       })
