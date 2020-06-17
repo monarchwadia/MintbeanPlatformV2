@@ -4,6 +4,8 @@ import { AuthService } from "./services/authService";
 import { MbState } from "./types/MbState";
 import { MbContext } from "./types/MbContext";
 import { Project } from "./types/Project";
+import errorHandlerPlugin from "./errorHandlerPlugin";
+import { MbError } from "./types/MbError";
 
 const state: MbState = {
   user: undefined,
@@ -13,6 +15,15 @@ const state: MbState = {
   project: undefined,
   mbEvents: [],
   votes: [],
+  mbErrors: [
+    {
+      id: "foo",
+      title: "Dummy error detected",
+      description: "This is a dummy error",
+      error: new Error(),
+      timeout: 0,
+    },
+  ],
 };
 
 const mutations: MutationTree<MbState> = {
@@ -190,6 +201,36 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
         }
       });
   };
+
+  const errorPush: Action<MbState, MbState> = async (
+    { commit, dispatch, state },
+    newError: MbError
+  ) => {
+    const mbErrors = state.mbErrors;
+
+    let newErrors;
+    if (mbErrors.length >= 3) {
+      newErrors = [mbErrors[1], mbErrors[2], newError];
+    } else {
+      newErrors = mbErrors.concat(newError);
+    }
+
+    commit("setProperty", ["mbErrors", newErrors]);
+  };
+
+  // switch (mutation.type) {
+  //   case "error.log": {
+  //     const errors = state.mbErrors.concat(payload);
+  //     store.commit("mbErrors", errors);
+  //     break;
+  //   }
+  //   case "error.dismiss": {
+  //     const errors = state.mbErrors.filter((x) => x.id !== payload.id);
+  //     store.commit("mbErrors", errors);
+  //     break;
+  //   }
+  // }
+
   return {
     checkAuth,
     login,
@@ -201,6 +242,7 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
     fetchProject,
     deleteMediaAsset,
     uploadMediaAssets,
+    errorPush,
   };
 };
 
@@ -211,5 +253,6 @@ export const createStore = (mbContext: MbContext) => {
     state,
     mutations,
     actions: createActions(mbContext),
+    plugins: [errorHandlerPlugin],
   });
 };

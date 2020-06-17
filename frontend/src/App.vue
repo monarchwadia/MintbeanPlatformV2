@@ -3,6 +3,7 @@
     mb-nav(:path="$route.path")
     router-view
     footer Made by Mintbean, Copyright 2020 All Rights Reserved. Aside images designed by Freepik.
+    mb-errors
 </template>
 
 <style lang="scss" scoped>
@@ -25,6 +26,8 @@ footer {
 </style>
 
 <script>
+import MbErrors from "./components/mb-errors";
+
 const intercomPayload = user => {
   return {
     user_id: user.id,
@@ -66,6 +69,9 @@ export default {
         this.$intercom.boot();
       }
     }
+  },
+  components: {
+    "mb-errors": MbErrors
   }
 };
 </script>
