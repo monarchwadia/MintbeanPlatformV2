@@ -2,8 +2,8 @@
 div
   //- mb-modal(:display="showSearchProjectsModal" v-on:close="closeSearchProjectsModal()")
   //-   mb-project-search
-  header.py-10(style="background: linear-gradient(0deg,#a3fedf,#fff 50%)")
-    div.container.flex.justify-between.m-auto.pb-10
+  header.pb-10(style="background: linear-gradient(0deg,#a3fedf,#fff 50%)")
+    div.container.flex.justify-between.m-auto.px-16.bg-black.text-white.rounded-lg
       div.flex-initial.px-15.py-20
         p.text-6xl.font-semibold Write code.
         p.text-6xl.font-semibold Get noticed.
@@ -11,21 +11,20 @@ div
         p.text-l.pt-5 Come for the jobs. Stay for the community.
       div.flex-initial.px-15.py-20.flex-col
         div.flex
+          div.p-3
+            h1.font-semibold.text-2xl.lg_text-3xl.xl_text-5xl.mt-5.text-right Online Hackathons
+            div.text-xl.md_text-xl.xl_text-2xl.mt-5.text-right
+              p Mondays & Wednesdays
+              p.mt-5 12:00pm EST
           div.p-3.sm_block.hidden
             mb-image-display(serverId="c58b49717bb0118438ee4a47e4ed2038")
             img.signup-bean(src='../assets/bean.png')
-          div.p-3
-            p.text-2xl.lg_text-3xl.xl_text-5xl Let the fun begin!
-            div.text-xl.md_text-xl.xl_text-2xl.mt-5
-              p Frontend & Full Stack Hackathons
-              p Every Monday & Wednesday
-              p 12:00pm EST
-        div.p-3
+        div.pt-10
           mb-a(href="https://www.eventbrite.ca/o/mintbean-28752300031")
             button.u-pulse.text-white.p-6.min-w-full.gradient-blue-mint Sign up now!
   
-  main
-    h2 Featured Projects
+  main.container.m-auto.pt-10
+    h2.text-5xl Featured Projects
     mb-project-search(show-search-panel=false)
 
     h2 Past events.
