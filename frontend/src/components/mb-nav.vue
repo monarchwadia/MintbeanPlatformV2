@@ -8,26 +8,10 @@
       </div>
 
       <div class="flex items-right justify-between px-4 py-3">
-        <nav class="hidden md:flex px-2 pt-2 pb-4 sm:p-0">
-          <router-link to="/" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
-            Home
-          </router-link>
-          <a v-if="isLoggedIn" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800" href="#" v-on:click.prevent="logout">
-            Log Out
-          </a>
-          <router-link v-if="isLoggedIn && isAdmin" to="/admin" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
-            Admin
-          </router-link>
-          <router-link v-if="!isLoggedIn" to="/auth/login" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
-            Log In
-          </router-link>
-          <router-link v-if="!isLoggedIn" to="/auth/register" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
-            Register
-          </router-link>
-        </nav>
+        <mb-nav-links :links="links"/>
 
         <div class="md:hidden">
-          <button @click="isOpen = !isOpen" type="button" class="block text-black hover:text-gray-500 focus:text-gray-500 focus:outline-none">
+          <button @click="isOpen = !isOpen" type="button" class="block text-black focus:outline-none">
             <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
               <path v-if="isOpen" fill-rule="evenodd" d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"/>
               <path v-if="!isOpen" fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"/>
@@ -37,32 +21,13 @@
       </div>
     </div>
 
-    <nav :class="isOpen ? 'block' : 'hidden'" class="md:hidden px-2 pt-2 pb-4 flex sm:p-0">
-      <router-link to="/" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
-        xHome
-      </router-link>
-      <a v-if="isLoggedIn" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800" href="#" v-on:click.prevent="logout">
-        Log Out
-      </a>
-      <router-link v-if="isLoggedIn && isAdmin" to="/admin" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
-        Admin
-      </router-link>
-      <router-link v-if="!isLoggedIn" to="/auth/login" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
-        Log In
-      </router-link>
-      <router-link v-if="!isLoggedIn" to="/auth/register" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
-        Register
-      </router-link>
-    </nav>
+    <mb-nav-links :links="links" v-if="isOpen" :forResponsive="true"/>
   </header>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
-
 <script>
 import mintbeanLogo from "../../src/assets/mintbean-logo.png";
+import mbNavLinks from "./mb-nav-links";
 
 export default {
   props: {
@@ -74,6 +39,30 @@ export default {
     }
   },
   computed: {
+    links() {
+          // <router-link to="/" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
+          //   Home
+          // </router-link>
+          // <a v-if="isLoggedIn" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800" href="#" v-on:click.prevent="logout">
+          //   Log Out
+          // </a>
+          // <router-link v-if="isLoggedIn && isAdmin" to="/admin" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
+          //   Admin
+          // </router-link>
+          // <router-link v-if="!isLoggedIn" to="/auth/login" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
+          //   Log In
+          // </router-link>
+          // <router-link v-if="!isLoggedIn" to="/auth/register" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
+          //   Register
+          // </router-link>
+      return [
+        { label: 'Home', showIf: true, linkTo: '/' },
+        { label: 'Log Out', showIf: this.isLoggedIn, onClick: this.logout },
+        { label: 'Admin', showIf: this.isLoggedIn && this.isAdmin, linkTo: '/admin' },
+        { label: 'Log In', showIf: !this.isLoggedIn, linkTo: '/auth/login' },
+        { label: 'Register', showIf: !this.isLoggedIn, linkTo: '/auth/register' },
+      ].filter((link => link.showIf ))
+    },
     mintbeanLogo() {
       return mintbeanLogo;
     },
@@ -97,6 +86,9 @@ export default {
     logout(evt) {
       this.$store.dispatch("logout");
     }
+  },
+  components: {
+    "mb-nav-links": mbNavLinks
   }
 };
 </script>
