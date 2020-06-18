@@ -5,13 +5,7 @@
 </template>
 
 <style lang="scss" scoped>
-.mb-project-grid {
-  column-gap: 5px;
-  row-gap: 50px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  justify-content: space-evenly;
-}
+
 </style>
 
 <script>

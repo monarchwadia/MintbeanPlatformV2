@@ -16,42 +16,7 @@ nav.mb-nav
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/colors";
-@import "../styles/variables";
 
-.mb-nav {
-  max-height: $navbar-height;
-  margin-bottom: 0px;
-}
-
-.logo {
-  max-height: 50px;
-  padding-bottom: 20px;
-  height: $navbar-height;
-  vertical-align: middle;
-  line-height: initial;
-  padding-left: 25px;
-}
-
-.links {
-  display: flex;
-  justify-content: space-between;
-  & > * {
-    border-radius: $border-radius;
-    box-sizing: border-box;
-    padding: 0 25px;
-    margin: 0 5px;
-    line-height: $navbar-height;
-    &:hover {
-      background-color: $minty;
-    }
-  }
-
-  a {
-    color: black;
-    text-decoration: none;
-  }
-}
 </style>
 
 <script>

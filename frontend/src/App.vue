@@ -1,5 +1,5 @@
 <template lang="pug">
-  div#app
+  div
     mb-nav(:path="$route.path")
     router-view
     footer Made by Mintbean, Copyright 2020 All Rights Reserved. Aside images designed by Freepik.
@@ -7,22 +7,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "./styles/colors";
-@import "./styles/variables";
 
-footer {
-  position: fixed;
-  background: transparent;
-  opacity: 0.2;
-  float: right;
-  cursor: pointer;
-  pointer-events: none;
-  bottom: 0;
-  right: 0;
-  color: $lightest;
-  max-height: $footer-height;
-  height: $footer-height;
-}
 </style>
 
 <script>

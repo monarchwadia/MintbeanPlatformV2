@@ -20,7 +20,6 @@ const state: MbState = {
       id: "foo",
       title: "Dummy error detected",
       description: "This is a dummy error",
-      error: new Error(),
       timeout: 0,
     },
   ],

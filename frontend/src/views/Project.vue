@@ -67,78 +67,7 @@ div.project-wrapper
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/colors";
-@import "../styles/mixins";
 
-main {
-  max-width: $width-card-wide;
-}
-
-.background-banner {
-  background: rgb(2, 237, 157);
-  background: -moz-linear-gradient(
-    175deg,
-    rgba(2, 237, 157, 1) 0%,
-    rgba(0, 155, 226, 1) 100%
-  );
-  background: -webkit-linear-gradient(
-    175deg,
-    rgba(2, 237, 157, 1) 0%,
-    rgba(0, 155, 226, 1) 100%
-  );
-  background: linear-gradient(
-    175deg,
-    rgba(2, 237, 157, 1) 0%,
-    rgba(0, 155, 226, 1) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#02ed9d",endColorstr="#009be2",GradientType=1);
-  position: absolute;
-  z-index: -100;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 40vh;
-  min-height: 300px;
-}
-
-textarea {
-  width: 100%;
-  height: 200px;
-}
-
-
-.vote-comment {
-  padding: 5px;
-  margin: 0;
-  border: none;
-  &:nth-child(2n-1) {
-    background-color: white;
-  }
-}
-
-.project-wrapper-inner {
-  padding-top: 100px;
-  position: relative;
-}
-
-.project {
-  background: whitesmoke;
-  min-height: 100vh;
-  padding-top: 50px;
-  border: 1px solid $color-bg-secondary;
-  border-radius: $border-radius;
-  @include has-box-shadow;
-  // margin: 1rem;
-  padding: 1.25rem;
-}
-
-.screenshots section {
-  justify-content: left;
-}
-
-form {
-  width: 100%;
-}
 </style>
 
 <script>

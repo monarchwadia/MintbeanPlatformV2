@@ -14,9 +14,9 @@
 </template>
 
 <style>
-.mb-image-display .cld-context .cld-image img {
+/* .mb-image-display .cld-context .cld-image img {
   max-width: 100%;
-}
+} */
 </style>
 
 <script>

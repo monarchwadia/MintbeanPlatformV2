@@ -49,53 +49,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/utils";
-@import "../styles/colors";
-
-.mb-project-search {
-  display: flex;
-  flex-wrap: wrap;
-  // grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  // justify-content: space-evenly;
-  // column-gap: 5px;
-
-  & > .left {
-    min-width: 400px;
-    flex-grow: 1;
-  }
-
-  & > .right {
-    flex-grow: 6;
-  }
-
-  label {
-    cursor: pointer;
-    width: 100%;
-  }
-
-  input {
-    cursor: pointer;
-  }
-
-  input[type="text"] {
-    cursor: text;
-    width: 100%;
-  }
-
-  input[type="number"] {
-    width: 100px;
-  }
-
-}
-
-.video-container {
-  width: 100%;
-  height: auto;
-  video {
-    display: block;
-    margin: auto;
-  }
-}
 
 </style>
 

@@ -5,7 +5,8 @@ div
     mb-project-search
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>
 
 <script>
 import mbProjectSearch from "../components/mb-project-search";

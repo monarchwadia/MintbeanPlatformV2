@@ -40,65 +40,7 @@ div
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/colors";
 
-button {
-  outline: none;
-}
-
-.hero {
-  justify-content: space-evenly;
-  display: flex;
-  margin-bottom: 50px;
-  background: rgb(255, 255, 255);
-  background: linear-gradient(
-    0deg,
-    $least-minty 0%,
-    rgba(255, 255, 255, 1) 50%
-  );
-  text-align: left;
-  background-color: $color-bg-secondary;
-  padding: 100px;
-  flex-wrap: wrap;
-
-  .left {
-    align-content: center;
-    min-width: 350px;
-    h1 {
-      font-size: 3.5em;
-      padding: 0 0;
-      margin: 0;
-    }
-  }
-
-  .right {
-    width: 600px;
-    min-width: 350px;
-    display: flex;
-    vertical-align: middle;
-  }
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-
-  .grid-item {
-    gap: 1rem;
-  }
-}
-
-.signup-bean {
-  padding: 0 50px;
-}
-
-.hackathon-card {
-  cursor: pointer;
-}
-
-main {
-  max-width: 100%;
-}
 </style>
 
 <script>

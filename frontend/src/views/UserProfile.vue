@@ -8,28 +8,7 @@ div.wrapper
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/colors";
-@import "../styles/mixins";
 
-.event-wrapper-inner {
-  padding-top: 100px;
-  position: relative;
-}
-
-.event {
-  background: whitesmoke;
-  min-height: 100vh;
-  padding-top: 50px;
-  border: 1px solid $color-bg-secondary;
-  border-radius: $border-radius;
-  @include has-box-shadow;
-  // margin: 1rem;
-  padding: 1.25rem;
-}
-
-form {
-  width: 100%;
-}
 </style>
 
 <script>

@@ -14,19 +14,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../../styles/variables";
 
-.auth {
-  background-image: url("../../assets/auth-background.jpg");
-  height: calc(100vh - #{$navbar-height});
-  flex-direction: row-reverse;
-  justify-content: right;
-}
-
-.login-form {
-  background-color: white;
-  margin: 100px;
-}
 </style>
 
 <script>
