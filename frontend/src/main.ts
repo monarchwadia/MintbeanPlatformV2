@@ -10,7 +10,7 @@ import App from "./App.vue";
 import router from "./router";
 import { createStore } from "./store";
 
-import "./styles/app.scss";
+import "./styles/app.pcss";
 import { MbState } from "./types/MbState";
 import VueGtag from "vue-gtag";
 import registerFontAwesome from "./config/registerFontAwesome";

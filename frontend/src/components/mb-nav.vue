@@ -1,18 +1,60 @@
-<template lang="pug">
-nav.mb-nav
-  router-link(to="/")
-    img.logo(:src="mintbeanLogo")
-  div.links
-    router-link(to="/") 
-      div Home
-    a(v-if="isLoggedIn" href="#" v-on:click.prevent="logout")
-      div Log Out
-    router-link(to="/admin" v-if="isLoggedIn && isAdmin") 
-      div Admin
-    router-link(to="/auth/login" v-if="!isLoggedIn") 
-      div Log In
-    router-link(to="/auth/register" v-if="!isLoggedIn") 
-      div Register
+<template>
+  <header class>
+    <div class="flex items-center justify-between px-4 py-3">
+      <div>
+        <router-link to="/" class="block">
+          <img :src="mintbeanLogo" class="h-8" alt="Mintbean Logo">
+        </router-link>
+      </div>
+
+      <div class="flex items-right justify-between px-4 py-3">
+        <nav class="hidden md:flex px-2 pt-2 pb-4 sm:p-0">
+          <router-link to="/" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
+            Home
+          </router-link>
+          <a v-if="isLoggedIn" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800" href="#" v-on:click.prevent="logout">
+            Log Out
+          </a>
+          <router-link v-if="isLoggedIn && isAdmin" to="/admin" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
+            Admin
+          </router-link>
+          <router-link v-if="!isLoggedIn" to="/auth/login" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
+            Log In
+          </router-link>
+          <router-link v-if="!isLoggedIn" to="/auth/register" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
+            Register
+          </router-link>
+        </nav>
+
+        <div class="md:hidden">
+          <button @click="isOpen = !isOpen" type="button" class="block text-black hover:text-gray-500 focus:text-gray-500 focus:outline-none">
+            <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+              <path v-if="isOpen" fill-rule="evenodd" d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"/>
+              <path v-if="!isOpen" fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <nav :class="isOpen ? 'block' : 'hidden'" class="md:hidden px-2 pt-2 pb-4 flex sm:p-0">
+      <router-link to="/" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
+        xHome
+      </router-link>
+      <a v-if="isLoggedIn" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800" href="#" v-on:click.prevent="logout">
+        Log Out
+      </a>
+      <router-link v-if="isLoggedIn && isAdmin" to="/admin" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
+        Admin
+      </router-link>
+      <router-link v-if="!isLoggedIn" to="/auth/login" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
+        Log In
+      </router-link>
+      <router-link v-if="!isLoggedIn" to="/auth/register" class="block px-2 py-1 text-black font-semibold rounded hover:bg-gray-800">
+        Register
+      </router-link>
+    </nav>
+  </header>
 </template>
 
 <style lang="scss" scoped>
@@ -25,6 +67,11 @@ import mintbeanLogo from "../../src/assets/mintbean-logo.png";
 export default {
   props: {
     path: String
+  },
+  data() {
+    return {
+      isOpen: false
+    }
   },
   computed: {
     mintbeanLogo() {
