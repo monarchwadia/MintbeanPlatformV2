@@ -2,22 +2,27 @@
 div
   //- mb-modal(:display="showSearchProjectsModal" v-on:close="closeSearchProjectsModal()")
   //-   mb-project-search
-  header.hero
-    div.left
-      h1 Write code.
-      h1 Get noticed.
-      h1 Get hired.
-      p Come for the jobs. Stay for the community.
-    div.right
-      div
-        mb-image-display(serverId="c58b49717bb0118438ee4a47e4ed2038")
-        img.signup-bean(src='../assets/bean.png')
-      div
-        h1 Beginners are welcome!
-        p Frontend & Full Stack Hackathons
-        p Mondays & Wednesdays at 12:00pm EST
-        mb-a(href="https://www.eventbrite.ca/o/mintbean-28752300031")
-          button.u-pulse Sign up now!
+  header.py-10(style="background: linear-gradient(0deg,#a3fedf,#fff 50%)")
+    div.container.flex.justify-between.m-auto.pb-10
+      div.flex-initial.px-15.py-20
+        p.text-6xl.font-semibold Write code.
+        p.text-6xl.font-semibold Get noticed.
+        p.text-6xl.font-semibold Get hired.
+        p.text-l.pt-5 Come for the jobs. Stay for the community.
+      div.flex-initial.px-15.py-20.flex-col
+        div.flex
+          div.p-3.sm_block.hidden
+            mb-image-display(serverId="c58b49717bb0118438ee4a47e4ed2038")
+            img.signup-bean(src='../assets/bean.png')
+          div.p-3
+            p.text-2xl.lg_text-3xl.xl_text-5xl Let the fun begin!
+            div.text-xl.md_text-xl.xl_text-2xl.mt-5
+              p Frontend & Full Stack Hackathons
+              p Every Monday & Wednesday
+              p 12:00pm EST
+        div.p-3
+          mb-a(href="https://www.eventbrite.ca/o/mintbean-28752300031")
+            button.u-pulse.text-white.p-6.min-w-full.gradient-blue-mint Sign up now!
   
   main
     h2 Featured Projects
@@ -40,7 +45,7 @@ div
 </template>
 
 <style lang="scss" scoped>
-
+@import "../styles/utils";
 </style>
 
 <script>

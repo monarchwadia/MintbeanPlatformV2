@@ -19,11 +19,11 @@ export default {
   },
   computed: {
     classes() {
-      const common = "px-2 pt-2 pb-4 sm:p-0";
+      const common = "px-2 pt-2 pb-4 sm_p-0";
 
       return this.$props.forResponsive
-        ? `md:hidden flex ${common}`
-        : `hidden md:flex ${common}`;
+        ? `md_hidden flex ${common}`
+        : `hidden md_flex ${common}`;
     }
   }
 };

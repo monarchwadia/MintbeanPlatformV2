@@ -1,0 +1,18 @@
+.gradient-blue-mint {
+  background: rgb(2, 237, 157);
+  background: -moz-linear-gradient(
+    175deg,
+    rgba(2, 237, 157, 1) 0%,
+    rgba(0, 155, 226, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    175deg,
+    rgba(2, 237, 157, 1) 0%,
+    rgba(0, 155, 226, 1) 100%
+  );
+  background: linear-gradient(
+    175deg,
+    rgba(2, 237, 157, 1) 0%,
+    rgba(0, 155, 226, 1) 100%
+  );
+}

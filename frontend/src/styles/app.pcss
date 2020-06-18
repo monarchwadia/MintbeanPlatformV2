@@ -1,21 +1,27 @@
+@import "./button.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@font-face {
+  font-family: Montserrat;
+  src: url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+}
+
+/* 
+* {
+  font-family: "Montserrat", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+} */
 
 /* 
 @import "./variables";
 @import "./utils";
 @import "./colors";
 @import "./transitions";
-
-/* // * {
-//   font-family: "Montserrat", sans-serif;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-//   box-sizing: border-box;
-// }
 
 // button,
 // input[type="submit"] {
