@@ -1,0 +1,18 @@
+.u-pulse {
+  animation: shadow-pulse 3s infinite;
+}
+
+@keyframes shadow-pulse {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 255, 255, 1);
+    filter: contrast(100%);
+  }
+  20% {
+    box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
+    filter: contrast(200%);
+  }
+}
+
+.u-width-full {
+  width: 100%;
+}
