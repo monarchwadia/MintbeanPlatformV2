@@ -15,9 +15,9 @@
               p.mt-5 12:00pm EST
           div.p-3.sm_block.hidden
             mb-image-display(serverId="c58b49717bb0118438ee4a47e4ed2038")
-            img.signup-bean(src='../../assets/bean.png')
+            img.signup-bean.u-pulse(src='../../assets/bean.png')
         div.pt-10
-          div.text-center.u-pulse.text-white.p-6.min-w-full.gradient-blue-mint.text-2xl.rounded-lg Sign up now!
+          div.text-center.u-pulse.text-black.p-6.min-w-full.gradient-blue-mint.text-2xl.rounded-lg Join an event
 </template>
 
 <script>
