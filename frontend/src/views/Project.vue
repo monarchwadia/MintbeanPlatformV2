@@ -8,9 +8,9 @@ div.project-wrapper
         h3 Author
         p {{ project.User.firstname }} {{ project.User.lastname }}
         h3(v-if="project.source_code_url") Source Code
-        mb-a(:href="project.source_code_url") Click here to see source code
+        mb-external-link(:href="project.source_code_url") Click here to see source code
         h3(v-if="project.live_url") View Project
-        mb-a(:href="project.live_url") Click here to view the project
+        mb-external-link(:href="project.live_url") Click here to view the project
         div.screenshots
           h2 Media
           section

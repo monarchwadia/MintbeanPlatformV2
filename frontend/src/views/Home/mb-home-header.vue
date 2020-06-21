@@ -1,7 +1,7 @@
 <template lang="pug">
 .flex.flex-col
   .flex.justify-around.pb-10(style="background: linear-gradient(0deg,#a3fedf,#fff 50%); box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);")
-    mb-a(href="https://www.eventbrite.ca/o/mintbean-28752300031").container.flex.justify-between.px-16.text-white.rounded-lg.cursor-pointer(style="background: linear-gradient(0deg, black, #3d3d3d);")
+    mb-external-link-follow(href="https://www.eventbrite.ca/o/mintbean-28752300031").container.flex.justify-between.px-16.text-white.rounded-lg.cursor-pointer(style="background: linear-gradient(0deg, black, #3d3d3d);")
       div.flex-initial.px-15.py-20
         p.text-6xl.font-semibold Write code.
         p.text-6xl.font-semibold Get noticed.

@@ -1,22 +1,10 @@
 <template>
-  <nav :class="classes">
-    <div v-for="(link, i) in links" :key="i">
-      <a
-        v-if="link.onClick"
-        class="inline-block text-black font-semibold rounded hover_bg-teal-400 hover_text-white py-4 px-5"
-        href="#"
-        v-on:click.prevent="link.onClick"
-      >
-        {{ link.label }}
-      </a>
-      <router-link
-        v-else
-        :to="link.linkTo"
-        class="inline-block text-black font-semibold rounded hover_bg-teal-400 hover_text-white py-4 px-5"
-      >
-        {{ link.label }}
-      </router-link>
-    </div>
+  <nav>
+    <mb-links
+      :links="links"
+      :class="classes"
+      link-class="inline-block text-black font-semibold rounded hover_bg-teal-400 hover_text-white py-4 px-5"
+    />
   </nav>
 </template>
 

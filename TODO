@@ -19,7 +19,21 @@ First:
 ✔ Automated deployment scripts @done(20-05-31 22:35)
 ✔ Deploy images @done(20-06-09 18:10)
 ✔ Move production to production mode @done(20-06-09 18:10)
-☐ Fix logo
+✔ Fix logo @done(20-06-21 11:57)
+☐ Add styling for "Already have an account? SIGN IN" and "SIGN UP" links
+☐ Add ToS and Privacy Policy
+☐ Add a nicer Page Not Found view
+☐ Beautify the Event view
+☐ Beautify the Project view
+☐ Add a Projects page
+☐ Add upcoming projects to above the fold
+☐ Users cannot submit multiple projects (backend safety checks)
+☐ Responsiveness
+
+
+Lined up:
+☐ Add Markdown support for creating events
+☐ Main page should show curated projects
 ☐ Beautify the project view
 ☐ Fix image preview
 ☐ Create user profile view
@@ -27,11 +41,6 @@ First:
   ☐ Create/Read/Update/Archive MbEvent, including image upload
 ☐ Compliance
 ☐ Create tests for frontend projects
-☐ Users cannot submit multiple projects (backend safety checks)
-
-Lined up:
-☐ Add Markdown support for creating events
-☐ Main page should show curated projects
 
 After:
 ☐ (loggedin) LIST /mb-event/:id/projects [leaderboard]

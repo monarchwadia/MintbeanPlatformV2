@@ -53,20 +53,32 @@ export default {
   computed: {
     links() {
       return [
-        { label: "Home", showIf: true, linkTo: "/" },
-        { label: "Log Out", showIf: this.isLoggedIn, onClick: this.logout },
+        { label: "Home", hidden: false, type: "internal", ref: "/" },
+        {
+          label: "Log Out",
+          hidden: !this.isLoggedIn,
+          type: "action",
+          ref: this.logout
+        },
         {
           label: "Admin",
-          showIf: this.isLoggedIn && this.isAdmin,
-          linkTo: "/admin"
+          hidden: !(this.isLoggedIn && this.isAdmin),
+          type: "internal",
+          ref: "/admin"
         },
-        { label: "Sign In", showIf: !this.isLoggedIn, linkTo: "/auth/login" },
+        {
+          label: "Sign In",
+          hidden: this.isLoggedIn,
+          type: "internal",
+          ref: "/auth/login"
+        },
         {
           label: "Sign Up",
-          showIf: !this.isLoggedIn,
-          linkTo: "/auth/register"
+          hidden: this.isLoggedIn,
+          type: "internal",
+          ref: "/auth/register"
         }
-      ].filter(link => link.showIf);
+      ].filter(link => !link.hidden);
     },
     mintbeanLogo() {
       return mintbeanLogo;
