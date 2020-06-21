@@ -10,9 +10,9 @@ auth-wrapper
       mb-input(name="email", v-model="email")
     mb-label Password
       mb-input(name="password", type="password", v-model="password")
+    router-link(to="/auth/register").text-xs.text-center By signing up, you agree to our Terms of Service and Privacy Policy.
     mb-button.my-4(type="submit") Continue
-    span.text-xs.text-center Already a member? 
-      router-link(to="/auth/login") Sign In
+    router-link(to="/auth/login").text-xs.text-center.text-blue-500 Already a member? Sign In
 </template>
 
 <style lang="scss" scoped></style>
