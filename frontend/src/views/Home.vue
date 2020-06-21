@@ -44,7 +44,7 @@ export default {
     return {
       sections: [
         {
-          title: 'ReactJS Projects',
+          title: "ReactJS Projects",
           projects: [
             {
               cloudinaryPublicId: "wzk5axcfxliedyrblkdj",
@@ -76,7 +76,7 @@ export default {
           ]
         },
         {
-          title: 'API Integration Projects',
+          title: "API Integration Projects",
           projects: [
             {
               cloudinaryPublicId: "mqnsisr2zuloikgd3gab",
@@ -108,13 +108,14 @@ export default {
           ]
         },
         {
-          title: 'Creative Projects',
+          title: "Creative Projects",
           projects: [
             {
               cloudinaryPublicId: "wzk5axcfxliedyrblkdj",
               title: "Piano, with PaperJS",
               authorName: "Yasaman Loghmani",
-              description: "Experience a beautiful fusion of visual design, animation, and audio APIs.",
+              description:
+                "Experience a beautiful fusion of visual design, animation, and audio APIs.",
               projectId: "",
               tags: ["audio", "animation", "creative"]
             },

@@ -17,7 +17,7 @@ const errorHandlerPlugin = (store: Store<MbState>) => {
         break;
       }
       case "error.dismiss": {
-        const errors = state.mbErrors.filter((x) => x.id !== payload.id);
+        const errors = state.mbErrors.filter(x => x.id !== payload.id);
         store.commit("mbErrors", errors);
         break;
       }

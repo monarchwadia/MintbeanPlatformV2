@@ -4,9 +4,7 @@
     mb-project-grid-item(v-for="project in projects" :project="project")
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
 
 <script>
 import mbProjectGridItem from "./mb-project-grid-item.vue";

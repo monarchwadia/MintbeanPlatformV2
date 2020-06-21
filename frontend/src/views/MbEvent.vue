@@ -39,9 +39,7 @@ div.event-wrapper
 
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
 
 <script>
 import moment from "moment";
@@ -135,7 +133,7 @@ export default {
           ratingCountMin: 0
         })
         .then(projects => {
-          self.projects = projects
+          self.projects = projects;
         })
         .catch(e => {
           console.error(e);
@@ -161,15 +159,17 @@ Would you like to continue?`);
         cloudinaryPublicId: f.public_id
       }));
 
-      this.$store.dispatch("submitProject", {
-        title,
-        source_code_url,
-        live_url,
-        MbEventId: this.mbEvent.id,
-        MediaAssets
-      }).then(() => {
-        self.fetchProjects();
-      });
+      this.$store
+        .dispatch("submitProject", {
+          title,
+          source_code_url,
+          live_url,
+          MbEventId: this.mbEvent.id,
+          MediaAssets
+        })
+        .then(() => {
+          self.fetchProjects();
+        });
     }
   },
   mounted() {

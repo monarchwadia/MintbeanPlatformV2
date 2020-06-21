@@ -8,9 +8,7 @@
 
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
 
 <script>
 export default {
@@ -18,11 +16,11 @@ export default {
   computed: {
     mbErrors() {
       return this.$store.state.mbErrors;
-    },
+    }
   },
   methods: {
     handleCloseError(e) {
-      this.$store.dispatch('errorPush', e)
+      this.$store.dispatch("errorPush", e);
     }
   }
 };

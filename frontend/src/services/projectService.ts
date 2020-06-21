@@ -32,7 +32,7 @@ const mapProjectSearchOptions = (pso: ProjectSearchOptions) => {
     sort_direction: pso.sortDirection,
     sort_field: pso.sortField,
     limit: pso.limit,
-    offset: pso.offset,
+    offset: pso.offset
   };
 };
 
@@ -63,7 +63,7 @@ export class ProjectService {
         sortDirection: "desc",
         sortField: "RATING_AVERAGE",
         limit: 50,
-        offset: 0,
+        offset: 0
       },
       options
     );
@@ -71,7 +71,7 @@ export class ProjectService {
     const params = mapProjectSearchOptions(opts);
 
     const queryResponse = await this.apiService.get("/api/v1/project/search", {
-      params,
+      params
     });
 
     return queryResponse.data;
@@ -84,7 +84,7 @@ export class ProjectService {
     const queryResponse = await this.apiService.post("/api/v1/vote", {
       ProjectId,
       rating,
-      comment,
+      comment
     });
     return queryResponse.data;
   }

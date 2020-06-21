@@ -21,9 +21,7 @@ div.mb-project-grid-item
         | &nbsp; {{ voteAverage }}
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
 
 <script>
 export default {

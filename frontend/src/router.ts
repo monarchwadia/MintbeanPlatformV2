@@ -15,43 +15,43 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: Home
   },
   {
     path: "/auth/login",
     name: "Login",
-    component: Login,
+    component: Login
   },
   {
     path: "/project/:id",
     name: "Project",
-    component: Project,
+    component: Project
   },
   {
     path: "/auth/register",
     name: "Register",
-    component: Register,
+    component: Register
   },
   {
     path: "/mb-event/:id",
     name: "Event",
-    component: MbEvent,
+    component: MbEvent
   },
   {
     path: "/user-profile/:id",
     name: "User Profile",
-    component: UserProfile,
+    component: UserProfile
   },
   {
     path: "/admin",
     name: "Admin Panel",
-    component: Admin,
+    component: Admin
   },
   {
     path: "*",
     name: "Not Found",
-    component: NotFound,
-  },
+    component: NotFound
+  }
 ];
 
 const router = new VueRouter({
@@ -60,7 +60,7 @@ const router = new VueRouter({
   routes,
   scrollBehavior() {
     return { x: 0, y: 0 };
-  },
+  }
 });
 
 export default router;

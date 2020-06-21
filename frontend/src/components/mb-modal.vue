@@ -10,20 +10,17 @@
           slot
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
 
 <script>
-
 export default {
   name: "mb-modal",
-  props: ['display', 'title', 'buttons'],
+  props: ["display", "title", "buttons"],
   data() {
     return {
       displayInitial: false,
       opacity100: false
-    }
+    };
   },
   methods: {
     onClickCover(evt) {
@@ -32,14 +29,16 @@ export default {
       }
     },
     onClose() {
-      this.$emit('close');
+      this.$emit("close");
     }
   },
   computed: {
     buttonJson() {
       const self = this;
       const buttons = this.buttons || [];
-      return buttons.concat([{ label: 'Close', onClick: () => self.onClose() }])
+      return buttons.concat([
+        { label: "Close", onClick: () => self.onClose() }
+      ]);
     }
   },
   watch: {

@@ -48,26 +48,24 @@
       mb-project-grid(:projects="projects")
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
 
 <script>
 import mbProjectGrid from "./mb-project-grid.vue";
 import debounce from "../helpers/debounce";
-import searchVideo from "../assets/search.mp4"
-import notFoundVideo from "../assets/notFound.mp4"
+import searchVideo from "../assets/search.mp4";
+import notFoundVideo from "../assets/notFound.mp4";
 
 // @ is an alias to /src
 export default {
   name: "mb-project-search",
-  props: ['showSearchPanel'],
+  props: ["showSearchPanel"],
   data() {
     return {
       search: {
-        searchQuery: '',
-        sortField: 'RATING_AVERAGE',
-        sortDirection: 'desc',
+        searchQuery: "",
+        sortField: "RATING_AVERAGE",
+        sortDirection: "desc",
         ratingCountMin: 9,
         ratingAverageMin: 9
       },
@@ -82,7 +80,7 @@ export default {
   },
   computed: {
     assets() {
-      return { searchVideo, notFoundVideo }
+      return { searchVideo, notFoundVideo };
     }
   },
   methods: {
@@ -91,7 +89,7 @@ export default {
 
       self.projects = [];
       self.status.loading = true;
-      this.debounce(() => self.doRequest())
+      this.debounce(() => self.doRequest());
     },
     doRequest() {
       const self = this;
@@ -111,36 +109,34 @@ export default {
     }
   },
   watch: {
-    'search.searchQuery'(val) {
-      this.doSearch()
+    "search.searchQuery"(val) {
+      this.doSearch();
     },
-    'search.sortField'(val) {
-      this.doSearch()
+    "search.sortField"(val) {
+      this.doSearch();
     },
-    'search.sortDirection'(val) {
-      this.doSearch()
+    "search.sortDirection"(val) {
+      this.doSearch();
     },
-    'search.ratingCountMin'(val) {
-      this.doSearch()
+    "search.ratingCountMin"(val) {
+      this.doSearch();
     },
-    'search.ratingAverageMin'(val) {
-      this.doSearch()
+    "search.ratingAverageMin"(val) {
+      this.doSearch();
     }
   },
   mounted() {
     this.debounce = debounce();
     this.doRequest();
 
-  // userId: string;
-  // mbEventId: string;
-  // ratingAverageMin: number;
-  // ratingCountMin: number;
-  // sortDirection: "asc" | "desc";
-  // sortField: "CREATED_AT" | "RATING_AVERAGE" | "RATING_COUNT";
-  // limit: number;
-  // offset: number;
-
-
+    // userId: string;
+    // mbEventId: string;
+    // ratingAverageMin: number;
+    // ratingCountMin: number;
+    // sortDirection: "asc" | "desc";
+    // sortField: "CREATED_AT" | "RATING_AVERAGE" | "RATING_COUNT";
+    // limit: number;
+    // offset: number;
   }
 };
 </script>

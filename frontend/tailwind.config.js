@@ -1,12 +1,12 @@
 module.exports = {
-  separator: '_',
+  separator: "_",
   purge: [],
   theme: {
     fontFamily: {
-      main: ['Montserrat']
+      main: ["Montserrat"]
     },
-    extend: {},
+    extend: {}
   },
   variants: {},
-  plugins: [],
-}
+  plugins: []
+};
