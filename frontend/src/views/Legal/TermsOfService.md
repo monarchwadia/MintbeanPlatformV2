@@ -1,121 +1,229 @@
-## Updated June 21, 2019
+# Terms of Service
 
-This Terms of Service (the "Terms") describes the rights and responsibilities that apply to your use of Dribbble's websites, services, and mobile app (collectively, the "Service"), each owned and operated by Dribbble Holdings Ltd. ("Dribbble", "we", "our" or "us").
+Last updated: 06/21/2020
 
-Please read the Terms carefully before using the Service. If you don't agree to the Terms, as well as [Dribbble's Privacy Policy](https://dribbble.com/privacy) (the "Privacy Policy") and Dribbble's [Community Guidelines](https://dribbble.com/guidelines) (the "Community Guidelines"), you may not use the Service. If you are entering into the Terms on behalf of a company or other legal entity, you represent that you have the authority to bind such entity to the Terms. If you do not have such authority, you must not accept the Terms or use the Service on behalf of such entity. The Service is only available to you if you have entered the age of majority in your jurisdiction of residence and are fully able and competent to enter into, abide by and comply with the Terms.
+## Introduction
 
-1.  Your Dribbble Account. If you create an account on the Service (your "Account"), you are responsible for maintaining the security of your Account and its Content (as defined below), and you are fully responsible for all activities that occur under your Account and any other actions taken on the Service. You must not describe or assign Content to your Account in a misleading or unlawful manner, including in a manner intended to trade on the name or reputation of others, and Dribbble may change or remove any description or keyword that it considers inappropriate or unlawful, or otherwise likely to cause Dribbble liability. You must immediately notify Dribbble of any unauthorized uses of your Account or any other breaches of security. Dribbble will not be liable for any acts or omissions by you, including any damages of any kind incurred as a result of such acts or omissions.
+Welcome to Mintbean ("Company", "we", "our", "us")! As you have just clicked our Terms of Service, please pause, grab a cup of coffee and carefully read the following pages. It will take you approximately 20 minutes.
 
-    For paid Accounts (each, a "Paid Account"), Dribbble deems the person under whose name appears on the credit or charge card or other payment method that pays the charges for the Service to be the owner of the Paid Account. If a corporate or other organization's name appears on the credit or charge card or other payment method, that corporation or organization is deemed to be the owner. If any dispute arises as to who owns or controls a Paid Account, your most recently provided payment method will continue to be charged and you will be responsible to pay for the Service until Dribbble receives written confirmation from the Paid Account email address confirming a change in ownership and control of the Paid Account.
+These Terms of Service ("Terms", "Terms of Service") govern your use of our web pages located at [https://mintbean.io](https://mintbean.io/) operated by Mintbean
 
-2.  Fees and Renewals. Pricing for Paid Accounts will be provided at the time of purchase. Unless otherwise set out at the time of purchase or as agreed to by Dribbble, fees for a Paid Account will be billed in advance for each year and are non-refundable. There will be no refunds or credits for partial months of service or for periods in which your Paid Account remains open but you do not use the Service.
+Our Privacy Policy also governs your use of our Service and explains how we collect, safeguard and disclose information that results from your use of our web pages. Please read it here <https://mintbean.io/legal/privacy-policy>.
 
-    We reserve the right to modify our billing rates at any time upon thirty (30) days written notice by posting such fee changes to the Service or through email notification to you. You will be liable to pay such modified billing rates.
+Your agreement with us includes these Terms and our Privacy Policy ("Agreements"). You acknowledge that you have read and understood Agreements, and agree to be bound of them.
 
-    Subject to your payment of applicable fees for a Paid Account, we will provide the Service to you for the period of time that you have paid for such Service (the "Subscription Period"). At the end of the Subscription Period, your Paid Account subscription will automatically renew for an additional Subscription Period until it is expressly cancelled by you as described in the "Termination" section below.
+If you do not agree with (or cannot comply with) Agreements, then you may not use the Service, but please let us know by emailing at <info@mintbean.io> so we can try to find a solution. These Terms apply to all visitors, users and others who wish to access or use Service.
 
-    If you purchase any fee-based Service, you agree that our third party payment gateways, such as Stripe and Paypal, may store your credit or charge card or other payment information. You expressly agree that we are authorized to charge you (i) a fee for any applicable Service for which you have subscribed, billed on a basis of the Subscription Period, (ii) any other fees for the Service you may purchase, (iii) any charges for use of the Service in excess of the usage or other limits placed on your use of the Service (and you hereby consent to such charges and agree we are not required to notify you of any such charge in advance) and (iv) any applicable taxes in connection with your use of the Service to the credit or charge card you provide and to reimburse us for all collection costs and interest for any overdue amounts. If the credit or charge card you provide expires and you do not provide new credit or charge card information or cancel your Account, you authorize us to continue billing you and you agree to remain responsible for any uncollected fees.
+Thank you for being responsible.
 
-    You take full responsibility for all taxes and fees of any nature associated with the Service, including any sales tax related to any purchase or sale of services or goods under the Terms. When purchasing or selling services or goods under the Terms, it is your responsibility to determine whether or not sales taxes apply to a transaction and to collect, report and remit the correct amounts to the appropriate authority.
+## Communications
 
-3.  Your Responsibilities. If you operate an Account, comment on a screenshot, post material to the Service, post links on the Service, or otherwise make (or allow any third party to make) material available by means of the Service (any such material, "Content"), you are entirely responsible for the content of, and any harm resulting from, that Content. That is the case regardless of whether the Content in question constitutes text or graphics. By making Content available, you represent and warrant that:
+By creating an Account on our Service, you agree to subscribe to newsletters, marketing or promotional materials and other information we may send. However, you may opt out of receiving any, or all, of these communications from us by following the unsubscribe link or by emailing at.
 
-    - the downloading, copying and use of the Content will not infringe the proprietary rights, including but not limited to the copyright, patent, trademark or trade secret rights, of any third party;
-    - if your employer has rights to intellectual property you create, you have either (i) received permission from your employer to post or make available the Content, including but not limited to any software, or (ii) secured from your employer a waiver as to all rights in or to the Content;
-    - you have fully complied with any third-party licenses relating to the Content, and have done all things necessary to successfully pass through to end users any required terms;
-    - the Content does not contain or install any viruses or other harmful or destructive content;
-    - the Content is not spam, is not machine- or randomly-generated, and does not contain unethical or unwanted commercial content designed to drive traffic to third party sites or boost the search engine rankings of third party sites, or to further unlawful acts (such as phishing) or mislead recipients as to the source of the material (such as spoofing);
-    - the Content is not obscene, libelous or defamatory, hateful or racially or ethnically objectionable, and does not violate the privacy or publicity rights of any third party;
-    - your Account is not getting advertised via unwanted electronic messages such as spam links on newsgroups, email lists, other blogs and web sites, and similar unsolicited promotional methods;
-    - your Account is not named in a manner that misleads your readers into thinking that you are another person or company. For example, your Account's URL or name is not the name of a person other than yourself or company other than your own; and
-    - you have, in the case of Content that includes computer code, accurately categorized and/or described the type, nature, uses and effects of the materials, whether requested to do so by Dribbble or otherwise.
+## Purchases
 
-    By uploading Content or otherwise providing Content to Dribbble, you grant Dribbble the right to use (including the right to host, index, cache and format) and display your Content in connection with providing the Service as well as otherwise on the Site and our marketing communications with you and other users and prospective users of the Service, including without limitation on our emails, marketing channels and other promotional materials (subject to the requirements set out in the Privacy Policy). To the extent we use your Content in our marketing communications, unless you expressly permit us to do otherwise, we will always cite you as the owner of such Content. This paragraph will survive the termination or expiry of the Terms.
+If you wish to purchase any product or service made available through Service ("Purchase"), you may be asked to supply certain information relevant to your Purchase including, without limitation, your credit card number, the expiration date of your credit card, your billing address, and your shipping information.
 
-    Dribbble reserves the right to refuse or remove any Content or terminate or deny access to your use of the Service for any reason whatsoever. Please read the Community Guidelines for rules and advice on what types of Content and uses of the Service are appropriate at Dribbble.
+You represent and warrant that: (i) you have the legal right to use any credit card(s) or other payment method(s) in connection with any Purchase; and that (ii) the information you supply to us is true, correct and complete.
 
-    All Content uploaded are copyright © their respective owners.
+We may employ the use of third party services for the purpose of facilitating payment and the completion of Purchases. By submitting your information, you grant us the right to provide the information to these third parties subject to our Privacy Policy.
 
-    If you delete Content, Dribbble will use reasonable efforts to remove it from the Service, but you acknowledge that caching or references to the Content may not be made immediately unavailable.
+We reserve the right to refuse or cancel your order at any time for reasons including but not limited to: product or service availability, errors in the description or price of the product or service, error in your order or other reasons.
 
-4.  Rules. Use of any of the Services is subject to the following rules. You agree that, in addition to abiding by our Community Guidelines, you will not do any of the following:
+We reserve the right to refuse or cancel your order if fraud or an unauthorized or illegal transaction is suspected.
 
-    - Use, support or develop bots, scrapers, software, scripts, crawlers, browser plugins, robots or other automated methods including human-powered automation through like farming or any other crowd-sourced methods to access, scrape, or copy the Services, or to add or download data, or send or redirect information or messages;
-    - Reverse engineer, decompile, disassemble, decipher or otherwise attempt to derive the source code for the Services or any related technology that we have not made open source;
-    - Rent, lease, loan, trade, sell or otherwise monetize the Services or related data or access to the same, without our express written consent;
-    - Monitor the Services' availability, performance or functionality for any competitive purpose;
-    - Engage in "framing," "mirroring," or otherwise simulating the appearance or function of the Services;
-    - Post anything that contains software viruses, worms, or any other harmful code;
-    - Overlay or otherwise modify the Services or their appearance (such as by inserting elements into the Services or removing, covering, or obscuring an advertisement included on the Services);
-    - Interfere with the operation of, or place an unreasonable load on, the Services (e.g., spam, denial of service attack, viruses, gaming algorithms);
-    - Override any security feature or bypass or circumvent any access controls or limits of the Services;
-    - Create a false identity, misrepresent your identity, create a profile for anyone other than yourself, or use or attempt to use another's account; or
-    - Violate our intellectual property rights or the intellectual property rights of others.
+## Contests, Sweepstakes and Promotions
 
-5.  Dribbble Talent. In addition to complying with the other Terms herein, the following terms (except to the extent expressly agreed otherwise in a written agreement signed by an authorized representative of Dribbble) shall apply to Dribbble Talent services.
+Any contests, sweepstakes or other promotions (collectively, "Promotions") made available through Service may be governed by rules that are separate from these Terms of Service. If you participate in any Promotions, please review the applicable rules as well as our Privacy Policy. If the rules for a Promotion conflict with these Terms of Service, Promotion rules will apply.
 
-    1.  *Account; Candidates.* If you apply for a Dribbble Talent account and are approved, subject to your continuing payment of fees due for such account and your compliance with these Terms, you will have access to Dribbble's pool of job seekers (the "Talent Database") and the terms of this Section 5 (Dribbble Talent) shall apply. Candidates who you locate in the Talent Database or who are otherwise referred to you by Dribbble are considered "Referred" and constitute a "Referral".
-    2.  *Referral Fee.* For each Referred candidate Hired by you, you will pay Dribbble, within thirty (30) days of the candidate's acceptance of a job offer, a fee equal to twenty percent (20%) of the candidate's Compensation (as defined below). (All fees to be paid in United States Dollars.)
-    3.  *Notification.* You agree to notify Dribbble in writing within five business days of: (a) extending an offer to a Referred candidate; (b) a Referred candidate accepting or rejecting an offer; and (c) a Referred candidate resigning without Good Reason (as defined below) or being terminated with Cause (as defined below) within the first 90 days of employment.
-    4.  *Guarantee.* If a Referred candidate hired by Client, within the first ninety (90) days of employment, either resigns without Good Reason or is terminated for Cause, Client shall be entitled to hire a Referred replacement candidate at no additional fee. To qualify for this replacement, you must ensure the following:
-        - Dribbble is notified in writing within seven (7) days of the termination of employment
-        - The original placed candidate is no longer working for your organization
-        - The full fee has been paid by the due date on the Dribbble invoice
-        - The replacement search has the same job title, location and client territory/portfolio
-        - The replacement candidate's first year of compensation is aligned with the previous placed candidate
-        - The replacement hire is initiated within ninety (90) days of the previous candidate's last date of employment
-    5.  *Inspection Rights.* Dribbble shall have the right to periodically review, inspect and copy your books and records relating to Referred candidates for the purposes of confirming your compliance with this Section 5. All such books and records will be treated as your confidential information.
-    6.  *Disclaimer.* DRIBBBLE DOES NOT GUARANTEE ANY OUTCOMES, SATISFACTION OR SUCCESS, AND DOES NOT CONDUCT BACKGROUND CHECKS ON CANDIDATES. YOU ARE SOLELY RESPONSIBLE FOR VETTING ALL REFERRED CANDIDATES.
-    7.  *Candidate Obligations.* In addition to complying with the other Terms herein, candidates shall notify Dribbble in writing within five days of: (a) receiving an offer of employment or contract engagement, providing the name of the offeror, the start date and compensation; (b) accepting an offer of employment or an engagement as a contractor; (c) commencing employment or a contracting engagement; and (d) termination of an employment or contracting engagement and the reasons therefore.
-    8.  *Employer Obligations.* You, and not Dribbble, are solely responsible for compliance with respect to all employer obligations (including tax withholding and statutory insurance). You agree to indemnify, defend and hold the Indemnified Parties (as defined in Section 13 below) harmless from and against any and all claims, losses, liability, demands, obligations, expenses (including reasonable attorney's fees), fees, fines, taxes, penalties, assessments, and judgments arising out of or relating to any candidate you Hire, including without limitation (a) claims by any such candidates for breach of contract, discrimination, and harassment, (b) actions concerning misclassification, benefits, taxes, and statutory violations, and (c) an assertion or determination that Dribbble is an employer or joint employer of any such candidates.
-    9.  *Definitions.* For purposes of this Section 5 (Dribbble Talent):
-        - "Compensation" means the amount of monetary compensation to be paid to the Referred candidate by you during the first twelve months (and does not include non-guaranteed bonuses, equity compensation or benefits).
-        - "Cause" means any of the following: (a) the Hired Referred candidate's material breach of any agreement with you; (b) negligence or intentional wrongdoing by the Hired Referred candidate that causes material harm to your business; or (c) the Hired Referred candidate's conviction of or plea of no contest to a felony or crime of moral turpitude (or in any jurisdiction outside of the United States, any substantially similar criminal acts).
-        - "Hire" means to employ or engage a candidate as a contractor, consultant, advisor or in any other capacity to provide services, deliverables and/or advice.
-        - "Good Reason" means any of the following: (a) your material breach of any agreement with the candidate; (b) a change of work location of more than 30 miles; (c) a reduction in compensation; or (c) a material reduction in authority, autonomy or quality or substance of work.
+## Subscriptions
 
-6.  Third Party Websites and Content. We have not reviewed, and cannot review, all of the material, including computer software, made available through the websites and webpages to which Dribbble links, and that link to Dribbble. Dribbble does not have any control over those non-Dribbble websites and webpages, and is not responsible for their contents or their use. By linking to a non-Dribbble website or webpage, Dribbble does not represent or imply that it endorses such website or webpage. You are responsible for taking precautions as necessary to protect yourself and your computer systems from viruses and other harmful or destructive content. Dribbble disclaims any responsibility for any harm resulting from your use of non-Dribbble websites and webpages.
+Some parts of Service are billed on a subscription basis ("Subscription(s)"). You will be billed in advance on a recurring and periodic basis ("Billing Cycle"). Billing cycles are set either on a monthly or annual basis, depending on the type of subscription plan you select when purchasing a Subscription.
 
-7.  Intellectual Property. All material available on the Service and all material and services provided by or through Dribbble, its affiliates, subsidiaries, employees, agents, licensors or other commercial partners including, but not limited to, software, all informational text, software documentation, design of and "look and feel", layout, photographs, graphics, audio, video, messages, interactive and instant messaging, design and functions, files, documents, images, or other materials, whether publicly posted or privately transmitted as well as all derivative works thereof (collectively, the "Materials"), are owned by us or our licensors or service providers, and are protected by copyright, trademark, trade secret and other intellectual property laws.
+At the end of each Billing Cycle, your Subscription will automatically renew under the exact same conditions unless you cancel it or Mintbean cancels it. You may cancel your Subscription renewal either through your online account management page or by contacting Mintbean customer support team.
 
-    If Dribbble, in its sole discretion and without notice, considers that there is an immediate security or operational risk to the Service, any of its, your or a third party system, then Dribbble may immediately suspend access to or use of the Service. The suspension of use and access is not a breach of the Terms. You acknowledge that the preservation of security, confidentiality and data is paramount. Dribbble has no liability to you for suspending the Service under this provision.
+A valid payment method, including credit card or PayPal, is required to process the payment for your subscription. You shall provide Mintbean with accurate and complete billing information including full name, address, state, zip code, telephone number, and a valid payment method information. By submitting such payment information, you automatically authorize Mintbean to charge all Subscription fees incurred through your account to any such payment instruments.
 
-    This section does not apply to Content; however you agree that any ideas, suggestions, concepts, processes or techniques which you provide to Dribbble related to the Service or Dribbble or its business ("Feedback") are and will be Dribbble's exclusive property without any compensation or other consideration payable to you by Dribbble, and you do so of your own free will and volition. Dribbble may or may not, in its sole discretion, use or incorporate the Feedback in whatever form or derivative Dribbble may decide into the Service or its business or other products. You hereby assign all rights on a worldwide basis in perpetuity to Dribbble in any Feedback and, as applicable, waive any moral rights.
+Should automatic billing fail to occur for any reason, Mintbean will issue an electronic invoice indicating that you must proceed manually, within a certain deadline date, with the full payment corresponding to the billing period as indicated on the invoice.
 
-    For the purposes of the Terms and the Privacy Policy, "personal information" is any information about an identifiable individual, as defined in our Privacy Policy.
+## Fee Changes
 
-    Dribbble retains the right to use or share any Aggregated Data generated by anyone using the Service, including our users, for the purpose of enhancing and providing the Service. "Aggregated Data" means data does not contain personal information and which has been manipulated or combined to provide generalized, anonymous information. Where you choose to utilize or connect certain services from third parties with the Service, you agree that Dribbble may share your lead data with such designated third parties. You are still responsible for any and all personal information that is part of any Content.
+Mintbean, in its sole discretion and at any time, may modify Subscription fees for the Subscriptions. Any Subscription fee change will become effective at the end of the then-current Billing Cycle.
 
-8.  Changes. Dribbble reserves the right, at its sole discretion, to modify or replace any part of the Terms. It is your responsibility to check the Terms periodically for changes. Your continued use of or access to the Service following the posting of any changes to the Terms constitutes acceptance of those changes. Dribbble may also, in the future, offer new services and/or features through the Service (including, the release of new tools and resources). Such new features and/or services shall be subject to the Terms.
+Mintbean will provide you with a reasonable prior notice of any change in Subscription fees to give you an opportunity to terminate your Subscription before such change becomes effective.
 
-9.  Termination. Dribbble may terminate your access to all or any part of the Service at any time, with or without cause, with or without notice, effective immediately. If you wish to terminate the Terms or your Account (if you have one), you may simply discontinue using the Service. All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability.
+Your continued use of Service after Subscription fee change comes into effect constitutes your agreement to pay the modified Subscription fee amount.
 
-10. Disclaimer of Warranties. *Your use of the Service and all Content forming part of or related to the Service, including any Content you upload or submit and any third party software and Content, are at your sole responsibility and risk. The Service are provided on an "as is" and "as available" basis. Dribbble expressly disclaims all representations, warranties, or conditions of any kind with respect to the Service, whether express or implied, including, but not limited to, any implied warranties or conditions of merchantability, fitness for a particular purpose, accuracy, completeness, performance, system integration, quiet enjoyment, title, and non-infringement.*
+## Refunds
 
-    _The service is offered and controlled by Dribbble from its facilities in Canada. Dribbble makes no representations that the service is appropriate or available for use in locations other than Canada and the United States. Those who access or use the Service from other jurisdictions do so at their own volition and are responsible for compliance with local law. We handle complaints of copyright infringement in accordance with our [Copyright Policy](https://dribbble.com/copyright)._
+We issue refunds for Contracts within seven (7) days of the original purchase of the Contract.
 
-11. Limitation of Liability. *You agree that, under no legal theory, including, but not limited to negligence, breach of warranty or condition, breach of contract or tort, will Dribbble or its owners, officers, directors, affiliates, contractors, employees or agents, be liable to you or any third party acting on your behalf for any indirect, incidental, special, consequential, punitive, or exemplary damages or damages for loss of profits, goodwill, use, data, or other intangible losses or the cost of any substitute equipment, facilities or services (even if Dribbble has been advised of the possibility of such damages), arising from or relating to the Terms or your use of or your inability to use the Service, or for any damages arising from or related to the Terms. Dribbble's total aggregate liability from any and all claims under the Terms is limited to the total amounts you paid to Dribbble in the one (1) year immediately preceding the occurrence of loss or damage. To the extent any province, state or jurisdiction does not allow the exclusion or the limitation of liability for consequential or incidental damages, Dribbble's liability in such province, state or jurisdiction will be limited to the furthest extent permitted by law. Notwithstanding the foregoing or anything else herein to the contrary, Dribbble will not be liable to you or any third party acting on your behalf in any way with respect to a trial program or your provision of an individual's personal information to Dribbble or through the Service. You further agree that the foregoing limitations will apply with respect to third party liability of any kind.*
+## Content
 
-    _The foregoing limitations will also apply with respect to any damages incurred by reason of any content or services provided on any third party sites or otherwise provided by any third parties other than Dribbble and received by you through or advertised on the Service or received by you on any third party sites. You also agree that Dribbble will not be responsible or liable for any loss or damage of any kind incurred as the result of any interactions or dealings with advertisers or as the result of the presence of such advertisers on the Service._
+Our Service allows you to post, link, store, share and otherwise make available certain information, text, graphics, videos, or other material ("Content"). You are responsible for Content that you post on or through Service, including its legality, reliability, and appropriateness.
 
-    _With respect to any dispute arising out of or related to the Service and/or the Terms: (i) you hereby expressly give up your right to have a trial by jury; and (ii) you hereby expressly give up your right to participate as a member of a class of claimants, in any lawsuit including but not limited to class action lawsuits involving any such dispute._
+By posting Content on or through Service, You represent and warrant that: (i) Content is yours (you own it) and/or you have the right to use it and the right to grant us the rights and license as provided in these Terms, and (ii) that the posting of your Content on or through Service does not violate the privacy rights, publicity rights, copyrights, contract rights or any other rights of any person or entity. We reserve the right to terminate the account of anyone found to be infringing on a copyright.
 
-    You agree that you will not bring a claim under or related to the Terms more than one (1) year from when your claim first arose.
+You retain any and all of your rights to any Content you submit, post or display on or through Service and you are responsible for protecting those rights. We take no responsibility and assume no liability for Content you or any third party posts on or through Service. However, by posting Content using Service you grant us the right and license to use, modify, publicly perform, publicly display, reproduce, and distribute such Content on and through Service. You agree that this license includes the right for us to make your Content available to other users of Service, who may also use your Content subject to these Terms.
 
-12. General Representation and Warranty. You represent and warrant that (i) your use of the Service will be in strict accordance with the Terms, the Privacy Policy, the Community Guidelines and all applicable laws and regulations (including without limitation any local laws or regulations in your country, state, city, or other governmental area, regarding online conduct and acceptable content, and including all applicable laws regarding the transmission of technical data exported from the Canada or the country in which you reside) and (ii) your use of the Service will not infringe or misappropriate the intellectual property rights of any third party.
+Mintbean has the right but not the obligation to monitor and edit all Content provided by users.
 
-13. Indemnification. You agree to indemnify, defend, and hold harmless Dribbble, and its subsidiaries, affiliates, co-branders, all third-party advertisers, technology providers, service providers or other partners, and each of their respective officers, directors, agents, shareholders, employees and representatives (together, the "Indemnified Parties"), from and against any third party claim, demand, loss, damage, cost, or liability (including, reasonable attorneys' fees) (collectively and individually, "Claims") incurred by or made against the Indemnified Parties in connection with any Claims arising out of or relating to the Terms, the Service, including but without limitation in relation to: (a) your use, non-use or misuse of, or connection to the Service and any Content; (b) your violation or alleged violation of the Terms; and (c) your violation of any rights, including intellectual property rights, of a third party and otherwise as set out herein. Dribbble reserves the right, at your expense, to assume the exclusive defense and control of any matter for which you are required to indemnify Dribbble and you agree to cooperate with Dribbble's defense of these Claims. You agree not to settle any matter without the prior written consent of Dribbble. Dribbble will use reasonable efforts to notify you of any such Claims upon becoming aware of it.
+## Prohibited Uses
 
-14. Miscellaneous. If there is any dispute between you and Dribbble about or involving the Terms, the Service, you hereby agree that the dispute will be governed by and construed in accordance with the laws of the Province of British Columbia, Canada, without regard to its conflict of law provisions.
+You may use Service only for lawful purposes and in accordance with Terms. You agree not to use Service:
 
-    Except for any claim involving the ownership of intellectual property, all disputes arising out of or in connection with the Terms will be referred to and finally resolved by arbitration under the rules of the British Columbia International Commercial Arbitration Centre. The appointing authority will be the British Columbia International Commercial Arbitration Centre. The case will be adjudicated by a single arbitrator and will be administered by the British Columbia International Commercial Arbitration Centre in accordance with its rules. The place of arbitration will be Vancouver, British Columbia, Canada. The language of the arbitration will be English.
+(a) In any way that violates any applicable national or international law or regulation.
 
-    If any portion of the Terms is deemed unlawful, void or unenforceable by any arbitrator or court of competent jurisdiction, the Terms as a whole will not be deemed unlawful, void or unenforceable, but only that portion of the Terms that is unlawful, void or unenforceable will be stricken from the Terms.
+(b) For the purpose of exploiting, harming, or attempting to exploit or harm minors in any way by exposing them to inappropriate content or otherwise.
 
-    You agree that the Terms are specifically enforceable by Dribbble through injunctive relief and other equitable remedies without proof of monetary damages.
+(c) To transmit, or procure the sending of, any advertising or promotional material, including any "junk mail", "chain letter," "spam," or any other similar solicitation.
 
-    You agree that if Dribbble does not exercise or enforce any legal right or remedy which is contained in the Terms (or which Dribbble has the benefit of under any applicable law), this will not be taken to be a formal waiver of Dribbble's rights and that those rights or remedies will still be available to Dribbble.
+(d) To impersonate or attempt to impersonate Company, a Company employee, another user, or any other person or entity.
 
-    The Terms are the entire agreement between us related to the subject matter in the Terms. The Terms replace and supersede any other prior or contemporaneous agreement, representation or discussion, oral or written, and may not be changed except in writing signed by us, regardless of whether or not the parties act under an unsigned "electronic" agreement or rely on such an unsigned agreement.
+(e) In any way that infringes upon the rights of others, or in any way is illegal, threatening, fraudulent, or harmful, or in connection with any unlawful, illegal, fraudulent, or harmful purpose or activity.
 
-15. Contacting Dribbble. You may contact Dribbble by email at contact@dribbble.com or by mail at 524 Yates St., Victoria, BC, V8W 1K8, Canada.
+(f) To engage in any other conduct that restricts or inhibits anyone's use or enjoyment of Service, or which, as determined by us, may harm or offend Company or users of Service or expose them to liability.
+
+Additionally, you agree not to:
+
+(a) Use Service in any manner that could disable, overburden, damage, or impair Service or interfere with any other party's use of Service, including their ability to engage in real time activities through Service.
+
+(b) Use any robot, spider, or other automatic device, process, or means to access Service for any purpose, including monitoring or copying any of the material on Service.
+
+(c) Use any manual process to monitor or copy any of the material on Service or for any other unauthorized purpose without our prior written consent.
+
+(d) Use any device, software, or routine that interferes with the proper working of Service.
+
+(e) Introduce any viruses, trojan horses, worms, logic bombs, or other material which is malicious or technologically harmful.
+
+(e) Attempt to gain unauthorized access to, interfere with, damage, or disrupt any parts of Service, the server on which Service is stored, or any server, computer, or database connected to Service.
+
+(f) Attack Service via a denial-of-service attack or a distributed denial-of-service attack.
+
+(g) Take any action that may damage or falsify Company rating.
+
+(h) Otherwise attempt to interfere with the proper working of Service.
+
+## Analytics
+
+We may use third-party Service Providers to monitor and analyze the use of our Service.
+
+### Google Analytics
+
+Google Analytics is a web analytics service offered by Google that tracks and reports website traffic. Google uses the data collected to track and monitor the use of our Service. This data is shared with other Google services. Google may use the collected data to contextualise and personalise the ads of its own advertising network.
+
+For more information on the privacy practices of Google, please visit the Google Privacy Terms web page: <https://policies.google.com/privacy?hl=en>
+
+We also encourage you to review the Google's policy for safeguarding your data: <https://support.google.com/analytics/answer/6004245>.
+
+## No Use By Minors
+
+Service is intended only for access and use by individuals at least eighteen (18) years old. By accessing or using any of Company, you warrant and represent that you are at least eighteen (18) years of age and with the full authority, right, and capacity to enter into this agreement and abide by all of the terms and conditions of Terms. If you are not at least eighteen (18) years old, you are prohibited from both the access and usage of Service.
+
+## Accounts
+
+When you create an account with us, you guarantee that you are above the age of 18, and that the information you provide us is accurate, complete, and current at all times. Inaccurate, incomplete, or obsolete information may result in the immediate termination of your account on Service.
+
+You are responsible for maintaining the confidentiality of your account and password, including but not limited to the restriction of access to your computer and/or account. You agree to accept responsibility for any and all activities or actions that occur under your account and/or password, whether your password is with our Service or a third-party service. You must notify us immediately upon becoming aware of any breach of security or unauthorized use of your account.
+
+You may not use as a username the name of another person or entity or that is not lawfully available for use, a name or trademark that is subject to any rights of another person or entity other than you, without appropriate authorization. You may not use as a username any name that is offensive, vulgar or obscene.
+
+We reserve the right to refuse service, terminate accounts, remove or edit content, or cancel orders in our sole discretion.
+
+## Intellectual Property
+
+Service and its original content (excluding Content provided by users), features and functionality are and will remain the exclusive property of Mintbean and its licensors. Service is protected by copyright, trademark, and other laws of the United States. Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of Mintbean.
+
+## Copyright Policy
+
+We respect the intellectual property rights of others. It is our policy to respond to any claim that Content posted on Service infringes on the copyright or other intellectual property rights ("Infringement") of any person or entity.
+
+If you are a copyright owner, or authorized on behalf of one, and you believe that the copyrighted work has been copied in a way that constitutes copyright infringement, please submit your claim via email to <info@mintbean.io>, with the subject line: "Copyright Infringement" and include in your claim a detailed description of the alleged Infringement as detailed below, under "DMCA Notice and Procedure for Copyright Infringement Claims"
+
+You may be held accountable for damages (including costs and attorneys' fees) for misrepresentation or bad-faith claims on the infringement of any Content found on and/or through Service on your copyright.
+
+## DMCA Notice and Procedure for Copyright Infringement Claims
+
+You may submit a notification pursuant to the Digital Millennium Copyright Act (DMCA) by providing our Copyright Agent with the following information in writing (see 17 U.S.C 512(c)(3) for further detail):
+
+(a) an electronic or physical signature of the person authorized to act on behalf of the owner of the copyright's interest;
+
+(b) a description of the copyrighted work that you claim has been infringed, including the URL (i.e., web page address) of the location where the copyrighted work exists or a copy of the copyrighted work;
+
+(c) identification of the URL or other specific location on Service where the material that you claim is infringing is located;
+
+(d) your address, telephone number, and email address;
+
+(e) a statement by you that you have a good faith belief that the disputed use is not authorized by the copyright owner, its agent, or the law;
+
+(e) a statement by you, made under penalty of perjury, that the above information in your notice is accurate and that you are the copyright owner or authorized to act on the copyright owner's behalf.
+
+You can contact our Copyright Agent via email at <info@mintbean.io>
+
+## Error Reporting and Feedback
+
+You may email us directly at <info@mintbean.io> tools with information and feedback concerning errors, suggestions for improvements, ideas, problems, complaints, and other matters related to our Service ("Feedback"). You acknowledge and agree that: (i) you shall not retain, acquire or assert any intellectual property right or other right, title or interest in or to the Feedback; (ii) Company may have development ideas similar to the Feedback; (iii) Feedback does not contain confidential information or proprietary information from you or any third party; and (iv) Company is not under any obligation of confidentiality with respect to the Feedback. In the event the transfer of the ownership to the Feedback is not possible due to applicable mandatory laws, you grant Company and its affiliates an exclusive, transferable, irrevocable, free-of-charge, sub-licensable, unlimited and perpetual right to use (including copy, modify, create derivative works, publish, distribute and commercialize) Feedback in any manner and for any purpose.
+
+## Links To Other Web Sites
+
+Our Service may contain links to third party web sites or services that are not owned or controlled by Mintbean
+
+Mintbean has no control over, and assumes no responsibility for the content, privacy policies, or practices of any third party web sites or services. We do not warrant the offerings of any of these entities/individuals or their websites.
+
+YOU ACKNOWLEDGE AND AGREE THAT Mintbean SHALL NOT BE RESPONSIBLE OR LIABLE, DIRECTLY OR INDIRECTLY, FOR ANY DAMAGE OR LOSS CAUSED OR ALLEGED TO BE CAUSED BY OR IN CONNECTION WITH USE OF OR RELIANCE ON ANY SUCH CONTENT, GOODS OR SERVICES AVAILABLE ON OR THROUGH ANY SUCH THIRD PARTY WEB SITES OR SERVICES.
+
+WE STRONGLY ADVISE YOU TO READ THE TERMS OF SERVICE AND PRIVACY POLICIES OF ANY THIRD PARTY WEB SITES OR SERVICES THAT YOU VISIT.
+
+## Disclaimer of Warranty
+
+THESE SERVICES ARE PROVIDED BY COMPANY ON AN "AS IS" AND "AS AVAILABLE" BASIS. COMPANY MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, AS TO THE OPERATION OF THEIR SERVICES, OR THE INFORMATION, CONTENT OR MATERIALS INCLUDED THEREIN. YOU EXPRESSLY AGREE THAT YOUR USE OF THESE SERVICES, THEIR CONTENT, AND ANY SERVICES OR ITEMS OBTAINED FROM US IS AT YOUR SOLE RISK.
+
+NEITHER COMPANY NOR ANY PERSON ASSOCIATED WITH COMPANY MAKES ANY WARRANTY OR REPRESENTATION WITH RESPECT TO THE COMPLETENESS, SECURITY, RELIABILITY, QUALITY, ACCURACY, OR AVAILABILITY OF THE SERVICES. WITHOUT LIMITING THE FOREGOING, NEITHER COMPANY NOR ANYONE ASSOCIATED WITH COMPANY REPRESENTS OR WARRANTS THAT THE SERVICES, THEIR CONTENT, OR ANY SERVICES OR ITEMS OBTAINED THROUGH THE SERVICES WILL BE ACCURATE, RELIABLE, ERROR-FREE, OR UNINTERRUPTED, THAT DEFECTS WILL BE CORRECTED, THAT THE SERVICES OR THE SERVER THAT MAKES IT AVAILABLE ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS OR THAT THE SERVICES OR ANY SERVICES OR ITEMS OBTAINED THROUGH THE SERVICES WILL OTHERWISE MEET YOUR NEEDS OR EXPECTATIONS.
+
+COMPANY HEREBY DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, NON-INFRINGEMENT, AND FITNESS FOR PARTICULAR PURPOSE.
+
+THE FOREGOING DOES NOT AFFECT ANY WARRANTIES WHICH CANNOT BE EXCLUDED OR LIMITED UNDER APPLICABLE LAW.
+
+## Limitation of Liability
+
+EXCEPT AS PROHIBITED BY LAW, YOU WILL HOLD US AND OUR OFFICERS, DIRECTORS, EMPLOYEES, AND AGENTS HARMLESS FOR ANY INDIRECT, PUNITIVE, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGE, HOWEVER IT ARISES (INCLUDING ATTORNEYS' FEES AND ALL RELATED COSTS AND EXPENSES OF LITIGATION AND ARBITRATION, OR AT TRIAL OR ON APPEAL, IF ANY, WHETHER OR NOT LITIGATION OR ARBITRATION IS INSTITUTED), WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE, OR OTHER TORTIOUS ACTION, OR ARISING OUT OF OR IN CONNECTION WITH THIS AGREEMENT, INCLUDING WITHOUT LIMITATION ANY CLAIM FOR PERSONAL INJURY OR PROPERTY DAMAGE, ARISING FROM THIS AGREEMENT AND ANY VIOLATION BY YOU OF ANY FEDERAL, STATE, OR LOCAL LAWS, STATUTES, RULES, OR REGULATIONS, EVEN IF COMPANY HAS BEEN PREVIOUSLY ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. EXCEPT AS PROHIBITED BY LAW, IF THERE IS LIABILITY FOUND ON THE PART OF COMPANY, IT WILL BE LIMITED TO THE AMOUNT PAID FOR THE PRODUCTS AND/OR SERVICES, AND UNDER NO CIRCUMSTANCES WILL THERE BE CONSEQUENTIAL OR PUNITIVE DAMAGES. SOME STATES DO NOT ALLOW THE EXCLUSION OR LIMITATION OF PUNITIVE, INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE PRIOR LIMITATION OR EXCLUSION MAY NOT APPLY TO YOU.
+
+## Termination
+
+We may terminate or suspend your account and bar access to Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever and without limitation, including but not limited to a breach of Terms.
+
+If you wish to terminate your account, you may simply discontinue using Service.
+
+All provisions of Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability.
+
+## Governing Law
+
+These Terms shall be governed and construed in accordance with the laws of State of Delaware without regard to its conflict of law provisions.
+
+Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement between us regarding our Service and supersede and replace any prior agreements we might have had between us regarding Service.
+
+## Changes to Service
+
+We reserve the right to withdraw or amend our Service, and any service or material we provide via Service, in our sole discretion without notice. We will not be liable if for any reason all or any part of Service is unavailable at any time or for any period. From time to time, we may restrict access to some parts of Service, or the entire Service, to users, including registered users.
+
+## Amendments to Terms
+
+We may amend Terms at any time by posting the amended terms on this site. It is your responsibility to review these Terms periodically.
+
+Your continued use of the Platform following the posting of revised Terms means that you accept and agree to the changes. You are expected to check this page frequently so you are aware of any changes, as they are binding on you.
+
+By continuing to access or use our Service after any revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, you are no longer authorized to use Service.
+
+## Waiver and Severability
+
+No waiver by Company of any term or condition set forth in Terms shall be deemed a further or continuing waiver of such term or condition or a waiver of any other term or condition, and any failure of Company to assert a right or provision under Terms shall not constitute a waiver of such right or provision.
+
+If any provision of Terms is held by a court or other tribunal of competent jurisdiction to be invalid, illegal or unenforceable for any reason, such provision shall be eliminated or limited to the minimum extent such that the remaining provisions of Terms will continue in full force and effect.
+
+## Acknowledgement
+
+BY USING SERVICE OR OTHER SERVICES PROVIDED BY US, YOU ACKNOWLEDGE THAT YOU HAVE READ THESE TERMS OF SERVICE AND AGREE TO BE BOUND BY THEM.
+
+## Contact Us
+
+Please send your feedback, comments, requests for technical support by email: <info@mintbean.io>. You can also get in touch with us via Intercom.

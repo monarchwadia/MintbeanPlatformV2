@@ -1,89 +1,225 @@
-## Updated October 4, 2019
+# Privacy Policy
 
-### Overview
+Last updated: 06/21/2020
 
-Dribbble Holdings Ltd. ("Dribbble", "we", "us" or "our") is committed to protecting the privacy of personal information (i.e. any information relating to an identified or identifiable natural person) who visit the https://dribbble.com website and Dribbble mobile software application (collectively, the "Site") and use the services available thereon (the "Services"). Amendments to this Privacy Policy will be posted to the Site and/or Services and will be effective when posted. Your continued use of the Site and/or Services following the posting of any amendment to this Privacy Policy shall constitute your acceptance of such amendment.
+## Introduction
 
-### Consent and Information Collection and Use
+Welcome Mintbean.
 
-When you register as a user of our Site and Services, we ask for personal information that will be used to activate your account, provide the Services to you, communicate with you about the status of your account, and for other purposes set out in this Privacy Policy. Your name, company name, address, telephone number, email address, credit card information and certain other information about you may be required by us to provide the Services or be disclosed by you during your use of the Services. You will also be asked to create a user name and private password, which will become part of your account information.
+Zero Projects Inc. ("Mintbean", "us", "we", or "our") operates https://mintbean.io (hereinafter referred to as "Service").
 
-By providing personal information to us and by retaining us to provide you with the Services, you voluntarily consent to the collection, use and disclosure of such personal information as specified in this Privacy Policy. The legal bases for our processing of personal information are primarily that the processing is necessary for providing the Services and that the processing is carried out in our legitimate interests, which are further explained below. Without limiting the foregoing, we may on occasion ask you to consent when we collect, use, or disclose your personal information in specific circumstances.
+Our Privacy Policy governs your visit to https://mintbean.io, and explains how we collect, safeguard and disclose information that results from your use of our Service.
 
-We take steps designed to ensure that only those employees who need access to your personal information to fulfil their employment duties will have access to it. We may use and disclose your personal or account information for the following purposes:
+We use your data to provide and improve Service. By using Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, the terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.
 
-- To provide the Site and Services to you and to other users of the Site and Services;
-- To improve the quality of the Site and Services through polls, surveys and other similar feedback gathering activities conducted by Dribbble and/or third parties;
-- To create, manage and control your account information, and to verify access rights to the Site and Services;
-- To bill your account;
-- To communicate with you (subject to your opt-out rights set forth in this Privacy Policy), including without limitation for the purpose of providing you with information about the Services, or informing you of changes or additions to the Services or of the availability of any other services or features we provide;
-- To assess service levels, monitor traffic patterns and gauge popularity of different features and service options of the Site and/or Services;
-- To enforce this Privacy Policy or our Terms of Service;
-- To protect against fraud or error, and to respond to claims of any violation of our rights or those of any third parties;
-- To respond to your requests for customer service;
-- To protect the rights, property or personal safety of you, us, our users and the public; and
-- As required to comply with applicable laws or as authorized by applicable laws.
+Our Terms and Conditions ("Terms") govern all use of our Service and together with the Privacy Policy constitutes your agreement with us ("agreement").
 
-For the purposes of billing your account (if you have a paid account) and in order to process payments, Dribbble utilizes third party payment gateways, such as Stripe and Paypal, who will utilize your credit card and other payment information in accordance with their respective privacy policies. Dribbble shall not be liable to you or any other person for any damages that might result from unauthorized use, publication, disclosure or any other misuse of such payment information, including credit card information.
+## Definitions
 
-Dribbble may share your personal information with its registered API application providers, including Chrome tab extensions Panda and Muz.li which deliver relevant design stories and inspiration. We invite you to review their applicable data protection policies.
+SERVICE means the https://mintbean.io website operated by Zero Projects Inc.
 
-When we disclose your personal information to third parties, we take reasonable measures to ensure that the rules set forth in this Privacy Policy are complied with and these third parties provide sufficient guarantees to implement appropriate technical and organisational measures.
+PERSONAL DATA means data about a living individual who can be identified from those data (or from those and other information either in our possession or likely to come into our possession).
 
-Your personal information may be stored and processed in any country where we have facilities or in which we engage third party service providers. By using the Services, you consent to the transfer of information to countries outside your country of residence, which may have different data protection rules than in your country. While such information is outside of Canada, it is subject to the laws of the country in which it is held, and may be subject to disclosure to the governments, courts or law enforcement or regulatory agencies of such other country, pursuant to the laws of such country. However, our practices regarding your personal information will at all times continue to be governed by this Privacy Policy and, if applicable, we will comply with the General Data Protection Regulation ("GDPR") requirements providing adequate protection for the transfer of personal information from the EU/EEA to third country.
+USAGE DATA is data collected automatically either generated by the use of Service or from Service infrastructure itself (for example, the duration of a page visit).
 
-We may occasionally communicate with you regarding our products, services, news and events. You have the option to not receive this information. We provide an opt-out function within all email communications of this nature, or will cease to communicate with you for this purpose if you contact us and tell us not to communicate this information to you. The only kind of these communications that you may not "opt-out" of are those required to communicate announcements related to the Services, including information specific to your Account, planned Services suspensions and outages. We will attempt to minimize this type of communication to you.
+COOKIES are small files stored on your device (computer or mobile device).
 
-### Age of Consent
+DATA CONTROLLER means a natural or legal person who (either alone or jointly or in common with other persons) determines the purposes for which and the manner in which any personal data are, or are to be, processed. For the purpose of this Privacy Policy, we are a Data Controller of your data.
 
-We do not knowingly provide the Services to, and will not knowingly collect the personal information from anyone under the age of consent. If you live in a country in the EU/EEA, you must be at least 16 years old to use our Services or such greater age required in your country to register for or use our Services. If you live in any other country except those in the EU/EEA, you must be at least 13 years old to use our Services or such greater age required in your country to register for or use our Services. In addition to being of the minimum required age to use our Services under applicable law, if you are not old enough to have authority to agree to our Privacy Policy in your country, your parent or guardian must agree to our Privacy Policy on your behalf. If you have any concerns about your child's personal information, please contact us at privacy@dribbble.com.
+DATA PROCESSORS (OR SERVICE PROVIDERS) means any natural or legal person who processes the data on behalf of the Data Controller. We may use the services of various Service Providers in order to process your data more effectively.
 
-Neither the Site nor the Services are intended for children under 13 years of age, and no one under age 13 may provide any personal information to, on or through the Site or Services. We do not knowingly collect personal information from children under 13. If you are under 13, do not use or provide any information to, on or through the Site or Services, make any purchases through the Site or Services, use any of the interactive or public comment features, or provide any information about yourself to us, including your name, address, telephone number, email address, or any screen name or user name you may use. If we learn we have collected or received personal information from a child under 13 without verification of parental consent, we will delete that information. If you believe we might have any information from or about a child under 13, please contact us at the email address provided in the paragraph above.
+DATA SUBJECT is any living individual who is the subject of Personal Data.
 
-### Rights to Your Information
+THE USER is the individual using our Service. The User corresponds to the Data Subject, who is the subject of Personal Data.
 
-You have the right to access and edit your information at any time through the web interface provided as part of the Services. On written request and subject to proof of identity, you may access the personal information that we hold, used or communicated and ask that any necessary corrections be made, where applicable, as authorized or required by law. However, to make sure that the personal information we maintain about you is accurate and up to date, please inform us immediately of any change in your personal information by mail or e-mail.
+## Information Collection and Use
 
-Under the GDPR, you may be entitled to additional rights, including: (i) the right to withdraw consent to processing where consent is the basis of processing; (ii) the right to access your personal information and certain other supplementary information, under certain conditions; (iii) the right to object to unlawful data processing, under certain conditions; (iv) the right to erasure of personal information about you, under certain conditions; (v) the right to demand that we restrict processing of your personal information, under certain conditions, if you believe we have exceeded the legitimate basis for processing, processing is no longer necessary, are processing, or believe your personal information is inaccurate; (vi) the right to data portability of personal information concerning you that you provided us in a structured, commonly used, and machine-readable format, under certain conditions; (vii) the right object to decisions being taken by automated means which produce legal effects concerning you or similarly significantly affect you, under certain conditions; (viii) the right to lodge a complaint with data protection authorities. If you want to learn more about your rights under the GDPR, you can visit the European Commission's [page on Data Protection](http://ec.europa.eu/justice/data-protection/index_en.htm).
+We collect several different types of information for various purposes to provide and improve our Service to you.
 
-### Your California Privacy Rights
+## Types of Data Collected
 
-California Civil Code Section §1798.83 permits users of the Site and/or Services who are California residents to request certain information regarding our disclosure of personal information to third parties for their direct marketing purposes. To make such a request, please send an email to [email] with "Request for California Privacy Information" in the subject line and in the body of your message. We will provide the requested information to you in your email address in response.
+### Personal Data
 
-### Aggregated Data
+While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). Personally identifiable information may include, but is not limited to:
 
-We may also use your personal information to generate Aggregated Data for internal use and for sharing with others on a selective basis. "Aggregated Data" means records which have been stripped of information potentially identifying users, and which have been manipulated or combined to provide generalized, anonymous information. Your identity and personal information will be kept anonymous in Aggregated Data.
+(a) Email address
 
-### Links
+(b) First name and last name
 
-The Site and/or Services may contain links to other sites and we are not responsible for the privacy practices or the content of such sites. We encourage you to read the privacy policy of linked sites. Their privacy policies and practices differ from our policies and practices.
+(c) Cookies and Usage Data
 
-### Cookies and Log Files
+We may use your Personal Data to contact you with newsletters, marketing or promotional materials and other information that may be of interest to you. You may opt out of receiving any, or all, of these communications from us by following the unsubscribe link or by emailing at <info@mintbean.io>.
 
-We use cookies and log files to track user information. Cookies are small amounts of data that are transferred to your web browser by a web server and are stored on your computer's hard drive. We use cookies to track which page variant a visitor has seen, to track if a visitor has clicked on a page variant, to monitor traffic patterns and to gauge popularity of service options. We will use this information to deliver relevant content and services to you.
+### Usage Data
 
-### Third Parties' & Interest-Based Ads
+We may also collect information that your browser sends whenever you visit our Service or when you access Service by or through a mobile device ("Usage Data").
 
-We do not control third parties' collection or use of your information to serve interest-based advertising. However, these third parties may provide you with ways to choose not to have your information collected or used in this way. You can opt out of receiving targeted ads from members of the Network Advertising Initiative ("NAI") on the NAI's website.
+This Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.
 
-### Change of Ownership or Business Transition
+When you access Service with a mobile device, this Usage Data may include information such as the type of mobile device you use, your mobile device unique ID, the IP address of your mobile device, your mobile operating system, the type of mobile Internet browser you use, unique device identifiers and other diagnostic data.
 
-In the event of a change of ownership or other business transition, such as a merger, acquisition or sale of our assets, your information may be transferred in accordance with applicable privacy laws.
+### Tracking Cookies Data
 
-### Security and Retention
+We use cookies and similar tracking technologies to track the activity on our Service and we hold certain information.
 
-We will strive to prevent unauthorized access to your personal information, however, no data transmission over the Internet, by wireless device or over the air is guaranteed to be 100% secure. We have implemented and maintain reasonable security procedures and practices (based on the nature of the information we collect) to protect that information from unauthorized disclosure. We will continue to enhance security procedures as new technologies and procedures become available.
+Cookies are files with a small amount of data which may include an anonymous unique identifier. Cookies are sent to your browser from a website and stored on your device. Other tracking technologies are also used such as beacons, tags and scripts to collect and track information and to improve and analyze our Service.
 
-We strongly recommend that you do not disclose your password to anyone.
+You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service.
 
-Please remember that you control what personal information you provide while using the Site and Services. Ultimately, you are responsible for maintaining the secrecy of your identification, passwords and/or any personal information in your possession for the use of the Site and/or Services. Always be careful and responsible regarding your personal information. We are not responsible for, and cannot control, the use by others of any information which you provide to them and you should use caution in selecting the personal information you provide to others through the Site or Services. Similarly, we cannot assume any responsibility for the content of any personal information or other information which you receive from other users through the Site or Services, and you release us from any and all liability in connection with the contents of any personal information or other information which you may receive using the Site or Services. We cannot guarantee, or assume any responsibility for verifying, the accuracy of the personal information or other information provided by any third party. You release us from any and all liability in connection with the use of such personal information or other information of others.
+Examples of Cookies we use:
 
-We will maintain your personal information for as long as they are needed, or as required by applicable laws, regulations, or government orders.
+(a) Session Cookies: We use Session Cookies to operate our Service.
 
-### Changes to this Policy
+(b) Preference Cookies: We use Preference Cookies to remember your preferences and various settings.
 
-We may update this Privacy Policy from time to time. If we do so, we will send an email to users subscribed to the [Company News list](https://dribbble.com/account/notifications). We will also add a site banner alerting users who may not be subscribed. If the change materially effects the treatment of your personal data, and we have your email but you are not subscribed to the Company News list, we will send you an email. (You are responsible for ensuring that we have an up-to-date email for this purpose.)
+(c) Security Cookies: We use Security Cookies for security purposes.
 
-### Contact Us
+## Use of Data
 
-If you have any questions or comments about this Privacy Policy or your personal information, to make an access or correction request, to exercise any applicable rights, to make a complaint, or to obtain information about our policies and practices with respect to any service providers outside Canada, our Privacy Officer (or Data Protection Officer) can be reached by mail or email using the following contact information: by email at privacy@dribbble.com or by mail at 524 Yates St., Victoria, BC, V8W 1K8, Canada.
+Mintbean uses the collected data for various purposes:
+
+(a) to provide and maintain our Service;
+
+(b) to notify you about changes to our Service;
+
+(c) to allow you to participate in interactive features of our Service when you choose to do so;
+
+(d) to provide customer support;
+
+(e) to gather analysis or valuable information so that we can improve our Service;
+
+(f) to monitor the usage of our Service;
+
+(g) to detect, prevent and address technical issues;
+
+(h) to fulfill any other purpose for which you provide it;
+
+(i) to carry out our obligations and enforce our rights arising from any contracts entered into between you and us, including for billing and collection;
+
+(j) to provide you with notices about your account and/or subscription, including expiration and renewal notices, email-instructions, etc.;
+
+(k) to provide you with news, special offers and general information about other goods, services and events which we offer that are similar to those that you have already purchased or enquired about unless you have opted not to receive such information;
+
+(l) in any other way we may describe when you provide the information;
+
+(m) for any other purpose with your consent.
+
+## Retention of Data
+
+We will retain your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.
+
+We will also retain Usage Data for internal analysis purposes. Usage Data is generally retained for a shorter period, except when this data is used to strengthen the security or to improve the functionality of our Service, or we are legally obligated to retain this data for longer time periods.
+
+## Transfer of Data
+
+Your information, including Personal Data, may be transferred to -- and maintained on -- computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ from those of your jurisdiction.
+
+If you are located outside United States and choose to provide information to us, please note that we transfer the data, including Personal Data, to United States and process it there.
+
+Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.
+
+Mintbean will take all the steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organisation or a country unless there are adequate controls in place including the security of your data and other personal information.
+
+## Disclosure of Data
+
+We may disclose personal information that we collect, or you provide:
+
+(a) Disclosure for Law Enforcement.\
+Under certain circumstances, we may be required to disclose your Personal Data if required to do so by law or in response to valid requests by public authorities.
+
+(b) Business Transaction.\
+If we or our subsidiaries are involved in a merger, acquisition or asset sale, your Personal Data may be transferred.
+
+(c) Other cases. We may disclose your information also:\
+(i) to contractors, service providers, and other third parties we use to support our business;\
+(ii) to fulfill the purpose for which you provide it;\
+(iii) for any other purpose disclosed by us when you provide the information;
+
+## Security of Data
+
+The security of your data is important to us but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.
+
+## Your Data Protection Rights Under General Data Protection Regulation (GDPR)
+
+If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR. -- See more at https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
+We aim to take reasonable steps to allow you to correct, amend, delete, or limit the use of your Personal Data.
+
+If you wish to be informed what Personal Data we hold about you and if you want it to be removed from our systems, please email us at <info@mintbean.io>.
+
+In certain circumstances, you have the following data protection rights:
+
+(a) the right to access, update or to delete the information we have on you;
+
+(b) the right of rectification. You have the right to have your information rectified if that information is inaccurate or incomplete;
+
+(c) the right to object. You have the right to object to our processing of your Personal Data;
+
+(d) the right of restriction. You have the right to request that we restrict the processing of your personal information;
+
+(e) the right to data portability. You have the right to be provided with a copy of your Personal Data in a structured, machine-readable and commonly used format;
+
+(f) the right to withdraw consent. You also have the right to withdraw your consent at any time where we rely on your consent to process your personal information;
+
+Please note that we may ask you to verify your identity before responding to such requests. Please note, we may not able to provide Service without some necessary data.
+
+You have the right to complain to a Data Protection Authority about our collection and use of your Personal Data. For more information, please contact your local data protection authority in the European Economic Area (EEA).
+
+## Service Providers
+
+We may employ third party companies and individuals to facilitate our Service ("Service Providers"), provide Service on our behalf, perform Service-related services or assist us in analysing how our Service is used.
+
+These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.
+
+## Analytics
+
+We may use third-party Service Providers to monitor and analyze the use of our Service.
+
+### Google Analytics
+
+Google Analytics is a web analytics service offered by Google that tracks and reports website traffic. Google uses the data collected to track and monitor the use of our Service. This data is shared with other Google services. Google may use the collected data to contextualise and personalise the ads of its own advertising network.
+
+For more information on the privacy practices of Google, please visit the Google Privacy Terms web page: <https://policies.google.com/privacy?hl=en>
+
+We also encourage you to review the Google's policy for safeguarding your data: <https://support.google.com/analytics/answer/6004245>.
+
+### Segment.io
+
+Segment.io is a web traffic analysis tool. You can read the Privacy Policy for Segment.io here: <https://segment.com/legal/privacy/>.
+
+## Payments
+
+We may provide paid products and/or services within Service. In that case, we use third-party services for payment processing (e.g. payment processors).
+
+We will not store or collect your payment card details. That information is provided directly to our third-party payment processors whose use of your personal information is governed by their Privacy Policy. These payment processors adhere to the standards set by PCI-DSS as managed by the PCI Security Standards Council, which is a joint effort of brands like Visa, Mastercard, American Express and Discover. PCI-DSS requirements help ensure the secure handling of payment information.
+
+The payment processors we work with are:
+
+### Stripe:
+
+Their Privacy Policy can be viewed at: <https://stripe.com/us/privacy>
+
+## Links to Other Sites
+
+Our Service may contain links to other sites that are not operated by us. If you click a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit. We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.
+
+## Children's Privacy
+
+Our Services are not intended for use by children under the age of 13 ("Children").
+
+We do not knowingly collect personally identifiable information from Children under 13. If you become aware that a Child has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from Children without verification of parental consent, we take steps to remove that information from our servers.
+
+## Changes to This Privacy Policy
+
+We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.
+
+We will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update "effective date" at the top of this Privacy Policy.
+
+You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
+
+## Contact Us
+
+If you have any questions about this Privacy Policy, please contact us:
+
+By Intercom.
+By Email: <info@mintbean.io>.
