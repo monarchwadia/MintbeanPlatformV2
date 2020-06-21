@@ -7,6 +7,8 @@ import Register from "./views/Auth/Register.vue";
 import Project from "./views/Project.vue";
 import UserProfile from "./views/UserProfile.vue";
 import Admin from "./views/Admin.vue";
+import TermsOfService from "./views/Legal/TermsOfService.vue";
+import PrivacyPolicy from "./views/Legal/PrivacyPolicy.vue";
 import NotFound from "./views/NotFound.vue";
 
 Vue.use(VueRouter);
@@ -15,43 +17,53 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
   },
   {
     path: "/auth/login",
     name: "Login",
-    component: Login
+    component: Login,
   },
   {
     path: "/project/:id",
     name: "Project",
-    component: Project
+    component: Project,
   },
   {
     path: "/auth/register",
     name: "Register",
-    component: Register
+    component: Register,
   },
   {
     path: "/mb-event/:id",
     name: "Event",
-    component: MbEvent
+    component: MbEvent,
   },
   {
     path: "/user-profile/:id",
     name: "User Profile",
-    component: UserProfile
+    component: UserProfile,
   },
   {
     path: "/admin",
     name: "Admin Panel",
-    component: Admin
+    component: Admin,
+  },
+  {
+    path: "/legal/terms-of-service",
+    name: "Terms Of Service",
+    component: TermsOfService,
+  },
+  {
+    path: "/legal/privacy-policy",
+    name: "Privacy Policy",
+    component: PrivacyPolicy,
   },
   {
     path: "*",
     name: "Not Found",
-    component: NotFound
-  }
+    component: NotFound,
+  },
 ];
 
 const router = new VueRouter({
@@ -60,7 +72,7 @@ const router = new VueRouter({
   routes,
   scrollBehavior() {
     return { x: 0, y: 0 };
-  }
+  },
 });
 
 export default router;

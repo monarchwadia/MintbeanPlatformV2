@@ -16,7 +16,11 @@
             :key="i"
             class="p-2 mr-5 justify-between "
           >
-            <mb-links :links="column.links" class="flex flex-col" link-class="pb-4" />
+            <mb-links
+              :links="column.links"
+              class="flex flex-col"
+              link-class="pb-4"
+            />
           </div>
         </div>
         <div>
@@ -70,6 +74,7 @@ export default {
             },
             {
               label: "Members",
+              type: "internal",
               hidden: true,
               ref: ""
             }
@@ -108,7 +113,10 @@ export default {
             }
           ]
         }
-      ]
+      ].map(({ links, ...rest }) => ({
+        ...rest,
+        links: links.filter(l => !l.hidden)
+      }))
     };
   }
 };

@@ -19,8 +19,9 @@ module.exports = {
     // config.module
     //   .rule("markdown")
     //   .test(/\.md$/)
-    //   .use("html-loader")
-    //   .loader("html-loader")
+    //   .use("markdown-loader")
+    //   .loader("markdown-loader")
+    //   .end();
     //   .end()
     //   // Add another loader
     //   .use("markdown-loader")
