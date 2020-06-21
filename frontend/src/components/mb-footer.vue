@@ -1,8 +1,11 @@
 <template>
-  <footer class="gradient-blue-mint p-8" style="height: 400px">
+  <footer class="gradient-blue-mint py-8" style="height: 350px">
     <div
-      class="bg-transparent container m-auto h-full w-full flex flex-col justify-between p-8 pl-32"
-      style="background: rgba(255,255,255,0.4);"
+      class="bg-transparent m-auto h-full w-full justify-between p-4"
+      style="background: rgba(255,255,255,0.25);"
+    >
+    <div
+      class="bg-transparent px-12 m-auto h-full w-full flex flex-col justify-between"
     >
       <div class="font-bold">
         <img :src="mintbeanLogo" class="h-12" alt="Mintbean Logo" />
@@ -22,6 +25,7 @@
         Made by Mintbean, Copyright 2020 All Rights Reserved. Some images
         designed by Freepik.
       </div>
+    </div>
     </div>
   </footer>
 </template>

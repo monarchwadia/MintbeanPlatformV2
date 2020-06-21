@@ -1,17 +1,22 @@
 <template lang="pug">
-  section.auth
-    form.login-form(v-on:submit.prevent="onSubmit")
-      h1 Login
-      label Email
-        input(name="email", v-model="email" ref="emailInput")
-      label Password
-        input(name="password", type="password", v-model="password")
-      button(type="submit") Submit
+auth-wrapper
+  auth-form(v-on:submit.prevent="onSubmit")
+    h1(class="text-lg pb-6") Sign in to Mintbean
+    mb-label Email
+      mb-input(name="email", v-model="email" ref="emailInput")
+    mb-label Password
+      mb-input(name="password", type="password", v-model="password")
+    mb-button.my-4(type="submit") Continue
+    span.text-xs.text-center Haven't joined yet? 
+      router-link(to="/auth/register") Sign Up
 </template>
 
 <style lang="scss" scoped></style>
 
 <script>
+import authWrapper from "./auth-wrapper";
+import authForm from "./auth-form";
+
 export default {
   name: "Login",
   data() {
@@ -28,6 +33,10 @@ export default {
   },
   mounted() {
     this.$refs.emailInput && this.$refs.emailInput.focus();
+  },
+  components: {
+    "auth-wrapper": authWrapper,
+    "auth-form": authForm
   }
 };
 </script>

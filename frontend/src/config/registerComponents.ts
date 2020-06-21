@@ -7,6 +7,9 @@ import mbProjectGrid from "../components/mb-project-grid.vue";
 import mbProjectSearch from "../components/mb-project-search.vue";
 import mbModal from "../components/mb-modal.vue";
 import mbFooter from "../components/mb-footer.vue";
+import mbButton from "../components/mb-button.vue";
+import mbInput from "../components/mb-input.vue";
+import mbLabel from "../components/mb-label.vue";
 import { VueConstructor } from "vue";
 
 export default (Vue: VueConstructor<Vue>) => {
@@ -18,5 +21,8 @@ export default (Vue: VueConstructor<Vue>) => {
   Vue.component("mb-project-search", mbProjectSearch);
   Vue.component("mb-modal", mbModal);
   Vue.component("mb-footer", mbFooter);
+  Vue.component("mb-button", mbButton);
+  Vue.component("mb-input", mbInput);
+  Vue.component("mb-label", mbLabel);
   Vue.component(VueCountdown.name, VueCountdown);
 };

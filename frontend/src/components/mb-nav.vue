@@ -1,6 +1,6 @@
 <template>
-  <header class="container m-auto">
-    <div class="flex items-center justify-between py-3">
+  <header class="px-12">
+    <div class="flex items-center justify-between">
       <div>
         <router-link to="/" class="block">
           <img :src="mintbeanLogo" class="h-12" alt="Mintbean Logo" />
@@ -60,9 +60,9 @@ export default {
           showIf: this.isLoggedIn && this.isAdmin,
           linkTo: "/admin"
         },
-        { label: "Log In", showIf: !this.isLoggedIn, linkTo: "/auth/login" },
+        { label: "Sign In", showIf: !this.isLoggedIn, linkTo: "/auth/login" },
         {
-          label: "Register",
+          label: "Sign Up",
           showIf: !this.isLoggedIn,
           linkTo: "/auth/register"
         }
