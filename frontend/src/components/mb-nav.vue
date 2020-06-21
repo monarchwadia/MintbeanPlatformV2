@@ -2,9 +2,9 @@
   <header class="px-12">
     <div class="flex items-center justify-between">
       <div>
-        <router-link to="/" class="block">
+        <mb-internal-link to="/" class="block">
           <img :src="mintbeanLogo" class="h-12" alt="Mintbean Logo" />
-        </router-link>
+        </mb-internal-link>
       </div>
 
       <div class="flex items-right justify-between px-4 py-3">

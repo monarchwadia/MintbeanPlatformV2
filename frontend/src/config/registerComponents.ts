@@ -1,5 +1,6 @@
 const VueCountdown: any = require("@chenfengyuan/vue-countdown");
 import mbA from "../components/mb-a.vue";
+import mbInternalLink from "../components/mb-internal-link.vue";
 import mbExternalLink from "../components/mb-external-link.vue";
 import mbExternalLinkFollow from "../components/mb-external-link-follow.vue";
 import mbNav from "../components/mb-nav.vue";
@@ -18,6 +19,7 @@ import { VueConstructor } from "vue";
 
 export default (Vue: VueConstructor<Vue>) => {
   Vue.component("mb-a", mbA);
+  Vue.component("mb-internal-link", mbInternalLink);
   Vue.component("mb-external-link", mbExternalLink);
   Vue.component("mb-external-link-follow", mbExternalLinkFollow);
   Vue.component("mb-nav", mbNav);

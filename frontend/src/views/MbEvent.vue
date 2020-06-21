@@ -33,7 +33,7 @@ div.event-wrapper
         section(v-else)
           h1 {{ submitFormState.disabledMessage }}
         section(v-if="submitFormState.showLoginButton")
-          router-link(to="/auth/login")
+          mb-internal-link(to="/auth/login")
             button Login
           
 

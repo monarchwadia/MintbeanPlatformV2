@@ -1,14 +1,14 @@
 <template lang="pug">
 auth-wrapper
   auth-form(v-on:submit.prevent="onSubmit")
-    h1(class="text-lg pb-6") Sign in to Mintbean
+    h1(class="text-xl pb-6") Sign in to Mintbean
     mb-label Email
       mb-input(name="email", v-model="email" ref="emailInput")
     mb-label Password
       mb-input(name="password", type="password", v-model="password")
-    router-link(to="/auth/register").text-xs.text-center By signing in, you agree to our Terms of Service and Privacy Policy.
+    auth-you-agree
     mb-button.my-4(type="submit") Continue
-    router-link(to="/auth/register").text-xs.text-center.text-blue-500 Not a member yet? Sign Up
+    mb-internal-link(to="/auth/register").text-sm.text-center Not a member yet? Sign Up
 </template>
 
 <style lang="scss" scoped></style>
@@ -16,6 +16,7 @@ auth-wrapper
 <script>
 import authWrapper from "./auth-wrapper";
 import authForm from "./auth-form";
+import authYouAgree from './auth-you-agree.vue';
 
 export default {
   name: "Login",
@@ -36,7 +37,8 @@ export default {
   },
   components: {
     "auth-wrapper": authWrapper,
-    "auth-form": authForm
+    "auth-form": authForm,
+    "auth-you-agree": authYouAgree
   }
 };
 </script>
