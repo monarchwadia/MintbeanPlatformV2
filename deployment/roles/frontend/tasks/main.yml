@@ -1,4 +1,15 @@
 ---
-- name: build frontend
-  # Sourcing ~/.profile because we want to load nodenv
-  shell: . ~/.profile && cd {{root_dir}}/frontend && yarn install && yarn build
+- name: yarn install locally
+  connection: local
+  command: yarn install
+  args:
+    chdir: ../frontend
+- name: build frontend locally
+  connection: local
+  command: yarn build
+  args:
+    chdir: ../frontend
+- name: push frontend
+  copy:
+    src: ../../../../frontend/dist
+    dest: "{{root_dir}}/frontend"

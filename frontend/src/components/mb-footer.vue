@@ -11,7 +11,7 @@
         <div
           v-for="(column, i) in columns"
           :key="i"
-          class="pr-20 justify-between"
+          class="p-2 mr-5 justify-between "
         >
           <div v-for="(link, j) in column.links" :key="j">
             <div class="pb-4">{{ link.label }}</div>
