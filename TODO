@@ -20,15 +20,15 @@ First:
 ✔ Deploy images @done(20-06-09 18:10)
 ✔ Move production to production mode @done(20-06-09 18:10)
 ✔ Fix logo @done(20-06-21 11:57)
-☐ Add styling for "Already have an account? SIGN IN" and "SIGN UP" links
-☐ Add ToS and Privacy Policy
+✔ Add styling for "Already have an account? SIGN IN" and "SIGN UP" links @done(20-06-21 18:27)
+✔ Add ToS and Privacy Policy @done(20-06-21 18:27)
 ☐ Add a nicer Page Not Found view
+☐ Users cannot submit multiple projects (backend safety checks)
+☐ Responsiveness
 ☐ Beautify the Event view
 ☐ Beautify the Project view
 ☐ Add a Projects page
 ☐ Add upcoming projects to above the fold
-☐ Users cannot submit multiple projects (backend safety checks)
-☐ Responsiveness
 
 
 Lined up:
