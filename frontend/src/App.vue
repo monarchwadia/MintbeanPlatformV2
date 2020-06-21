@@ -1,9 +1,9 @@
 <template lang="pug">
   div
     mb-nav(:path="$route.path")
+    //- mb-errors
     router-view
-    footer Made by Mintbean, Copyright 2020 All Rights Reserved. Aside images designed by Freepik.
-    mb-errors
+    mb-footer
 </template>
 
 <style lang="scss" scoped>
