@@ -46,7 +46,7 @@ const COMPONENTS = {
       return {
         class: linkClass,
         href: "#",
-        "v-on:click.prevent": link.ref
+        "v-on": { click: link.ref }
       };
     }
   }

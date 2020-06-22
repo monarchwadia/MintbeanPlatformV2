@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import Home from "./views/Home.vue";
 import MbEvent from "./views/MbEvent.vue";
 import Login from "./views/Auth/Login.vue";
+import Logout from "./views/Auth/Logout.vue";
 import Register from "./views/Auth/Register.vue";
 import Project from "./views/Project.vue";
 import UserProfile from "./views/UserProfile.vue";
@@ -33,6 +34,11 @@ const routes: Array<RouteConfig> = [
     path: "/auth/register",
     name: "Register",
     component: Register,
+  },
+  {
+    path: "/auth/logout",
+    name: "Logout",
+    component: Logout,
   },
   {
     path: "/mb-event/:id",

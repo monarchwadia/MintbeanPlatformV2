@@ -57,8 +57,8 @@ export default {
         {
           label: "Log Out",
           hidden: !this.isLoggedIn,
-          type: "action",
-          ref: this.logout
+          type: "internal",
+          ref: "/auth/logout"
         },
         {
           label: "Admin",

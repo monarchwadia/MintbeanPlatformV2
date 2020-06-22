@@ -20,9 +20,9 @@ const state: MbState = {
       id: "foo",
       title: "Dummy error detected",
       description: "This is a dummy error",
-      timeout: 0
-    }
-  ]
+      timeout: 0,
+    },
+  ],
 };
 
 const mutations: MutationTree<MbState> = {
@@ -32,15 +32,15 @@ const mutations: MutationTree<MbState> = {
     const value: any = arr[1];
     /* eslint-enable  @typescript-eslint/no-explicit-any */
     state[key] = value;
-  }
+  },
 };
 
 const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
   const checkAuth: Action<MbState, MbState> = async ({ commit }) => {
     mbContext.authService
       .checkAuth()
-      .then(user => commit("setProperty", ["user", user || undefined]))
-      .catch(e => {
+      .then((user) => commit("setProperty", ["user", user || undefined]))
+      .catch((e) => {
         console.log("Failed to perform auth", e);
       });
   };
@@ -51,13 +51,13 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
   ) => {
     mbContext.authService
       .login(email, password)
-      .then(user => {
+      .then((user) => {
         commit("setProperty", ["user", user || undefined]);
         if (user) {
           $router.push("/");
         }
       })
-      .catch(e => {
+      .catch((e) => {
         const message =
           (e && e.response && e.response.data && e.response.data.message) || "";
         console.log("Login failed", message, e);
@@ -71,13 +71,13 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
   ) => {
     mbContext.authService
       .register(firstname, lastname, email, password)
-      .then(user => {
+      .then((user) => {
         commit("setProperty", ["user", user || undefined]);
         if (user) {
           $router.push("/");
         }
       })
-      .catch(e => {
+      .catch((e) => {
         const message =
           (e && e.response && e.response.data && e.response.data.message) || "";
         console.log("Registration failed", message, e);
@@ -89,7 +89,7 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
     mbContext.authService
       .logout()
       .then(() => commit("setProperty", ["user", undefined]))
-      .catch(e => {
+      .catch((e) => {
         console.log("Failed to logout", e);
       });
   };
@@ -97,8 +97,8 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
   const fetchMbEvents: Action<MbState, MbState> = async ({ commit }) => {
     mbContext.mbEventService
       .getMbEvents()
-      .then(events => commit("setProperty", ["mbEvents", events]))
-      .catch(e => {
+      .then((events) => commit("setProperty", ["mbEvents", events]))
+      .catch((e) => {
         console.log("Failed to fetch events", e);
       });
   };
@@ -109,10 +109,10 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
   ) => {
     mbContext.projectService
       .submitProject(obj)
-      .then(dto => {
+      .then((dto) => {
         dispatch("fetchMbEvents");
       })
-      .catch(e => {
+      .catch((e) => {
         const message =
           (e && e.response && e.response.data && e.response.data.message) || "";
         console.log("Project submission failed", message, e);
@@ -126,10 +126,10 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
   ) => {
     mbContext.projectService
       .fetchProject(projectId)
-      .then(dto => {
+      .then((dto) => {
         commit("setProperty", ["project", dto || undefined]);
       })
-      .catch(e => {
+      .catch((e) => {
         const message =
           (e && e.response && e.response.data && e.response.data.message) || "";
         console.log("Failed to fetch project", message, e);
@@ -144,11 +144,11 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
   ) => {
     mbContext.projectService
       .vote(obj)
-      .then(dto => {
+      .then((dto) => {
         alert("Thanks for voting!");
         dispatch("fetchProject", obj.ProjectId);
       })
-      .catch(e => {
+      .catch((e) => {
         const message =
           (e && e.response && e.response.data && e.response.data.message) || "";
         console.log("Voting failed", message, e);
@@ -169,7 +169,7 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
         alert("Deletion successful.");
         dispatch("fetchProject", obj.ProjectId);
       })
-      .catch(e => {
+      .catch((e) => {
         const message =
           (e && e.response && e.response.data && e.response.data.message) || "";
         console.log("Deletion failed", message, e);
@@ -190,7 +190,7 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
         alert("Upload successful.");
         dispatch("fetchProject", obj.ProjectId);
       })
-      .catch(e => {
+      .catch((e) => {
         const message =
           (e && e.response && e.response.data && e.response.data.message) || "";
         console.log("Upload failed", message, e);
@@ -241,7 +241,7 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
     fetchProject,
     deleteMediaAsset,
     uploadMediaAssets,
-    errorPush
+    errorPush,
   };
 };
 
@@ -252,6 +252,6 @@ export const createStore = (mbContext: MbContext) => {
     state,
     mutations,
     actions: createActions(mbContext),
-    plugins: [errorHandlerPlugin]
+    plugins: [errorHandlerPlugin],
   });
 };
