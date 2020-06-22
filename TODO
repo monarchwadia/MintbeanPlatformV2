@@ -26,12 +26,17 @@ First:
 ☐ Beautify the Event view
 ☐ Beautify the Project view
 ☐ Users cannot submit multiple projects (backend safety checks)
-☐ Add a Projects page
 ☐ Add upcoming projects to above the fold
+☐ RELEASE
+
+☐ Admin
 ☐ Responsiveness
+☐ RELEASE
+
 
 
 Lined up:
+☐ Add a Projects page
 ☐ Add Markdown support for creating events
 ☐ Main page should show curated projects
 ☐ Beautify the project view
