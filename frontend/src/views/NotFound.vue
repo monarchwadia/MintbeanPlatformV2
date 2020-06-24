@@ -1,7 +1,5 @@
 <template lang="pug">
-div.container.m-auto.text-center(style="height: 80vh; padding-top: 25vh")
-    p.text-6xl 404
-    p.text-2xl.max-w-xl.m-auto(class="italic") {{ quote }}
+  mb-center-message(header="404" :body="quote")
 </template>
 
 <script>

@@ -1,36 +1,54 @@
 <template lang="pug">
 div
-  div(v-if="mbEvent")
-    div.relative.bg-fixed.min-h-screen(class="bg-no-repeat bg-center" :style="{'background-image': `url(${mbEvent.cover_image_url})`, 'background-size': 'cover'}" ref="cover")
-      div.rounded.inline-block.gradient-blue-mint.p-1.absolute(style="top: 30vh; left: 10vw; max-width: 40vw")
-        div.bg-white.p-12.rounded
+  div(v-if="!mbEvent")
+    mb-center-message(header="Loading" body="Please wait...")
+  div(v-else)
+    div.mb-32.relative.bg-fixed.min-h-screen(class="bg-no-repeat bg-center" :style="{'background-image': `url(${mbEvent.cover_image_url})`, 'background-size': 'cover'}" style="box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);" ref="cover")
+      //- spacer
+      div(style="height: 30vh") 
+      div.rounded.gradient-blue-mint.p-1.m-auto(style="max-width: 40vw;")
+        div.bg-white.p-12.rounded.text-center
           h1.text-5xl.font-semibold {{ mbEvent.title }}
           p.text-xl.py-2 {{ prettyDate }}
-    p {{ mbEvent.description }}
-    h3 Submissions
-    section(v-if="projects && projects.length === 0")
-      p No submissions yet. Be the first to submit a project!
-    mb-project-grid(v-else :projects="projects")
-    section(v-if="submitFormState.enabled")
-      form.submit-project-form(v-on:submit.prevent="handleSubmitProject")
-        h1 Submit a Project
-        div.flex
-          label Title
-            input(name="title", v-model="title")
-          label Source Code URL
-            input(name="source_code_url", v-model="source_code_url")
-          label Deployment URL
-            input(name="live_url", v-model="live_url")
-          button(type="submit") Submit
-        div.flex
-          label Screenshots & Videos
-            mb-file-upload(:files="myFiles" name="files" ref="mbFileUpload")
+    div.container.m-auto.mb-32
+      h1.text-5xl.font-semibold {{ mbEvent.title }}
+
+  
+
+
+
+//- div
+//-   div(v-if="mbEvent")
+//-     div.relative.bg-fixed.min-h-screen(class="bg-no-repeat bg-center" :style="{'background-image': `url(${mbEvent.cover_image_url})`, 'background-size': 'cover'}" ref="cover")
+//-       div.rounded.inline-block.gradient-blue-mint.p-1.absolute(style="top: 30vh; left: 10vw; max-width: 40vw")
+//-         div.bg-white.p-12.rounded
+//-           h1.text-5xl.font-semibold {{ mbEvent.title }}
+//-           p.text-xl.py-2 {{ prettyDate }}
+//-     p {{ mbEvent.description }}
+//-     h3 Submissions
+//-     section(v-if="projects && projects.length === 0")
+//-       p No submissions yet. Be the first to submit a project!
+//-     mb-project-grid(v-else :projects="projects")
+//-     section(v-if="submitFormState.enabled")
+//-       form.submit-project-form(v-on:submit.prevent="handleSubmitProject")
+//-         h1 Submit a Project
+//-         div.flex
+//-           label Title
+//-             input(name="title", v-model="title")
+//-           label Source Code URL
+//-             input(name="source_code_url", v-model="source_code_url")
+//-           label Deployment URL
+//-             input(name="live_url", v-model="live_url")
+//-           button(type="submit") Submit
+//-         div.flex
+//-           label Screenshots & Videos
+//-             mb-file-upload(:files="myFiles" name="files" ref="mbFileUpload")
           
-    section(v-else)
-      h1 {{ submitFormState.disabledMessage }}
-    section(v-if="submitFormState.showLoginButton")
-      mb-internal-link(to="/auth/login")
-        button Login
+//-     section(v-else)
+//-       h1 {{ submitFormState.disabledMessage }}
+//-     section(v-if="submitFormState.showLoginButton")
+//-       mb-internal-link(to="/auth/login")
+//-         button Login
 
 //- div.event-wrapper
 //-   div.event-wrapper-inner

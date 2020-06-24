@@ -1,9 +1,8 @@
 <template lang="pug">
 div
-  mb-home-header
-
-  main.container.m-auto.py-10
-    div.mb-5(v-for="section in sections")
+  mb-home-header(:mb-events="mbEvents")
+  main.container.m-auto.pt-32
+    div.pb-32(v-for="section in sections")
       h2.text-3xl.py-5.font-semibold {{ section.title }}
       div.flex.justify-between
         div.rounded.overflow-hidden.shadow-xl(v-for="project in section.projects" style="width: 400px;")
@@ -42,6 +41,20 @@ export default {
   name: "Home",
   data() {
     return {
+      mbEvents: [
+        {
+          title: "Mapbox",
+          description: "Tests"
+        },
+        {
+          title: "Mapbox",
+          description: "Tests"
+        },
+        {
+          title: "Mapbox",
+          description: "Tests"
+        }
+      ],
       sections: [
         {
           title: "ReactJS Projects",
@@ -144,9 +157,9 @@ export default {
     };
   },
   computed: {
-    mbEvents: function() {
-      return this.$store.state.mbEvents || [];
-    },
+    // mbEvents: function() {
+    //   return this.$store.state.mbEvents || [];
+    // },
     nextEvent: function() {
       return this.$store.state.mbEvents.find(
         mbEvent => this.getEventStatus(mbEvent) === "upcoming"

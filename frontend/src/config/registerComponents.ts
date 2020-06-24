@@ -14,6 +14,7 @@ import mbButton from "../components/mb-button.vue";
 import mbInput from "../components/mb-input.vue";
 import mbLabel from "../components/mb-label.vue";
 import mbLinks from "../components/mb-links.vue";
+import mbCenterMessage from "../components/mb-center-message.vue";
 
 import { VueConstructor } from "vue";
 
@@ -33,5 +34,6 @@ export default (Vue: VueConstructor<Vue>) => {
   Vue.component("mb-input", mbInput);
   Vue.component("mb-label", mbLabel);
   Vue.component("mb-links", mbLinks);
+  Vue.component("mb-center-message", mbCenterMessage);
   Vue.component(VueCountdown.name, VueCountdown);
 };
