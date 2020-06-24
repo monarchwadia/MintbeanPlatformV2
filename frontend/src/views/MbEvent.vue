@@ -171,7 +171,7 @@ export default {
         };
       }
 
-      if (this.projects.find(project => project.UserId === user.id)) {
+      if (this.projects.find(project => project.user_id === user.id)) {
         return {
           enabled: false,
           disabledMessage: "Thank you for submitting your project.",
@@ -217,6 +217,7 @@ export default {
         });
     },
     handleSubmitProject() {
+      const self = this;
       const { title, source_code_url, live_url } = this;
       const isConfirmed = confirm(`Submitting a project is final. PROJECTS CANNOT CURRENTLY BE EDITED OR DELETED AFTER SUBMISSION!
 Your project will have the following information:
@@ -243,6 +244,9 @@ Would you like to continue?`);
         MediaAssets
       }).then(() => {
         self.fetchProjects();
+      }).catch((e) => {
+        alert("Failed to submit project.");
+        console.log("Failed to submit project.", e);
       });
     }
   },
