@@ -72,6 +72,7 @@ projectRoute.get('/search',  validator.query(Joi.object({
     let sql = `
       SELECT  
         p.id AS "id",
+        u.id AS "user_id",
         p."title" AS "title",
         p."live_url" AS "live_url",
         mbe."cover_image_url" AS "mbevent_cover_image_url",
@@ -172,8 +173,20 @@ projectRoute.post('/',
     const params = { title, source_code_url, live_url, mb_event_id, MbEventId, MediaAssets } = req.body;
     const UserId = req.user.id;
 
-    let project;
+    let existingProject;
+    try {
+      existingProject = await Project.findOne({
+        where: { UserId: UserId },
+      });
+    } catch (e) {
+      return next(e);
+    }
 
+    if (existingProject) {
+      return res.status(403).json({ message: 'You have already submitted a project to this event.' });
+    }
+    
+    let project;
     const result = await sequelize.transaction(async transaction => {
       project = await Project.create({ title, source_code_url, live_url, mb_event_id, MbEventId, UserId }, { transaction });
       const mediaAssets = await MediaAsset.bulkCreate(MediaAssets.map(({ cloudinaryPublicId }) => ({ cloudinaryPublicId, UserId  })), { transaction });
