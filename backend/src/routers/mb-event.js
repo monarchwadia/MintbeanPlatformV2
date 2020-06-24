@@ -1,5 +1,5 @@
 const { Router } = require('express');
-// const { requireAuth } = require('./routers.util');
+const { requireAdmin } = require('./routers.util');
 const { MbEvent, User, Project, Vote, MediaAsset } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
@@ -53,23 +53,24 @@ mbEventRoute.get('/:id', validator.params(Joi.object({
     .catch(e => next(e));
 })
 
-// mbEventRoute.post('/', 
-//   validator.query(Joi.object({
-//     title: Joi.string().required(),
-//     description: Joi.string().required(),
-//     cover_image_url: Joi.string().required(),
-//     instructions: Joi.string().required(),
-//     start_time: Joi.date().required(),
-//     end_time: Joi.date().required()
-//   })),
-//   async (req, res, next) => {
-//     console.log(req.body);
-//     MbEvent.create({ title, description, cover_image_url, instructions, start_time, end_time } = req.body)
-//       .then(resp => res.json(resp))
-//       .catch(err => {
-//         console.log(err);
-//         next(err)
-//       });
-// })
+mbEventRoute.post('/', 
+  requireAdmin,
+  validator.body(Joi.object({
+    title: Joi.string().min(1).required(),
+    description: Joi.string().min(1).required(),
+    cover_image_url: Joi.string().uri().min(1).required(),
+    instructions: Joi.string().min(1).required(),
+    start_time: Joi.date().required(),
+    end_time: Joi.date().required()
+  })),
+  async (req, res, next) => {
+    console.log(req.body);
+    MbEvent.create({ title, description, cover_image_url, instructions, start_time, end_time } = req.body)
+      .then(resp => res.json(resp))
+      .catch(err => {
+        console.log(err);
+        next(err)
+      });
+})
 
 module.exports = mbEventRoute;

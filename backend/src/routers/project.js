@@ -159,12 +159,12 @@ projectRoute.get('/:id', validator.params(Joi.object({id: Joi.string().required(
 });
 
 projectRoute.post('/',
-  requireAuth, 
+  requireAuth,
   validator.body(Joi.object({
-    title: Joi.string().required(),
-    source_code_url: Joi.string().uri().required(),
-    live_url: Joi.string().uri().required(),
-    MbEventId: Joi.string().uuid().required(),
+    title: Joi.string().min(1).required(),
+    source_code_url: Joi.string().min(1).uri().required(),
+    live_url: Joi.string().min(1).uri().required(),
+    MbEventId: Joi.string().min(1).uuid().required(),
     MediaAssets: Joi.array().items(Joi.object({
       cloudinaryPublicId: Joi.string().min(5).max(20).required()
     })).min(1).max(5).required()
@@ -176,7 +176,7 @@ projectRoute.post('/',
     let existingProject;
     try {
       existingProject = await Project.findOne({
-        where: { UserId: UserId },
+        where: { UserId, MbEventId },
       });
     } catch (e) {
       return next(e);
