@@ -22,7 +22,7 @@
             mb-external-link-follow(href="https://www.eventbrite.ca/o/mintbean-28752300031")
               div.text-center.u-pulse.text-black.p-6.min-w-full.gradient-blue-mint.text-2xl.rounded-lg.cursor-pointer Join an event
       div.flex.flex-initial.px-16.py-8
-        div.flex-col.mx-8.flex-grow.bg-white.rounded(v-for="mbEvent in mbEvents" style="width: 400px")
+        div.flex-col.mx-8.flex-grow.bg-white.rounded.overflow-hidden(v-for="mbEvent in mbEvents" style="width: 400px")
           div.bg-red-300(class="" style="height: 300px")
           div.p-3.text-black
             | {{ mbEvent.title }}

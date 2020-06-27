@@ -2,21 +2,21 @@
 main.container.m-auto
   h1.text-2xl Admin Panel
   section
-    form.login-form(v-on:submit.prevent="onSubmit")
+    form.flex.rounded-md.flex-col.p-12.bg-white.align-center.justify-center(v-on:submit.prevent="onSubmit")
       h1 Create Event
-      label Event Title
-        input(name="title", v-model="mbEvent.title")
-      label Event Description
+      mb-label Event Title
+        mb-input(name="title", v-model="mbEvent.title")
+      mb-label Event Description
         textarea.h-12.min-w-full(name="description" v-model="mbEvent.description")
-      label Image URL
-        input(name="cover_image_url", v-model="mbEvent.cover_image_url")
-      label Instructions
+      mb-label Image URL
+        mb-input(name="cover_image_url", v-model="mbEvent.cover_image_url")
+      mb-label Instructions
         textarea(name="instructions", v-model="mbEvent.instructions")
-      label Start Time
-        input(name="start_time", type="datetime-local", v-model="mbEvent.start_time")
-      label End Time
-        input(name="end_time", type="datetime-local", v-model="mbEvent.end_time")
-      button(type="submit") Submit
+      mb-label Start Time
+        mb-input(name="start_time", type="datetime-local", v-model="mbEvent.start_time")
+      mb-label End Time
+        mb-input(name="end_time", type="datetime-local", v-model="mbEvent.end_time")
+      mb-button(type="submit") Submit
 
     
 </template>
