@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  mb-home-header(:mb-events="mbEvents")
+  mb-home-header
   main.container.m-auto.pt-32
     div.pb-32(v-for="section in sections")
       h2.text-3xl.py-5.font-semibold {{ section.title }}
@@ -13,25 +13,6 @@ div
             div.text-gray-700.text-base.my-5(style="min-height: 60px; max-height: 60px; height: 60px;") {{ project.description }}
             div.flex.justify-left
                 div.inline-block.bg-gray-200.rounded-full.px-3.py-1.text-sm.font-semibold.text-gray-700.mr-2(v-for="tag in project.tags") {{`#${tag}`}}
-              
-
-    
-    //- mb-project-search(show-search-panel=false)
-
-    //- h2 Past events.
-    //- section.u-centered
-    //-   aside(v-for="mbEvent in mbEvents" class="hackathon-card" v-on:click.prevent="() => goToEvent(mbEvent.id)")
-    //-     img(:src="mbEvent.cover_image_url" max-height=300 width="100%")
-    //-     h3 {{mbEvent.title}}
-    //-     //- b(v-if="getEventStatus(mbEvent) === 'upcoming'")
-    //-     //-   countdown(:time="getCountdownTime(mbEvent.start_time)")
-    //-     //-     template(slot-scope="props") Starts In: <br/>{{ props.days }}d {{ props.hours }}h {{ props.minutes }}m {{ props.seconds }}s.
-    //-     //- b(v-if="getEventStatus(mbEvent) === 'ongoing'")
-    //-     //-   countdown(:time="getCountdownTime(mbEvent.end_time)")
-    //-     //-     template(slot-scope="props") Ends In: <br/>{{ props.days }}d {{ props.hours }}h {{ props.minutes }}m {{ props.seconds }}s.
-    //-     //- b(v-if="getEventStatus(mbEvent) === 'ended'")
-    //-     //-   | Event Ended
-    //-     p {{mbEvent.description}}
 </template>
 
 <script>
@@ -41,20 +22,6 @@ export default {
   name: "Home",
   data() {
     return {
-      mbEvents: [
-        {
-          title: "Mapbox",
-          description: "Tests"
-        },
-        {
-          title: "Mapbox",
-          description: "Tests"
-        },
-        {
-          title: "Mapbox",
-          description: "Tests"
-        }
-      ],
       sections: [
         {
           title: "ReactJS Projects",
@@ -156,47 +123,9 @@ export default {
       showSearchProjectsModal: false
     };
   },
-  computed: {
-    // mbEvents: function() {
-    //   return this.$store.state.mbEvents || [];
-    // },
-    nextEvent: function() {
-      return this.$store.state.mbEvents.find(
-        mbEvent => this.getEventStatus(mbEvent) === "upcoming"
-      );
-    }
-  },
   methods: {
     cloudinaryUrlFor: function(id) {
       return `url(https://res.cloudinary.com/mintbean/image/upload/b_black,c_crop,h_225,w_400/${id})`;
-    },
-    openSearchProjectsModal() {
-      this.showSearchProjectsModal = true;
-    },
-    closeSearchProjectsModal() {
-      this.showSearchProjectsModal = false;
-    },
-    getEventStatus(mbEvent) {
-      const timeToStart = new Date(mbEvent.start_time) - new Date();
-      const timeToEnd = new Date(mbEvent.end_time) - new Date();
-
-      if (timeToStart > 0) {
-        return "upcoming";
-      } else {
-        if (timeToEnd > 0) {
-          return "ongoing";
-        } else {
-          return "ended";
-        }
-      }
-    },
-    getCountdownTime: function(mbEventStartTime) {
-      return new Date(mbEventStartTime) - new Date();
-    },
-    goToEvent: function(id) {
-      if (id) {
-        this.$router.push("/mb-event/" + id);
-      }
     }
   },
   mounted() {

@@ -7,7 +7,7 @@
           p.text-6xl.font-semibold Write code.
           p.text-6xl.font-semibold Get noticed.
           p.text-6xl.font-semibold Get hired.
-          p.text-l.pt-5 Come for the jobs. Stay for the community.
+          p.text-l.pt-5 Come to learn. Stay to grow. And have fun.
         div.flex-initial.py-20.flex-col
           div.flex
             div.p-3
@@ -20,19 +20,9 @@
               img.signup-bean.u-pulse(src='../../assets/bean.png')
           div.pt-10
             mb-external-link-follow(href="https://www.eventbrite.ca/o/mintbean-28752300031")
-              div.text-center.u-pulse.text-black.p-6.min-w-full.gradient-blue-mint.text-2xl.rounded-lg.cursor-pointer Join an event
-      div.flex.flex-initial.px-16.py-8
-        div.flex-col.mx-8.flex-grow.bg-white.rounded.overflow-hidden(v-for="mbEvent in mbEvents" style="width: 400px")
-          div.bg-red-300(class="" style="height: 300px")
-          div.p-3.text-black
-            | {{ mbEvent.title }}
-          div.p-3.text-black
-            | Testx
+              div.text-center.u-pulse.text-black.p-6.min-w-full.gradient-blue-mint.text-2xl.rounded-lg.cursor-pointer See all upcoming events
 </template>
 
 <script>
-export default {
-  props: ['mbEvents'],
-  name: "Home"
-};
+export default {};
 </script>
