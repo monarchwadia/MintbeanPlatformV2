@@ -5,14 +5,15 @@ div
     div.pb-32(v-for="section in sections")
       h2.text-3xl.py-5.font-semibold {{ section.title }}
       div.flex.justify-between
-        div.rounded.overflow-hidden.shadow-xl(v-for="project in section.projects" style="width: 400px;")
-          div(class="w-full" style="height: 225px; width: 400px;" :style="{ backgroundImage: cloudinaryUrlFor(project.cloudinaryPublicId) }")
-          div.px-6.py-4.text-gray-700.flex.flex-col.justify-between
-            div.text-xl {{ project.title }}
-            div.text-md.mb-2 by {{ project.authorName }}
-            div.text-gray-700.text-base.my-5(style="min-height: 60px; max-height: 60px; height: 60px;") {{ project.description }}
-            div.flex.justify-left
-                div.inline-block.bg-gray-200.rounded-full.px-3.py-1.text-sm.font-semibold.text-gray-700.mr-2(v-for="tag in project.tags") {{`#${tag}`}}
+        mb-internal-link(v-for="project in section.projects" :to="'/project/' + project.projectId")
+          div.rounded.overflow-hidden.shadow-xl(style="width: 400px;")
+            div(class="w-full" style="height: 225px; width: 400px;" :style="{ backgroundImage: cloudinaryUrlFor(project.cloudinaryPublicId) }")
+            div.px-6.py-4.text-gray-700.flex.flex-col.justify-between
+              div.text-xl {{ project.title }}
+              div.text-md.mb-2 by {{ project.authorName }}
+              div.text-gray-700.text-base.my-5(style="min-height: 60px; max-height: 60px; height: 60px;") {{ project.description }}
+              div.flex.justify-left
+                  div.inline-block.bg-gray-200.rounded-full.px-3.py-1.text-sm.font-semibold.text-gray-700.mr-2(v-for="tag in project.tags") {{`#${tag}`}}
 </template>
 
 <script>
@@ -29,16 +30,16 @@ export default {
             {
               cloudinaryPublicId: "wzk5axcfxliedyrblkdj",
               title: "Piano, with PaperJS",
-              projectId: "",
               authorName: "Yasaman Loghmani",
               description:
                 "Experience a beautiful fusion of visual design, animation, and audio APIs.",
+              projectId: "736c384b-e5ab-4536-b8e5-40c03d659338",
               tags: ["audio", "animation", "creative"]
             },
             {
               cloudinaryPublicId: "gsrtag5dpz0bm0cz74ma",
               title: "Pokémon Search, with Algolia",
-              projectId: "",
+              projectId: "8ad96864-1187-4b11-8d70-57dcbac0b766",
               authorName: "Jimmy Peng",
               description:
                 "See the power of Algolia in creating a slick, complex, performant Pokémon search application",
@@ -48,7 +49,7 @@ export default {
               cloudinaryPublicId: "wq35wfvcqgvz3oqwvjcr",
               title: "Chicago bike safety heatmap",
               authorName: "Michael Hammer",
-              projectId: "",
+              projectId: "b6a3d928-e890-4fb8-b8e3-729c1a011126",
               description:
                 "Creating powerful, insightful explorations of publicly available datasets using Mapbox.",
               tags: ["map", "geolocation", "heatmap"]
@@ -96,7 +97,7 @@ export default {
               authorName: "Yasaman Loghmani",
               description:
                 "Experience a beautiful fusion of visual design, animation, and audio APIs.",
-              projectId: "",
+              projectId: "736c384b-e5ab-4536-b8e5-40c03d659338",
               tags: ["audio", "animation", "creative"]
             },
             {
