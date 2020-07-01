@@ -14,7 +14,8 @@
               h1.font-semibold.text-2xl.lg_text-3xl.xl_text-5xl.mt-5.text-right Online Hackathons
               div.text-xl.md_text-xl.xl_text-2xl.mt-5.text-right
                 p Mondays & Wednesdays
-                p.mt-5 12:00pm EST
+                p.mt-5 12pm EST / 9am PST
+                p.mt-5 
             div.p-3.sm_block.hidden
               mb-image-display(serverId="c58b49717bb0118438ee4a47e4ed2038")
               img.signup-bean.u-pulse(src='../../assets/bean.png')

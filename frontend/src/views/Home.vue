@@ -5,15 +5,15 @@ div
     div.pb-32(v-for="section in sections")
       h2.text-3xl.py-5.font-semibold {{ section.title }}
       div.flex.justify-between
-        mb-internal-link(v-for="project in section.projects" :to="'/project/' + project.projectId")
-          div.rounded.overflow-hidden.shadow-xl.hover_shadow-2xl(style="width: 400px;")
-            div(class="w-full" style="height: 225px; width: 400px;" :style="{ backgroundImage: cloudinaryUrlFor(project.cloudinaryPublicId) }")
-            div.px-6.py-4.text-gray-700.flex.flex-col.justify-between
-              div.text-xl {{ project.title }}
-              div.text-md.mb-2 by {{ project.authorName }}
-              div.text-gray-700.text-base.my-5(style="min-height: 60px; max-height: 60px; height: 60px;") {{ project.description }}
-              div.flex.justify-left
-                  div.inline-block.bg-gray-200.rounded-full.px-3.py-1.text-sm.font-semibold.text-gray-700.mr-2(v-for="tag in project.tags") {{`#${tag}`}}
+        mb-project-card(
+          v-for="project in section.projects"
+          :id="project.projectId"
+          :cloudinaryPublicId="project.cloudinaryPublicId"
+          :title="project.title"
+          :authorName="project.authorName"
+          :description="project.description"
+          :tags="project.tags"
+        )
 </template>
 
 <script>
@@ -123,11 +123,6 @@ export default {
       ],
       showSearchProjectsModal: false
     };
-  },
-  methods: {
-    cloudinaryUrlFor: function(id) {
-      return `url(https://res.cloudinary.com/mintbean/image/upload/b_black,c_crop,h_225,w_400/${id})`;
-    }
   },
   mounted() {
     const self = this;
