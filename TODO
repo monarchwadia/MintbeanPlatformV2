@@ -64,3 +64,4 @@ After:
 ☐ Captcha on register
 ☐ Send calendar invite on register
 ☐ Add links between Login & Register forms ("Already have an account? Sign in here" / "Don't have an account?...")
+☐ Move to RPC instead of REST
