@@ -6,7 +6,7 @@ div
       h2.text-3xl.py-5.font-semibold {{ section.title }}
       div.flex.justify-between
         div.rounded.overflow-hidden.shadow-xl(v-for="project in section.projects" style="width: 400px;")
-          div(class="w-full" style="height: 300px; width: 400px;" :style="{ backgroundImage: cloudinaryUrlFor(project.cloudinaryPublicId) }")
+          div(class="w-full" style="height: 225px; width: 400px;" :style="{ backgroundImage: cloudinaryUrlFor(project.cloudinaryPublicId) }")
           div.px-6.py-4.text-gray-700.flex.flex-col.justify-between
             div.text-xl {{ project.title }}
             div.text-md.mb-2 by {{ project.authorName }}
@@ -168,7 +168,7 @@ export default {
   },
   methods: {
     cloudinaryUrlFor: function(id) {
-      return `url(https://res.cloudinary.com/mintbean/image/upload/b_black,c_crop,h_600,w_600/${id})`;
+      return `url(https://res.cloudinary.com/mintbean/image/upload/b_black,c_crop,h_225,w_400/${id})`;
     },
     openSearchProjectsModal() {
       this.showSearchProjectsModal = true;
