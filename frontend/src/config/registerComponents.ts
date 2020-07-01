@@ -1,40 +1,59 @@
 const VueCountdown: any = require("@chenfengyuan/vue-countdown");
 
-import mbA from "../components/mb-a.vue";
-import mbInternalLink from "../components/mb-internal-link.vue";
-import mbExternalLink from "../components/mb-external-link.vue";
-import mbExternalLinkFollow from "../components/mb-external-link-follow.vue";
-import mbNav from "../components/mb-nav.vue";
-import mbFileUpload from "../components/mb-file-upload.vue";
-import mbImageDisplay from "../components/mb-image-display.vue";
-import mbProjectGrid from "../components/mb-project-grid.vue";
-import mbProjectSearch from "../components/mb-project-search.vue";
-import mbModal from "../components/mb-modal.vue";
-import mbFooter from "../components/mb-footer.vue";
-import mbButton from "../components/mb-button.vue";
-import mbInput from "../components/mb-input.vue";
-import mbLabel from "../components/mb-label.vue";
-import mbLinks from "../components/mb-links.vue";
-import mbCenterMessage from "../components/mb-center-message.vue";
-
 import { VueConstructor } from "vue";
 
+const validate = (files: __WebpackModuleApi.RequireContext): string[] => {
+  // error holder
+  const errors: string[] = [];
+  // duplication detection set
+  const names: Set<string> = new Set();
+
+  files.keys().forEach((key: string) => {
+    const module = files(key).default;
+    const name: string = module.name;
+
+    // ensure all modules have names
+    if (!name) {
+      errors.push(
+        `Module [${key}] doesn't have a name defined in the default export.`
+      );
+
+      // since there's no name, just return.
+      return;
+    }
+
+    // ensure names are unique
+    if (names.has(name)) {
+      errors.push(
+        `Module [${key}] has name [${name}], but this name was already used and is not unique. Fix the duplication and try again.`
+      );
+    }
+
+    // passed
+    names.add(name);
+  });
+
+  return errors;
+};
+
 export default (Vue: VueConstructor<Vue>) => {
-  Vue.component("mb-a", mbA);
-  Vue.component("mb-internal-link", mbInternalLink);
-  Vue.component("mb-external-link", mbExternalLink);
-  Vue.component("mb-external-link-follow", mbExternalLinkFollow);
-  Vue.component("mb-nav", mbNav);
-  Vue.component("mb-file-upload", mbFileUpload);
-  Vue.component("mb-image-display", mbImageDisplay);
-  Vue.component("mb-project-grid", mbProjectGrid);
-  Vue.component("mb-project-search", mbProjectSearch);
-  Vue.component("mb-modal", mbModal);
-  Vue.component("mb-footer", mbFooter);
-  Vue.component("mb-button", mbButton);
-  Vue.component("mb-input", mbInput);
-  Vue.component("mb-label", mbLabel);
-  Vue.component("mb-links", mbLinks);
-  Vue.component("mb-center-message", mbCenterMessage);
+  const files = require.context("../components", false, /\.vue$/);
+
+  const errors = validate(files);
+
+  // this only happens once, during bootup, and should theoretically only happen if there was obvious programmer error.
+  if (errors.length > 0) {
+    console.error(errors.join("\r\n"));
+    throw new Error("Errors found! See above.");
+  }
+
+  files.keys().forEach((key: string) => {
+    // @ts-ignore
+    const module = files(key).default;
+    const { name } = module;
+    Vue.component(name, module);
+  });
+
+  // register components not found in the folder
   Vue.component(VueCountdown.name, VueCountdown);
 };

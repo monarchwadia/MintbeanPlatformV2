@@ -42,6 +42,7 @@ import mintbeanLogo from "../../src/assets/mintbean-logo.png";
 import mbNavLinks from "./mb-nav-links";
 
 export default {
+  name: "mb-nav",
   props: {
     path: String
   },

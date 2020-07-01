@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  name: "mb-nav-links",
   props: {
     links: Array,
     forResponsive: Boolean

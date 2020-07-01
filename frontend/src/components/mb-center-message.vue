@@ -6,6 +6,7 @@ div.container.m-auto.text-center(style="height: 80vh; padding-top: 25vh")
 
 <script>
 export default {
-  props: ['header', 'body']
+  props: ["header", "body"],
+  name: "mb-center-message"
 };
 </script>
