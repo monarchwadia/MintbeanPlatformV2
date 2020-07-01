@@ -6,7 +6,7 @@ div
       h2.text-3xl.py-5.font-semibold {{ section.title }}
       div.flex.justify-between
         mb-internal-link(v-for="project in section.projects" :to="'/project/' + project.projectId")
-          div.rounded.overflow-hidden.shadow-xl(style="width: 400px;")
+          div.rounded.overflow-hidden.shadow-xl.hover_shadow-2xl(style="width: 400px;")
             div(class="w-full" style="height: 225px; width: 400px;" :style="{ backgroundImage: cloudinaryUrlFor(project.cloudinaryPublicId) }")
             div.px-6.py-4.text-gray-700.flex.flex-col.justify-between
               div.text-xl {{ project.title }}
