@@ -1,5 +1,5 @@
 <template>
-  <footer class="gradient-blue-mint py-8" style="height: 350px">
+  <footer class="gradient-blue-mint py-8 mt-32" style="height: 350px">
     <div
       class="bg-transparent m-auto h-full w-full justify-between p-4"
       style="background: rgba(255,255,255,0.25);"

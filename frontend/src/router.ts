@@ -7,7 +7,7 @@ import Logout from "./views/Auth/Logout.vue";
 import Register from "./views/Auth/Register.vue";
 import Project from "./views/Project.vue";
 import UserProfile from "./views/UserProfile.vue";
-import Admin from "./views/Admin.vue";
+import Admin from "./views/Admin/Admin.vue";
 import TermsOfService from "./views/Legal/TermsOfService.vue";
 import PrivacyPolicy from "./views/Legal/PrivacyPolicy.vue";
 import NotFound from "./views/NotFound.vue";

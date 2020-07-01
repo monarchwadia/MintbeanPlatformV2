@@ -2,21 +2,17 @@
 main.container.m-auto
   h1.text-2xl Admin Panel
   section
-    form.flex.rounded-md.flex-col.p-12.bg-white.align-center.justify-center(v-on:submit.prevent="onSubmit")
+    div
       h1 Create Event
-      mb-label Event Title
-        mb-input(name="title", v-model="mbEvent.title")
-      mb-label Event Description
-        textarea.h-12.min-w-full(name="description" v-model="mbEvent.description")
-      mb-label Image URL
-        mb-input(name="cover_image_url", v-model="mbEvent.cover_image_url")
-      mb-label Instructions
-        textarea(name="instructions", v-model="mbEvent.instructions")
-      mb-label Start Time
-        mb-input(name="start_time", type="datetime-local", v-model="mbEvent.start_time")
-      mb-label End Time
-        mb-input(name="end_time", type="datetime-local", v-model="mbEvent.end_time")
-      mb-button(type="submit") Submit
+      FormulateForm(v-model="mbEvent" @submit="onSubmit")
+        FormulateInput(type="text" name="title" label="Event Title" validation="required")
+        FormulateInput(type="text" name="description" label="Event Description" validation="required")
+        FormulateInput(type="textarea" name="description" label="Event Description" validation="required")
+        FormulateInput(type="text" name="cover_image_url" label="Image URL" validation="required")
+        FormulateInput(type="textarea" name="instructions" label="Instructions" validation="required")
+        FormulateInput(type="datetime-local" name="start_time" label="Start Time" validation="required")
+        FormulateInput(type="datetime-local" name="end_time" label="End Time" validation="required")
+        FormulateInput(type="submit") Submit
 
     
 </template>
@@ -24,7 +20,8 @@ main.container.m-auto
 <style lang="scss" scoped></style>
 
 <script>
-import mbProjectSearch from "../components/mb-project-search";
+import mbProjectSearch from "../../components/mb-project-search";
+
 // @ is an alias to /src
 export default {
   name: "Home",

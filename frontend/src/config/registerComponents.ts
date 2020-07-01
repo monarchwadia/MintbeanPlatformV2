@@ -1,4 +1,5 @@
 const VueCountdown: any = require("@chenfengyuan/vue-countdown");
+
 import mbA from "../components/mb-a.vue";
 import mbInternalLink from "../components/mb-internal-link.vue";
 import mbExternalLink from "../components/mb-external-link.vue";
