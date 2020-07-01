@@ -25,17 +25,14 @@ First:
 ✔ Add a nicer Page Not Found view @done(20-06-21 19:00)
 ☐ Beautify the Event view
 ☐ Beautify the Project view
-☐ Users cannot submit multiple projects (backend safety checks)
-☐ Add upcoming projects to above the fold
+✔ Users cannot submit multiple projects (backend safety checks) @done(20-06-30 23:55)
 ☐ RELEASE
-
-☐ Admin
+✔ Admin @done(20-06-30 23:55)
 ☐ Responsiveness
 ☐ RELEASE
 
-
-
 Lined up:
+  ☐ Add upcoming projects to above the fold
 ☐ Add a Projects page
 ☐ Add Markdown support for creating events
 ☐ Main page should show curated projects
