@@ -34,7 +34,6 @@ export default {
               description:
                 "Experience a beautiful fusion of visual design, animation, and audio APIs.",
               projectId: "736c384b-e5ab-4536-b8e5-40c03d659338",
-              tags: ["audio", "animation", "creative"]
             },
             {
               cloudinaryPublicId: "gsrtag5dpz0bm0cz74ma",
@@ -43,7 +42,6 @@ export default {
               authorName: "Jimmy Peng",
               description:
                 "See the power of Algolia in creating a slick, complex, performant Pokémon search application",
-              tags: ["search", "algolia", "api"]
             },
             {
               cloudinaryPublicId: "wq35wfvcqgvz3oqwvjcr",
@@ -52,7 +50,6 @@ export default {
               projectId: "b6a3d928-e890-4fb8-b8e3-729c1a011126",
               description:
                 "Creating powerful, insightful explorations of publicly available datasets using Mapbox.",
-              tags: ["map", "geolocation", "heatmap"]
             }
           ]
         },
@@ -66,7 +63,6 @@ export default {
               projectId: "2d729764-6df0-4ea6-8127-9758a3952a10",
               description:
                 "Multi-currency converter using React and other tools.",
-              tags: ["api", "react", "tool"]
             },
             {
               cloudinaryPublicId: "xolpm0m5zzdmkyggpw5s",
@@ -75,7 +71,6 @@ export default {
               authorName: "Alex Costan",
               description:
                 "A 3D map built on top of a Mapbox integration creates a compelling direction search experience",
-              tags: ["api", "mapbox", "tool"]
             },
             {
               cloudinaryPublicId: "ynze2sdbr7lciikch91o",
@@ -84,7 +79,6 @@ export default {
               description:
                 "Creating powerful explorations of publicly available datasets using Mapbox.",
               projectId: "28abad7a-db21-4bba-bd15-627809cf4a8d",
-              tags: ["api", "tool", "search"]
             }
           ]
         },
@@ -98,7 +92,6 @@ export default {
               description:
                 "Experience a beautiful fusion of visual design, animation, and audio APIs.",
               projectId: "736c384b-e5ab-4536-b8e5-40c03d659338",
-              tags: ["audio", "animation", "creative"]
             },
             {
               cloudinaryPublicId: "pdklvyh1arhoiha0uj3d",
@@ -107,7 +100,6 @@ export default {
               authorName: "Zoë Siskos",
               description:
                 "Portals take you to a different place. On the landing page, you get a sneak peek of what is beyond.",
-              tags: ["animation", "vanilla", "compilation"]
             },
             {
               cloudinaryPublicId: "vjyzrvsg0hrvqzfwtdf6",
@@ -116,7 +108,6 @@ export default {
               authorName: "Matt Taylor",
               description:
                 "Useful design tool that generates colors palettes, including complementary, triad, tetrad, and more.",
-              tags: ["map", "tool", "design"]
             }
           ]
         }
