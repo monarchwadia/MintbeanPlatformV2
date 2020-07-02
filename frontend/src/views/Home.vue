@@ -3,17 +3,11 @@ div
   mb-home-header
   main.container.m-auto.pt-32
     div.pb-32(v-for="section in sections")
-      h2.text-3xl.py-5.font-semibold {{ section.title }}
-      div.flex.justify-between
-        mb-project-card(
-          v-for="project in section.projects"
-          :id="project.projectId"
-          :cloudinaryPublicId="project.cloudinaryPublicId"
-          :title="project.title"
-          :authorName="project.authorName"
-          :description="project.description"
-          :tags="project.tags"
+      mb-project-section(
+        :title="section.title"
+        :projects="section.projects"
         )
+
 </template>
 
 <script>
