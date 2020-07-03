@@ -8,10 +8,12 @@ div
         :projects="section.projects"
         :key="i"
       )
-    mb-button(
-      v-if="isAdmin"
-      onclick='alert("add button")'
-    ) Add new section
+    div.flex.justify-center
+      mb-button.justify-center(
+        v-if="isAdmin"
+        onclick='alert("add button")'
+        style="width: 60%; min-width: max-content;"
+      ) Add new section
 </template>
 
 <script>
