@@ -2,12 +2,16 @@
 div
   mb-home-header
   main.container.m-auto.pt-32
-    div.pb-32(v-for="section in sections")
+    div.pb-32(v-for="(section, i) in sections")
       mb-project-section(
         :title="section.title"
         :projects="section.projects"
-        )
-
+        :key="i"
+      )
+    mb-button(
+      v-if="isAdmin"
+      onclick='alert("add button")'
+    ) Add new section
 </template>
 
 <script>
@@ -119,6 +123,11 @@ export default {
       .catch(e => {
         console.error("Failed to fetch frontpage projects", e);
       });
+  },
+  computed: {
+    isAdmin: function() {
+      return this.$store.state.user && this.$store.state.user.isAdmin;
+    }
   },
   components: {
     "mb-home-header": mbHomeHeader

@@ -2,14 +2,19 @@
   div(style="width: 100%; background-color:red;")
     h2.text-3xl.py-5.font-semibold {{ title }}
     input.mx-2.px-2(
+      v-if="isAdmin"
       type="text"
       name="title"
       value=""
       )
     button.inline(
       v-if="isAdmin"
-      onclick="alert('yo')"
+      onclick='alert("can\'t edit yet!")'
     ) Edit
+    button.inline(
+      v-if="isAdmin"
+      onclick='alert("can\'t delete yet!")'
+    ) Delete
     div.flex.justify-between
       mb-project-card(
         v-for="project in projects"
