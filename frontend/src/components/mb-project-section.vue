@@ -13,7 +13,7 @@
     ) Edit
     button.inline(
       v-if="isAdmin"
-      onclick='alert("can\'t delete yet!")'
+      @click='deleteSection($event)'
     ) Delete
     div.flex.justify-between
       mb-project-card(
@@ -30,12 +30,28 @@
 
 <script>
 export default {
-  props: ['title', 'projects'],
+  props: {
+    title: String,
+    projects: {
+      type: Array,
+      default: () => []
+    }
+  },
   name: "mb-project-section",
   methods: {
+    deleteSection: (e) => console.log(e.target)
     // cloudinaryUrlFor: function(id) {
     //   return `url(https://res.cloudinary.com/mintbean/image/upload/b_black,c_crop,h_225,w_400/${id})`;
     // }
+  },
+  data() {
+    return {
+      // check out sync
+      // v-on
+      // v-bind
+      // sync
+      // emit / 2-way binding
+    }
   },
   computed: {
     isAdmin: function() {
