@@ -9,7 +9,7 @@
       )
     button.inline(
       v-if="isAdmin"
-      onclick='alert("can\'t edit yet!")'
+      v-on:click="openModal"
     ) Edit
     button.inline(
       v-if="isAdmin"
@@ -39,10 +39,10 @@ export default {
   },
   name: "mb-project-section",
   methods: {
-    deleteSection: (e) => console.log(e.target)
-    // cloudinaryUrlFor: function(id) {
-    //   return `url(https://res.cloudinary.com/mintbean/image/upload/b_black,c_crop,h_225,w_400/${id})`;
-    // }
+    deleteSection: (e) => console.log(e.target),
+    openModal: () => {
+      alert('this will be a modal')
+    }
   },
   data() {
     return {
