@@ -3,6 +3,7 @@
     <div
       class="mb-modal-backdrop fixed inset-0 z-9998 overflow-auto bg-smoke-light flex"
       @click="close"
+      v-show="show"
     >
       <div
         class="mb-modal relative p-8 bg-white w-full max-w-md m-auto flex-col flex shadow-md"
@@ -33,6 +34,7 @@
 <script>
 export default {
   name: 'mb-modal',
+  props: ['show'],
   data() {
     return {
     }
@@ -43,9 +45,9 @@ export default {
     }
   },
   mounted: function () {
+    // allow close modal with 'escape'
     document.addEventListener("keydown", (e) => {
       if (e.keyCode == 27) {
-        // allow close modal with 'escape'
         this.close();
       }
     });

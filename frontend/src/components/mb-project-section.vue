@@ -13,15 +13,12 @@
     button.inline(
       @click='deleteSection($event)'
     ) Delete
-    mb-modal(
-      v-show="isModalVisible"
+    mb-project-section-modal-edit(
+      v-if="isModalVisible"
       @close="closeModal"
+      :show="openModal"
     )
-      template(
-        v-slot:title
-      )
-        | Edit section
-      
+
     div.flex.justify-between
       mb-project-card(
         v-for="project in projects"
