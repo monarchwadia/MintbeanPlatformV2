@@ -41,6 +41,14 @@ export default {
     close() {
       this.$emit('close');
     }
+  },
+  mounted: function () {
+    document.addEventListener("keydown", (e) => {
+      if (e.keyCode == 27) {
+        // allow close modal with 'escape'
+        this.close();
+      }
+    });
   }
 }
 </script>
