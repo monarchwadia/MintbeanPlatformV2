@@ -1,20 +1,22 @@
 <template lang="pug">
-  div(style="width: 100%; background-color:red;")
+  div.mb-project-section.w-full
     h2.text-3xl.py-5.font-semibold {{ title }}
     input.mx-2.px-2(
       v-if="isAdmin"
       type="text"
       name="title"
       value=""
-      )
+    )
     button.inline(
-      v-if="isAdmin"
       v-on:click="openModal"
     ) Edit
     button.inline(
-      v-if="isAdmin"
       @click='deleteSection($event)'
     ) Delete
+    mb-modal(
+      v-show="isModalVisible"
+      @close="closeModal"
+    )
     div.flex.justify-between
       mb-project-card(
         v-for="project in projects"
@@ -30,6 +32,7 @@
 
 <script>
 export default {
+  name: "mb-project-section",
   props: {
     title: String,
     projects: {
@@ -37,20 +40,19 @@ export default {
       default: () => []
     }
   },
-  name: "mb-project-section",
   methods: {
-    deleteSection: (e) => console.log(e.target),
-    openModal: () => {
-      alert('this will be a modal')
+    deleteSection(e) { console.log(e.target) },
+    openModal() {
+      this.isModalVisible = true
+      console.log('click modal open')
+    },
+    closeModal() {
+      this.isModalVisible = false
     }
   },
   data() {
     return {
-      // check out sync
-      // v-on
-      // v-bind
-      // sync
-      // emit / 2-way binding
+      isModalVisible: false
     }
   },
   computed: {
