@@ -2,7 +2,7 @@
   <transition name="modal-fade">
     <div class="mb-modal-backdrop fixed inset-0 z-9998 overflow-auto bg-smoke-light flex">
       <div
-        class="mb-modal relative p-8 bg-white w-full max-w-md m-auto flex-col flex"
+        class="mb-modal relative p-8 bg-white w-full max-w-md m-auto flex-col flex shadow-md"
         role="dialog"
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription"
