@@ -21,6 +21,7 @@
         v-slot:title
       )
         | Edit section
+      
     div.flex.justify-between
       mb-project-card(
         v-for="project in projects"
