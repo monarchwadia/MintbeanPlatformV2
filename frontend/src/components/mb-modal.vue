@@ -7,24 +7,20 @@
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription"
       >
-        <slot name="header">
-          Default title!
-          <button
-            type="button"
-            class="btn-close"
-            @click="close"
-            aria-label="Close modal"
+        <button
+          type="button"
+          class="btn-close self-end p-1"
+          @click="close"
+          aria-label="Close modal"
           >
-            x
-          </button>
-        </slot>
-
-        <section class="modal-body">
-          <slot name="body">
-            I'm the default body!
-          </slot>
-         </section>
-
+          x
+        </button>
+        <div class="mb-modal-title text-center font-bold">
+            <slot name="title"></slot>
+        </div>
+        <section class="mb-modal-body">
+          <slot name="body"></slot>
+        </section>
       </div>
     </div>
   </transition>
@@ -34,9 +30,8 @@
 export default {
   name: 'mb-modal',
   data() {
-    // return {
-    //   isVisible: false,
-    // }
+    return {
+    }
   },
   methods: {
     close() {
@@ -47,32 +42,6 @@ export default {
 </script>
 
 <style lang="css" scoped >
-  .modal-header {
-    border-bottom: 1px solid #eeeeee;
-    color: #4AAE9B;
-    justify-content: space-between;
-  }
-
-  .modal-footer {
-    border-top: 1px solid #eeeeee;
-    justify-content: flex-end;
-  }
-
-  .modal-body {
-    position: relative;
-    padding: 20px 10px;
-  }
-
-  .btn-close {
-    border: none;
-    font-size: 20px;
-    padding: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #4AAE9B;
-    background: transparent;
-  }
-
   .modal-fade-enter,
   .modal-fade-leave-active {
     opacity: 0;
