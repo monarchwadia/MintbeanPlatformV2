@@ -17,6 +17,7 @@
       v-if="isModalVisible"
       @close="closeModal"
       :show="openModal"
+      :titleData="sectionTitle"
     )
 
     div.flex.justify-between
@@ -25,7 +26,7 @@
         :key="project.projectId"
         :id="project.projectId"
         :cloudinaryPublicId="project.cloudinaryPublicId"
-        :title="project.title"
+        :projectTitle="project.title"
         :authorName="project.authorName"
         :description="project.description"
         :tags="project.tags"
@@ -42,19 +43,20 @@ export default {
       default: () => []
     }
   },
+  data() {
+    return {
+      isModalVisible: false,
+      sectionTitle: this.title
+    }
+  },
   methods: {
     deleteSection(e) { console.log(e.target) },
     openModal() {
-      this.isModalVisible = true
-      console.log('click modal open')
+      this.isModalVisible = true;
+      console.log('click modal open');
     },
     closeModal() {
-      this.isModalVisible = false
-    }
-  },
-  data() {
-    return {
-      isModalVisible: false
+      this.isModalVisible = false;
     }
   },
   computed: {

@@ -5,13 +5,15 @@
         Edit section
       </template>
       <template v-slot:body>
-        <input
-          type="text"
-          id="edit-title"
-          placeholder="Section title"
-          class="p-2"
-          value="John"
-        />
+        <div class="p-2">
+          <input
+            type="text"
+            placeholder="Section title"
+            class="p-2"
+            v-model="titleData"
+            @keyup="$emit('update',titleData);"
+          />
+        </div>
       </template>
     </mb-modal>
   </div>
@@ -20,10 +22,18 @@
 <script>
 export default {
   name: 'mb-project-section-modal-edit',
-  props: ['show'],
+  props: {
+    show: Function,
+    titleData: String,
+  },
+  data() {
+    return {
+      titleData: this.titleData,
+    }
+  },
   methods: {
     close: function() {
-        this.$emit('close')
+      this.$emit('close')
     }
   }
 }
