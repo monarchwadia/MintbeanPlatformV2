@@ -1,28 +1,19 @@
 <template lang="pug">
-  div.mb-project-section.w-full
-    h2.text-3xl.py-5.font-semibold {{ title }}
-    mb-modal-button(text="Edit")
-      template(v-slot:title) Edit section title
-      template(v-slot:body)
-        FormulateForm
-          FormulateInput(type="text" name="title" v-model="editTitle")
-          FormulateInput(type="submit" @click.prevent="updateTitle") Submit
-    mb-modal(
-      ref="modalEdit"
-    )
-      template(v-slot:title) Edit section
-      template(v-slot:body)
-        div.p-2
-          input(
-            type="text"
-            placeholder="Section title"
-            class="p-2"
-            v-model="title"
-          )
-    mb-confirm.ml-1(@confirm="deleteSection" text="Delete" message="Are you sure you want to delete this section?")
-    button.inline(
-      @click='deleteSection($event)'
-      ) Delete
+  div.w-full
+    div.mb-2
+      h2.text-3xl.py-5.font-semibold.inline {{ title }}
+      mb-modal-button.ml-2(text="Edit" ref="modalEdit")
+        template(v-slot:title) Edit section title
+        template(v-slot:body)
+          FormulateForm
+            FormulateInput(type="text" name="title" v-model="editTitle")
+            FormulateInput(type="submit" @click.prevent="updateTitle") Submit
+      mb-confirm.ml-1(
+        @confirm="deleteSection"
+        text="Delete"
+        title="Confirm"
+        message="Are you sure you want to delete this section?"
+      )
     div.flex.justify-between
       mb-project-card(
         v-for="project in projects"
@@ -43,7 +34,7 @@ export default {
     title: String,
     projects: {
       type: Array,
-      default: () => []
+      default: () => [],
     }
   },
   data() {
@@ -52,13 +43,15 @@ export default {
     }
   },
   methods: {
-    deleteSection() { alert('faking deletion of this section') },
+    deleteSection() {
+      alert('faking deletion of this section');
+    },
     openModal() {
-      console.log('click modal open');
       this.$refs.modalEdit.open();
     },
     updateTitle() {
-      alert(`pretending to update title to: ${this.editTitle}`)
+      alert(`pretending to update title to: ${this.editTitle}`);
+      this.$refs.modalEdit.$refs.modal.close();
     }
   },
   computed: {

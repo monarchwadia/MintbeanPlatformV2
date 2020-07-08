@@ -10,7 +10,7 @@
         button.btn-close.self-end.p-1(
           @click="close"
           ) X
-        div.text-center.font-bold
+        div.text-center.mb-2.font-bold
           slot(name="title")
         section
           slot(name="body")
