@@ -6,9 +6,6 @@
     >
       <div
         class="mb-modal relative p-8 bg-white w-full max-w-md m-auto flex-col flex shadow-md"
-        role="dialog"
-        aria-labelledby="modalTitle"
-        aria-describedby="modalDescription"
         @click.stop
       >
         <button
