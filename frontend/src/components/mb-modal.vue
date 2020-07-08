@@ -12,8 +12,7 @@
           type="button"
           class="btn-close self-end p-1"
           @click="close"
-          aria-label="Close modal"
-          >
+        >
           x
         </button>
         <div class="mb-modal-title text-center font-bold">
