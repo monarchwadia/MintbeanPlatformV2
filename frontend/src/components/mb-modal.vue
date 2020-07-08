@@ -2,6 +2,7 @@
   transition(name="modal-fade")
     div.mb-modal-backdrop.fixed.inset-0.z-9998.overflow-auto.bg-black.bg-opacity-50.flex(
        @click="close"
+       v-if="isOpen"
       )
       div.mb-modal.relative.p-8.bg-white.w-full.max-w-md.m-auto.flex-col.flex.shadow-md(
         @click.stop
@@ -21,13 +22,15 @@ export default {
   props: ['showModal'],
   data() {
     return {
-      isOpen: true
+      isOpen: false
     }
   },
   methods: {
     close() {
       this.isOpen = false;
-      this.$emit('close');
+    },
+    open() {
+      this.isOpen = true;
     }
   },
 }

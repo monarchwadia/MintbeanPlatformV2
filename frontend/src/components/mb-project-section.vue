@@ -9,8 +9,7 @@
       @click='deleteSection($event)'
     ) Delete
     mb-modal(
-      v-if="showModal"
-      @close="showModal = false"
+      ref="modalEdit"
     )
       template(v-slot:title) Edit section
       template(v-slot:body)
@@ -46,14 +45,13 @@ export default {
   },
   data() {
     return {
-      showModal: false,
     }
   },
   methods: {
     deleteSection(e) { console.log(e.target) },
     openModal() {
-      this.showModal = true;
       console.log('click modal open');
+      this.$refs.modalEdit.open();
     },
   },
   computed: {
