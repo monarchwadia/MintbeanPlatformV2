@@ -4,7 +4,7 @@
     mb-modal-button(text="Edit")
       template(v-slot:title) Edit section title
       template(v-slot:body)
-        FormulateForm.flex.flex-col.py-2
+        FormulateForm
           FormulateInput(type="text" name="title" v-model="editTitle")
           FormulateInput(type="submit" @click.prevent="updateTitle") Submit
     mb-modal(
@@ -19,6 +19,7 @@
             class="p-2"
             v-model="title"
           )
+    mb-confirm.ml-1(@confirm="deleteSection" text="Delete" message="Are you sure you want to delete this section?")
     button.inline(
       @click='deleteSection($event)'
       ) Delete
@@ -51,7 +52,7 @@ export default {
     }
   },
   methods: {
-    deleteSection(e) { console.log(e.target) },
+    deleteSection() { alert('faking deletion of this section') },
     openModal() {
       console.log('click modal open');
       this.$refs.modalEdit.open();
