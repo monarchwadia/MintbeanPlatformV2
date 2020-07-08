@@ -1,19 +1,12 @@
 <template lang="pug">
   div.mb-project-section.w-full
     h2.text-3xl.py-5.font-semibold {{ title }}
-    button.inline(
-      v-on:click="openModal"
-      v-if="isAdmin"
-    ) Edit
-    button.inline(
-      @click='deleteSection($event)'
-    ) Delete
     mb-modal-button(text="Edit")
       template(v-slot:title) Edit section title
       template(v-slot:body)
-        form.flex.flex-col.py-2
-          input.mb-2(type="text" name="sectionTitle" v-model="editTitle")
-          mb-button(type="submit" @click.prevent="updateTitle") Submit
+        FormulateForm.flex.flex-col.py-2
+          FormulateInput(type="text" name="title" v-model="editTitle")
+          FormulateInput(type="submit" @click.prevent="updateTitle") Submit
     mb-modal(
       ref="modalEdit"
     )
@@ -26,6 +19,9 @@
             class="p-2"
             v-model="title"
           )
+    button.inline(
+      @click='deleteSection($event)'
+      ) Delete
     div.flex.justify-between
       mb-project-card(
         v-for="project in projects"
@@ -61,7 +57,7 @@ export default {
       this.$refs.modalEdit.open();
     },
     updateTitle() {
-      alert('pretending to update title')
+      alert(`pretending to update title to: ${this.editTitle}`)
     }
   },
   computed: {
