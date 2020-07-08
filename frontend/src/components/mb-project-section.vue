@@ -12,7 +12,7 @@
       template(v-slot:title) Edit section title
       template(v-slot:body)
         form.flex.flex-col.py-2
-          input.mb-2(type="text" name="sectionTitle" v-model="title")
+          input.mb-2(type="text" name="sectionTitle" v-model="editTitle")
           mb-button(type="submit" @click.prevent="updateTitle") Submit
     mb-modal(
       ref="modalEdit"
@@ -51,6 +51,7 @@ export default {
   },
   data() {
     return {
+      editTitle: this.title,
     }
   },
   methods: {
