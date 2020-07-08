@@ -9,11 +9,15 @@ div
         :key="i"
       )
     div.flex.justify-center
-      mb-button.justify-center(
+      mb-modal-button.ml-2(
         v-if="isAdmin"
-        onclick='alert("add button")'
-        style="width: 60%; min-width: max-content;"
-      ) Add new section
+        text="Add new section"
+        ref="modalAddSection")
+        template(v-slot:title) Add new section
+        template(v-slot:body)
+          FormulateForm
+            FormulateInput(type="text" name="newSectionTitle" placeholder="New section title" v-model="newSectionTitle")
+            FormulateInput(type="submit" @click.prevent="createSection") Add
 </template>
 
 <script>
@@ -23,6 +27,7 @@ export default {
   name: "Home",
   data() {
     return {
+      newSectionTitle: '',
       sections: [
         {
           title: "ReactJS Projects",
@@ -112,8 +117,13 @@ export default {
           ]
         }
       ],
-      showSearchProjectsModal: false
     };
+  },
+  methods: {
+    createSection(e) {
+      alert(`faking creation of section '${this.newSectionTitle}'`);
+      this.$refs.modalAddSection.$refs.modal.close();
+    }
   },
   mounted() {
     const self = this;
