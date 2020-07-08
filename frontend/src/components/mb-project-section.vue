@@ -8,6 +8,14 @@
     button.inline(
       @click='deleteSection($event)'
     ) Delete
+    mb-modal-button(text="test")
+      template(v-slot:title)
+        p.text-red Edit Section
+      template(v-slot:body)
+        form
+          input(type="text")
+          input(type="text")
+          input(type="text")
     mb-modal(
       ref="modalEdit"
     )
