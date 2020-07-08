@@ -3,7 +3,6 @@
     <div
       class="mb-modal-backdrop fixed inset-0 z-9998 overflow-auto bg-smoke-light flex"
       @click="close"
-      v-show="show"
     >
       <div
         class="mb-modal relative p-8 bg-white w-full max-w-md m-auto flex-col flex shadow-md"
@@ -34,13 +33,15 @@
 <script>
 export default {
   name: 'mb-modal',
-  props: ['show'],
+  props: ['showModal'],
   data() {
     return {
+      // isOpen: true
     }
   },
   methods: {
     close() {
+      // this.isOpen = false;
       this.$emit('close');
     }
   },

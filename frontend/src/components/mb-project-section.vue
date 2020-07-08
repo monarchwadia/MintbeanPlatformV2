@@ -1,25 +1,26 @@
 <template lang="pug">
   div.mb-project-section.w-full
     h2.text-3xl.py-5.font-semibold {{ title }}
-    input.mx-2.px-2(
-      v-if="isAdmin"
-      type="text"
-      name="title"
-      value=""
-    )
     button.inline(
       v-on:click="openModal"
+      v-if="isAdmin"
     ) Edit
     button.inline(
       @click='deleteSection($event)'
     ) Delete
-    mb-project-section-modal-edit(
-      v-if="isModalVisible"
-      @close="closeModal"
-      :show="openModal"
-      :titleData="sectionTitle"
+    mb-modal(
+      v-if="showModal"
+      @close="showModal = false"
     )
-
+      template(v-slot:title) Edit section
+      template(v-slot:body)
+        div.p-2
+          input(
+            type="text"
+            placeholder="Section title"
+            class="p-2"
+            v-model="title"
+          )
     div.flex.justify-between
       mb-project-card(
         v-for="project in projects"
@@ -45,19 +46,15 @@ export default {
   },
   data() {
     return {
-      isModalVisible: false,
-      sectionTitle: this.title
+      showModal: false,
     }
   },
   methods: {
     deleteSection(e) { console.log(e.target) },
     openModal() {
-      this.isModalVisible = true;
+      this.showModal = true;
       console.log('click modal open');
     },
-    closeModal() {
-      this.isModalVisible = false;
-    }
   },
   computed: {
     isAdmin: function() {
