@@ -1,7 +1,7 @@
 <template lang="html">
   <transition name="modal-fade">
     <div
-      class="mb-modal-backdrop fixed inset-0 z-9998 overflow-auto bg-smoke-light flex"
+      class="mb-modal-backdrop fixed inset-0 z-9998 overflow-auto bg-black bg-opacity-50 flex"
       @click="close"
     >
       <div
