@@ -8,14 +8,12 @@
     button.inline(
       @click='deleteSection($event)'
     ) Delete
-    mb-modal-button(text="test")
-      template(v-slot:title)
-        p.text-red Edit Section
+    mb-modal-button(text="Edit")
+      template(v-slot:title) Edit section title
       template(v-slot:body)
-        form
-          input(type="text")
-          input(type="text")
-          input(type="text")
+        form.flex.flex-col.py-2
+          input.mb-2(type="text" name="sectionTitle" v-model="title")
+          mb-button(type="submit" @click.prevent="updateTitle") Submit
     mb-modal(
       ref="modalEdit"
     )
@@ -61,6 +59,9 @@ export default {
       console.log('click modal open');
       this.$refs.modalEdit.open();
     },
+    updateTitle() {
+      alert('pretending to update title')
+    }
   },
   computed: {
     isAdmin: function() {

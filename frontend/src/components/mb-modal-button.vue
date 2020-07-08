@@ -1,7 +1,7 @@
 <template lang="pug">
-  mb-button(@click="openModal") {{ text }}
-    //- must break mb-button color/cursor inheritance
-    mb-modal.text-black.cursor-default(ref="modal")
+  div.inline
+    mb-button(@click="openModal") {{ text }}
+    mb-modal(ref="modal")
       template(v-slot:title)
         slot(name="title")
       template(v-slot:body)

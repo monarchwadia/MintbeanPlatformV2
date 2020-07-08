@@ -5,8 +5,7 @@ module.exports = {
     fontFamily: {
       main: ["Montserrat"]
     },
-    extend: {
-    },
+    extend: {},
   },
   variants: {
     boxShadow: ['hover']
