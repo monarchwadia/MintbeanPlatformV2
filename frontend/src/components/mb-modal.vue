@@ -7,7 +7,6 @@
         @click.stop
       )
         button.btn-close.self-end.p-1(
-          type="button"
           @click="close"
           ) X
         div.text-center.font-bold
@@ -22,12 +21,12 @@ export default {
   props: ['showModal'],
   data() {
     return {
-      // isOpen: true
+      isOpen: true
     }
   },
   methods: {
     close() {
-      // this.isOpen = false;
+      this.isOpen = false;
       this.$emit('close');
     }
   },
