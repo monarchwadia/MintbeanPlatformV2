@@ -2,13 +2,14 @@
   div.w-full
     div.mb-2
       h2.text-3xl.py-5.font-semibold.inline {{ title }}
-      mb-modal-button.ml-2(text="Edit" ref="modalEdit")
+      mb-modal-button.ml-2(v-if="isAdmin" text="Edit" ref="modalEdit")
         template(v-slot:title) Edit section title
         template(v-slot:body)
           FormulateForm
             FormulateInput(type="text" name="title" v-model="editTitle")
             FormulateInput(type="submit" @click.prevent="updateTitle") Submit
       mb-confirm.ml-1(
+        v-if="isAdmin" 
         @confirm="deleteSection"
         text="Delete"
         title="Confirm"
