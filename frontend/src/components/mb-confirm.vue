@@ -2,7 +2,7 @@
   mb-modal-button(:text="text" ref="modalBtn")
     template(v-slot:title) {{ title }}
     template(v-slot:body)
-      p.mb-2.text-center {{ message }}
+      p.mb-4.text-center {{ message }}
       div.flex.justify-around
         mb-button(@click="emitCancelAndClose") {{ cancelText }}
         mb-button(@click="emitConfirmAndClose") {{ confirmText }}

@@ -15,9 +15,19 @@ div
         ref="modalAddSection")
         template(v-slot:title) Add new section
         template(v-slot:body)
-          FormulateForm
-            FormulateInput(type="text" name="newSectionTitle" placeholder="New section title" v-model="newSectionTitle")
-            FormulateInput(type="submit" @click.prevent="createSection") Add
+          FormulateForm(live)
+            FormulateInput(
+              type="text"
+              name="newSectionTitle"
+              placeholder="New section title"
+              v-model="newSectionTitle"
+              validation="between:2,40,length"
+              error-behavior="live"
+            )
+            FormulateInput(
+              type="submit"
+              @click.prevent="createSection"
+            ) Add
 </template>
 
 <script>
@@ -120,8 +130,10 @@ export default {
     };
   },
   methods: {
-    createSection(e) {
+    createSection() {
+      // TODO: prevent form submission on invalid inputs
       alert(`faking creation of section '${this.newSectionTitle}'`);
+      this.newSectionTitle = '';
       this.$refs.modalAddSection.$refs.modal.close();
     }
   },
