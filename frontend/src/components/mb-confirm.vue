@@ -4,7 +4,7 @@
     template(v-slot:body)
       p.mb-4.text-center {{ message }}
       div.flex.justify-around
-        mb-button(@click="emitCancelAndClose") {{ cancelText }}
+        mb-button(variant="default" @click="emitCancelAndClose") {{ cancelText }}
         mb-button(@click="emitConfirmAndClose") {{ confirmText }}
 </template>
 
