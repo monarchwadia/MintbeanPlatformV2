@@ -13,7 +13,7 @@ module.exports = {
       try {
         const projects = await Project.findAll({ where: {} });
         projects.forEach(async p => {
-          
+
           const mediaAsset = await MediaAsset.create(mediaAssetFactory.one({
             UserId: p.UserId
           }));
@@ -49,29 +49,5 @@ module.exports = {
         reject(e);
       }
     })
-
-    // const users = mbEventFactory.bulk(10);
-
-
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
   },
-
-  down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
-  }
 };
