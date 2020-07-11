@@ -1,8 +1,12 @@
 const { Project } = require('../db/models');
 
 const search = (where = {}) => Project.findAll({ where });
+const findWhere = (where = {}) => Project.findOne({ where });
+const find = (options = {}) => Project.findOne(options);
 
 
 module.exports = {
-  search
+  search,
+  findWhere,
+  find
 }

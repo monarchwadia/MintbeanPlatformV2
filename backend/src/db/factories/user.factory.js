@@ -7,5 +7,6 @@ module.exports = factory({
   email: () => faker.internet.email(),
   password_hash: () => 'password', // TODO: Change
   createdAt: () => new Date(),
-  updatedAt: () => new Date()
+  updatedAt: () => new Date(),
+  isAdmin: false
 });
