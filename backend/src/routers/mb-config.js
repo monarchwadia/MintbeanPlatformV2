@@ -20,47 +20,49 @@ mbConfigRoute.get('/:key',
 });
 
 // for returning sections that include project associations
-mbConfigRoute.get('/linked/featured-sections',
+mbConfigRoute.get('/asc/featured-sections',
   async (req, res, next) => {
     let val;
-    // let sections = [];
 
-    await MbConfig.findOne({ where: { configKey: FEATURED_SECTIONS_KEY }})
-      .then(config => val = JSON.parse(config.configValue))
-      .catch(err => next(err));
+    try {
+      const response = await MbConfig.findOne({ where: { configKey: FEATURED_SECTIONS_KEY }})
+      val = JSON.parse(response.configValue);
+    } catch (e) {
+      return next(e);
+    }
 
-    const sections = val.sections.map(s => {
-      const title = s.title;
-      let projects = [];
+    let pids = new Set();
+    val.sections.forEach(s => {
+      s.projectIds.forEach(pid => pids.add(pid));
+    });
 
-        s.projectIds.forEach( async pid => {
-          const project = await findProject({
-            where: { id: pid },
-            include: [
-              { model: User },
-              { model: MbEvent },
-            ]
-          })
-          console.log(findProject({
-            where: { id: pid },
-            include: [
-              { model: User },
-              { model: MbEvent },
-            ]
-          }))
-          projects.push(project)
-        })
+    const pidsArray = Array.from(pids);
 
-        console.log(projects)
+
+    let projects;
+    try {
+      projects = await Project.findAll({
+        where: { id: pidsArray },
+        include: [
+          { model: User, attributes: {exclude: ['password', 'password_hash'] }},
+          { model: MbEvent }
+        ],
+
+      })
+    } catch (e) {
+      return next(e);
+    }
+
+    const responseObj = val.sections.map(section => {
+      const projs = section.projectIds.map(pid => projects.find(p => p.id === pid));
 
       return {
-        title,
-        projects
+        title: section.title,
+        projects: projs
       }
-    })
-    console.log(sections)
+    });
 
-    res.json(sections)
+    res.json(responseObj);
   }
 );
 
