@@ -1,6 +1,6 @@
 const { Router } = require('express');
 // const { requireAdmin } = require('./routers.util');
-const { MbConfig, User, MbEvent, Project } = require('../db/models');
+const { MbConfig, User, MbEvent, Project, MediaAsset } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
 const sequelize = require('sequelize');
@@ -44,7 +44,8 @@ mbConfigRoute.get('/asc/featured-sections',
         where: { id: pidsArray },
         include: [
           { model: User, attributes: {exclude: ['password', 'password_hash'] }},
-          { model: MbEvent }
+          { model: MbEvent },
+          { model: MediaAsset }
         ],
 
       })

@@ -9,7 +9,7 @@
             FormulateInput(type="text" name="title" v-model="editTitle")
             FormulateInput(type="submit" @click.prevent="updateTitle") Submit
       mb-confirm.ml-1(
-        v-if="isAdmin" 
+        v-if="isAdmin"
         @confirm="deleteSection"
         text="Delete"
         title="Confirm"
@@ -18,11 +18,11 @@
     div.flex.justify-between
       mb-project-card(
         v-for="project in projects"
-        :key="project.projectId"
-        :id="project.projectId"
-        :cloudinaryPublicId="project.cloudinaryPublicId"
+        :key="project.id"
+        :id="project.id"
+        :cloudinaryPublicId="project.MediaAssets[0].cloudinaryPublicId"
         :projectTitle="project.title"
-        :authorName="project.authorName"
+        :authorName="getFullname(project.User)"
         :description="project.description"
         :tags="project.tags"
       )
@@ -53,12 +53,15 @@ export default {
     updateTitle() {
       alert(`pretending to update title to: ${this.editTitle}`);
       this.$refs.modalEdit.$refs.modal.close();
+    },
+    getFullname(user) {
+      return `${user.firstname} ${user.lastname}`
     }
   },
   computed: {
     isAdmin: function() {
       return this.$store.state.user && this.$store.state.user.isAdmin;
-    }
+    },
   },
 }
 </script>
