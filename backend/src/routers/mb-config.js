@@ -38,7 +38,6 @@ mbConfigRoute.get('/asc/featured-sections',
 
     const pidsArray = Array.from(pids);
 
-
     let projects;
     try {
       projects = await Project.findAll({
