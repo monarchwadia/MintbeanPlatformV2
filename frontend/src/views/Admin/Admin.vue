@@ -14,7 +14,6 @@ main.container.m-auto
         FormulateInput(type="datetime-local" name="end_time" label="End Time" validation="required")
         FormulateInput(type="submit") Submit
 
-      
       h1.mt-4 Edit Featured Projects Sections
         mb-modal-button.ml-2(
           btnText="Edit"
