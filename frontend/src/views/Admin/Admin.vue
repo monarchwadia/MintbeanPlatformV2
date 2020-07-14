@@ -81,12 +81,17 @@ export default {
         });
     },
     async updateFeaturedProjectsSections() {
-      const self = this;
-      console.log(this.featuredSectionsJSONstr);
-      const value = await this.$mbContext.mbConfigService
-        .patchValueByEndpoint('featured-sections', self.featuredSectionsJSONstr);
-      console.log({value})
-      this.$refs.modalEditSections.$refs.modal.close();
+      const confirmed = confirm("Are you sure you want to make this change?");
+      if (confirmed) {
+        const self = this;
+        console.log(this.featuredSectionsJSONstr);
+        const value = await this.$mbContext.mbConfigService
+          .patchValueByEndpoint('featuredSections', self.featuredSectionsJSONstr);
+        console.log({value})
+        this.$refs.modalEditSections.$refs.modal.close();
+      } else {
+        return;
+      }
     }
   },
   mounted() {

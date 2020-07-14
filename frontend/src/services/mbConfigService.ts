@@ -10,6 +10,8 @@ export class MbConfigService {
 
   async patchValueByEndpoint(key: string, newValue: string): Promise<MbConfig> {
     return this.apiService.patch("/api/v1/mb-config/" + key, { configValue: newValue }).then(resp => resp.data);
+    // const queryResponse = this.apiService.patch("/api/v1/mb-config/" + key, { configValue: newValue }).then(resp => resp.data);
+    // return queryResponse.data;
   };
 
 

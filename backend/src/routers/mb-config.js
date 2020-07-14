@@ -24,7 +24,7 @@ mbConfigRoute.patch('/:key',
   // validator.body(Joi.object({configValue: Joi.any()})),
   async (req, res, next) => {
     const { key } = req.params;
-    console.log(req.body)
+    console.log(req.body.configValue)
 
     try {
       let config = await MbConfig.findOne({ where: {
@@ -32,10 +32,11 @@ mbConfigRoute.patch('/:key',
       }});
 
       if (config) {
-        const stringifiedValue = JSON.stringify(req.body.configValue)
+        const stringifiedValue = JSON.stringify(JSON.parse(req.body.configValue));
         config = await config.update({
           configValue: stringifiedValue,
         });
+        console.log(config)
       }
        else {
         const params = { configKey: key, configValue: req.configValue };
