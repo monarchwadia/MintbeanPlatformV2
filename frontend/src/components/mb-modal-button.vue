@@ -1,6 +1,6 @@
 <template lang="pug">
   div.inline
-    mb-button(@click="openModal") {{ text }}
+    mb-button(@click="openModal" :variant="btnVariant") {{ btnText }}
     mb-modal(ref="modal")
       template(v-slot:title)
         slot(name="title")
@@ -12,7 +12,11 @@
 export default {
   name: "mb-modal-button",
   props: {
-    text: String,
+    btnText: String,
+    btnVariant: {
+      type: String,
+      default: "primary",
+    },
   },
   methods: {
     openModal() {

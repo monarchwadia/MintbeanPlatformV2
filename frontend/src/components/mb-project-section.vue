@@ -2,7 +2,7 @@
   div.w-full
     div.mb-2
       h2.text-3xl.py-5.font-semibold.inline {{ title }}
-      mb-modal-button.ml-2(v-if="isAdmin" text="Edit" ref="modalEdit")
+      mb-modal-button.ml-2(v-if="isAdmin" btnText="Edit" ref="modalEdit")
         template(v-slot:title) Edit section title
         template(v-slot:body)
           FormulateForm
@@ -11,7 +11,7 @@
       mb-confirm.ml-1(
         v-if="isAdmin"
         @confirm="deleteSection"
-        text="Delete"
+        btnText="Delete"
         title="Confirm"
         message="Are you sure you want to delete this section?"
       )
