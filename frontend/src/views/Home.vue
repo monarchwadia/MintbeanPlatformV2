@@ -11,7 +11,7 @@ div
     div.flex.justify-center
       mb-modal-button.ml-2(
         v-if="isAdmin"
-        text="Add new section"
+        btnText="Add new section"
         ref="modalAddSection")
         template(v-slot:title) Add new section
         template(v-slot:body)
@@ -54,6 +54,7 @@ export default {
     this.$mbContext.mbConfigService
       .getAscFeaturedSections()
         .then(res => self.sections = res)
+
   },
   computed: {
     isAdmin: function() {
