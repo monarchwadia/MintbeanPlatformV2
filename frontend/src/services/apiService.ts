@@ -11,4 +11,7 @@ export class ApiService {
   post(url: string, data: any) {
     return axios.post(url, data);
   }
+  patch(url: string, data: any) {
+    return axios.patch(url, data);
+  }
 }

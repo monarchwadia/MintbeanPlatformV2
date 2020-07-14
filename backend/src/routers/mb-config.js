@@ -19,6 +19,35 @@ mbConfigRoute.get('/:key',
       .catch(err => next(err));
 });
 
+mbConfigRoute.patch('/:key',
+  // validator.params(Joi.object({key: Joi.string().required()})),
+  // validator.body(Joi.object({configValue: Joi.any()})),
+  async (req, res, next) => {
+    const { key } = req.params;
+    console.log(req.body)
+
+    try {
+      let config = await MbConfig.findOne({ where: {
+        configKey: key,
+      }});
+
+      if (config) {
+        const stringifiedValue = JSON.stringify(req.body.configValue)
+        config = await config.update({
+          configValue: stringifiedValue,
+        });
+      }
+       else {
+        const params = { configKey: key, configValue: req.configValue };
+        config = await MbConfig.create(params);
+      }
+
+      res.json(config);
+    } catch (e) {
+      return next(e);
+    }
+});
+
 // for returning sections that include project associations
 mbConfigRoute.get('/asc/featured-sections',
   async (req, res, next) => {

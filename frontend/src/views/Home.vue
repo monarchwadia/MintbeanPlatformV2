@@ -38,9 +38,7 @@ export default {
   data() {
     return {
       newSectionTitle: '',
-      sections: [
-
-      ],
+      sections: [ ],
     };
   },
   methods: {
@@ -56,7 +54,6 @@ export default {
     this.$mbContext.mbConfigService
       .getAscFeaturedSections()
         .then(res => self.sections = res)
-        // .then(res => console.log(res))
   },
   computed: {
     isAdmin: function() {

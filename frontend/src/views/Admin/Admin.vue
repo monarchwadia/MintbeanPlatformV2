@@ -14,7 +14,26 @@ main.container.m-auto
         FormulateInput(type="datetime-local" name="end_time" label="End Time" validation="required")
         FormulateInput(type="submit") Submit
 
-    
+      h1.mt-4 Edit Featured Projects Sections
+        mb-modal-button.ml-2(
+          text="Edit"
+          ref="modalEditSections")
+          template(v-slot:title)
+            p Edit Featured Projects Sections
+            p (Drag textarea to englarge)
+          template(v-slot:body)
+            FormulateForm(live)
+              FormulateInput(
+                type="textarea"
+                name="featuredSectionsJSON"
+                placeholder="Enter JSON here"
+                v-model="featuredSectionsJSONstr"
+                validation="required"
+              )
+              FormulateInput(
+                type="submit"
+                @click.prevent="updateFeaturedProjectsSections"
+              ) Update
 </template>
 
 <style lang="scss" scoped></style>
@@ -34,7 +53,8 @@ export default {
         instructions: "",
         start_time: new Date(),
         end_time: new Date()
-      }
+      },
+      featuredSectionsJSONstr: {},
     };
   },
   components: {
@@ -59,7 +79,22 @@ export default {
           console.log("Failed to create event", message, e);
           alert("Failed to create event. " + message);
         });
+    },
+    async updateFeaturedProjectsSections() {
+      const self = this;
+      console.log(this.featuredSectionsJSONstr);
+      const value = await this.$mbContext.mbConfigService
+        .patchValueByEndpoint('featured-sections', self.featuredSectionsJSONstr);
+      console.log({value})
+      this.$refs.modalEditSections.$refs.modal.close();
     }
-  }
+  },
+  mounted() {
+    const self = this;
+    this.$mbContext.mbConfigService
+      .getValueByKey('featuredSections')
+        .then(res => JSON.stringify(JSON.parse(res), null, '\t'))
+        .then(data => self.featuredSectionsJSONstr = data)
+  },
 };
 </script>

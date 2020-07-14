@@ -8,7 +8,13 @@ export class MbConfigService {
     return this.apiService.get("/api/v1/mb-config/" + key).then(resp => resp.data);
   };
 
+  async patchValueByEndpoint(key: string, newValue: string): Promise<MbConfig> {
+    return this.apiService.patch("/api/v1/mb-config/" + key, { configValue: newValue }).then(resp => resp.data);
+  };
+
+
   async getAscFeaturedSections(): Promise<MbConfig> {
     return this.apiService.get("/api/v1/mb-config/asc/featured-sections").then(resp => resp.data);
   };
+
 };
