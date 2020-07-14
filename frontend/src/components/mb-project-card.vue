@@ -1,5 +1,5 @@
 <template lang="pug">
-  mb-internal-link(:to="'/project/' + id")
+  mb-internal-link(:to="'/project/' + id" :class="disableClick ? 'disable' : null")
     div.rounded.overflow-hidden.shadow-xl.hover_shadow-2xl(style="width: 400px;")
       div(class="w-full" style="height: 225px; width: 400px;" :style="{ backgroundImage: cloudinaryUrlFor(cloudinaryPublicId) }")
       div.px-6.py-4.text-gray-700.flex.flex-col.justify-between
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  props: ['id', 'cloudinaryPublicId', 'projectTitle', 'authorName', 'description', 'tags'],
+  props: ['id', 'cloudinaryPublicId', 'projectTitle', 'authorName', 'description', 'tags', 'disableClick'],
   name: "mb-project-card",
   methods: {
     cloudinaryUrlFor: function(id) {
@@ -21,3 +21,9 @@ export default {
   },
 }
 </script>
+
+<style lang="css" scoped >
+  .disabled {
+    pointer-events: none;
+  }
+</style>
