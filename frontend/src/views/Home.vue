@@ -1,7 +1,9 @@
 <template lang="pug">
 div
   mb-home-header
-  main.container.m-auto.pt-32
+  main.container.m-auto.pt-24.max-w-screen-lg
+    div.mb-10
+      mb-event-section(title="Upcoming Events")
     div.pb-32(v-for="(section, i) in sections")
       mb-project-section(
         :title="section.title"
@@ -53,7 +55,7 @@ export default {
     const self = this;
     this.$mbContext.mbConfigService
       .getAscFeaturedSections()
-        .then(res => self.sections = res)
+        .then(res => self.sections = res).then(()=>console.log(self.sections))
 
   },
   computed: {
