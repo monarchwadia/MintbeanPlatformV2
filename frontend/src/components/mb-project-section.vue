@@ -1,5 +1,5 @@
 <template lang="pug">
-  div.sliding-section.w-full.overflow-x-auto(:class="sliderIsDown ? 'active' : null" ref="projectSectionContainer")
+  div.w-full
     div.mb-2
       h2.text-3xl.py-5.font-semibold.inline {{ title }}
       mb-modal-button.ml-2(v-if="isAdmin" btnText="Edit" ref="modalEdit")
@@ -15,7 +15,7 @@
         title="Confirm"
         message="Are you sure you want to delete this section?"
       )
-    div.flex.justify-between
+    div.sliding-section.flex.justify-between.overflow-x-auto(:class="sliderIsDown ? 'active' : null" ref="projectSectionContainer")
       mb-project-card.mr-2(
         v-for="project in projects"
         :key="project.id"
@@ -93,13 +93,44 @@ export default {
 
 <style lang="css" scoped >
   .sliding-section.active {
-    cursor: grabbing;
-    cursor: -webkit-grabbing;
+    cursor: grabbing !important;
+    cursor: -webkit-grabbing !important;
     transform: scale(1.01);
     transition: ease 0.2s;
   }
   .sliding-section {
     transition: ease 0.2s;
+    cursor: grab !important;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgba(2, 237, 157, 0.6);
+    background: -moz-linear-gradient(
+      90deg,
+      rgba(2, 237, 157, 0.6) 0%,
+      rgba(0, 155, 226, 0.6) 100%
+    );
+    background: linear-gradient(
+      90deg,
+      rgba(2, 237, 157, 0.6) 0%,
+      rgba(0, 155, 226, 0.6) 100%
+    );
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 
 </style>
