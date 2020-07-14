@@ -86,7 +86,6 @@ mbConfigRoute.get('/asc/featured-sections',
 
     const pidsArray = Array.from(pids);
 
-    let projects;
     try {
       projects = await Project.findAll({
         where: { id: pidsArray },
@@ -95,7 +94,6 @@ mbConfigRoute.get('/asc/featured-sections',
           { model: MbEvent },
           { model: MediaAsset }
         ],
-
       })
     } catch (e) {
       return next(e);
@@ -103,7 +101,6 @@ mbConfigRoute.get('/asc/featured-sections',
 
     const responseObj = val.sections.map(section => {
       const projs = section.projectIds.map(pid => projects.find(p => p.id === pid));
-
       return {
         title: section.title,
         projects: projs
