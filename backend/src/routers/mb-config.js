@@ -1,5 +1,5 @@
 const { Router } = require('express');
-// const { requireAdmin } = require('./routers.util');
+const { requireAdmin } = require('./routers.util');
 const { MbConfig, User, MbEvent, Project, MediaAsset } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
@@ -30,26 +30,22 @@ mbConfigRoute.get('/:key',
 // }
 
 mbConfigRoute.patch('/:key',
+  requireAdmin,
   validator.params(Joi.object({ key: Joi.string().required() })),
-  // validator.body(Joi.object({
-  //   configValue: Joi.object({
-  //     sections: Joi.array().items(Joi.object({
-  //       title: Joi.string().min(1),
-  //       projectIds: Joi.array().items(Joi.string().min(1))
-  //     }))
-  //   })
-  // })),
-  // validator.body(Joi.object({
-  //   configValue: Joi.string().custom(validateJSON, 'validate featured Projects JSON string')
-  // })),
+  validator.body(Joi.object({
+    configValue: Joi.object({
+      sections: Joi.array().items(Joi.object({
+        title: Joi.string().required().min(1),
+        projectIds: Joi.array().min(1).items(Joi.string().required())
+      }))
+    })
+  })),
   async (req, res, next) => {
     const { key } = req.params;
     console.log(req.body)
 
     try {
-      let config = await MbConfig.findOne({ where: {
-        configKey: key,
-      }});
+      let config = await MbConfig.findOne({ where: { configKey: key } });
 
       if (config) {
         config = await config.update({
