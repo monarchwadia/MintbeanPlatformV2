@@ -15,15 +15,36 @@ mbConfigRoute.get('/:key',
     const { key } = req.params;
 
     MbConfig.findOne({ where: { configKey: key }})
-      .then(config => res.json(config.configValue))
+      .then(config => res.json(JSON.parse(config.configValue)))
       .catch(err => next(err));
 });
 
+
+// function validateJSON(val, helpers) {
+//   const json = JSON.parse(val);
+//   // TODO: if.....
+//   if(json) {
+//     console.log('is json!')
+//   }
+//   return val;
+// }
+
 mbConfigRoute.patch('/:key',
-  // validator.params(Joi.object({key: Joi.string().required()})),
-  // validator.body(Joi.object({configValue: Joi.any()})),
+  validator.params(Joi.object({ key: Joi.string().required() })),
+  // validator.body(Joi.object({
+  //   configValue: Joi.object({
+  //     sections: Joi.array().items(Joi.object({
+  //       title: Joi.string().min(1),
+  //       projectIds: Joi.array().items(Joi.string().min(1))
+  //     }))
+  //   })
+  // })),
+  // validator.body(Joi.object({
+  //   configValue: Joi.string().custom(validateJSON, 'validate featured Projects JSON string')
+  // })),
   async (req, res, next) => {
     const { key } = req.params;
+    console.log(req.body)
 
     try {
       let config = await MbConfig.findOne({ where: {
@@ -31,13 +52,12 @@ mbConfigRoute.patch('/:key',
       }});
 
       if (config) {
-        const stringifiedValue = JSON.stringify(JSON.parse(req.body.configValue));
         config = await config.update({
-          configValue: stringifiedValue,
+          configValue: JSON.stringify(req.body.configValue),
         });
       }
        else {
-        const params = { configKey: key, configValue: req.configValue };
+        const params = { configKey: key, configValue: JSON.stringify(req.body.configValue) };
         config = await MbConfig.create(params);
       }
 
