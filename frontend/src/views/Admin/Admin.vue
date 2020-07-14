@@ -22,7 +22,7 @@ main.container.m-auto
             p Edit Featured Projects Sections
             p (Drag textarea to englarge)
           template(v-slot:body)
-            FormulateForm(live)
+            FormulateForm.text-xs(live)
               FormulateInput(
                 type="textarea"
                 name="featuredSectionsJSON"
@@ -38,7 +38,7 @@ main.container.m-auto
         mb-modal-button.ml-2(btnText="Show me an example" btnVariant="default")
           template(v-slot:title) Example format for featured projects sections
           template(v-slot:body)
-            textarea.w-full(rows="25" :value="featuredSectionsJSONstrSample")
+            textarea.text-xs.w-full(rows="25" :value="featuredSectionsJSONstrSample")
 
 </template>
 
