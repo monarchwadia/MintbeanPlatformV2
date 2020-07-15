@@ -34,7 +34,7 @@ div
           div.flex.flex-col.p-6(style="box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);")
             h2.text-2xl.mb-4 About the dev
             div.flex.items-start
-              mb-avatar(size="50px")
+              mb-avatar(size="md")
               div.ml-2
                 p.text-xl {{ project.User.firstname }} {{ project.User.lastname }}
                 mb-external-link(:href="project.User.linkedin_id") Linkedin
@@ -45,7 +45,7 @@ div
               form.w-full.flex.flex-col(v-on:submit.prevent="function(evt){ handleVoteProject(project.id) }")
                 h2.text-2xl.mb-4 {{ userVote ? 'Edit your' : 'Submit a' }} vote
                 div.flex.items-center.mb-2
-                  mb-avatar(size="25px")
+                  mb-avatar(size="sm")
                   em.ml-1 Editing as {{ $store.state.user.firstname }} {{ $store.state.user.lastname }}
                 label.mb-2 Your Rating (1 - 10)
                   select.ml-2.p-2(v-model="rating")
@@ -83,7 +83,7 @@ div
               div(v-for="vote in project.Votes" style="width: 100%;")
                 div.flex.mb-3
                   div.flex-shrink-0
-                    mb-avatar.self-center(size="50px")
+                    mb-avatar.self-center(size="md")
                   div.pl-2
                     b.mb-2 {{vote.User.firstname + ' ' + vote.User.lastname}}
                     em.ml-2.text-sm.mb-2 - {{getMoment(vote.createdAt)}}

@@ -6,7 +6,12 @@
 export default {
   name: 'mb-avatar',
   props: {
-    size: String,
+    size: {
+      type: String,
+      validator (val) {
+        return ['sm', 'md', 'lg', 'xl'].includes(val)
+      }
+    },
     color: {
       type: String,
     }
@@ -17,11 +22,23 @@ export default {
       const randomColor =  mbColors[Math.floor(Math.random()*mbColors.length)];
       return randomColor;
     },
+    parsedSize() {
+      switch(this.size) {
+        case 'sm':
+          return '24px;';
+        case 'md':
+          return '50px';
+        case 'lg':
+          return '100px';
+        default:
+          return '50px';
+      }
+    },
   },
   computed: {
     style() {
-      return `width: ${this.size}; height: ${this.size}; border-radius: 50%; background-color: ${this.randomMintyColor()}`;
-    }
+      return `width: ${this.parsedSize()}; height: ${this.parsedSize()}; border-radius: 50%; background-color: ${this.randomMintyColor()}`;
+    },
   }
 }
 </script>
