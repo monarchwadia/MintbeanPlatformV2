@@ -1,3 +1,5 @@
+const { mbColors } = require('./src/styles/mbColors');
+
 module.exports = {
   separator: "_",
   purge: [],
@@ -5,7 +7,9 @@ module.exports = {
     fontFamily: {
       main: ["Montserrat"]
     },
-    extend: {},
+    extend: {
+      colors: mbColors,
+    },
   },
   variants: {
     boxShadow: ['hover']
