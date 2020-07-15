@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-image-display">
+  <div class="mb-image-display flex justify-center">
     <cld-context cloudName="mintbean">
       <cld-image :publicId="publicId" secure="true">
         <cld-transformation

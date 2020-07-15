@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import prettyDateHelper from '../helpers/prettyDate';
+
 export default {
   props: ['id', 'cloudinaryPublicId', 'eventTitle', 'startTime', 'registerLink'],
   name: "mb-event-card",
@@ -21,14 +23,7 @@ export default {
     urlFor: function(url) {
       return `url(${url})`;
     },
-    prettyDate: function(date) {
-      let locale;
-      if (navigator) {
-        locale = navigator.language ? navigator.language : 'en-CA';
-      }
-      const localizedDate = new Date(date).toLocaleString(locale, {hour: 'numeric', minute: '2-digit', month: 'short', year: 'numeric', day: 'numeric'});
-      return localizedDate;
-    },
+    prettyDate: prettyDateHelper
   },
 }
 </script>
