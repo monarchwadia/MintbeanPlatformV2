@@ -91,13 +91,9 @@ div
 
 </template>
 
-<style lang="scss" scoped></style>
-  .mb-boxshadow {
-    box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3)
-  }
+
 <script>
 import moment from "moment";
-import prettyDateHelper from '../helpers/prettyDate';
 
 // @ is an alias to /src
 export default {
