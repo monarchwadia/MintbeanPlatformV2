@@ -9,6 +9,9 @@ module.exports = {
     },
     extend: {
       colors: mbColors,
+      boxShadow: {
+        'mb': '0 10px 20px -10px rgba(0,0,0,0.3)'
+      }
     },
   },
   variants: {

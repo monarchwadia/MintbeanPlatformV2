@@ -13,7 +13,7 @@ div
   div.container.m-auto
     div(v-if="!!project")
       div
-        section.mt-4.p-6(style="box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);")
+        section.mt-4.p-6.shadow-mb
           aside(v-for="mediaAsset in project.MediaAssets")
             mb-image-display(v-if="mediaAsset.cloudinaryPublicId" :publicId="mediaAsset.cloudinaryPublicId", width="980")
             div.flex.justify-end(v-if="isAdmin")
@@ -31,7 +31,7 @@ div
         //- left column
         div(style="flex-basis: 40%;")
 
-          div.flex.flex-col.p-6(style="box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);")
+          div.flex.flex-col.p-6.shadow-mb
             h2.text-2xl.mb-4 About the dev
             div.flex.items-start
               mb-avatar(size="md")
@@ -40,7 +40,7 @@ div
                 mb-external-link(:href="project.User.linkedin_id") Linkedin
                 mb-external-link(v-if="project.User.github_id" :href="project.User.github_id") GitHub
                 mb-external-link(v-if="project.User.stackoverflow_id" :href="project.User.stackoverflow_id") StackOverflow
-          div.flex.flex-col.p-6(style="box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);")
+          div.flex.flex-col.p-6.shadow-mb
             section(v-if="$store.state.user")
               form.w-full.flex.flex-col(v-on:submit.prevent="function(evt){ handleVoteProject(project.id) }")
                 h2.text-2xl.mb-4 {{ userVote ? 'Edit your' : 'Submit a' }} vote
@@ -73,7 +73,7 @@ div
 
         //- right column
         div(style="flex-basis: 60%;")
-          div.p-6(style="box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);")
+          div.p-6.shadow-mb
             div.flex.justify-between
               h2.text-2xl.mb-4 Votes
               h2.text-right.text-2xl Average Score:  {{averageScore}} / 10
