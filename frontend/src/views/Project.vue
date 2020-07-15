@@ -7,8 +7,8 @@ div
         h1.text-5xl {{ project.title }}
         p.text-xl by {{ project.User.firstname }} {{ project.User.lastname }}
       div.flex.self-end
-        mb-a-button.mr-4.h-auto.z-99.right-0(isExternal v-if="project.source_code_url" target="_blank" rel="noopener noreferrer" :href="project.source_code_url" ) Source Code
-        mb-a-button.h-auto.z-99.right-0(isExternal v-if="project.live_url" target="_blank" rel="noopener noreferrer" :href="project.live_url" ) View Project
+        mb-a-button.mr-4.h-auto.z-99.right-0(isExternal v-if="project.source_code_url" :href="project.source_code_url" ) Source Code
+        mb-a-button.h-auto.z-99.right-0(isExternal v-if="project.live_url" :href="project.live_url" ) View Project
 
   div.container.m-auto
     div(v-if="!!project")
