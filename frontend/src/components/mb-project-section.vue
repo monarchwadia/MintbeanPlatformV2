@@ -25,7 +25,6 @@
         :authorName="getFullname(project.User)"
         :description="project.description"
         :tags="project.tags"
-        :disableClick="sliderIsDown"
       )
 </template>
 
