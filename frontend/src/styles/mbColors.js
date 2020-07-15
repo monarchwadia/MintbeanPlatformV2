@@ -4,7 +4,6 @@ const basemint = "#02ed9d";
 const baseblue = "#009be2";
 const basered  = "#f14668";
 
-// TODO: fix color darkening/lightening (currently only '500' works)
 // color darken/lighten tool: http://scg.ar-ch.org/
 // loose rule:
 // lighten: 15% (400), 40% (300), 50% (200), 55% (100)
