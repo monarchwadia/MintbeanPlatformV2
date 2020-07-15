@@ -16,7 +16,7 @@
         message="Are you sure you want to delete this section?"
       )
     div.sliding-section.flex.justify-between.overflow-x-auto(:class="sliderIsDown ? 'active' : null" ref="projectSectionContainer")
-      mb-project-card.mr-2(
+      mb-project-card.mr-4(
         v-for="project in projects"
         :key="project.id"
         :id="project.id"
