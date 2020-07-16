@@ -11,7 +11,7 @@ div
           p.text-xl.py-2 {{ prettyDate }}
     div.container.m-auto.mb-32
       div.flex.mb-16
-        div.flex-grow.mr-4.shadow-mb.p-10.flex.flex-col.justify-center(style="flex-basis: 60%;")
+        div.flex-grow.mr-4.shadow-mb.p-10.flex.flex-col.justify-center.text-white.rounded-lg(style="flex-basis: 60%; background: linear-gradient(0deg, black, #3d3d3d);")
           div.mb-6
             h2.text-3xl Description
             p {{ mbEvent.description }}
@@ -19,7 +19,7 @@ div
             h2.mt-2.text-2xl Instructions
             h3 {{ mbEvent.instructions }}
 
-        div.flex-grow.shadow-mb.p-10.flex.flex-col.justify-end(style="flex-basis: 40%;")
+        div.flex-grow.shadow-mb.p-10.flex.flex-col.justify-end.text-white.rounded-lg(style="flex-basis: 40%; background: linear-gradient(0deg, black, #3d3d3d);")
           section(v-if="submitFormState.enabled")
             form(v-on:submit.prevent="handleSubmitProject")
               h2.text-3xl.mb-1 Submit a Project
