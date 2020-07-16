@@ -22,7 +22,7 @@ div
 
         div.flex-grow.shadow-mb.p-10.flex.flex-col.justify-end(style="flex-basis: 40%;")
           section(v-if="submitFormState.enabled")
-            form.submit-project-form(v-on:submit.prevent="handleSubmitProject")
+            form(v-on:submit.prevent="handleSubmitProject")
               h2.text-3xl.mb-1 Submit a Project
               div.flex.flex-col.mb-form
                 label(for="source_code_url") Title

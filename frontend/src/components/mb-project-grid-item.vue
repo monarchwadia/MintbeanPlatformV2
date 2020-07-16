@@ -1,22 +1,29 @@
 <template lang="pug">
-div.shadow-mb.m-2.mb-10(style="width: 400px;")
+div.shadow-mb.m-2.mb-10(style="width: 400px; background: #3d3d3d;")
   div.inner
-    div.screenshot
-      div.overlay.relative
-        div.project-title
-          | {{ project.title }}
-        div.project-buttons.absolute.right-0
-          mb-a-button(isExternal :href="projectPlatformUrl") Comments
-          mb-a-button(isExternal :href="projectDeployedUrl") Visit
-          //- button Score
-      mb-image-display(:publicId="cloudinaryPublicId" height="300" width="400")
-    div.user
-      div.username {{ username }}
-      div.projectinfo
-        fa.icon(icon="comment")
-        | &nbsp; {{ voteCount }}
-        fa.icon(icon="star")
-        | &nbsp; {{ voteAverage }}
+    div.screenshot.relative
+      div.overlay-top.absolute.text-white.p-3.pb-3.top-0.z-50.w-full(style="background: linear-gradient(180deg, #3d3d3d, transparent);")
+        h3.text-xl.font-semibold {{ project.title }}
+      div.overlay-bottom.absolute.flex.items-center.justify-between.text-white.py-2.px-3.pt-3.bottom-0.text-right.z-50.w-full(style="background: linear-gradient(0deg, #3d3d3d,transparent);")
+        div.flex.items-center
+          //- mb-avatar.mr-2(size="sm")
+          //- p {{ username }}
+        div
+          div.inline.mr-2
+            fa.icon.text-mb-mint-500(icon="comment")
+            | &nbsp; {{ voteCount }}
+          div.inline
+            fa.icon.text-mb-mint-500(icon="star")
+            | &nbsp; {{ voteAverage }}
+
+      mb-image-display.relative(:publicId="cloudinaryPublicId" height="300" width="400")
+    div.p-3.flex
+      div.flex.flex-none.text-white.items-center
+        mb-avatar.mr-2(size="sm")
+        p {{ username }}
+      div.flex.w-full.justify-end
+        mb-a-button.mr-2(isExternal :href="projectPlatformUrl") Comments
+        mb-a-button(isExternal :href="projectDeployedUrl") Demo
 </template>
 
 
