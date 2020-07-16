@@ -4,7 +4,7 @@
     div.px-6.py-4.text-gray-700.flex.flex-col.justify-between
       div.text-xl {{ projectTitle }}
       div.text-md.mb-2 by {{ authorName }}
-      div.text-gray-700.text-base.my-5(style="min-height: 60px; max-height: 60px; height: 60px;") {{ description }}
+      div.hidden.text-gray-700.text-base.my-5(style="min-height: 60px; max-height: 60px; height: 60px;") {{ description }}
       mb-internal-link(:to="'/project/' + id")
         mb-button.float-right View
       div.flex.justify-left
