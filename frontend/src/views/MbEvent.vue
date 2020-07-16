@@ -12,7 +12,7 @@ div
           p.text-xl.py-2 {{ prettyDate }}
     div.container.m-auto.mb-32
       div.flex.mb-16
-        div.flex-grow.mr-4.shadow-mb.p-10.self-center.flex.flex-col.justify-center(style="flex-basis: 60%;")
+        div.flex-grow.mr-4.shadow-mb.p-10.flex.flex-col.justify-center(style="flex-basis: 60%;")
           div.mb-6
             h2.text-3xl Description
             p {{ mbEvent.description }}
