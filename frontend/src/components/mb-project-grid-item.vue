@@ -1,27 +1,24 @@
 <template lang="pug">
-div.mb-project-grid-item
+div.shadow-mb.m-2.mb-10(style="width: 400px;")
   div.inner
     div.screenshot
-      div.overlay
-        div.project-title 
+      div.overlay.relative
+        div.project-title
           | {{ project.title }}
-        div.project-buttons
-          mb-a(:href="projectPlatformUrl")
-            button Comments
-          mb-a(:href="projectDeployedUrl")
-            button Visit
+        div.project-buttons.absolute.right-0
+          mb-a-button(isExternal :href="projectPlatformUrl") Comments
+          mb-a-button(isExternal :href="projectDeployedUrl") Visit
           //- button Score
       mb-image-display(:publicId="cloudinaryPublicId" height="300" width="400")
     div.user
       div.username {{ username }}
-      div.projectinfo 
+      div.projectinfo
         fa.icon(icon="comment")
         | &nbsp; {{ voteCount }}
         fa.icon(icon="star")
         | &nbsp; {{ voteAverage }}
 </template>
 
-<style lang="scss" scoped></style>
 
 <script>
 export default {
