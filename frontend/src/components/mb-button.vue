@@ -24,7 +24,7 @@ export default {
         case "primary":
           return "gradient-blue-mint text-white p-2 hover_shadow-md";
         case "default":
-          return "border-solid border-2 border-gray-700 text-gray-700 p-2 hover_shadow-md";
+          return "border-solid bg-white border-2 border-gray-700 text-gray-700 p-2 hover_shadow-md";
         default:
           return "gradient-blue-mint text-white p-2 hover_shadow-md";
       }

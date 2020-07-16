@@ -102,6 +102,23 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
         console.log("Failed to fetch events", e);
       });
   };
+  //
+  // const fetchMbEvent: Action<MbState, MbState> = async (
+  //   { commit, dispatch },
+  //   mbEventId: string
+  // ) => {
+  //   mbContext.projectService
+  //     .fetchMbEvent(mbEventId)
+  //     .then((dto) => {
+  //       commit("setProperty", ["mbEvent", dto || undefined]);
+  //     })
+  //     .catch((e) => {
+  //       const message =
+  //         (e && e.response && e.response.data && e.response.data.message) || "";
+  //       console.log("Failed to fetch event", message, e);
+  //       alert("Failed to fetch event");
+  //     });
+  // };
 
   const submitProject: Action<MbState, MbState> = async (
     { commit, dispatch },
@@ -236,6 +253,7 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
     logout,
     register,
     fetchMbEvents,
+    // fetchMbEvent,
     submitProject,
     vote,
     fetchProject,
