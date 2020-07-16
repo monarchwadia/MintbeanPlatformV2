@@ -15,7 +15,7 @@
               div.text-xl.md_text-xl.xl_text-2xl.mt-5.text-right
                 p Mondays & Wednesdays
                 p.mt-5 12pm EST / 9am PST
-                p.mt-5 
+                p.mt-5
             div.p-3.sm_block.hidden
               mb-image-display(serverId="c58b49717bb0118438ee4a47e4ed2038")
               img.signup-bean.u-pulse(src='../../assets/bean.png')

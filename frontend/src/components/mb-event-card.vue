@@ -3,8 +3,8 @@
     div.rounded.overflow-hidden.shadow-xl.hover_shadow-2xl.w-full
       div.w-full.relative(style="background-size: cover; height: 250px;" :style="{ backgroundImage: urlFor(cloudinaryPublicId) }")
         mb-a-button.absolute.z-99.right-0(isExternal :href="registerLink" @click.stop) Register
-      div.px-4.py-4.text-gray-700.flex.justify-between.items-center
-        div.text-xl {{ eventTitle }}
+      div.px-4.py-4.text-gray-700.lg_flex.lg_justify-between.items-center
+        div.text-xl.mr-2 {{ eventTitle }}
         div {{prettyDate(startTime) + ' (EST)'}}
 </template>
 
