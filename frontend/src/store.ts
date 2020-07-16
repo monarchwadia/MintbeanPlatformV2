@@ -47,13 +47,16 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
 
   const login: Action<MbState, MbState> = async (
     { commit },
-    { email, password, $router }
+    { email, password, $router, $route }
   ) => {
     mbContext.authService
       .login(email, password)
       .then((user) => {
         commit("setProperty", ["user", user || undefined]);
-        if (user) {
+        if (user && $route && $route.query.redirect) {
+          $router.replace($route.query.redirect);
+        }
+        else if (user) {
           $router.push("/");
         }
       })

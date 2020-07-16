@@ -55,7 +55,7 @@ export default {
     const self = this;
     this.$mbContext.mbConfigService
       .getAscFeaturedSections()
-        .then(res => self.sections = res).then(()=>console.log(self.sections))
+        .then(res => self.sections = res);
 
   },
   computed: {
