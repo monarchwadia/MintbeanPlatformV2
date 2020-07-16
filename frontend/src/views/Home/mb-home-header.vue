@@ -2,14 +2,14 @@
 .flex.flex-col
   .flex.justify-around.pb-10(style="background: linear-gradient(0deg,#a3fedf,#fff 50%); box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);")
     .container.text-white.rounded-lg(style="background: linear-gradient(0deg, black, #3d3d3d);")
-      div.flex.justify-between.px-16
-        div.flex-initial.py-20
-          p.text-6xl.font-semibold Write code.
-          p.text-6xl.font-semibold Get noticed.
-          p.text-6xl.font-semibold Get hired.
+      div.lg_flex.justify-between.px-16
+        div.flex-initial.lg_py-20.pt-20.text-center
+          p.lg_text-6xl.lg_text-left.lg_block.text-center.text-3xl.inline.font-semibold Write code.&nbsp;
+          p.lg_text-6xl.lg_text-left.lg_block.text-center.text-3xl.inline.font-semibold Get noticed.&nbsp;
+          p.lg_text-6xl.lg_text-left.lg_block.text-center.text-3xl.inline.font-semibold Get hired.&nbsp;
           p.text-l.pt-5 Come to learn. Stay to grow. And have fun.
         div.flex-initial.py-20.flex-col
-          div.flex
+          div.flex.lg_justify-start.justify-center
             div.p-3
               h1.font-semibold.text-2xl.lg_text-3xl.xl_text-5xl.mt-5.text-right Online Hackathons
               div.text-xl.md_text-xl.xl_text-2xl.mt-5.text-right
