@@ -40,11 +40,12 @@ div
           section.w-full(v-if="submitFormState.showLoginButton")
             mb-internal-link.w-full(to="/auth/login")
               mb-button.w-full Login
+      div.shadow-mb.px-4.py-10
 
-      h2.text-3xl
-      section(v-if="projects && projects.length === 0")
-        p No submissions yet. Be the first to submit a project!
-      mb-project-grid(v-else :projects="projects")
+        h2.text-3xl.mb-2.text-center Submissions
+        section(v-if="projects && projects.length === 0")
+          p No submissions yet. Be the first to submit a project!
+        mb-project-grid(v-else :projects="projects")
 
 
 

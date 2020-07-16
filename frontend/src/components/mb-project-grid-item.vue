@@ -17,7 +17,7 @@ div.shadow-mb.m-2.mb-10(style="width: 400px; background: #3d3d3d;")
             | &nbsp; {{ voteAverage }}
 
       mb-image-display.relative(:publicId="cloudinaryPublicId" height="300" width="400")
-    div.p-3.flex
+    div.p-3.flex.flex-grow
       div.flex.flex-none.text-white.items-center
         mb-avatar.mr-2(size="sm")
         p {{ username }}
