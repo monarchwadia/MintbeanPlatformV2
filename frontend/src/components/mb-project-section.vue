@@ -92,14 +92,13 @@ export default {
 
 <style lang="css" scoped >
   .sliding-section.active {
-    cursor: grabbing !important;
-    cursor: -webkit-grabbing !important;
+    cursor: ew-resize;
     transform: scale(1.01);
     transition: ease 0.2s;
   }
   .sliding-section {
     transition: ease 0.2s;
-    cursor: grab !important;
+    cursor: ew-resize;
   }
 
   /* width */

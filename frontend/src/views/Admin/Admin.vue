@@ -1,44 +1,43 @@
 <template lang="pug">
 main.container.m-auto
-  h1.text-2xl Admin Panel
-  section
-    div
-      h1 Create Event
-      FormulateForm(v-model="mbEvent" @submit="onSubmit")
-        FormulateInput(type="text" name="title" label="Event Title" validation="required")
-        FormulateInput(type="text" name="description" label="Event Description" validation="required")
-        FormulateInput(type="textarea" name="description" label="Event Description" validation="required")
-        FormulateInput(type="text" name="cover_image_url" label="Image URL" validation="required")
-        FormulateInput(type="textarea" name="instructions" label="Instructions" validation="required")
-        FormulateInput(type="datetime-local" name="start_time" label="Start Time" validation="required")
-        FormulateInput(type="datetime-local" name="end_time" label="End Time" validation="required")
-        FormulateInput(type="submit") Submit
+  h1.text-5xl Admin Panel
 
-      h1.mt-4 Edit Featured Projects Sections
-        mb-modal-button.ml-2(
-          btnText="Edit"
-          ref="modalEditSections")
-          template(v-slot:title)
-            p Edit Featured Projects Sections
-            p (Drag textarea to englarge)
-          template(v-slot:body)
-            FormulateForm.text-xs(live)
-              FormulateInput(
-                type="textarea"
-                name="featuredSectionsJSONstr"
-                placeholder="Enter JSON here"
-                v-model="featuredSectionsJSONstr"
-                validation="required"
-              )
-              FormulateInput(
-                type="submit"
-                @click.prevent="updateFeaturedProjectsSections"
-              ) Update
+  h1.text-2xl.mt-12 Edit Featured Projects Sections
+  mb-modal-button.ml-2(btnText="Show me an example" btnVariant="default")
+    template(v-slot:title) Example format for featured projects sections
+    template(v-slot:body)
+      textarea.text-xs.w-full(rows="25" :value="featuredSectionsJSONstrSample")
+  mb-modal-button.ml-2(
+    btnText="Edit"
+    ref="modalEditSections")
+    template(v-slot:title)
+      p Edit Featured Projects Sections
+      p (Drag textarea to englarge)
+    template(v-slot:body)
+      FormulateForm.text-xs(live)
+        FormulateInput(
+          type="textarea"
+          name="featuredSectionsJSONstr"
+          placeholder="Enter JSON here"
+          v-model="featuredSectionsJSONstr"
+          validation="required"
+        )
+        FormulateInput(
+          type="submit"
+          @click.prevent="updateFeaturedProjectsSections"
+        ) Update
 
-        mb-modal-button.ml-2(btnText="Show me an example" btnVariant="default")
-          template(v-slot:title) Example format for featured projects sections
-          template(v-slot:body)
-            textarea.text-xs.w-full(rows="25" :value="featuredSectionsJSONstrSample")
+  h1.text-2xl.mt-12 Create Event
+  FormulateForm(v-model="mbEvent" @submit="onSubmit")
+    FormulateInput(type="text" name="title" label="Event Title" validation="required")
+    FormulateInput(type="text" name="description" label="Event Description" validation="required")
+    FormulateInput(type="textarea" name="description" label="Event Description" validation="required")
+    FormulateInput(type="text" name="cover_image_url" label="Image URL" validation="required")
+    FormulateInput(type="textarea" name="instructions" label="Instructions" validation="required")
+    FormulateInput(type="datetime-local" name="start_time" label="Start Time" validation="required")
+    FormulateInput(type="datetime-local" name="end_time" label="End Time" validation="required")
+    FormulateInput(type="submit") Submit
+
 
 </template>
 
