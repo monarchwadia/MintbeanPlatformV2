@@ -15,30 +15,30 @@ main.container.m-auto
         FormulateInput(type="submit") Submit
 
       h1.mt-4 Edit Featured Projects Sections
-        mb-modal-button.ml-2(
-          btnText="Edit"
-          ref="modalEditSections")
-          template(v-slot:title)
-            p Edit Featured Projects Sections
-            p (Drag textarea to englarge)
-          template(v-slot:body)
-            FormulateForm.text-xs(live)
-              FormulateInput(
-                type="textarea"
-                name="featuredSectionsJSONstr"
-                placeholder="Enter JSON here"
-                v-model="featuredSectionsJSONstr"
-                validation="required"
-              )
-              FormulateInput(
-                type="submit"
-                @click.prevent="updateFeaturedProjectsSections"
-              ) Update
+      mb-modal-button(
+        btnText="Edit"
+        ref="modalEditSections")
+        template(v-slot:title)
+          p Edit Featured Projects Sections
+          p (Drag textarea to englarge)
+        template(v-slot:body)
+          FormulateForm.text-xs(live)
+            FormulateInput(
+              type="textarea"
+              name="featuredSectionsJSONstr"
+              placeholder="Enter JSON here"
+              v-model="featuredSectionsJSONstr"
+              validation="required"
+            )
+            FormulateInput(
+              type="submit"
+              @click.prevent="updateFeaturedProjectsSections"
+            ) Update
 
-        mb-modal-button.ml-2(btnText="Show me an example" btnVariant="default")
-          template(v-slot:title) Example format for featured projects sections
-          template(v-slot:body)
-            textarea.text-xs.w-full(rows="25" :value="featuredSectionsJSONstrSample")
+      mb-modal-button.ml-2(btnText="Show me an example" btnVariant="default")
+        template(v-slot:title) Example format for featured projects sections
+        template(v-slot:body)
+          textarea.text-xs.w-full(rows="25" :value="featuredSectionsJSONstrSample")
 
 </template>
 
