@@ -10,26 +10,26 @@ div
         :projects="section.projects"
         :key="i"
       )
-    div.flex.justify-center
-      mb-modal-button.ml-2(
-        v-if="isAdmin"
-        btnText="Add new section"
-        ref="modalAddSection")
-        template(v-slot:title) Add new section
-        template(v-slot:body)
-          FormulateForm(live)
-            FormulateInput(
-              type="text"
-              name="newSectionTitle"
-              placeholder="New section title"
-              v-model="newSectionTitle"
-              validation="between:2,40,length"
-              error-behavior="live"
-            )
-            FormulateInput(
-              type="submit"
-              @click.prevent="createSection"
-            ) Add
+    //- div.flex.justify-center
+    //-   mb-modal-button.ml-2(
+    //-     v-if="isAdmin"
+    //-     btnText="Add new section"
+    //-     ref="modalAddSection")
+    //-     template(v-slot:title) Add new section
+    //-     template(v-slot:body)
+    //-       FormulateForm(live)
+    //-         FormulateInput(
+    //-           type="text"
+    //-           name="newSectionTitle"
+    //-           placeholder="New section title"
+    //-           v-model="newSectionTitle"
+    //-           validation="between:2,40,length"
+    //-           error-behavior="live"
+    //-         )
+    //-         FormulateInput(
+    //-           type="submit"
+    //-           @click.prevent="createSection"
+    //-         ) Add
 </template>
 
 <script>
