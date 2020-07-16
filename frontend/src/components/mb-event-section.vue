@@ -2,8 +2,9 @@
   div.w-full
     div.mb-2
       h1.text-4xl {{ title }}
-    div.flex.justify-around
+    div.flex.flex-wrap
       mb-event-card(
+        style="width: 50%"
         v-for="event in events"
         :key="event.id"
         :id="event.id"

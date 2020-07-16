@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   mb-home-header
-  main.container.m-auto.pt-24.max-w-screen-lg
+  main.container.m-auto.pt-24
     div.mb-10
       mb-event-section(title="Upcoming Events")
     div.pb-32(v-for="(section, i) in sections")

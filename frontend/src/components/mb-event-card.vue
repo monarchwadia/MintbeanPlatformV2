@@ -1,9 +1,9 @@
 <template lang="pug">
-  mb-internal-link(:to="'/mb-event/' + id")
-    div.rounded.overflow-hidden.shadow-xl.hover_shadow-2xl(style="width: 500px;")
-      div.w-full.relative(style="background-size: cover; height: 225px;" :style="{ backgroundImage: urlFor(cloudinaryPublicId) }")
+  mb-internal-link.w-full(:to="'/mb-event/' + id")
+    div.rounded.overflow-hidden.shadow-xl.hover_shadow-2xl.w-full
+      div.w-full.relative(style="background-size: cover; height: 250px;" :style="{ backgroundImage: urlFor(cloudinaryPublicId) }")
         mb-a-button.absolute.z-99.right-0(isExternal :href="registerLink" @click.stop) Register
-      div.px-6.py-4.text-gray-700.flex.justify-between
+      div.px-4.py-4.text-gray-700.flex.justify-between.items-center
         div.text-xl {{ eventTitle }}
         div {{prettyDate(startTime) + ' (EST)'}}
 </template>
