@@ -2,8 +2,10 @@
   div.rounded.shadow-xl.hover_shadow-2xl(style="width: 400px;")
     div(class="w-full" style="height: 225px; width: 400px;" :style="{ backgroundImage: cloudinaryUrlFor(cloudinaryPublicId) }")
     div.px-6.py-4.text-gray-700.flex.flex-col.justify-between
-      div.text-xl {{ projectTitle }}
-      div.text-md.mb-2 by {{ authorName }}
+      div.text-xl.mb-2 {{ projectTitle }}
+      div.text-md.mb-2.flex.items-center
+        mb-avatar.mr-1(size="sm")
+        | {{ authorName }}
       div.hidden.text-gray-700.text-base.my-5(style="min-height: 60px; max-height: 60px; height: 60px;") {{ description }}
       mb-internal-link(:to="'/project/' + id")
         mb-button.float-right View
