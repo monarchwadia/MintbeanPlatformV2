@@ -2,7 +2,7 @@
 div
   mb-home-header
   main.container.m-auto.pt-24
-    div.mb-24
+    div.mb-32
       mb-event-section(title="Upcoming Events")
     div.pb-32(v-for="(section, i) in sections")
       mb-project-section(
