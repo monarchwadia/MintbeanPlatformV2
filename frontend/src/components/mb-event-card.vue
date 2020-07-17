@@ -34,7 +34,6 @@ export default {
     // this is for dummy data only vvv
     // TODO: remove this after linking real MbEvents, use cloudinaryUrlFor instead
     urlFor: function(url) {
-      console.log(url)
       return `url(${url})`;
     },
     prettyDate: prettyDateHelper

@@ -2,6 +2,7 @@
   div
     mb-banner(title="Events")
     div.container.m-auto.pt-24
+      mb-back-button
       mb-event-section(:events="events")
 </template>
 
@@ -36,7 +37,6 @@ export default {
               ],
             }
           })
-
           self.events = events;
         })
         .catch(e => {
