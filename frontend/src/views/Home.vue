@@ -3,13 +3,15 @@ div
   mb-home-header
   main.container.m-auto.pt-24
     div.mb-32
-      mb-event-section(title="Upcoming Events")
-    div.pb-32(v-for="(section, i) in sections")
+      mb-event-section(title="Upcoming Events" :isUpcoming="true")
+    div.mb-32(v-for="(section, i) in sections")
       mb-project-section(
         :title="section.title"
         :projects="section.projects"
         :key="i"
       )
+    //- TODO: RE-IMPLEMENT ADMIN CONTROLS
+
     //- div.flex.justify-center
     //-   mb-modal-button.ml-2(
     //-     v-if="isAdmin"
@@ -30,6 +32,8 @@ div
     //-           type="submit"
     //-           @click.prevent="createSection"
     //-         ) Add
+
+
 </template>
 
 <script>
@@ -49,14 +53,16 @@ export default {
       alert(`faking creation of section '${this.newSectionTitle}'`);
       this.newSectionTitle = '';
       this.$refs.modalAddSection.$refs.modal.close();
-    }
+    },
+    getAscFeaturedSections() {
+      const self = this;
+      this.$mbContext.mbConfigService
+        .getAscFeaturedSections()
+        .then(res => self.sections = res)
+    },
   },
   mounted() {
-    const self = this;
-    this.$mbContext.mbConfigService
-      .getAscFeaturedSections()
-        .then(res => self.sections = res).then(()=>console.log(self.sections))
-
+    this.getAscFeaturedSections();
   },
   computed: {
     isAdmin: function() {
