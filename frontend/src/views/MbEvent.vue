@@ -38,8 +38,8 @@ div
           section.h-full.flex(v-else)
             h2.text-xl.text-center.mb-2.self-center {{ submitFormState.disabledMessage }}
           section.w-full(v-if="submitFormState.showLoginButton")
-            mb-internal-link.w-full(to="/auth/login")
-              mb-button.w-full Login
+            //- mb-internal-link.w-full(to="/auth/login")
+            mb-button.w-full(@click="rememberMeLogin") Login
       div.shadow-mb.px-4.py-10
 
         h2.text-3xl.mb-2.text-center Submissions
@@ -122,8 +122,6 @@ div
 
 </template>
 
-<style lang="scss" scoped></style>
-
 <script>
 import moment from "moment";
 
@@ -192,6 +190,9 @@ export default {
     }
   },
   methods: {
+    rememberMeLogin() {
+      this.$router.push({ name: 'Login', query: { redirect: this.$router.history.current.path } });
+    },
     fetchMbEvent() {
       const self = this;
       const { id } = this.$route.params;

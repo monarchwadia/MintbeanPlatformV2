@@ -15,6 +15,14 @@ import NotFound from "./views/NotFound.vue";
 
 Vue.use(VueRouter);
 
+const ifAdmin = (to, from, next) => {
+  if (window.store.state.user && window.store.state.user.isAdmin) {
+    next()
+    return
+  }
+  next('/auth/login')
+}
+
 const routes: Array<RouteConfig> = [
   {
     path: "/",
@@ -60,6 +68,7 @@ const routes: Array<RouteConfig> = [
     path: "/admin",
     name: "Admin Panel",
     component: Admin,
+    beforeEnter: ifAdmin,
   },
   {
     path: "/legal/terms-of-service",
