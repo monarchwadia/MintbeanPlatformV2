@@ -27,15 +27,6 @@ export default {
       this.$mbContext.mbEventService
         .getMbEvents()
         .then(events => {
-          const past = [];
-          const upcoming = [];
-          const nowUTC = (new Date).toUTCString()
-          // events.forEach((e)=> {
-          //   const eventEndUTC = moment(e.end_time).tz('UTC');
-          // })
-          // self.events = events;
-          console.log(nowUTC)
-
           // TODO: remove this in prod
           events = events.map(e => {
             return {
@@ -45,10 +36,8 @@ export default {
               ],
             }
           })
-          
-          console.log(events)
-          self.events = events;
 
+          self.events = events;
         })
         .catch(e => {
           console.error(e);
