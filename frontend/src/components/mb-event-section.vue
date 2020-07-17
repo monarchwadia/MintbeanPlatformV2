@@ -41,7 +41,7 @@ export default {
           title: "Music Hack",
           startTime: new Date(new Date().getTime()+1000*60*60*24*3),
           registerLink: "https://www.eventbrite.ca/e/mintbean-hackathons-music-hack-tickets-111881326058"
-        }
+        },
       ],
     }
   },
