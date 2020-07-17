@@ -1,5 +1,5 @@
 <template lang="pug">
-  mb-internal-link.w-full(:to="'/mb-event/' + id")
+  mb-internal-link.w-full(:to="'/mb-event/' + id" style="margin: 0.5rem;")
     div.rounded.overflow-hidden.shadow-xl.hover_shadow-2xl.w-full
       div.w-full.relative(style="background-size: cover; height: 250px;" :style="{ backgroundImage: urlFor(cloudinaryPublicId) }")
         mb-a-button.absolute.z-99.right-0(isExternal :href="registerLink" @click.stop) Register

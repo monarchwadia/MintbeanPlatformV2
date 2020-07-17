@@ -2,9 +2,9 @@
   div.w-full
     div.mb-2
       h1.text-4xl {{ title }}
-    div.flex.flex-wrap
+    div.flex.flex-wrap(style="margin: -0.5rem;")
       mb-event-card(
-        style="width: 50%"
+        style="width: calc(50% - 1rem)"
         v-for="event in events"
         :key="event.id"
         :id="event.id"
