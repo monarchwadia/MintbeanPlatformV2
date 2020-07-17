@@ -2,7 +2,7 @@
   div
     mb-banner(title="Events")
     div.container.m-auto.pt-24
-      p events page
+      mb-event-section(:events="events")
 </template>
 
 
@@ -12,24 +12,52 @@ import moment from "moment";
 // @ is an alias to /src
 export default {
   name: "Events",
+  data() {
+    return {
+      pastEvents: [],
+      upcomingEvents: [],
+      events: [],
+    }
+  },
   methods: {
-    fetchProjects() {
+    fetchEvents() {
       const self = this;
-      const { id } = this.$route.params;
+      const nowUTC = moment(new Date);
 
-      this.$mbContext.projectService
-        .search({
-          mbEventId: id,
-          ratingCountMin: 0
-        })
-        .then(projects => {
-          self.projects = projects;
+      this.$mbContext.mbEventService
+        .getMbEvents()
+        .then(events => {
+          const past = [];
+          const upcoming = [];
+          const nowUTC = (new Date).toUTCString()
+          // events.forEach((e)=> {
+          //   const eventEndUTC = moment(e.end_time).tz('UTC');
+          // })
+          // self.events = events;
+          console.log(nowUTC)
+
+          // TODO: remove this in prod
+          events = events.map(e => {
+            return {
+              ...e,
+              MediaAssets: [
+                {cloudinaryPublicId: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F104989166%2F426627906897%2F1%2Foriginal.20200630-224301?w=800&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C150%2C2880%2C1440&s=c5bdf44134c893cc7dbb631b73973ba7"},
+              ],
+            }
+          })
+          
+          console.log(events)
+          self.events = events;
+
         })
         .catch(e => {
           console.error(e);
-          alert("Failed to fetch event");
+          alert("Failed to fetch events");
         });
     },
   },
+  mounted() {
+    this.fetchEvents()
+  }
 };
 </script>

@@ -11,7 +11,7 @@
         :id="event.id"
         :cloudinaryPublicId="event.MediaAssets[0].cloudinaryPublicId"
         :eventTitle="event.title"
-        :startTime="event.startTime"
+        :startTime="event.start_time"
         :registerLink="event.registerLink"
       )
 </template>
@@ -32,7 +32,7 @@ export default {
             { cloudinaryPublicId: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F104989166%2F426627906897%2F1%2Foriginal.20200630-224301?w=800&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C150%2C2880%2C1440&s=c5bdf44134c893cc7dbb631b73973ba7" }
           ],
           title: "Hackernoon",
-          startTime: new Date(new Date().getTime()+1000*60*60*24*2),
+          start_time: (new Date(new Date().getTime()+1000*60*60*24*2)).toString(),
           registerLink: "https://www.eventbrite.ca/e/mintbean-hackathons-hackernoon-tickets-111883699156"
         },
         {
@@ -41,16 +41,7 @@ export default {
             { cloudinaryPublicId: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F104988470%2F426627906897%2F1%2Foriginal.20200630-223416?w=800&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C57%2C2880%2C1440&s=c68441f6485bd652cc18b748b2dbff11" }
           ],
           title: "Music Hack",
-          startTime: new Date(new Date().getTime()+1000*60*60*24*3),
-          registerLink: "https://www.eventbrite.ca/e/mintbean-hackathons-music-hack-tickets-111881326058"
-        },
-        {
-          id: "trfresd-3284-fdsaf-3d4fdsf3",
-          MediaAssets: [
-            { cloudinaryPublicId: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F104988470%2F426627906897%2F1%2Foriginal.20200630-223416?w=800&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C57%2C2880%2C1440&s=c68441f6485bd652cc18b748b2dbff11" }
-          ],
-          title: "Music Hack",
-          startTime: new Date(new Date().getTime()+1000*60*60*24*3),
+          start_time: (new Date(new Date().getTime()+1000*60*60*24*3)).toString(),
           registerLink: "https://www.eventbrite.ca/e/mintbean-hackathons-music-hack-tickets-111881326058"
         },
       ],

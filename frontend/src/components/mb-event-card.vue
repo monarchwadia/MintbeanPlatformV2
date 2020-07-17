@@ -1,6 +1,6 @@
 <template lang="pug">
   mb-internal-link.w-full(:to="'/mb-event/' + id" style="margin: 0.5rem;")
-    div.rounded.overflow-hidden.shadow-xl.hover_shadow-2xl.w-full
+    div.rounded.overflow-hidden.h-full.shadow-xl.hover_shadow-2xl.w-full
       div.w-full.relative(
         style="background-size: cover; height: 250px;"
         :style="{ backgroundImage: urlFor(cloudinaryPublicId) }"
@@ -8,7 +8,7 @@
         mb-a-button.absolute.z-99.right-0(v-if="isUpcoming" isExternal :href="registerLink" @click.stop) Register
       div.px-4.py-4.text-gray-700.lg_flex.lg_justify-between.items-center
         div.text-xl.mr-2 {{ eventTitle }}
-        div {{prettyDate(startTime) + ' (EST)'}}
+        div.text-sm {{prettyDate(startTime) + ' (EST)'}}
 </template>
 
 <script>
@@ -23,7 +23,7 @@ export default {
     },
     cloudinaryPublicId: String,
     eventTitle: String,
-    startTime: Date,
+    startTime: String,
     registerLink: String
   },
   name: "mb-event-card",
@@ -34,6 +34,7 @@ export default {
     // this is for dummy data only vvv
     // TODO: remove this after linking real MbEvents, use cloudinaryUrlFor instead
     urlFor: function(url) {
+      console.log(url)
       return `url(${url})`;
     },
     prettyDate: prettyDateHelper
