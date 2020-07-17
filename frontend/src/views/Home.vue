@@ -44,7 +44,6 @@ div
 
 <script>
 import mbHomeHeader from "./Home/mb-home-header.vue";
-import isUpcoming from "../helpers/isUpcoming";
 
 export default {
   name: "Home",
