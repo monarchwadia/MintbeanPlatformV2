@@ -15,7 +15,10 @@ export default {
   props: {
     variant: {
       type: String,
-      default: 'primary'
+      default: 'primary',
+      validator (val) {
+        return ['primary', 'default'].includes(val)
+      },
     },
   },
   computed: {
