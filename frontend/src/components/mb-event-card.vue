@@ -3,9 +3,14 @@
     div.rounded.overflow-hidden.h-full.shadow-xl.hover_shadow-2xl.w-full
       div.w-full.relative(
         style="background-size: cover; height: 250px;"
-        :style="{ backgroundImage: urlFor(cloudinaryPublicId) }"
+        :style="{ backgroundImage: urlFor(image) }"
         )
-        mb-a-button.absolute.z-99.right-0(v-if="isUpcoming" isExternal :href="registerLink" @click.stop) Register
+        mb-a-button.absolute.z-99.right-0(
+          v-if="isUpcoming && registerLink"
+          isExternal
+          :href="registerLink"
+          @click.stop
+        ) Register
       div.px-4.py-4.text-gray-700.lg_flex.lg_justify-between.items-center
         div.text-xl.mr-2 {{ eventTitle }}
         div.text-sm {{prettyDate(startTime) + ' (EST)'}}
@@ -19,7 +24,7 @@ export default {
   name: "mb-event-card",
   props: {
     id: String,
-    cloudinaryPublicId: String,
+    image: String,
     eventTitle: String,
     startTime: String,
     endTime: String,
