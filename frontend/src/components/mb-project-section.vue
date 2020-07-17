@@ -2,19 +2,19 @@
   div.w-full
     div.mb-2
       h2.text-3xl.py-5.font-semibold.inline {{ title }}
-      mb-modal-button.ml-2(v-if="isAdmin" btnText="Edit" ref="modalEdit")
-        template(v-slot:title) Edit section title
-        template(v-slot:body)
-          FormulateForm
-            FormulateInput(type="text" name="title" v-model="editTitle")
-            FormulateInput(type="submit" @click.prevent="updateTitle") Submit
-      mb-confirm.ml-1(
-        v-if="isAdmin"
-        @confirm="deleteSection"
-        btnText="Delete"
-        title="Confirm"
-        message="Are you sure you want to delete this section?"
-      )
+      //- mb-modal-button.ml-2(v-if="isAdmin" btnText="Edit" ref="modalEdit")
+      //-   template(v-slot:title) Edit section title
+      //-   template(v-slot:body)
+      //-     FormulateForm
+      //-       FormulateInput(type="text" name="title" v-model="editTitle")
+      //-       FormulateInput(type="submit" @click.prevent="updateTitle") Submit
+      //- mb-confirm.ml-1(
+      //-   v-if="isAdmin"
+      //-   @confirm="deleteSection"
+      //-   btnText="Delete"
+      //-   title="Confirm"
+      //-   message="Are you sure you want to delete this section?"
+      //- )
     div.sliding-section.flex.justify-between.overflow-x-auto(:class="sliderIsDown ? 'active' : null" ref="projectSectionContainer")
       mb-project-card.mr-4(
         v-for="project in projects"
