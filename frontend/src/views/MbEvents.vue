@@ -2,7 +2,6 @@
   div
     mb-banner(title="Events")
     div.container.m-auto.pt-24
-      mb-back-button
       mb-event-section(:events="events")
 </template>
 
@@ -29,16 +28,6 @@ export default {
 
           // TODO: remove this map in prod, adds fake image
           events = events
-          // .map(e => {
-          //   return {
-          //     ...e,
-          //     MediaAssets: [
-          //       {cloudinaryPublicId: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F104989166%2F426627906897%2F1%2Foriginal.20200630-224301?w=800&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C150%2C2880%2C1440&s=c5bdf44134c893cc7dbb631b73973ba7"},
-          //     ],
-          //     register_link: "www.this-is-a-fake-external-url.fake"
-          //   }
-          // })
-
           .sort((a, b) => {
             // to reverse chronological
             return new Date(b.start_time).getTime() - new Date(a.start_time).getTime();
