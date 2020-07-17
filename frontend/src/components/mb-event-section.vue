@@ -6,12 +6,12 @@
       mb-event-card(
         style="width: calc(50% - 1rem)"
         v-for="event in events"
-        :isUpcoming="isUpcoming"
         :key="event.id"
         :id="event.id"
         :cloudinaryPublicId="event.MediaAssets[0].cloudinaryPublicId"
         :eventTitle="event.title"
         :startTime="event.start_time"
+        :endTime="event.end_time"
         :registerLink="event.registerLink"
       )
 </template>
@@ -21,7 +21,6 @@ export default {
   name: "mb-event-section",
   props: {
     title: String,
-    isUpcoming: Boolean,
     events: {
       type: Array,
       // TODO: remove this dummy data once hooked up to real events (MbConfig)

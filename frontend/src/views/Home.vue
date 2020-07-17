@@ -3,7 +3,7 @@ div
   mb-home-header
   main.container.m-auto.pt-24
     div.mb-32
-      mb-event-section.mb-6(title="Upcoming Events" :isUpcoming="true")
+      mb-event-section.mb-6(title="Upcoming Events")
       mb-internal-link-arrow(
         to="/mb-events"
         text="See all events"

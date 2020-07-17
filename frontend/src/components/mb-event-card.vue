@@ -13,20 +13,23 @@
 
 <script>
 import prettyDateHelper from '../helpers/prettyDate';
+import isUpcoming from '../helpers/isUpcoming';
 
 export default {
+  name: "mb-event-card",
   props: {
     id: String,
-    isUpcoming: {
-      type: Boolean,
-      default: false,
-    },
     cloudinaryPublicId: String,
     eventTitle: String,
     startTime: String,
+    endTime: String,
     registerLink: String
   },
-  name: "mb-event-card",
+  data() {
+    return {
+      isUpcoming: false
+    }
+  },
   methods: {
     cloudinaryUrlFor: function(id) {
       return `url(https://res.cloudinary.com/mintbean/image/upload/b_black,c_crop,h_225,w_400/${id})`;
@@ -38,5 +41,8 @@ export default {
     },
     prettyDate: prettyDateHelper
   },
+  mounted() {
+    this.isUpcoming = isUpcoming(this.endTime) ? true : false;
+  }
 }
 </script>
