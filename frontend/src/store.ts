@@ -53,7 +53,7 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
       .login(email, password)
       .then((user) => {
         commit("setProperty", ["user", user || undefined]);
-        if (user && $route && $route.query.redirect) {
+        if (user && $route && $route.query && $route.query.redirect) {
           $router.replace($route.query.redirect);
         }
         else if (user) {
