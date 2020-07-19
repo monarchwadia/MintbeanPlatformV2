@@ -1,5 +1,5 @@
 <template lang="pug">
-  div.mb-project-search
+  div
     aside.left(v-if="showSearchPanel")
       label Search {{search.searchQuery}}
         input(type="text" v-model="search.searchQuery")
@@ -9,7 +9,7 @@
         input(type="radio" id="RATING_COUNT" value="RATING_COUNT" v-model="search.sortField")
       label Newest
         input(type="radio" id="CREATED_AT" value="CREATED_AT" v-model="search.sortField")
-    
+
       label Minimum Number of Votes
         select(v-model="search.ratingCountMin")
           option 10
@@ -41,7 +41,7 @@
         <video autoplay muted loop>
           <source :src="assets.searchVideo" type="video/mp4">
         </video>
-      div.video-container(:style="{ display: (!status.loading && !projects.length) ? 'initial' : 'none' }") 
+      div.video-container(:style="{ display: (!status.loading && !projects.length) ? 'initial' : 'none' }")
         <video autoplay muted loop>
           <source :src="assets.notFoundVideo" type="video/mp4">
         </video>

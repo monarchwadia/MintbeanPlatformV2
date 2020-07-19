@@ -29,8 +29,8 @@ export default {
   },
   methods: {
     onSubmit(evt) {
-      const { email, password, $router } = this;
-      this.$store.dispatch("login", { email, password, $router });
+      const { email, password, $router, $route } = this;
+      this.$store.dispatch("login", { email, password, $router, $route });
     }
   },
   mounted() {

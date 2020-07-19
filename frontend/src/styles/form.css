@@ -1,0 +1,25 @@
+form > *,
+.mb-form > * {
+  margin-bottom: 0.5rem
+}
+
+label:nth-child(n) {
+  /* color: #688bb0; */
+  /* font-weight: bold; */
+  margin-bottom: 0.25rem;
+  font-size: 0.8rem;
+}
+
+input:nth-child(n),
+textarea:nth-child(n) {
+  border: 2px solid #688bb0;
+}
+
+input:nth-child(n) {
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+input:-internal-autofill-selected:nth-child(n) {
+  background-color: #bdfee8;
+}

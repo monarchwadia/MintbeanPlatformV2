@@ -10,7 +10,7 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       try {
         const users = await User.findAll({where: {}});
-        const projects = await Project.findAll({ where: {} });
+        const projects = await Project.findAll({ where: {} })
 
         const votes = [];
         users.forEach(user => {
@@ -36,29 +36,5 @@ module.exports = {
         reject(e);
       }
     })
-
-    // const users = mbEventFactory.bulk(10);
-
-
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
   },
-
-  down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
-  }
 };

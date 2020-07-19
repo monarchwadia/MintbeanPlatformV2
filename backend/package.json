@@ -11,7 +11,10 @@
     "tdd": "jest --config ./jest.config.js --watch --runInBand --detectOpenHandles",
     "sly": "DOTENV_CONFIG_PATH=./.env node -r dotenv/config node_modules/sequelize-cli/lib/sequelize",
     "sly.test": "DOTENV_CONFIG_PATH=./test/.env.test node -r dotenv/config node_modules/sequelize-cli/lib/sequelize",
-    "repl": "DOTENV_CONFIG_PATH=./.env node -r dotenv/config ./bin/repl.js"
+    "repl": "DOTENV_CONFIG_PATH=./.env node -r dotenv/config ./bin/repl.js",
+    "psql": "PGPASSWORD=password psql -U mintbean -d mintbean_development -h localhost",
+    "psqlc": "PGPASSWORD=password psql -U mintbean -d mintbean_development -c",
+    "redb": "bash ./bin/redb.sh"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",

@@ -10,7 +10,7 @@ then
   yarn sly db:drop && yarn sly db:create;
   # Create UUID extension, which requires superuser
   PGPASSWORD=password psql -U postgres -d mintbean_development -h 0.0.0.0 -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"';
-  yarn sly db:migrate && yarn sly db:seed:all;
+  yarn sly db:migrate --debug && yarn sly db:seed:all --debug;
 else
   echo 'Aborted.'
 fi

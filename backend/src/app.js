@@ -9,6 +9,7 @@ const userProfileRoute = require('./routers/user-profile');
 const mbEventRoute = require('./routers/mb-event');
 const projectRoute = require('./routers/project');
 const voteRoute = require('./routers/vote');
+const mbConfigRoute = require('./routers/mb-config');
 const initializePassport = require('./passport/initialize');
 
 const app = express();
@@ -26,6 +27,7 @@ rootRouter.use('/user-profile', userProfileRoute);
 rootRouter.use('/mb-event', mbEventRoute);
 rootRouter.use('/project', projectRoute);
 rootRouter.use('/vote', voteRoute);
+rootRouter.use('/mb-config', mbConfigRoute);
 rootRouter.get("/", (req, res) => {
   res.json({
     message: 'Welcome to the Mintbean Platform API'

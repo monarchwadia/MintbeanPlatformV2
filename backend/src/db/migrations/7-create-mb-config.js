@@ -16,7 +16,7 @@ module.exports = {
       configValue: {
         allowNull: true,
         unique: true,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,

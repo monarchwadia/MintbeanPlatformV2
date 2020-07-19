@@ -1,4 +1,4 @@
-const { Router } = require('express');
+ const { Router } = require('express');
 const { requireAuth } = require('./routers.util');
 const { MbEvent, User, Project, Vote } = require('../db/models');
 const Joi = require('@hapi/joi');
@@ -9,7 +9,7 @@ const userRoute = new Router();
 userRoute.get('/:id', requireAuth, validator.params(Joi.object({id: Joi.string().required()})), async (req, res, next) => {
   const { id } = req.params;
 
-  User.findOne({ 
+  User.findOne({
     where: { id },
     include: [
       {

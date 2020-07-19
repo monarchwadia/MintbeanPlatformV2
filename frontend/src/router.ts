@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Home from "./views/Home.vue";
 import MbEvent from "./views/MbEvent.vue";
+import MbEvents from "./views/MbEvents.vue";
 import Login from "./views/Auth/Login.vue";
 import Logout from "./views/Auth/Logout.vue";
 import Register from "./views/Auth/Register.vue";
@@ -13,6 +14,14 @@ import PrivacyPolicy from "./views/Legal/PrivacyPolicy.vue";
 import NotFound from "./views/NotFound.vue";
 
 Vue.use(VueRouter);
+
+const ifAdmin = (to, from, next) => {
+  if (window.store.state.user && window.store.state.user.isAdmin) {
+    next()
+    return
+  }
+  next('/auth/login')
+}
 
 const routes: Array<RouteConfig> = [
   {
@@ -46,6 +55,11 @@ const routes: Array<RouteConfig> = [
     component: MbEvent,
   },
   {
+    path: "/mb-events",
+    name: "Events",
+    component: MbEvents,
+  },
+  {
     path: "/user-profile/:id",
     name: "User Profile",
     component: UserProfile,
@@ -54,6 +68,7 @@ const routes: Array<RouteConfig> = [
     path: "/admin",
     name: "Admin Panel",
     component: Admin,
+    beforeEnter: ifAdmin,
   },
   {
     path: "/legal/terms-of-service",

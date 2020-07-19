@@ -1,6 +1,6 @@
 <template lang="pug">
 
-  div.mb-project-grid
+  div.flex.flex-wrap.justify-center
     mb-project-grid-item(v-for="project in projects" :project="project")
 </template>
 

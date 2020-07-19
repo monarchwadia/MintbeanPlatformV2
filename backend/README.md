@@ -10,7 +10,7 @@
 The fastest way to get your dev DB setup is to start the dev database using docker.
 
 ```bash
-cd devtools/db
+cd db
 docker-compose up -d
 ```
 

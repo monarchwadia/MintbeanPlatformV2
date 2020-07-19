@@ -1,3 +1,6 @@
+// We are now extending tailwind theme instead of using sass for colors
+// Keeping for reference.
+
 @import "./variables";
 
 $basetone: #466585;
@@ -16,7 +19,7 @@ $least-minty: lighten($basemint, 35%);
 $less-minty: lighten($basemint, 20%);
 $minty: $basemint;
 $mintier: saturate($basemint, 20%);
-$mintiest: saturate($basemint, 30%);
+$mintiest: saturate($basemint, 60%);
 
 $least-blue: darken($baseblue, 15%);
 $less-blue: darken($baseblue, 5%);

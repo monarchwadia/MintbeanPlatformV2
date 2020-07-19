@@ -1,55 +1,48 @@
 <template lang="pug">
-  transition(name="fade")
-    div.mb-modal-cover(v-if="display" v-on:click.prevent="onClickCover" ref="cover")
-      aside.mb-modal-body
-        header
-          div.title {{ title }}
-          div.buttons
-            button(v-for="b in buttonJson" v-on:click.prevent="b.onClick") {{ b.label }}
-        div.mb-modal-contents
-          slot
+  transition(name="modal-fade")
+    div.fixed.inset-0.z-9998.overflow-auto.bg-black.bg-opacity-50.flex(
+       @click="close"
+       v-if="isOpen"
+      )
+      div.relative.p-8.bg-white.w-full.max-w-md.m-auto.flex-col.flex.shadow-md(
+        @click.stop
+      )
+        button.self-end.p-1(
+          @click="close"
+          ) X
+        div.text-center.mb-2.font-bold
+          slot(name="title")
+        section
+          slot(name="body")
 </template>
-
-<style lang="scss" scoped></style>
 
 <script>
 export default {
-  name: "mb-modal",
-  props: ["display", "title", "buttons"],
+  name: 'mb-modal',
   data() {
     return {
-      displayInitial: false,
-      opacity100: false
-    };
+      isOpen: false
+    }
   },
   methods: {
-    onClickCover(evt) {
-      if (evt.target === this.$refs.cover) {
-        this.onClose();
-      }
+    close() {
+      this.isOpen = false;
     },
-    onClose() {
-      this.$emit("close");
+    open() {
+      this.isOpen = true;
     }
   },
-  computed: {
-    buttonJson() {
-      const self = this;
-      const buttons = this.buttons || [];
-      return buttons.concat([
-        { label: "Close", onClick: () => self.onClose() }
-      ]);
-    }
-  },
-  watch: {
-    display(val) {
-      const self = this;
-      self.displayInitial = !!val;
-
-      setTimeout(() => {
-        self.opacity100 = !!val;
-      }, 1);
-    }
-  }
-};
+}
 </script>
+
+<style lang="css" scoped >
+  .modal-fade-enter,
+  .modal-fade-leave-active {
+    opacity: 0;
+  }
+
+  .modal-fade-enter-active,
+  .modal-fade-leave-active {
+    transition: opacity .5s ease;
+  }
+</style>
