@@ -11,7 +11,6 @@ module.exports = {
       try {
         const users = await User.findAll({where: {}});
         const projects = await Project.findAll({ where: {} })
-          .catch(err=>console.log(err));
 
         const votes = [];
         users.forEach(user => {

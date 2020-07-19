@@ -3,8 +3,6 @@ const { requireAdmin } = require('./routers.util');
 const { MbConfig, User, MbEvent, Project, MediaAsset } = require('../db/models');
 const Joi = require('@hapi/joi');
 const validator = require('../validator');
-const sequelize = require('sequelize');
-const findProject = require('../services/projectService').find;
 const mbConfigRoute = new Router();
 
 const FEATURED_SECTIONS_KEY = 'featuredSections';
@@ -18,16 +16,6 @@ mbConfigRoute.get('/:key',
       .then(config => res.json(JSON.parse(config.configValue)))
       .catch(err => next(err));
 });
-
-
-// function validateJSON(val, helpers) {
-//   const json = JSON.parse(val);
-//   // TODO: if.....
-//   if(json) {
-//     console.log('is json!')
-//   }
-//   return val;
-// }
 
 mbConfigRoute.patch('/:key',
   requireAdmin,

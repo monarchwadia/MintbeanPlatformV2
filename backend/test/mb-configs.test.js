@@ -86,13 +86,3 @@ describe("MbConfig route", () => {
     });
   });
 });
-
-// it('needs to be logged in', async done => {
-//   // fetch while not logged in
-//   const response = await agent
-//     .get("/api/v1/mb-config/");
-//
-//   expect(response.statusCode).toBe(404);
-//
-//   done()
-// });

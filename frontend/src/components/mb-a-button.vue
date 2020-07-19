@@ -29,15 +29,16 @@ export default {
   },
   computed: {
     btnClass() {
+      const PRIMARY = "gradient-blue-mint text-white p-2 hover_shadow-md";
       switch(this.variant) {
         case "primary":
-          return "gradient-blue-mint text-white p-2 hover_shadow-md";
+          return PRIMARY;
         case "default":
           return "border-solid border-2 bg-white border-gray-700 text-gray-700 p-2 hover_shadow-md";
         default:
-          return "gradient-blue-mint text-white p-2 hover_shadow-md";
+          return PRIMARY;
       }
-    },
+    }
   }
 };
 </script>
