@@ -28,7 +28,7 @@ export default (Vue: VueConstructor<Vue>) => {
       },
       help: "text-xs mb-1 text-gray-600",
       error: "text-red-700 text-xs mb-1",
-      errors: [],
-    },
+      errors: []
+    }
   });
 };

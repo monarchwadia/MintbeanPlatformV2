@@ -51,6 +51,6 @@ export default {
   components: {
     "auth-wrapper": authWrapper,
     "auth-you-agree": authYouAgree
-  },
+  }
 };
 </script>

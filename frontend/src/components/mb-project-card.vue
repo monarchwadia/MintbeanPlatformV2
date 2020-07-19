@@ -15,12 +15,20 @@
 
 <script>
 export default {
-  props: ['id', 'cloudinaryPublicId', 'projectTitle', 'authorName', 'description', 'tags', 'disableClick'],
+  props: [
+    "id",
+    "cloudinaryPublicId",
+    "projectTitle",
+    "authorName",
+    "description",
+    "tags",
+    "disableClick"
+  ],
   name: "mb-project-card",
   methods: {
     cloudinaryUrlFor: function(id) {
       return `url(https://res.cloudinary.com/mintbean/image/upload/b_black,c_crop,h_225,w_400/${id})`;
     }
-  },
-}
+  }
+};
 </script>

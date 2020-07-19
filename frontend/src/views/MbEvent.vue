@@ -146,7 +146,10 @@ export default {
       if (!this.mbEvent.start_time) {
         return "";
       }
-      return moment(this.mbEvent.start_time).format("dddd, MMMM Do YYYY, ha") + " EST";
+      return (
+        moment(this.mbEvent.start_time).format("dddd, MMMM Do YYYY, ha") +
+        " EST"
+      );
     },
     // mbEvent: function() {
     //   const { id } = this.$route.params;
@@ -191,7 +194,10 @@ export default {
   },
   methods: {
     rememberMeLogin() {
-      this.$router.push({ name: 'Login', query: { redirect: this.$router.history.current.path } });
+      this.$router.push({
+        name: "Login",
+        query: { redirect: this.$router.history.current.path }
+      });
     },
     fetchMbEvent() {
       const self = this;
@@ -200,7 +206,7 @@ export default {
       this.$mbContext.mbEventService
         .fetchMbEvent(id)
         .then(mbEvent => {
-          self.mbEvent = mbEvent
+          self.mbEvent = mbEvent;
         })
         .catch(e => {
           console.error(e);
@@ -252,12 +258,13 @@ Would you like to continue?`);
           MbEventId: this.mbEvent.id,
           MediaAssets
         })
-      .then(() => {
-        self.fetchProjects();
-      }).catch((e) => {
-        alert("Failed to submit project.");
-        console.log("Failed to submit project.", e);
-      });
+        .then(() => {
+          self.fetchProjects();
+        })
+        .catch(e => {
+          alert("Failed to submit project.");
+          console.log("Failed to submit project.", e);
+        });
     }
   },
   mounted() {

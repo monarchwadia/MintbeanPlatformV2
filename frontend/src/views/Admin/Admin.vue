@@ -47,37 +47,37 @@ main.container.m-auto
 import mbProjectSearch from "../../components/mb-project-search";
 
 const sampleFeaturedSectionsFormat = {
-	"sections": [
-		{
-			"title": "ReactJS Projects",
-			"projectIds": [
-				"e17daffa-55f8-47c6-a5eb-6c44772997b0",
-				"8e4f2f69-d062-4bb9-95b2-7b13e63cded7",
-				"32cc3751-e317-4eac-9915-c9f7333db50d",
-				"b3ac69bb-4ddc-4440-9074-63a47bbd5a5b"
-			]
-		},
-		{
-			"title": "API Integration Projects",
-			"projectIds": [
-				"9c8f6caa-7a85-4d9d-a3f3-08911861cdf3",
-				"f1a7ea56-23ba-46f2-907d-65974c051f7d",
-				"cd918a5b-2675-4322-82ca-693cc979272c",
-				"5f0d75b8-5b71-4fbe-9db4-09fff7e1cffe",
-			]
-		},
-		{
-			"title": "Creative Projects",
-			"projectIds": [
-				"781d0bcf-810f-4c17-97b0-93124b6f328b",
-				"77ca3453-f17d-4328-bb3b-52a30cf6271b",
-				"c6103fba-48c3-479c-8bda-d871f48ae5dc",
-				"bafc5329-e79f-455a-a446-099c8fb9d729",
-				"a86c2a12-0bdc-4f92-a04f-e1d9165bb310"
-			]
-		}
-	]
-}
+  sections: [
+    {
+      title: "ReactJS Projects",
+      projectIds: [
+        "e17daffa-55f8-47c6-a5eb-6c44772997b0",
+        "8e4f2f69-d062-4bb9-95b2-7b13e63cded7",
+        "32cc3751-e317-4eac-9915-c9f7333db50d",
+        "b3ac69bb-4ddc-4440-9074-63a47bbd5a5b"
+      ]
+    },
+    {
+      title: "API Integration Projects",
+      projectIds: [
+        "9c8f6caa-7a85-4d9d-a3f3-08911861cdf3",
+        "f1a7ea56-23ba-46f2-907d-65974c051f7d",
+        "cd918a5b-2675-4322-82ca-693cc979272c",
+        "5f0d75b8-5b71-4fbe-9db4-09fff7e1cffe"
+      ]
+    },
+    {
+      title: "Creative Projects",
+      projectIds: [
+        "781d0bcf-810f-4c17-97b0-93124b6f328b",
+        "77ca3453-f17d-4328-bb3b-52a30cf6271b",
+        "c6103fba-48c3-479c-8bda-d871f48ae5dc",
+        "bafc5329-e79f-455a-a446-099c8fb9d729",
+        "a86c2a12-0bdc-4f92-a04f-e1d9165bb310"
+      ]
+    }
+  ]
+};
 // @ is an alias to /src
 export default {
   name: "Home",
@@ -91,8 +91,12 @@ export default {
         start_time: new Date(),
         end_time: new Date()
       },
-      featuredSectionsJSONstr: '',
-      featuredSectionsJSONstrSample: JSON.stringify(sampleFeaturedSectionsFormat, null, '\t')
+      featuredSectionsJSONstr: "",
+      featuredSectionsJSONstrSample: JSON.stringify(
+        sampleFeaturedSectionsFormat,
+        null,
+        "\t"
+      )
     };
   },
   components: {
@@ -123,10 +127,13 @@ export default {
       if (confirmed) {
         const self = this;
         await this.$mbContext.mbConfigService
-          .patchValueByEndpoint('featuredSections',JSON.parse(self.featuredSectionsJSONstr))
-            .then(() => alert('Updated featured projects sections!'))
-            .then(() => this.$refs.modalEditSections.$refs.modal.close())
-            .catch(() => alert("Failed to update. Check object formatting"));
+          .patchValueByEndpoint(
+            "featuredSections",
+            JSON.parse(self.featuredSectionsJSONstr)
+          )
+          .then(() => alert("Updated featured projects sections!"))
+          .then(() => this.$refs.modalEditSections.$refs.modal.close())
+          .catch(() => alert("Failed to update. Check object formatting"));
       } else {
         return;
       }
@@ -135,9 +142,9 @@ export default {
   mounted() {
     const self = this;
     this.$mbContext.mbConfigService
-      .getValueByKey('featuredSections')
-        .then(res => JSON.stringify(res, null, '\t'))
-        .then(data => self.featuredSectionsJSONstr = data)
-  },
+      .getValueByKey("featuredSections")
+      .then(res => JSON.stringify(res, null, "\t"))
+      .then(data => (self.featuredSectionsJSONstr = data));
+  }
 };
 </script>

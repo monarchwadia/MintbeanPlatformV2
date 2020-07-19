@@ -39,13 +39,13 @@ export default {
         //   start_time: (new Date(new Date().getTime()+1000*60*60*24*3)).toString(),
         //   registerLink: "https://www.eventbrite.ca/e/mintbean-hackathons-music-hack-tickets-111881326058"
         // },
-      ],
+      ]
     }
   },
   computed: {
     isAdmin: function() {
       return this.$store.state.user && this.$store.state.user.isAdmin;
-    },
-  },
-}
+    }
+  }
+};
 </script>

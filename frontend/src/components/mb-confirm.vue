@@ -10,40 +10,40 @@
 
 <script>
 export default {
-  name: 'mb-confirm',
+  name: "mb-confirm",
   props: {
     btnText: {
-      type: String,
+      type: String
     },
     btnVariant: {
-      type: String,
+      type: String
     },
     message: {
       type: String,
-      default: 'Are you sure you want to do that?',
+      default: "Are you sure you want to do that?"
     },
     title: {
       type: String,
-      default: '',
+      default: ""
     },
     confirmText: {
       type: String,
-      default: 'Confirm',
+      default: "Confirm"
     },
     cancelText: {
       type: String,
-      default: 'Cancel',
+      default: "Cancel"
     }
   },
   methods: {
     emitConfirmAndClose() {
-      this.$emit('confirm');
+      this.$emit("confirm");
       this.$refs.modalBtn.$refs.modal.close();
     },
     emitCancelAndClose() {
-      this.$emit('cancel');
+      this.$emit("cancel");
       this.$refs.modalBtn.$refs.modal.close();
     }
   }
-}
+};
 </script>

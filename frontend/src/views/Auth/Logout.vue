@@ -4,15 +4,15 @@ auth-wrapper
     h1(class="text-xl pb-6") Logging out...
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
 
 <script>
 export default {
   name: "Logout",
   mounted() {
-    const action = () => this.$router.push('/');
-    this.$store.dispatch("logout")
+    const action = () => this.$router.push("/");
+    this.$store
+      .dispatch("logout")
       .then(action)
       .catch(action);
   }

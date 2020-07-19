@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import prettyDateHelper from '../helpers/prettyDate';
-import isUpcoming from '../helpers/isUpcoming';
+import prettyDateHelper from "../helpers/prettyDate";
+import isUpcoming from "../helpers/isUpcoming";
 
 export default {
   name: "mb-event-card",
@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       isUpcoming: false
-    }
+    };
   },
   methods: {
     cloudinaryUrlFor: function(id) {
@@ -49,5 +49,5 @@ export default {
   mounted() {
     this.isUpcoming = isUpcoming(this.endTime) ? true : false;
   }
-}
+};
 </script>

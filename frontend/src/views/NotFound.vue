@@ -16,14 +16,14 @@ const QUOTES = [
   "Love is the longing for the half of ourselves we have lost.",
   "I was born lost and take no pleasure in being found.",
   "Out of all the things I have lost, I miss my mind the most.",
-  "\"Because I am lost,\" she whispered onto the earth. \"And I do not know the way.\""
+  '"Because I am lost," she whispered onto the earth. "And I do not know the way."'
 ];
 
 export default {
   name: "Not Found",
   computed: {
     quote() {
-      return QUOTES[Math.floor(Math.random()*QUOTES.length)];
+      return QUOTES[Math.floor(Math.random() * QUOTES.length)];
     }
   }
 };

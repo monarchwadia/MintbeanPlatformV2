@@ -5,7 +5,6 @@
       mb-event-section(:events="events")
 </template>
 
-
 <script>
 import moment from "moment";
 
@@ -14,23 +13,24 @@ export default {
   name: "Events",
   data() {
     return {
-      events: [],
-    }
+      events: []
+    };
   },
   methods: {
     fetchEvents() {
       const self = this;
-      const nowUTC = moment(new Date);
+      const nowUTC = moment(new Date());
 
       this.$mbContext.mbEventService
         .getMbEvents()
         .then(events => {
-
           // TODO: remove this map in prod, adds fake image
-          events = events
-          .sort((a, b) => {
+          events = events.sort((a, b) => {
             // to reverse chronological
-            return new Date(b.start_time).getTime() - new Date(a.start_time).getTime();
+            return (
+              new Date(b.start_time).getTime() -
+              new Date(a.start_time).getTime()
+            );
           });
 
           self.events = events;
@@ -39,10 +39,10 @@ export default {
           console.error(e);
           alert("Failed to fetch events");
         });
-    },
+    }
   },
   mounted() {
-    this.fetchEvents()
+    this.fetchEvents();
   }
 };
 </script>

@@ -15,15 +15,15 @@ export default {
   props: {
     variant: {
       type: String,
-      default: 'primary',
-      validator (val) {
-        return ['primary', 'default'].includes(val)
-      },
-    },
+      default: "primary",
+      validator(val) {
+        return ["primary", "default"].includes(val);
+      }
+    }
   },
   computed: {
     btnClass() {
-      switch(this.variant) {
+      switch (this.variant) {
         case "primary":
           return "gradient-blue-mint text-white p-2 hover_shadow-md";
         case "default":
@@ -31,7 +31,7 @@ export default {
         default:
           return "gradient-blue-mint text-white p-2 hover_shadow-md";
       }
-    },
+    }
   }
 };
 </script>

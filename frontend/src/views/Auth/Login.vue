@@ -15,7 +15,7 @@ auth-wrapper
 
 <script>
 import authWrapper from "./auth-wrapper";
-import authYouAgree from './auth-you-agree.vue';
+import authYouAgree from "./auth-you-agree.vue";
 import disallowAuthenticatedUser from "../../mixins/disallowAuthenticatedUser";
 
 export default {

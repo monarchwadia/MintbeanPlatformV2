@@ -15,13 +15,13 @@ import NotFound from "./views/NotFound.vue";
 
 Vue.use(VueRouter);
 
-const ifAdmin = (to, from, next) => {
+const ifAdmin = (to: any, from: any, next: (route?: string) => any) => {
   if (window.store.state.user && window.store.state.user.isAdmin) {
-    next()
-    return
+    next();
+    return;
   }
-  next('/auth/login')
-}
+  next("/auth/login");
+};
 
 const routes: Array<RouteConfig> = [
   {

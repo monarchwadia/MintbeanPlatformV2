@@ -15,17 +15,16 @@ export class MbEventService {
   }
 
   getUpcomingMbEvents(): Promise<MbEvent> {
-    return this.apiService.get("/api/v1/mb-event")
-      .then((events) => {
-        console.log(events.data)
-        return events.data.filter(e => isUpcoming(e.end_time));
-      });
+    return this.apiService.get("/api/v1/mb-event").then((events) => {
+      console.log(events.data);
+      return events.data.filter((e: MbEvent) => isUpcoming(e.end_time));
+    });
 
-      // events.data.sort((a: any, b: any) => {
-      //   return (
-      //     new Date(a.start_time).getTime() - new Date(b.start_time).getTime()
-      //   );
-      // })
+    // events.data.sort((a: any, b: any) => {
+    //   return (
+    //     new Date(a.start_time).getTime() - new Date(b.start_time).getTime()
+    //   );
+    // })
     // );
   }
 

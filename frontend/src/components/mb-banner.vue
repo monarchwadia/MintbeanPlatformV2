@@ -9,7 +9,7 @@
 export default {
   name: "mb-banner",
   props: {
-    title: String,
+    title: String
   }
-}
+};
 </script>

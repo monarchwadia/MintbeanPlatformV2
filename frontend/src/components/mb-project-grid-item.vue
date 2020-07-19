@@ -26,7 +26,6 @@ div.shadow-mb.m-2.mb-10(style="width: 400px; background: #3d3d3d;")
         mb-a-button(isExternal :href="projectDeployedUrl") Demo
 </template>
 
-
 <script>
 export default {
   name: "mb-project-grid-item",

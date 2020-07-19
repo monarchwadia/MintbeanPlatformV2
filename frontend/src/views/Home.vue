@@ -49,29 +49,30 @@ export default {
   name: "Home",
   data() {
     return {
-      newSectionTitle: '',
+      newSectionTitle: "",
       sections: [],
-      upcomingEvents: [],
+      upcomingEvents: []
     };
   },
   methods: {
     createSection() {
       // TODO: prevent form submission on invalid inputs
       alert(`faking creation of section '${this.newSectionTitle}'`);
-      this.newSectionTitle = '';
+      this.newSectionTitle = "";
       this.$refs.modalAddSection.$refs.modal.close();
     },
     getAscFeaturedSections() {
       const self = this;
       this.$mbContext.mbConfigService
         .getAscFeaturedSections()
-        .then(res => self.sections = res)
+        .then(res => (self.sections = res));
     },
     getUpcomingEvents(limit = 2) {
       const self = this;
-      this.$mbContext.mbEventService.getUpcomingMbEvents()
-        .then(res => self.upcomingEvents = res.slice(0,limit))
-    },
+      this.$mbContext.mbEventService
+        .getUpcomingMbEvents()
+        .then(res => (self.upcomingEvents = res.slice(0, limit)));
+    }
   },
   mounted() {
     this.getAscFeaturedSections();
@@ -86,5 +87,4 @@ export default {
     "mb-home-header": mbHomeHeader
   }
 };
-
 </script>

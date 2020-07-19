@@ -91,7 +91,6 @@ div
 
 </template>
 
-
 <script>
 import moment from "moment";
 
@@ -131,8 +130,7 @@ export default {
     },
     isAdmin: function() {
       return this.$store.state.user && this.$store.state.user.isAdmin;
-    },
-
+    }
   },
   methods: {
     goBack() {
@@ -199,6 +197,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch("fetchProject", this.$route.params.id);
-  },
+  }
 };
 </script>

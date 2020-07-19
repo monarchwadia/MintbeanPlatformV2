@@ -15,13 +15,13 @@ export default {
     btnText: String,
     btnVariant: {
       type: String,
-      default: "primary",
-    },
+      default: "primary"
+    }
   },
   methods: {
     openModal() {
       this.$refs.modal.open();
-    },
-  },
-}
+    }
+  }
+};
 </script>

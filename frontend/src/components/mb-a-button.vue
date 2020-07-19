@@ -21,16 +21,16 @@ export default {
     // btn style
     variant: {
       type: String,
-      default: 'primary',
-      validator (val) {
-        return ['primary', 'default'].includes(val)
-      },
-    },
+      default: "primary",
+      validator(val) {
+        return ["primary", "default"].includes(val);
+      }
+    }
   },
   computed: {
     btnClass() {
       const PRIMARY = "gradient-blue-mint text-white p-2 hover_shadow-md";
-      switch(this.variant) {
+      switch (this.variant) {
         case "primary":
           return PRIMARY;
         case "default":

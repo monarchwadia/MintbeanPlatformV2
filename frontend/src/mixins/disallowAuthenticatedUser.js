@@ -2,7 +2,7 @@ export default {
   methods: {
     redirectOnLoggedIn() {
       if (this.$store.state.user) {
-        this.$router.push('/');
+        this.$router.push("/");
       }
     }
   },
@@ -17,4 +17,4 @@ export default {
   mounted() {
     this.redirectOnLoggedIn();
   }
-}
+};
