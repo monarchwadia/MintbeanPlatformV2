@@ -6,6 +6,7 @@ import MbEvents from "./views/MbEvents.vue";
 import Login from "./views/Auth/Login.vue";
 import Logout from "./views/Auth/Logout.vue";
 import Register from "./views/Auth/Register.vue";
+import Reset from "./views/Auth/Reset.vue";
 import Project from "./views/Project.vue";
 import UserProfile from "./views/UserProfile.vue";
 import Admin from "./views/Admin/Admin.vue";
@@ -33,6 +34,11 @@ const routes: Array<RouteConfig> = [
     path: "/auth/login",
     name: "Login",
     component: Login
+  },
+  {
+    path: "/auth/reset",
+    name: "Reset",
+    component: Reset
   },
   {
     path: "/project/:id",

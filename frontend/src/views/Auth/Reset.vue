@@ -1,36 +1,30 @@
 <template lang="pug">
 auth-wrapper
   form.flex.rounded-md.flex-col.p-12.bg-white.align-center.justify-center(style="min-height: 400px;" v-on:submit.prevent="onSubmit")
-    h1(class="text-xl pb-6") Sign in to Mintbean
+    h1(class="text-xl pb-6") Reset your password
     mb-label Email
-      mb-input(:value.sync="email" name="email", ref="emailInput")
-    mb-label Password
-      mb-input(:value.sync="password" name="password" type="password")
-    mb-internal-link.text-sm(to="/auth/reset") Forgot your password?
+      mb-input(:value.sync="email" name="email", ref="emailInput" style="min-width: 280px;")
     auth-you-agree
-    mb-button.my-4(type="submit") Continue
+    mb-button.my-4(type="submit") Send reset link
     mb-internal-link(to="/auth/register").text-sm.text-center Not a member yet? Sign Up
 </template>
 
-<style lang="scss" scoped></style>
-
 <script>
 import authWrapper from "./auth-wrapper";
-import authYouAgree from "./auth-you-agree.vue";
+import authYouAgree from "./auth-you-agree";
 import disallowAuthenticatedUser from "../../mixins/disallowAuthenticatedUser";
 
 export default {
-  name: "Login",
+  name: "Reset",
   mixins: [disallowAuthenticatedUser],
   data() {
     return {
-      email: "",
-      password: ""
+      email: ""
     };
   },
   methods: {
     onSubmit(evt) {
-      const { email, password, $router, $route } = this;
+      const { email, $router, $route } = this;
       this.$store.dispatch("login", { email, password, $router, $route });
     }
   },
