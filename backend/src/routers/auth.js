@@ -39,8 +39,16 @@ authRoute.post("/reset", async (req, res) => {
   const hashedResetToken = await hash(resetToken);
   console.log(hashedResetToken);
 
+  // The bcrypt of the token is saved on the user object
+  user.update({
+    reset_token: hashedResetToken,
+    reset_token_created_at: new Date()
+  });
+
   // The token itself is sent to the user's email in the form of a URL: `https://mintbean.io/auth/reset/:tokenId`
-  res.json({ message: "todo change me" });
+
+  // return ambiguous message
+  res.json({ message: "operation successful" });
 });
 
 authRoute.post(
