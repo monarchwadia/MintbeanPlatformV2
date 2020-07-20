@@ -11,6 +11,11 @@ export class AuthService {
       .post("/api/v1/auth/login", { email, password })
       .then(resp => resp.data);
   }
+  reset(email: string): Promise<MbUser> {
+    return this.apiService
+      .post("/api/v1/auth/reset", { email })
+      .then(resp => resp.data);
+  }
   register(
     firstname: string,
     lastname: string,

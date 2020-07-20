@@ -7,7 +7,7 @@ auth-wrapper
     mb-label Last Name
       mb-input(name="lastname", :value.sync="lastname")
     mb-label Email
-      mb-input(name="email", :value.sync="email")
+      mb-input(name="email", type="email" :value.sync="email")
     mb-label Password
       mb-input(name="password", type="password", :value.sync="password")
     auth-you-agree
@@ -51,6 +51,6 @@ export default {
   components: {
     "auth-wrapper": authWrapper,
     "auth-you-agree": authYouAgree
-  },
+  }
 };
 </script>

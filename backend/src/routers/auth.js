@@ -1,61 +1,109 @@
-const { Router } = require('express');
-const passport = require('passport');
-const Joi = require('@hapi/joi');
-const validator = require('../validator');
-const { User } = require('../db/models');
+const { Router } = require("express");
+const passport = require("passport");
+const Joi = require("@hapi/joi");
+const validator = require("../validator");
+const { User } = require("../db/models");
 
-const { requireAuth } = require('./routers.util');
+const { requireAuth } = require("./routers.util");
 
 const authRoute = new Router();
 
-authRoute.post('/login', passport.authenticate('local'), (req, res) => {
+authRoute.post("/login", passport.authenticate("local"), (req, res) => {
   res.json(req.user);
 });
 
-authRoute.post('/logout', requireAuth, (req, res) => {
+authRoute.post("/logout", requireAuth, (req, res) => {
   req.logout();
-  res.json({ message: 'Logged out' });
+  res.json({ message: "Logged out" });
 });
 
-authRoute.post('/register', validator.body(Joi.object({
-  email: Joi.string().required().min(8).max(32),
-  password: Joi.string().required().min(8).max(64),
-  firstname: Joi.string().required().max(255),
-  lastname: Joi.string().required().max(255),
-})), async (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return res.status(400).json({ message: 'Registration failed: You are already signed in. Try signing out first.' });
-  }
-
-  const { email, password, firstname, lastname } = req.body;
-  const isAdmin = false; // just being defensive
-
+authRoute.post("/reset", async (req, res) => {
+  console.log(req.body.email);
+  const email = req.body.email;
+  // check if user with that email exists
   let user;
   try {
-    user = await User.findOne({ where: { email }});
+    user = await User.findOne({ where: { email } });
   } catch (e) {
     next(e);
   }
-
-  if (user) {
-    return res.status(422).json({ message: 'User with that email address already exists' })
+  // if false: do nothing
+  console.log(user);
+  if (!user) {
+    return res.status(200);
   }
+  // if true: a password reset token is generated.
+  // The bcrypt of the token is saved on the user object.
+  // The token itself is sent to the user's email in the form of a URL: `https://mintbean.io/auth/reset/:tokenId`
+  res.json({ message: "todo change me" });
+});
 
-  try {
-    user = await User.create({ email, password_hash: password, firstname, lastname, isAdmin });
-  } catch (e) {
-    next(e);
-  }
-
-  req.login(user, (err) => {
-    if (err) {
-      next(err);
-    } else {
-      return res.json(user);
+authRoute.post(
+  "/register",
+  validator.body(
+    Joi.object({
+      email: Joi.string()
+        .required()
+        .min(8)
+        .max(32),
+      password: Joi.string()
+        .required()
+        .min(8)
+        .max(64),
+      firstname: Joi.string()
+        .required()
+        .max(255),
+      lastname: Joi.string()
+        .required()
+        .max(255)
+    })
+  ),
+  async (req, res, next) => {
+    if (req.isAuthenticated()) {
+      return res.status(400).json({
+        message:
+          "Registration failed: You are already signed in. Try signing out first."
+      });
     }
-  });
-})
 
-authRoute.get('/self', requireAuth, (req, res) => res.json(req.user));
+    const { email, password, firstname, lastname } = req.body;
+    const isAdmin = false; // just being defensive
+
+    let user;
+    try {
+      user = await User.findOne({ where: { email } });
+    } catch (e) {
+      next(e);
+    }
+
+    if (user) {
+      return res
+        .status(422)
+        .json({ message: "User with that email address already exists" });
+    }
+
+    try {
+      user = await User.create({
+        email,
+        password_hash: password,
+        firstname,
+        lastname,
+        isAdmin
+      });
+    } catch (e) {
+      next(e);
+    }
+
+    req.login(user, err => {
+      if (err) {
+        next(err);
+      } else {
+        return res.json(user);
+      }
+    });
+  }
+);
+
+authRoute.get("/self", requireAuth, (req, res) => res.json(req.user));
 
 module.exports = authRoute;

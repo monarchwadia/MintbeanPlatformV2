@@ -3,7 +3,7 @@ auth-wrapper
   form.flex.rounded-md.flex-col.p-12.bg-white.align-center.justify-center(style="min-height: 400px;" v-on:submit.prevent="onSubmit")
     h1(class="text-xl pb-6") Sign in to Mintbean
     mb-label Email
-      mb-input(:value.sync="email" name="email", ref="emailInput")
+      mb-input(:value.sync="email" type="email" name="email", ref="emailInput")
     mb-label Password
       mb-input(:value.sync="password" name="password" type="password")
     mb-internal-link.text-sm(to="/auth/reset") Forgot your password?
