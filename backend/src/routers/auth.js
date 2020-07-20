@@ -1,3 +1,4 @@
+const config = require("../utils/config.js");
 const { Router } = require("express");
 const passport = require("passport");
 const Joi = require("@hapi/joi");
@@ -6,6 +7,7 @@ const { User } = require("../db/models");
 const { v4: uuidv4 } = require("uuid");
 const { requireAuth } = require("./routers.util");
 const { hash, compare } = require("../utils/encryption");
+const { sendResetTokenLink } = require("../services/mailerService");
 
 const authRoute = new Router();
 
@@ -44,9 +46,8 @@ authRoute.post("/reset", async (req, res) => {
     reset_token: hashedResetToken,
     reset_token_created_at: new Date()
   });
-
   // The token itself is sent to the user's email in the form of a URL: `https://mintbean.io/auth/reset/:tokenId`
-
+  sendResetTokenLink(user.email, resetToken);
   // return ambiguous message
   res.json({ message: "operation successful" });
 });
