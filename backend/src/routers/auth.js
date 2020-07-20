@@ -39,7 +39,6 @@ authRoute.post("/reset", async (req, res) => {
 
   // The bcrypt of the token is saved on the user object.
   const hashedResetToken = await hash(resetToken);
-  console.log(hashedResetToken);
 
   // The bcrypt of the token is saved on the user object
   user.update({

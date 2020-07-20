@@ -42,6 +42,5 @@ module.exports = {
   appPort: hoc("APP_PORT", { convert: CONVERTERS.toNumber }),
   appSessionSecret: hoc("APP_SESSION_SECRET"),
   cloudinaryUrl: hoc("CLOUDINARY_URL"),
-  sendgridUsername: hoc("SENDGRID_USERNAME"),
   sendgridKey: hoc("SENDGRID_KEY")
 };
