@@ -3,8 +3,9 @@ const passport = require("passport");
 const Joi = require("@hapi/joi");
 const validator = require("../validator");
 const { User } = require("../db/models");
-
+const { v4: uuidv4 } = require("uuid");
 const { requireAuth } = require("./routers.util");
+const { hash, compare } = require("../utils/encryption");
 
 const authRoute = new Router();
 
@@ -28,12 +29,16 @@ authRoute.post("/reset", async (req, res) => {
     next(e);
   }
   // if false: do nothing
-  console.log(user);
   if (!user) {
     return res.status(200);
   }
   // if true: a password reset token is generated.
+  const resetToken = uuidv4();
+
   // The bcrypt of the token is saved on the user object.
+  const hashedResetToken = await hash(resetToken);
+  console.log(hashedResetToken);
+
   // The token itself is sent to the user's email in the form of a URL: `https://mintbean.io/auth/reset/:tokenId`
   res.json({ message: "todo change me" });
 });
