@@ -24,9 +24,8 @@ export default {
   },
   methods: {
     onSubmit(evt) {
-      console.log(this);
       const { email } = this;
-      this.$mbContext.authService.reset(email).then(res => console.log(res));
+      this.$mbContext.authService.reset(email);
     }
   },
   mounted() {
