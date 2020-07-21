@@ -9,6 +9,7 @@ const { requireAuth } = require("./routers.util");
 const { hash, compare } = require("../utils/encryption");
 const { sendResetTokenLink } = require("../services/mailerService");
 
+const TOKEN_EXPIRE_HOURS = 48;
 const authRoute = new Router();
 
 authRoute.post("/login", passport.authenticate("local"), (req, res) => {
@@ -49,6 +50,35 @@ authRoute.post("/reset", async (req, res) => {
   sendResetTokenLink(user.email, resetToken);
   // return ambiguous message
   res.json({ message: "operation successful" });
+});
+
+authRoute.post("/check-token", async (req, res) => {
+  const token = req.body.token;
+  console.log({ token });
+  const bcryptToken = await hash(token);
+
+  // get token if exists
+  let user;
+  try {
+    user = await User.findOne({ where: { reset_token: bcryptToken } });
+    console.log({ user });
+  } catch (e) {
+    next(e);
+  }
+  if (!user) {
+    return res.status(404).json({ error: "Invalid token." });
+  }
+
+  // token hasn't expired
+  const resetTokenExpiration = new Date(
+    user.reset_token_created_at + TOKEN_EXPIRE_HOURS * 60 * 60 * 1000
+  );
+  if (new Date() <= resetTokenExpiration) {
+    console.log("valid!");
+    // return valid...
+  } else {
+    // return invalid....
+  }
 });
 
 authRoute.post(
