@@ -16,9 +16,9 @@ export class AuthService {
       .post("/api/v1/auth/reset", { email })
       .then(resp => resp.data);
   }
-  checkPasswordResetToken(token: string): Promise<MbUser> {
+  checkPasswordResetToken(tokenObj: object): Promise<MbUser> {
     return this.apiService
-      .post("/api/v1/auth/check-token", { token })
+      .post("/api/v1/auth/check-token", { tokenObj })
       .then(resp => resp.data);
   }
   register(

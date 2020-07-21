@@ -6,7 +6,7 @@ const validator = require("../validator");
 const { User } = require("../db/models");
 const { v4: uuidv4 } = require("uuid");
 const { requireAuth } = require("./routers.util");
-const { hash, compare } = require("../utils/encryption");
+const { hash, compare, objToBase64 } = require("../utils/encryption");
 const { sendResetTokenLink } = require("../services/mailerService");
 
 const TOKEN_EXPIRE_HOURS = 48;
@@ -46,27 +46,30 @@ authRoute.post("/reset", async (req, res) => {
     reset_token: hashedResetToken,
     reset_token_created_at: new Date()
   });
-  // The token itself is sent to the user's email in the form of a URL: `https://mintbean.io/auth/reset/:tokenId`
-  sendResetTokenLink(user.email, resetToken);
+  // Send link to user's email in the form of a URL: `https://mintbean.io/auth/reset/:data` where data is base64 of {email, token}
+  const base64Obj = objToBase64({
+    email,
+    token: resetToken
+  });
+  sendResetTokenLink(user.email, base64Obj);
   // return ambiguous message
   res.json({ message: "operation successful" });
 });
-
-authRoute.post("/check-token", async (req, res) => {
-  const token = req.body.token;
-  console.log({ token });
-  const bcryptToken = await hash(token);
-
-  // get token if exists
+// TODO: /reset/...
+authRoute.post("/check-token", async (req, res, next) => {
+  const { email, token } = req.body.tokenObj;
+  console.log(req.body.tokenObj);
+  console.log({ msg: "hi" });
+  //  verify token on user
   let user;
   try {
-    user = await User.findOne({ where: { reset_token: bcryptToken } });
-    console.log({ user });
+    user = await User.findOne({ where: { email } });
+    console.log(user);
+    if (!user) {
+      return res.status(404).json({ error: "Invalid token." });
+    }
   } catch (e) {
     next(e);
-  }
-  if (!user) {
-    return res.status(404).json({ error: "Invalid token." });
   }
 
   // token hasn't expired
