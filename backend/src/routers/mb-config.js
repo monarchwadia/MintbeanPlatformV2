@@ -95,7 +95,17 @@ mbConfigRoute.get("/asc/featured-sections", async (req, res, next) => {
     projects = await Project.findAll({
       where: { id: pidsArray },
       include: [
-        { model: User, attributes: { exclude: ["password", "password_hash"] } },
+        {
+          model: User,
+          attributes: {
+            exclude: [
+              "password",
+              "password_hash",
+              "reset_token",
+              "reset_token_created_at"
+            ]
+          }
+        },
         { model: MbEvent },
         { model: MediaAsset }
       ]

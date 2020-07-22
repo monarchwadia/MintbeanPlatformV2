@@ -16,8 +16,7 @@ const send = function(mailObj) {
   sgMail.send(mailObj).catch(err => console.log(err.response.body.errors));
 };
 
-const sendResetTokenLink = function(email, data) {
-  console.log(config.sendgridKey());
+const sendResetTokenLink = function(email, referer, data) {
   const mailObj = {
     to: email,
     from: SENDER_EMAIL,
@@ -26,7 +25,7 @@ const sendResetTokenLink = function(email, data) {
     <p>Hello,</p>
     <p>A password reset was requested for the Mintbean account with this email address.</p>
     <p>Please click the link below to reset your password.</p>
-    <a style="${BUTTON_STYLE}" href="https://mintbean.io/auth/reset/${data}">Create a new password</a>
+    <a style="${BUTTON_STYLE}" href=${referer}/${data}">Create a new password</a>
     `
   };
   return send(mailObj);
