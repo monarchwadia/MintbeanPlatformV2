@@ -2,7 +2,7 @@
   mb-internal-link.w-full(:to="'/mb-event/' + id" style="margin: 0.5rem;")
     div.rounded.overflow-hidden.h-full.shadow-xl.hover_shadow-2xl.w-full
       div.w-full.relative(
-        style="background-size: cover; height: 250px;"
+        style="background-size: cover; background-position:center; height: 250px;"
         :style="{ backgroundImage: urlFor(image) }"
         )
         mb-a-button.absolute.z-99.right-0(
@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import prettyDateHelper from '../helpers/prettyDate';
-import isUpcoming from '../helpers/isUpcoming';
+import prettyDateHelper from "../helpers/prettyDate";
+import isUpcoming from "../helpers/isUpcoming";
 
 export default {
   name: "mb-event-card",
@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       isUpcoming: false
-    }
+    };
   },
   methods: {
     cloudinaryUrlFor: function(id) {
@@ -49,5 +49,5 @@ export default {
   mounted() {
     this.isUpcoming = isUpcoming(this.endTime) ? true : false;
   }
-}
+};
 </script>
