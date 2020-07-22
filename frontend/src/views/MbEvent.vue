@@ -3,7 +3,7 @@ div
   div(v-if="!mbEvent")
     mb-center-message(header="Loading" body="Please wait...")
   div(v-else)
-    div.mb-32.relative.bg-fixed.min-h-screen.bg-no-repeat.bg-center.bg-contain(:style="{'background-image': `url(${mbEvent.cover_image_url})`, 'background-size': 'cover'}" style="box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);" ref="cover")
+    div.mb-16.md_mb-32.relative.bg-fixed.min-h-screen.bg-no-repeat.bg-center.bg-contain(:style="{'background-image': `url(${mbEvent.cover_image_url})`, 'background-size': 'cover'}" style="box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);" ref="cover")
       mb-back-button.absolute.left-0.text-white.p-4(style="background: rgba(0,0,0,0.3);")
       div(style="height: 30vh")
       div._title-box.rounded.gradient-blue-mint.p-1.m-auto
@@ -11,8 +11,8 @@ div
           h1.text-lg.sm_text-2xl.md_text-5xl.font-semibold {{ mbEvent.title }}
           p.md_text-xl.py-2 {{ prettyDate }}
     div.container.m-auto.mb-32
-      div.flex.mb-16
-        div.flex-grow.mr-4.shadow-mb.p-10.flex.flex-col.justify-center.text-white.rounded-lg(style="flex-basis: 60%; background: linear-gradient(0deg, black, #3d3d3d);")
+      div.md_flex.mb-16
+        div.mb-4.md_mb-0.md_mr-4.shadow-mb.p-10.flex.flex-col.justify-center.text-white.rounded-lg(style="flex-basis: 60%; background: linear-gradient(0deg, black, #3d3d3d);")
           div.mb-6
             h2.text-3xl Description
             p {{ mbEvent.description }}
@@ -20,7 +20,7 @@ div
             h2.mt-2.text-2xl Instructions
             h3 {{ mbEvent.instructions }}
 
-        div.flex-grow.shadow-mb.p-10.flex.flex-col.justify-end.text-white.rounded-lg(style="flex-basis: 40%; background: linear-gradient(0deg, black, #3d3d3d);")
+        div.shadow-mb.p-10.flex.flex-col.justify-end.text-white.rounded-lg(style="flex-basis: 40%; background: linear-gradient(0deg, black, #3d3d3d);")
           section(v-if="submitFormState.enabled")
             form(v-on:submit.prevent="handleSubmitProject")
               h2.text-3xl.mb-1 Submit a Project
