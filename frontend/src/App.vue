@@ -4,10 +4,10 @@
     //- mb-errors
     router-view
     mb-footer
-    div(class="sm_hidden fixed top-0 right-0 bottom-0 left-0 gradient-blue-mint flex flex-row m-auto align-middle justify-center z-50 text-white")
-      div(class="text-center max-w-md" style="padding-top: 20vh")
-        div.text-5xl Sorry :(
-        div.text-3xl Smaller screens are currently not supported. (But we're working on it!)
+    //- div(class="sm_hidden fixed top-0 right-0 bottom-0 left-0 gradient-blue-mint flex flex-row m-auto align-middle justify-center z-50 text-white")
+    //-   div(class="text-center max-w-md" style="padding-top: 20vh")
+    //-     div.text-5xl Sorry :(
+    //-     div.text-3xl Smaller screens are currently not supported. (But we're working on it!)
 
 
 </template>
