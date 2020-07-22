@@ -7,7 +7,10 @@ const { User } = require("../db/models");
 const { v4: uuidv4 } = require("uuid");
 const { requireAuth } = require("./routers.util");
 const { hash, compare, objToBase64 } = require("../utils/encryption");
-const { sendResetTokenLink } = require("../services/mailerService");
+const {
+  sendResetTokenLink,
+  sendWelcomeMessage
+} = require("../services/mailerService");
 
 const TOKEN_EXPIRE_HOURS = 48;
 
@@ -215,6 +218,10 @@ authRoute.post(
         lastname,
         isAdmin
       });
+      if (user) {
+        sendWelcomeMessage(user);
+      }
+      console.log({ user });
     } catch (e) {
       next(e);
     }

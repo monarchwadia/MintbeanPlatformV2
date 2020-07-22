@@ -2,6 +2,8 @@ const config = require("../utils/config.js");
 const sgMail = require("@sendgrid/mail");
 
 const SENDER_EMAIL = "claire.froelich@mintbean.io"; // TODO: use correct sender address
+const MINTBEAN_URL = "https://www.mintbean.io/";
+const EVENTBRITE_URL = "https://www.eventbrite.ca/o/mintbean-28752300031";
 
 sgMail.setApiKey(config.sendgridKey());
 
@@ -30,10 +32,24 @@ const sendResetTokenLink = function(email, referer, data) {
   };
   return send(mailObj);
 };
+const sendWelcomeMessage = function(user) {
+  const mailObj = {
+    to: user.email,
+    from: SENDER_EMAIL,
+    subject: "Welcome to Mintbean!",
+    html: `
+    <p>We're happy to have you on board, ${user.firstname}!</p>
+    <p>Check out our <a href="${EVENTBRITE_URL} rel="noopener noreferrer" target="_blank">upcoming events</a> to get started.</p>
+    <a style="${BUTTON_STYLE}" href="${MINTBEAN_URL}">Access Mintbean</a>
+    `
+  };
+  return send(mailObj);
+};
 
 module.exports = {
   send,
-  sendResetTokenLink
+  sendResetTokenLink,
+  sendWelcomeMessage
 };
 
 const BUTTON_STYLE = `
