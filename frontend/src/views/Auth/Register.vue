@@ -2,16 +2,44 @@
 auth-wrapper
   form.flex.rounded-md.flex-col.p-12.bg-white.align-center.justify-center(style="min-height: 400px;" v-on:submit.prevent="onSubmit")
     h1(class="text-xl pb-6") Sign up to Mintbean
-    mb-label First Name
-      mb-input(name="firstname", :value.sync="firstname" ref="firstnameInput")
-    mb-label Last Name
-      mb-input(name="lastname", :value.sync="lastname")
-    mb-label Email
-      mb-input(name="email", type="email" :value.sync="email")
-    mb-label Password
-      mb-input(name="password", type="password", :value.sync="password")
+    FormulateForm(@submit="onSubmit($event)")
+      FormulateInput(
+        type="text"
+        name="firstname"
+        label="First name"
+        validation-name="First name"
+        /* v-focus-input */
+        v-model="firstname"
+        v-focus-input
+      )
+      FormulateInput(
+        type="text"
+        name="lastname"
+        label="Last name"
+        validation-name="Last name"
+        v-model="lastname"
+      )
+      FormulateInput(
+        type="email"
+        name="email"
+        label="Email"
+        v-model="email"
+      )
+
+      FormulateInput(
+        type="password"
+        name="password"
+        label="Password"
+        validation="required|between:7,65,length"
+        validation-name="New password"
+        :validation-messages="{ between: 'New password must be between 8 and 64 characters long.'}"
+        v-model="password"
+      )
+      FormulateInput(
+        type="submit"
+        label="Continue"
+      )
     auth-you-agree
-    mb-button.my-4(type="submit") Continue
     mb-internal-link(to="/auth/login").text-sm.text-center Already a member? Sign In
 </template>
 
@@ -45,8 +73,15 @@ export default {
       });
     }
   },
-  mounted() {
-    this.$refs.firstnameInput.$el && this.$refs.firstnameInput.$el.focus();
+  directives: {
+    focusInput: {
+      inserted: function(el) {
+        const input = el.querySelector("input");
+        if (input) {
+          input.focus();
+        }
+      }
+    }
   },
   components: {
     "auth-wrapper": authWrapper,

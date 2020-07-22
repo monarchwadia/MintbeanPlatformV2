@@ -1,3 +1,4 @@
+// returns obj if valid base64 string, returns null if invalid base64 string
 const base64ToObj = function(base64) {
   let obj;
   try {

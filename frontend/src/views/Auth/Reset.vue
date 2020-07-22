@@ -5,7 +5,9 @@ auth-wrapper
     mb-label Email
       mb-input(:value.sync="email" name="email", ref="emailInput" type="email" style="min-width: 280px;")
     auth-you-agree
-    mb-button.my-4(type="submit") Send reset link
+    p.font-semibold.text-mb-tone-500(v-if="emailIsSent") A reset token was sent to this email address.
+    mb-button.my-4(v-if="!emailIsSent" type="submit") Send reset link
+    mb-button.my-4(v-else type="submit") Resend reset link
     mb-internal-link(to="/auth/register").text-sm.text-center Not a member yet? Sign Up
 </template>
 
@@ -19,13 +21,16 @@ export default {
   mixins: [disallowAuthenticatedUser],
   data() {
     return {
-      email: ""
+      email: "",
+      emailIsSent: false
     };
   },
   methods: {
     onSubmit(evt) {
       const { email } = this;
-      this.$mbContext.authService.reset(email);
+      this.$mbContext.authService.sendResetToken(email);
+      this.emailIsSent = true;
+      this.$forceUpdate();
     }
   },
   mounted() {
