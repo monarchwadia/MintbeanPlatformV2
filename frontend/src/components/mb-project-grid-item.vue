@@ -1,5 +1,5 @@
 <template lang="pug">
-div.shadow-mb.m-2.mb-10(style="width: 400px; background: #3d3d3d;")
+div.shadow-mb.m-2.mb-10.hover_shadow-2xl.cursor-pointer(style="width: 400px; background: #3d3d3d;")
   div.inner
     div.screenshot.relative
       div.overlay-top.absolute.text-white.p-3.pb-3.top-0.z-50.w-full(style="background: linear-gradient(180deg, #3d3d3d, transparent);")
@@ -8,24 +8,25 @@ div.shadow-mb.m-2.mb-10(style="width: 400px; background: #3d3d3d;")
         div.flex.items-center
           //- mb-avatar.mr-2(size="sm")
           //- p {{ username }}
-        div
+
+
+      mb-image-display.relative(:publicId="cloudinaryPublicId" height="300" width="400")
+    div.p-3.text-white
+      div.flex.justify-between.mb-4
+        div.flex.items-center.mr-2
+          mb-avatar.flex-none.mr-2(size="sm")
+          p.flex.flex-wrap {{ username }}
+        div(style="min-width:100px;")
           div.inline.mr-2
             fa.icon.text-mb-mint-500(icon="comment")
             | &nbsp; {{ voteCount }}
           div.inline
             fa.icon.text-mb-mint-500(icon="star")
             | &nbsp; {{ voteAverage }}
-
-      mb-image-display.relative(:publicId="cloudinaryPublicId" height="300" width="400")
-    div.p-3.flex.flex-grow
-      div.flex.flex-none.text-white.items-center
-        mb-avatar.mr-2(size="sm")
-        p {{ username }}
       div.flex.w-full.justify-end
         mb-a-button.mr-2(isExternal :href="projectPlatformUrl") Comments
         mb-a-button(isExternal :href="projectDeployedUrl") Demo
 </template>
-
 
 <script>
 export default {
