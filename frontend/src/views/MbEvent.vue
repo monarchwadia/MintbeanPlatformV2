@@ -47,79 +47,6 @@ div
           p No submissions yet. Be the first to submit a project!
         mb-project-grid(v-else :projects="projects")
 
-
-
-//- div
-//-   div(v-if="mbEvent")
-//-     div.relative.bg-fixed.min-h-screen(class="bg-no-repeat bg-center" :style="{'background-image': `url(${mbEvent.cover_image_url})`, 'background-size': 'cover'}" ref="cover")
-//-       div.rounded.inline-block.gradient-blue-mint.p-1.absolute(style="top: 30vh; left: 10vw; max-width: 40vw")
-//-         div.bg-white.p-12.rounded
-//-           h1.text-5xl.font-semibold {{ mbEvent.title }}
-//-           p.text-xl.py-2 {{ prettyDate }}
-//-     p {{ mbEvent.description }}
-//-     h3 Submissions
-//-     section(v-if="projects && projects.length === 0")
-//-       p No submissions yet. Be the first to submit a project!
-//-     mb-project-grid(v-else :projects="projects")
-//-     section(v-if="submitFormState.enabled")
-//-       form.submit-project-form(v-on:submit.prevent="handleSubmitProject")
-//-         h1 Submit a Project
-//-         div.flex
-//-           label Title
-//-             input(name="title", v-model="title")
-//-           label Source Code URL
-//-             input(name="source_code_url", v-model="source_code_url")
-//-           label Deployment URL
-//-             input(name="live_url", v-model="live_url")
-//-           button(type="submit") Submit
-//-         div.flex
-//-           label Screenshots & Videos
-//-             mb-file-upload(:files="myFiles" name="files" ref="mbFileUpload")
-//-
-//-     section(v-else)
-//-       h1 {{ submitFormState.disabledMessage }}
-//-     section(v-if="submitFormState.showLoginButton")
-//-       mb-internal-link(to="/auth/login")
-//-         button Login
-//- //-
-//- div.event-wrapper
-//-   div.event-wrapper-inner
-//-     div.background-banner
-//-     main.event
-//-       div(v-if="!!mbEvent")
-//-         h1 {{ mbEvent.title }}
-//-         h3 Description
-//-         p {{ mbEvent.description }}
-//-         h3 Instructions
-//-         p {{ mbEvent.instructions }}
-//-         h3 Date & Time
-//-         p {{ prettyDate }}
-//-         h3 Submissions
-//-         section(v-if="projects && projects.length === 0")
-//-           p No submissions yet. Be the first to submit a project!
-//-         mb-project-grid(v-else :projects="projects")
-//-         section(v-if="submitFormState.enabled")
-//-           form.submit-project-form(v-on:submit.prevent="handleSubmitProject")
-//-             h1 Submit a Project
-//-             div.flex
-//-               label Title
-//-                 input(name="title", v-model="title")
-//-               label Source Code URL
-//-                 input(name="source_code_url", v-model="source_code_url")
-//-               label Deployment URL
-//-                 input(name="live_url", v-model="live_url")
-//-               button(type="submit") Submit
-//-             div.flex
-//-               label Screenshots & Videos
-//-                 mb-file-upload(:files="myFiles" name="files" ref="mbFileUpload")
-//-
-//-         section(v-else)
-//-           h1 {{ submitFormState.disabledMessage }}
-//-         section(v-if="submitFormState.showLoginButton")
-//-           mb-internal-link(to="/auth/login")
-//-             button Login
-
-
 </template>
 
 <script>
@@ -146,7 +73,10 @@ export default {
       if (!this.mbEvent.start_time) {
         return "";
       }
-      return moment(this.mbEvent.start_time).format("dddd, MMMM Do YYYY, ha") + " EST";
+      return (
+        moment(this.mbEvent.start_time).format("dddd, MMMM Do YYYY, ha") +
+        " EST"
+      );
     },
     // mbEvent: function() {
     //   const { id } = this.$route.params;
@@ -191,7 +121,16 @@ export default {
   },
   methods: {
     rememberMeLogin() {
-      this.$router.push({ name: 'Login', query: { redirect: this.$router.history.current.path } });
+      this.$router.push({
+        name: "Login",
+        query: { redirect: this.$router.history.current.path }
+      });
+    },
+    clearInputs() {
+      this.source_code_url = "";
+      this.title = "";
+      this.live_url = "";
+      this.myFiles = [];
     },
     fetchMbEvent() {
       const self = this;
@@ -200,7 +139,7 @@ export default {
       this.$mbContext.mbEventService
         .fetchMbEvent(id)
         .then(mbEvent => {
-          self.mbEvent = mbEvent
+          self.mbEvent = mbEvent;
         })
         .catch(e => {
           console.error(e);
@@ -252,12 +191,15 @@ Would you like to continue?`);
           MbEventId: this.mbEvent.id,
           MediaAssets
         })
-      .then(() => {
-        self.fetchProjects();
-      }).catch((e) => {
-        alert("Failed to submit project.");
-        console.log("Failed to submit project.", e);
-      });
+        .then(() => {
+          this.clearInputs();
+          self.fetchProjects();
+          this.$router.go(0);
+        })
+        .catch(e => {
+          alert("Failed to submit project.");
+          console.log("Failed to submit project.", e);
+        });
     }
   },
   mounted() {
