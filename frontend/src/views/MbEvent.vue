@@ -3,13 +3,13 @@ div
   div(v-if="!mbEvent")
     mb-center-message(header="Loading" body="Please wait...")
   div(v-else)
-    div.mb-32.relative.bg-fixed.min-h-screen(class="bg-no-repeat bg-center" :style="{'background-image': `url(${mbEvent.cover_image_url})`, 'background-size': 'cover'}" style="box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);" ref="cover")
+    div.mb-32.relative.bg-fixed.min-h-screen.bg-no-repeat.bg-center.bg-contain(:style="{'background-image': `url(${mbEvent.cover_image_url})`, 'background-size': 'cover'}" style="box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);" ref="cover")
       mb-back-button.absolute.left-0.text-white.p-4(style="background: rgba(0,0,0,0.3);")
       div(style="height: 30vh")
-      div.rounded.gradient-blue-mint.p-1.m-auto(style="max-width: 40vw;")
+      div._title-box.rounded.gradient-blue-mint.p-1.m-auto
         div.bg-white.p-12.rounded.text-center
-          h1.text-5xl.font-semibold {{ mbEvent.title }}
-          p.text-xl.py-2 {{ prettyDate }}
+          h1.text-lg.sm_text-2xl.md_text-5xl.font-semibold {{ mbEvent.title }}
+          p.md_text-xl.py-2 {{ prettyDate }}
     div.container.m-auto.mb-32
       div.flex.mb-16
         div.flex-grow.mr-4.shadow-mb.p-10.flex.flex-col.justify-center.text-white.rounded-lg(style="flex-basis: 60%; background: linear-gradient(0deg, black, #3d3d3d);")
@@ -48,6 +48,24 @@ div
         mb-project-grid(v-else :projects="projects")
 
 </template>
+
+<style lang="scss" scoped>
+._title-box {
+  max-width: 70vw;
+}
+// tablets
+@media only screen and (min-width: 639px) {
+  ._title-box {
+    width: 60vw;
+  }
+}
+// larger than tablets
+@media only screen and (min-width: 1023px) {
+  ._title-box {
+    width: 60vw;
+  }
+}
+</style>
 
 <script>
 import moment from "moment";
