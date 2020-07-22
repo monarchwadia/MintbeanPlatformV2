@@ -36,11 +36,13 @@ const sendWelcomeMessage = function(user) {
   const mailObj = {
     to: user.email,
     from: SENDER_EMAIL,
-    subject: "Welcome to Mintbean!",
+    subject: "Confirm your Mintbean account",
     html: `
-    <p>We're happy to have you on board, ${user.firstname}!</p>
-    <p>Check out our <a href="${EVENTBRITE_URL} rel="noopener noreferrer" target="_blank">upcoming events</a> to get started.</p>
-    <a style="${BUTTON_STYLE}" href="${MINTBEAN_URL}">Access Mintbean</a>
+    <p>Welcome to Mintbean, ${user.firstname}!</p>
+    <p>Please click the link below to confirm your new account.</p>
+    <a style="${BUTTON_STYLE}" href="${MINTBEAN_URL}">Confirm your new account</a>
+    <p>Be sure to check out our <a href="${EVENTBRITE_URL} rel="noopener noreferrer" target="_blank">upcoming events</a> to get started hacking!</p>
+    <p>Mintbean team</p>
     `
   };
   return send(mailObj);
