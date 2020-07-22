@@ -50,8 +50,11 @@ div
 </template>
 
 <style lang="scss" scoped>
-._title-box {
-  max-width: 70vw;
+// tablets
+@media only screen and (max-width: 638px) {
+  ._title-box {
+    max-width: 70vw;
+  }
 }
 // tablets
 @media only screen and (min-width: 639px) {
@@ -62,7 +65,7 @@ div
 // larger than tablets
 @media only screen and (min-width: 1023px) {
   ._title-box {
-    width: 60vw;
+    max-width: 40vw;
   }
 }
 </style>
