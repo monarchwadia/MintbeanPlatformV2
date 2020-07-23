@@ -26,12 +26,9 @@ export default {
   },
   computed: {
     user() {
-      console.log("computing user");
       return this.$store.state && this.$store.state.user;
     },
     isLoggedIn() {
-      //- console.log(this.$store.state);
-      console.log("computing isLoggedIn");
       return !!this.user;
     },
     columns() {
@@ -122,17 +119,6 @@ export default {
         links: links.filter(l => !l.hidden)
       }));
     }
-  },
-  //- methods: {
-  //-   logout(evt) {
-  //-     this.$store.dispatch("logout");
-  //-   }
-  //- },
-  mounted() {
-    //- console.log(this.$store.state.user);
-    //- this.$set(this.isLoggedIn, this.isLoggedIn);
-    //- console.log(this.isLoggedIn);
-    //- console.log(this.$store._vm.$data.$$state.user);
   }
 };
 </script>
