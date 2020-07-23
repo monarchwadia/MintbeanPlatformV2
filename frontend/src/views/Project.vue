@@ -3,9 +3,9 @@ div
   div.pb-4.w-screen.text-white(style="background: linear-gradient(180deg, black, #3d3d3d);")
     div.container.m-auto.flex.flex-col.lg_flex-row.justify-between
       div
-        mb-back-button.mt-4
+        mb-back-button.mt-4.mb-2
         h1.text-center.text-4xl.md_text-left.md_text-5xl {{ project.title }}
-        p.text-center.md_text-left.text-xl by {{ project.User.firstname }} {{ project.User.lastname }}
+        p.text-center.md_text-left.text-xl by {{ authorFullname }}
       div.flex.self-center.md_self-end.mt-5.text-center
         mb-a-button.mr-4.h-auto.z-99.right-0(isExternal v-if="project.source_code_url" :href="project.source_code_url" ) Source Code
         mb-a-button.h-auto.z-99.right-0(isExternal v-if="project.live_url" :href="project.live_url" ) View Project
@@ -27,7 +27,7 @@ div
                   mb-file-upload(:files="[]" name="files" ref="mbFileUpload")
                   button(v-on:click.prevent="handleUploadMediaAssets()") Submit
 
-      div.mt-6.flex
+      div.mt-6.flex.flex-col.md_flex-row
         //- left column
         div(style="flex-basis: 40%;")
 
@@ -36,11 +36,11 @@ div
             div.flex.items-start
               mb-avatar(size="md")
               div.ml-2
-                p.text-xl {{ project.User.firstname }} {{ project.User.lastname }}
+                p.text-xl {{ authorFullname }}
                 mb-external-link(:href="project.User.linkedin_id") Linkedin
                 mb-external-link(v-if="project.User.github_id" :href="project.User.github_id") GitHub
                 mb-external-link(v-if="project.User.stackoverflow_id" :href="project.User.stackoverflow_id") StackOverflow
-          div.flex.flex-col.p-6.shadow-mb
+          div.flex.flex-col.p-6.shadow-mb.mt-4
             section(v-if="$store.state.user")
               form.w-full.flex.flex-col(v-on:submit.prevent="function(evt){ handleVoteProject(project.id) }")
                 h2.text-2xl.mb-4 {{ userVote ? 'Edit your' : 'Submit a' }} vote
@@ -73,22 +73,21 @@ div
 
         //- right column
         div(style="flex-basis: 60%;")
-          div.p-6.shadow-mb
-            div.flex.justify-between
-              h2.text-2xl.mb-4 Votes
-              h2.text-right.text-2xl Average Score:  {{averageScore}} / 10
+          div.p-6.shadow-mb.h-full.mt-4.md_mt-0
+            div.flex.justify-between.items-center.mb-6
+              h2.text-2xl Votes
+              h2.text-lg.text-right.sm_text-2xl Average Score:  {{averageScore ? averageScore : ' -- ' }} / 10
             section(v-if="!project.Votes || project.Votes.length === 0")
-              p No comments yet
+              p No votes or comments yet.
             section(v-else)
               div(v-for="vote in project.Votes" style="width: 100%;")
-                div.flex.mb-3
+                div.flex.mb-5
                   div.flex-shrink-0
                     mb-avatar.self-center(size="md")
-                  div.pl-2
-                    b.mb-2 {{vote.User.firstname + ' ' + vote.User.lastname}}
-                    em.ml-2.text-sm.mb-2 - {{getMoment(vote.createdAt)}}
+                  div.pl-4
+                    b.mb-2 {{ vote.User.firstname + ' ' + vote.User.lastname }}
+                    em.ml-2.text-sm.mb-2 - {{ getMoment(vote.createdAt) }}
                     p {{ vote.comment }}
-
 </template>
 
 <script>
@@ -125,7 +124,11 @@ export default {
         Votes.reduce((prev, curr) => prev + curr.rating, 0) / Votes.length;
       return score.toPrecision(2);
     },
+    authorFullname() {
+      return `${this.project.User.firstname} ${this.project.User.lastname}`;
+    },
     project: function() {
+      console.log(this.$store.state.project);
       return this.$store.state.project;
     },
     isAdmin: function() {
@@ -147,8 +150,6 @@ export default {
         comment,
         rating
       };
-
-      console.log(obj);
       this.$store.dispatch("vote", obj);
     },
     handleDeleteMediaAsset(MediaAsset) {
@@ -196,7 +197,9 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("fetchProject", this.$route.params.id);
+    this.$store
+      .dispatch("fetchProject", this.$route.params.id)
+      .then(res => console.log(res));
   }
 };
 </script>
