@@ -14,7 +14,7 @@ div
       div._title-box.rounded.gradient-blue-mint.p-1.m-auto
         div.bg-white.p-12.rounded.text-center
           h1.text-lg.sm_text-2xl.md_text-5xl.font-semibold {{ mbEvent.title }}
-          p.md_text-xl.py-2 {{ prettyDate }}
+          p.md_text-xl.py-2 {{ prettyStartTime }}
     div.p-2.md_p-0.container.m-auto.mb-32
       div.md_flex.mb-16
         div.mb-4.md_mb-0.md_mr-4.shadow-mb.p-10.flex.flex-col.justify-center.text-white.rounded-lg(style="flex-basis: 60%; background: linear-gradient(0deg, black, #3d3d3d);")
@@ -24,7 +24,7 @@ div
           div.mb-6(v-else)
             h2.text-2xl.my-2.md_font-normal.md_text-3xl Description
             p.text-md (No description for this event yet - hang tight!)
-          div(v-if="mbEvent.instructions")
+          div(v-if="shouldShowInstructions")
             h2.text-2xl.my-2.md_text-3xl Instructions
             mb-external-link(:href="mbEvent.instructions") {{ mbEvent.instructions }}
 
@@ -80,6 +80,7 @@ div
 
 <script>
 import moment from "moment";
+import prettyESTDate from "../helpers/prettyDate";
 
 // @ is an alias to /src
 export default {
@@ -98,14 +99,37 @@ export default {
     // projects: function() {
     //   return this.mbEvent && this.mbEvent.Projects;
     // },
-    prettyDate: function() {
+    startTime: function() {
+      return this.mbEvent && this.mbEvent.start_time;
+    },
+    endTime: function() {
+      return this.mbEvent && this.mbEvent.end_time;
+    },
+    shouldShowInstructions: function() {
+      // should show from start time to 24hrs after end time
+      const start = new Date(this.startTime);
+
+      const end = new Date(this.endTime);
+      const expiration = end.setHours(end.getHours() + 24);
+      const now = new Date();
+
+      const fakestart = now.setHours(now.getHours() - 2);
+      const fakeexpiration = now.setHours(now.getHours() + 24);
+
+      const hasInstructions = this.mbEvent.instructions;
+      //- const isShowTime = now >= start && now <= expiration;
+
+      const isShowTime = now >= fakestart && now <= fakeexpiration;
+      //- console.log(isShowTime);
+      //- console.log(start);
+      return !!(hasInstructions && isShowTime);
+    },
+    prettyStartTime: function() {
       if (!this.mbEvent.start_time) {
         return "";
       }
-      return (
-        moment(this.mbEvent.start_time).format("dddd, MMMM Do YYYY, ha") +
-        " EST"
-      );
+      const datestr = this.mbEvent.start_time.toLocaleString();
+      return prettyESTDate(datestr, { weekday: "long" });
     },
     // mbEvent: function() {
     //   const { id } = this.$route.params;
@@ -234,7 +258,8 @@ Would you like to continue?`);
   mounted() {
     this.fetchMbEvent();
     this.fetchProjects();
-    this.$refs.cover.scrollIntoView();
+    //- this.$refs.cover.scrollIntoView();
+    this.startTime;
   }
 };
 </script>

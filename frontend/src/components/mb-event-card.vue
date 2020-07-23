@@ -13,15 +13,15 @@
         ) Register
       div.px-4.py-4.text-gray-700.lg_flex.lg_justify-between.items-center
         div.text-xl.mr-2 {{ eventTitle }}
-        div.text-sm {{prettyDate(startTime) + ' (EST)'}}
+        div.text-sm {{prettyESTDate(startTime)}}
 </template>
 
 <style lang="scss" scoped>
-@media only screen and (max-width: 638px) {
-  // ._event-card {
-  //   min-width: 250px;
-  // }
-}
+// @media only screen and (max-width: 638px) {
+//   // ._event-card {
+//   //   min-width: 250px;
+//   // }
+// }
 </style>
 
 <script>
@@ -52,7 +52,7 @@ export default {
     urlFor: function(url) {
       return `url(${url})`;
     },
-    prettyDate: prettyDateHelper
+    prettyESTDate: prettyDateHelper
   },
   mounted() {
     this.isUpcoming = isUpcoming(this.endTime) ? true : false;

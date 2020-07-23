@@ -17,7 +17,10 @@ div
   div.container.m-auto
     div(v-if="!!project")
       div
-        section.mt-4.p-6.shadow-mb
+        //- p.relative.pt-10.text-3xl.sm_text-5xl(
+        //-   style="top: 100px;margin-left: auto;margin-right: auto;left: 0;right: 0;text-align: center;"
+        //- ) Loading...
+        section._media-asset-container.mt-4.p-6.shadow-mb
           aside(v-for="mediaAsset in project.MediaAssets")
             mb-image-display(v-if="mediaAsset.cloudinaryPublicId" :publicId="mediaAsset.cloudinaryPublicId", width="980")
             div.flex.justify-end(v-if="isAdmin")
@@ -41,7 +44,7 @@ div
               mb-avatar(size="md")
               div.ml-2
                 p.text-xl {{ authorFullname }}
-                mb-external-link(:href="project.User.linkedin_id") Linkedin
+                mb-external-link(v-if="project.User.linkedin_id" :href="project.User.linkedin_id") Linkedin
                 mb-external-link(v-if="project.User.github_id" :href="project.User.github_id") GitHub
                 mb-external-link(v-if="project.User.stackoverflow_id" :href="project.User.stackoverflow_id") StackOverflow
           div.flex.flex-col.p-6.shadow-mb.mt-4
@@ -78,7 +81,7 @@ div
         //- right column
         div(style="flex-basis: 60%;")
           div.p-6.shadow-mb.h-full.mt-4.md_mt-0
-            div.flex.justify-between.items-center.mb-6
+            div.flex.justify-between.items-center.mb-4
               h2.text-2xl Votes
               h2.text-lg.text-right.sm_text-2xl Average Score:  {{averageScore ? averageScore : ' -- ' }} / 10
             section(v-if="!project.Votes || project.Votes.length === 0")
@@ -93,6 +96,12 @@ div
                     em.ml-2.text-sm.mb-2 - {{ getMoment(vote.createdAt) }}
                     p {{ vote.comment }}
 </template>
+
+<style lang="css">
+._media-asset-container img {
+  max-height: 600px;
+}
+</style>
 
 <script>
 import moment from "moment";
