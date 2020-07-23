@@ -1,12 +1,12 @@
 <template lang="pug">
 div
-  div.h-40.w-screen.text-white(style="background: linear-gradient(180deg, black, #3d3d3d);")
-    div.container.m-auto.flex.justify-between
+  div.pb-4.w-screen.text-white(style="background: linear-gradient(180deg, black, #3d3d3d);")
+    div.container.m-auto.flex.flex-col.lg_flex-row.justify-between
       div
         mb-back-button.mt-4
-        h1.text-5xl {{ project.title }}
-        p.text-xl by {{ project.User.firstname }} {{ project.User.lastname }}
-      div.flex.self-end
+        h1.text-center.text-4xl.md_text-left.md_text-5xl {{ project.title }}
+        p.text-center.md_text-left.text-xl by {{ project.User.firstname }} {{ project.User.lastname }}
+      div.flex.self-center.md_self-end.mt-5.text-center
         mb-a-button.mr-4.h-auto.z-99.right-0(isExternal v-if="project.source_code_url" :href="project.source_code_url" ) Source Code
         mb-a-button.h-auto.z-99.right-0(isExternal v-if="project.live_url" :href="project.live_url" ) View Project
 
@@ -91,7 +91,6 @@ div
 
 </template>
 
-
 <script>
 import moment from "moment";
 
@@ -131,8 +130,7 @@ export default {
     },
     isAdmin: function() {
       return this.$store.state.user && this.$store.state.user.isAdmin;
-    },
-
+    }
   },
   methods: {
     goBack() {
@@ -199,6 +197,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch("fetchProject", this.$route.params.id);
-  },
+  }
 };
 </script>
