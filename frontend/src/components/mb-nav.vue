@@ -1,5 +1,5 @@
 <template lang="pug">
-  header.px-12
+  header.px-5.pt-2.pb-3.md_pt-0.md_pb-0.md_px-12
     div.flex.items-center.justify-between
       div
         mb-internal-link(to="/")
