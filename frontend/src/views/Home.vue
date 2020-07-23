@@ -10,7 +10,7 @@ div
         to="/mb-events"
         text="See all past and future events"
       )
-    div.mb-32(v-for="(section, i) in sections")
+    div.mb-16.lg_mb-32(v-for="(section, i) in sections")
       mb-project-section(
         :title="section.title"
         :projects="section.projects"
