@@ -1,35 +1,18 @@
-<template>
-  <footer class="gradient-blue-mint py-8 mt-32" style="height: 350px">
-    <div
-      class="bg-transparent m-auto h-full w-full justify-between p-4"
-      style="background: rgba(255,255,255,0.25);"
-    >
-      <div
-        class="bg-transparent px-12 m-auto h-full w-full flex flex-col justify-between"
-      >
-        <div class="font-bold">
-          <img :src="mintbeanLogo" class="h-12" alt="Mintbean Logo" />
-        </div>
-        <div class="flex">
-          <div
-            v-for="(column, i) in columns"
-            :key="i"
-            class="p-2 mr-5 justify-between "
-          >
-            <mb-links
-              :links="column.links"
-              class="flex flex-col"
-              link-class="pb-4"
-            />
-          </div>
-        </div>
-        <div>
-          Made by Mintbean, Copyright 2020 All Rights Reserved. Some images
-          designed by Freepik.
-        </div>
-      </div>
-    </div>
-  </footer>
+<template lang="pug">
+  footer.gradient-blue-mint.py-8.mt-32(style="height: 350px")
+    div.bg-transparent.m-auto.h-full.w-full.justify-between.p-4(style="background: rgba(255,255,255,0.25);")
+
+      div.bg-transparent.px-12.m-auto.h-full.w-full.flex.flex-col.justify-between
+        div.font-bold
+          img.h-12(:src="mintbeanLogo" alt="Mintbean Logo")
+
+        div.flex
+          div.p-2.mr-5.justify-between(v-for="(column, i) in columns" :key="i")
+            mb-links.flex.flex-col(:links="column.links" link-class="pb-4")
+        div
+          | Made by Mintbean, Copyright 2020 All Rights Reserved. Some images
+          | designed by Freepik.
+
 </template>
 
 <script>
