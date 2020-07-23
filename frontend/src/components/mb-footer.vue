@@ -1,15 +1,15 @@
 <template lang="pug">
-  footer.gradient-blue-mint.py-8.mt-32(style="height: 350px")
+  footer.gradient-blue-mint.py-8.mt-32
     div.bg-transparent.m-auto.h-full.w-full.justify-between.p-4(style="background: rgba(255,255,255,0.25);")
 
       div.bg-transparent.px-12.m-auto.h-full.w-full.flex.flex-col.justify-between
-        div.font-bold
+        div.mb-4.font-bold.flex.justify-center.md_block
           img.h-12(:src="mintbeanLogo" alt="Mintbean Logo")
 
-        div.flex
+        div.text-center.md_text-left.flex.flex-col.md_flex-row
           div.p-2.mr-5.justify-between(v-for="(column, i) in columns" :key="i")
             mb-links.flex.flex-col(:links="column.links" link-class="pb-4")
-        div
+        div.text-center.md_text-left
           | Made by Mintbean, Copyright 2020 All Rights Reserved. Some images
           | designed by Freepik.
 
@@ -31,12 +31,20 @@ export default {
               ref: "/"
             },
             {
+              label: "Log Out",
+              hidden: !this.isLoggedIn,
+              type: "internal",
+              ref: "/auth/logout"
+            },
+            {
               label: "Sign In",
+              hidden: this.isLoggedIn,
               type: "internal",
               ref: "/auth/login"
             },
             {
               label: "Sign Up",
+              hidden: this.isLoggedIn,
               type: "internal",
               ref: "/auth/register"
             }
@@ -101,6 +109,28 @@ export default {
         links: links.filter(l => !l.hidden)
       }))
     };
+  },
+  computed: {
+    user() {
+      console.log("computing user");
+      return this.$store.state && this.$store.state.user;
+    },
+    isLoggedIn() {
+      //- console.log(this.$store.state);
+      console.log("computing isLoggedIn");
+      return !!this.user;
+    }
+  },
+  //- methods: {
+  //-   logout(evt) {
+  //-     this.$store.dispatch("logout");
+  //-   }
+  //- },
+  mounted() {
+    //- console.log(this.$store.state.user);
+    //- this.$set(this.isLoggedIn, this.isLoggedIn);
+    //- console.log(this.isLoggedIn);
+    //- console.log(this.$store._vm.$data.$$state.user);
   }
 };
 </script>
