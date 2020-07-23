@@ -1,10 +1,7 @@
 <template lang="pug">
-  div.w-full
-    div.mb-2
-      h2.text-4xl(v-if="title") {{ title }}
-    div.flex.flex-wrap(style="margin: -0.5rem;")
-      mb-event-card(
-        style="width: calc(50% - 1rem)"
+  div.md_w-full
+    div.flex.flex-col.items-center.md_items-stretch.md_flex-row.flex-wrap(style="margin: -0.5rem;")
+      mb-event-card._event-card(
         v-for="event in events"
         :key="event.id"
         :id="event.id"
@@ -15,6 +12,24 @@
         :registerLink="event.register_link"
       )
 </template>
+
+<style lang="scss" scoped>
+@media only screen and (max-width: 638px) {
+  ._event-card {
+    width: 90vw;
+  }
+}
+@media only screen and (min-width: 639px) {
+  ._event-card {
+    width: calc(80% - 1rem);
+  }
+}
+@media only screen and (min-width: 767px) {
+  ._event-card {
+    width: calc(50% - 1rem);
+  }
+}
+</style>
 
 <script>
 export default {
@@ -39,13 +54,13 @@ export default {
         //   start_time: (new Date(new Date().getTime()+1000*60*60*24*3)).toString(),
         //   registerLink: "https://www.eventbrite.ca/e/mintbean-hackathons-music-hack-tickets-111881326058"
         // },
-      ],
+      ]
     }
   },
   computed: {
     isAdmin: function() {
       return this.$store.state.user && this.$store.state.user.isAdmin;
-    },
-  },
-}
+    }
+  }
+};
 </script>

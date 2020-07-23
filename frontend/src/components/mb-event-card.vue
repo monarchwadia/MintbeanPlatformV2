@@ -1,6 +1,6 @@
 <template lang="pug">
   mb-internal-link.w-full(:to="'/mb-event/' + id" style="margin: 0.5rem;")
-    div.rounded.overflow-hidden.h-full.shadow-xl.hover_shadow-2xl.w-full
+    div._event-card.rounded.overflow-hidden.h-full.shadow-xl.hover_shadow-2xl.w-full
       div.w-full.relative(
         style="background-size: cover; background-position:center; height: 250px;"
         :style="{ backgroundImage: urlFor(image) }"
@@ -15,6 +15,14 @@
         div.text-xl.mr-2 {{ eventTitle }}
         div.text-sm {{prettyDate(startTime) + ' (EST)'}}
 </template>
+
+<style lang="scss" scoped>
+@media only screen and (max-width: 638px) {
+  // ._event-card {
+  //   min-width: 250px;
+  // }
+}
+</style>
 
 <script>
 import prettyDateHelper from "../helpers/prettyDate";

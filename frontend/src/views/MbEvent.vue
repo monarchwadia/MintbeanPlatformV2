@@ -10,14 +10,14 @@ div
         div.bg-white.p-12.rounded.text-center
           h1.text-lg.sm_text-2xl.md_text-5xl.font-semibold {{ mbEvent.title }}
           p.md_text-xl.py-2 {{ prettyDate }}
-    div.container.m-auto.mb-32
+    div.p-2.md_p-0.container.m-auto.mb-32
       div.md_flex.mb-16
         div.mb-4.md_mb-0.md_mr-4.shadow-mb.p-10.flex.flex-col.justify-center.text-white.rounded-lg(style="flex-basis: 60%; background: linear-gradient(0deg, black, #3d3d3d);")
           div.mb-6
-            h2.text-3xl Description
+            h2.text-xl.md_font-normal.md_text-3xl Description
             p {{ mbEvent.description }}
           div
-            h2.mt-2.text-2xl Instructions
+            h2.text-lg.mt-2.md_text-2xl Instructions
             h3 {{ mbEvent.instructions }}
 
         div.shadow-mb.p-10.flex.flex-col.justify-end.text-white.rounded-lg(style="flex-basis: 40%; background: linear-gradient(0deg, black, #3d3d3d);")
@@ -50,7 +50,7 @@ div
 </template>
 
 <style lang="scss" scoped>
-// tablets
+// phones
 @media only screen and (max-width: 638px) {
   ._title-box {
     max-width: 70vw;
