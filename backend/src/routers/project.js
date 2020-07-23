@@ -169,7 +169,14 @@ projectRoute.get(
         bind: bindings,
         include: [
           {
-            model: User
+            model: User,
+            attributes: {
+              exclude: [
+                "password_hash",
+                "reset_token",
+                "reset_token_created_at"
+              ]
+            }
           }
         ]
       });
@@ -314,7 +321,20 @@ projectRoute.post(
     try {
       project = await Project.findOne({
         where: { id: project.id },
-        include: [{ model: MbEvent }, { model: User }, { model: MediaAsset }]
+        include: [
+          { model: MbEvent },
+          {
+            model: User,
+            attributes: {
+              exclude: [
+                "password_hash",
+                "reset_token",
+                "reset_token_created_at"
+              ]
+            }
+          },
+          { model: MediaAsset }
+        ]
       });
     } catch (e) {
       return next(e);
