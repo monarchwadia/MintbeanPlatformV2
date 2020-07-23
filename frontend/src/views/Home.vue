@@ -5,7 +5,7 @@ div
     div.mb-32.flex.flex-col
       h1.text-center.md_text-left.text-4xl.mb-4 Upcoming Events
       p.text-2xl.mb-6(v-if="upcomingEvents.length == 0") No events at the moment... Stay tuned!
-      mb-event-section.mx-2.md_mx-0.mb-6(v-else :events="upcomingEvents")
+      mb-event-section.mx-2.md_mx-0.mb-12(v-else :events="upcomingEvents")
       mb-internal-link-arrow.m-auto.md_m-0(
         to="/mb-events"
         text="See all past and future events"
