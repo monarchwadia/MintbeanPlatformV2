@@ -4,7 +4,12 @@ div
     mb-center-message(header="Loading" body="Please wait...")
   div(v-else)
     div.mb-16.md_mb-32.relative.bg-fixed.min-h-screen.bg-no-repeat.bg-center.bg-contain(:style="{'background-image': `url(${mbEvent.cover_image_url})`, 'background-size': 'cover'}" style="box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);" ref="cover")
-      mb-back-button.absolute.left-0.text-white.p-4(style="background: rgba(0,0,0,0.3);")
+      mb-internal-link-arrow.absolute.left-0.text-white.p-4(
+        style="background: rgba(0,0,0,0.5);"
+        to="/mb-events"
+        text="All events"
+        left
+      )
       div(style="height: 30vh")
       div._title-box.rounded.gradient-blue-mint.p-1.m-auto
         div.bg-white.p-12.rounded.text-center

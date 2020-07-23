@@ -3,8 +3,11 @@ div
   div.pb-4.w-screen.text-white(style="background: linear-gradient(180deg, black, #3d3d3d);")
     div.container.m-auto.flex.flex-col.lg_flex-row.justify-between
       div
-        mb-back-button.mt-4.mb-2
-        mb-internal-link-arrow.mt-4.mb-2(text="fkjdhfkdjh")
+        mb-internal-link-arrow.mt-4.mb-2.m-auto(
+          :to="eventPage"
+          text="Projects"
+          left
+        )
         h1.text-center.text-4xl.md_text-left.md_text-5xl {{ project.title }}
         p.text-center.md_text-left.text-xl by {{ authorFullname }}
       div.flex.self-center.md_self-end.mt-5.text-center
@@ -129,8 +132,11 @@ export default {
       return `${this.project.User.firstname} ${this.project.User.lastname}`;
     },
     project: function() {
-      console.log(this.$store.state.project);
       return this.$store.state.project;
+    },
+    eventPage: function() {
+      const eventId = this.project && this.project.MbEventId;
+      return `/mb-event/${eventId}`;
     },
     isAdmin: function() {
       return this.$store.state.user && this.$store.state.user.isAdmin;
