@@ -21,8 +21,21 @@ export default {
   name: "mb-footer",
   data() {
     return {
-      mintbeanLogo,
-      columns: [
+      mintbeanLogo
+    };
+  },
+  computed: {
+    user() {
+      console.log("computing user");
+      return this.$store.state && this.$store.state.user;
+    },
+    isLoggedIn() {
+      //- console.log(this.$store.state);
+      console.log("computing isLoggedIn");
+      return !!this.user;
+    },
+    columns() {
+      return [
         {
           links: [
             {
@@ -107,18 +120,7 @@ export default {
       ].map(({ links, ...rest }) => ({
         ...rest,
         links: links.filter(l => !l.hidden)
-      }))
-    };
-  },
-  computed: {
-    user() {
-      console.log("computing user");
-      return this.$store.state && this.$store.state.user;
-    },
-    isLoggedIn() {
-      //- console.log(this.$store.state);
-      console.log("computing isLoggedIn");
-      return !!this.user;
+      }));
     }
   },
   //- methods: {
