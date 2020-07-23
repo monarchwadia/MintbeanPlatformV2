@@ -18,12 +18,15 @@ div
     div.p-2.md_p-0.container.m-auto.mb-32
       div.md_flex.mb-16
         div.mb-4.md_mb-0.md_mr-4.shadow-mb.p-10.flex.flex-col.justify-center.text-white.rounded-lg(style="flex-basis: 60%; background: linear-gradient(0deg, black, #3d3d3d);")
-          div.mb-6
-            h2.text-xl.md_font-normal.md_text-3xl Description
+          div.mb-6(v-if="mbEvent.description")
+            h2.text-2xl.my-2.md_font-normal.md_text-3xl Description
             p {{ mbEvent.description }}
-          div
-            h2.text-lg.mt-2.md_text-2xl Instructions
-            h3 {{ mbEvent.instructions }}
+          div.mb-6(v-else)
+            h2.text-2xl.my-2.md_font-normal.md_text-3xl Description
+            p.text-md (No description for this event yet - hang tight!)
+          div(v-if="mbEvent.instructions")
+            h2.text-2xl.my-2.md_text-3xl Instructions
+            mb-external-link(:href="mbEvent.instructions") {{ mbEvent.instructions }}
 
         div.shadow-mb.p-10.flex.flex-col.justify-end.text-white.rounded-lg(style="flex-basis: 40%; background: linear-gradient(0deg, black, #3d3d3d);")
           section(v-if="submitFormState.enabled")

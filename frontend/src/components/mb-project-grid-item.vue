@@ -5,13 +5,13 @@ mb-external-link(:href="projectDeployedUrl")
       div.screenshot.relative(style="min-height: 300px;" :style="{background: urlFor(project.mbevent_cover_image_url), backgroundPosition: 'center', backgroundSize: 'cover'}")
         div.overlay-top.absolute.text-white.py-3.top-0.z-50.w-full(style="background: linear-gradient(180deg, #3d3d3d, transparent);")
 
-        //- div.overlay-bottom.absolute.flex.items-center.justify-between.text-white.py-2.bottom-0.text-right.z-50.w-full(style="background: linear-gradient(0deg, #3d3d3d,transparent);")
+        div.overlay-bottom.absolute.flex.items-center.justify-between.text-white.py-2.bottom-0.text-right.z-50.w-full(style="background: linear-gradient(0deg, #3d3d3d,transparent);")
 
         mb-image-display.relative(:publicId="cloudinaryPublicId" height="300" width="400")
       div.p-4.text-white.flex.flex-col.justify-between(style="min-height:166px")
         div
           div.flex.justify-between.items-start.mb-2
-            h3.text-xl.font-semibold {{ project.title }}
+            h3.text-lg.font-semibold {{ project.title }}
             div.flex.justify-end(style="min-width:100px;")
               div.inline.mr-2
                 fa.icon.text-mb-mint-500(icon="comment")
