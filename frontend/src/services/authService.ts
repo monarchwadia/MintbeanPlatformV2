@@ -26,13 +26,15 @@ export class AuthService {
     token: string,
     email: string
   ): Promise<MbUser> {
-    return this.apiService.post("/api/v1/auth/reset/new-password", {
-      tokenObj: {
-        password,
-        token,
-        email
-      }
-    });
+    return this.apiService
+      .post("/api/v1/auth/reset/new-password", {
+        tokenObj: {
+          password,
+          token,
+          email
+        }
+      })
+      .then(resp => resp.data);
   }
   register(
     firstname: string,
