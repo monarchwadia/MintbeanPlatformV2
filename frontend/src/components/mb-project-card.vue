@@ -1,6 +1,7 @@
 <template lang="pug">
   div.rounded.shadow-xl.hover_shadow-2xl(style="width: 400px;")
-    div.w-full(style="height: 225px; width: 400px;" :style="{ backgroundImage: cloudinaryUrlFor(cloudinaryPublicId) }")
+    //- div.w-full(style="height: 225px; width: 400px;" :style="{ backgroundImage: cloudinaryUrlFor(cloudinaryPublicId) }")
+    mb-image-display(:publicId="cloudinaryPublicId" height="225" width="400" crop="fill" style="width:400px; height: 225px;")
     div.px-6.py-4.text-gray-700.flex.flex-col.justify-between
       div.text-xl.mb-2 {{ projectTitle }}
       div.text-md.mb-2.flex.items-center

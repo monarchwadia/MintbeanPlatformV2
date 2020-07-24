@@ -6,7 +6,7 @@
           :width="width"
           :height="height"
           background="black"
-          crop="pad"
+          :crop="crop"
         />
       </cld-image>
     </cld-context>
@@ -33,7 +33,11 @@ export default {
   props: {
     publicId: String,
     height: String,
-    width: String
+    width: String,
+    crop: {
+      type: String,
+      default: "pad"
+    }
   },
   components: {
     "cld-context": CldContext,
