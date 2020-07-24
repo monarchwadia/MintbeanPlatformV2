@@ -9,7 +9,8 @@
       )
         button.self-end.p-1(
           @click="close"
-          ) X
+          )
+          fa.icon(icon="times")
         div.text-center.mb-2.font-bold
           slot(name="title")
         section
@@ -18,11 +19,11 @@
 
 <script>
 export default {
-  name: 'mb-modal',
+  name: "mb-modal",
   data() {
     return {
       isOpen: false
-    }
+    };
   },
   methods: {
     close() {
@@ -31,18 +32,18 @@ export default {
     open() {
       this.isOpen = true;
     }
-  },
-}
+  }
+};
 </script>
 
-<style lang="css" scoped >
-  .modal-fade-enter,
-  .modal-fade-leave-active {
-    opacity: 0;
-  }
+<style lang="css" scoped>
+.modal-fade-enter,
+.modal-fade-leave-active {
+  opacity: 0;
+}
 
-  .modal-fade-enter-active,
-  .modal-fade-leave-active {
-    transition: opacity .5s ease;
-  }
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.5s ease;
+}
 </style>
