@@ -1,6 +1,6 @@
 <template lang="pug">
 mb-external-link(:href="projectDeployedUrl")
-  div.shadow-mb.m-2.mb-10.hover_shadow-2xl.cursor-pointer(style="width: 400px; background: #3d3d3d;")
+  div.shadow-mb.m-2.mb-10.hover_shadow-2xl.cursor-pointer(style="max-width: 400px; background: #3d3d3d;")
     div.inner
       div.screenshot.relative(style="min-height: 300px;" :style="{background: urlFor(project.mbevent_cover_image_url), backgroundPosition: 'center', backgroundSize: 'cover'}")
         div.overlay-top.absolute.text-white.py-3.top-0.z-50.w-full(style="background: linear-gradient(180deg, #3d3d3d, transparent);")
