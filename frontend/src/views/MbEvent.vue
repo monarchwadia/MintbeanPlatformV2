@@ -27,7 +27,8 @@ div
           div(v-if="shouldShowInstructions")
             h2.text-2xl.my-2.md_text-3xl Instructions
             mb-external-link(:href="mbEvent.instructions") {{ mbEvent.instructions }}
-
+          div(v-else-if="isBeforeEvent")
+            p.italic.text-lg Instructions will be visible when event starts
         div.shadow-mb.p-10.flex.flex-col.justify-end.text-white.rounded-lg(style="flex-basis: 40%; background: linear-gradient(0deg, black, #3d3d3d);")
           section(v-if="submitFormState.enabled")
             form(v-on:submit.prevent="handleSubmitProject")
@@ -105,24 +106,34 @@ export default {
     endTime: function() {
       return this.mbEvent && this.mbEvent.end_time;
     },
+    isBeforeEvent() {
+      return new Date() < new Date(this.endTime);
+    },
+    hasInstructions() {
+      return !!(this.mbEvent && this.mbEvent.instructions);
+    },
     shouldShowInstructions: function() {
       // should show from start time to 24hrs after end time
-      const start = new Date(this.startTime);
+      // note: initializing a Date creates it relative to local timezone
+      const EXPIRATION_HR_THRESHOLD = 24;
 
-      const end = new Date(this.endTime);
-      const expiration = end.setHours(end.getHours() + 24);
       const now = new Date();
+      const start = new Date(this.startTime);
+      const end = new Date(this.endTime);
+      const expiration = new Date(end); // copy
+      expiration.setHours(expiration.getHours() + EXPIRATION_HR_THRESHOLD); // +24 hrs
 
-      const fakestart = now.setHours(now.getHours() - 2);
-      const fakeexpiration = now.setHours(now.getHours() + 24);
+      //- const fakeStart = new Date(
+      //-   new Date().setHours(new Date().getHours() + 2)
+      //- );
+      //-
+      //- const fakeexpiration = new Date(
+      //-   new Date().setHours(new Date().getHours() + 24)
+      //- );
 
-      const hasInstructions = this.mbEvent.instructions;
-      //- const isShowTime = now >= start && now <= expiration;
+      const isShowTime = now >= start && now <= expiration;
 
-      const isShowTime = now >= fakestart && now <= fakeexpiration;
-      //- console.log(isShowTime);
-      //- console.log(start);
-      return !!(hasInstructions && isShowTime);
+      return !!(this.hasInstructions && isShowTime);
     },
     prettyStartTime: function() {
       if (!this.mbEvent.start_time) {
