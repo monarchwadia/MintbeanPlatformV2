@@ -98,12 +98,7 @@ mbConfigRoute.get("/asc/featured-sections", async (req, res, next) => {
         {
           model: User,
           attributes: {
-            exclude: [
-              "password",
-              "password_hash",
-              "reset_token",
-              "reset_token_created_at"
-            ]
+            exclude: ["password_hash", "reset_token", "reset_token_created_at"]
           }
         },
         { model: MbEvent },

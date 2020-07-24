@@ -1,11 +1,9 @@
 form > *,
 .mb-form > * {
-  margin-bottom: 0.5rem
+  margin-bottom: 0.5rem;
 }
 
 label:nth-child(n) {
-  /* color: #688bb0; */
-  /* font-weight: bold; */
   margin-bottom: 0.25rem;
   font-size: 0.8rem;
 }
@@ -18,6 +16,7 @@ textarea:nth-child(n) {
 input:nth-child(n) {
   border-radius: 6px;
   padding: 0.5rem;
+  color: black;
 }
 
 input:-internal-autofill-selected:nth-child(n) {
