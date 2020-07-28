@@ -17,12 +17,11 @@ import NotFound from "./views/NotFound.vue";
 
 Vue.use(VueRouter);
 
-// to/from are set to undefined bc we are not using them
-const ifAdmin = (
-  to: undefined,
-  from: undefined,
-  next: (route?: string) => void
-) => {
+// TODO: type to an from
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const ifAdmin = (to: any, from: any, next: (route?: string) => void) => {
+  /* eslint-enable @typescript-eslint/no-explicit-any */
+
   debugger;
   if (window.store.state.user && window.store.state.user.isAdmin) {
     next();

@@ -7,7 +7,10 @@ interface DebounceOptions {
 }
 
 const debounce = (wait = 1000) => {
-  let timeout: number | null = null;
+  // TODO: type timeout
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  let timeout: any = null;
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   const stopTimeout = () => {
     if (timeout !== null) {
