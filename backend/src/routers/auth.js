@@ -42,39 +42,40 @@ authRoute.post("/logout", requireAuth, (req, res) => {
   res.json({ message: "Logged out" });
 });
 
-authRoute.post("/reset", async (req, res) => {
-  const email = req.body.email;
-  // check if user with that email exists
-  let user;
+authRoute.post("/reset", async (req, res, next) => {
   try {
+    // check if user with that email exists
+    const email = req.body.email;
+
+    let user;
     user = await User.findOne({ where: { email } });
+
+    if (user) {
+      // if user exists: a password reset token is generated.
+      const resetToken = uuidv4();
+    
+      // The bcrypt of the token is saved on the user object.
+      const hashedResetToken = await hash(resetToken);
+    
+      await user.update({
+        reset_token: hashedResetToken,
+        reset_token_created_at: new Date()
+      });
+
+      // Send link to user's email in the form of a URL: `https://mintbean.io/auth/reset/:data` where data is base64 of {email, token}
+      const tokenContainer = objToBase64({
+        email,
+        token: resetToken
+      });
+    
+      sendResetTokenLink(user.email, tokenContainer);
+    }
+
+    // always return ambiguous message
+    res.status(200);
   } catch (e) {
     next(e);
   }
-  // if no user, return ambiguous 200
-  if (!user) {
-    return res.status(200);
-  }
-  // if user exists: a password reset token is generated.
-  const resetToken = uuidv4();
-
-  // The bcrypt of the token is saved on the user object.
-  const hashedResetToken = await hash(resetToken);
-
-  user.update({
-    reset_token: hashedResetToken,
-    reset_token_created_at: new Date()
-  });
-  // Send link to user's email in the form of a URL: `https://mintbean.io/auth/reset/:data` where data is base64 of {email, token}
-  const base64Obj = objToBase64({
-    email,
-    token: resetToken
-  });
-
-  const referer = req.headers.referer;
-  sendResetTokenLink(user.email, referer, base64Obj);
-  // return ambiguous message
-  res.status(200).json({ message: "operation successful" });
 });
 
 // check if supplied pw reset token is valid and return user email if true

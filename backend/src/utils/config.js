@@ -9,7 +9,8 @@ const hoc = (key, _opts = {}) => {
   const defaults = {
     required: true,
     defaultValue: undefined,
-    convert: val => val
+    convert: val => val,
+    validator: null
   };
 
   // cache opts for this key
@@ -23,6 +24,13 @@ const hoc = (key, _opts = {}) => {
     throw new Error(
       `CRITICAL ERROR: Value for config variable [${key}] was not provided. Check env file.`
     );
+  }
+
+  // run the validator
+  if (opts.validator && !opts.validator(val)) {
+    throw new Error(
+      `CRITICAL ERROR: Custom validation failed for config variable [${key}]. Check env file.`
+    )
   }
 
   // return the getter
@@ -42,5 +50,9 @@ module.exports = {
   appPort: hoc("APP_PORT", { convert: CONVERTERS.toNumber }),
   appSessionSecret: hoc("APP_SESSION_SECRET"),
   cloudinaryUrl: hoc("CLOUDINARY_URL"),
-  sendgridKey: hoc("SENDGRID_KEY")
+  sendgridKey: hoc("SENDGRID_KEY"),
+  rootDomain: hoc("ROOT_DOMAIN", { 
+    // ensure https for everything, unless running localhost
+    validator: rootDomain => rootDomain.indexOf('localhost') === 0 || rootDomain.indexOf('https://') === 0
+  })
 };
