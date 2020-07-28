@@ -9,7 +9,8 @@
       )
         button.self-end.p-1(
           @click="close"
-          ) X
+          )
+          fa.icon(icon="times")
         div.text-center.mb-2.font-bold
           slot(name="title")
         section

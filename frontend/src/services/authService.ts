@@ -11,6 +11,31 @@ export class AuthService {
       .post("/api/v1/auth/login", { email, password })
       .then(resp => resp.data);
   }
+  sendResetToken(email: string): Promise<MbUser> {
+    return this.apiService
+      .post("/api/v1/auth/reset", { email })
+      .then(resp => resp.data);
+  }
+  checkPasswordResetToken(tokenObj: object): Promise<MbUser> {
+    return this.apiService
+      .post("/api/v1/auth/reset/check-token", { tokenObj })
+      .then(resp => resp.data);
+  }
+  resetPassword(
+    password: string,
+    token: string,
+    email: string
+  ): Promise<MbUser> {
+    return this.apiService
+      .post("/api/v1/auth/reset/new-password", {
+        tokenObj: {
+          password,
+          token,
+          email
+        }
+      })
+      .then(resp => resp.data);
+  }
   register(
     firstname: string,
     lastname: string,

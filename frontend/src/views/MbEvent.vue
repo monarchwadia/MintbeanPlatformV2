@@ -3,24 +3,33 @@ div
   div(v-if="!mbEvent")
     mb-center-message(header="Loading" body="Please wait...")
   div(v-else)
-    div.mb-32.relative.bg-fixed.min-h-screen(class="bg-no-repeat bg-center" :style="{'background-image': `url(${mbEvent.cover_image_url})`, 'background-size': 'cover'}" style="box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);" ref="cover")
-      mb-back-button.absolute.left-0.text-white.p-4(style="background: rgba(0,0,0,0.3);")
+    div.mb-16.md_mb-32.relative.bg-fixed.min-h-screen.bg-no-repeat.bg-center.bg-contain(:style="{'background-image': `url(${mbEvent.cover_image_url})`, 'background-size': 'cover'}" style="box-shadow: 0 10px 20px -10px rgba(0,0,0,0.3);" ref="cover")
+      mb-internal-link-arrow.absolute.left-0.text-white.p-4(
+        style="background: rgba(0,0,0,0.5);"
+        to="/mb-events"
+        text="All events"
+        left
+      )
       div(style="height: 30vh")
-      div.rounded.gradient-blue-mint.p-1.m-auto(style="max-width: 40vw;")
+      div._title-box.rounded.gradient-blue-mint.p-1.m-auto
         div.bg-white.p-12.rounded.text-center
-          h1.text-5xl.font-semibold {{ mbEvent.title }}
-          p.text-xl.py-2 {{ prettyDate }}
-    div.container.m-auto.mb-32
-      div.flex.mb-16
-        div.flex-grow.mr-4.shadow-mb.p-10.flex.flex-col.justify-center.text-white.rounded-lg(style="flex-basis: 60%; background: linear-gradient(0deg, black, #3d3d3d);")
-          div.mb-6
-            h2.text-3xl Description
+          h1.text-lg.sm_text-2xl.md_text-5xl.font-semibold {{ mbEvent.title }}
+          p.md_text-xl.py-2 {{ prettyStartTime }}
+    div.p-2.md_p-0.container.m-auto.mb-32
+      div.md_flex.mb-16
+        div.mb-4.md_mb-0.md_mr-4.shadow-mb.p-10.flex.flex-col.justify-center.text-white.rounded-lg(style="flex-basis: 60%; background: linear-gradient(0deg, black, #3d3d3d);")
+          div.mb-6(v-if="mbEvent.description")
+            h2.text-2xl.my-2.md_font-normal.md_text-3xl Description
             p {{ mbEvent.description }}
-          div
-            h2.mt-2.text-2xl Instructions
-            h3 {{ mbEvent.instructions }}
-
-        div.flex-grow.shadow-mb.p-10.flex.flex-col.justify-end.text-white.rounded-lg(style="flex-basis: 40%; background: linear-gradient(0deg, black, #3d3d3d);")
+          div.mb-6(v-else)
+            h2.text-2xl.my-2.md_font-normal.md_text-3xl Description
+            p.text-md (No description for this event yet - hang tight!)
+          div(v-if="shouldShowInstructions")
+            h2.text-2xl.my-2.md_text-3xl Instructions
+            mb-external-link(:href="mbEvent.instructions") {{ mbEvent.instructions }}
+          div(v-else-if="isBeforeEvent")
+            p.italic.text-lg Instructions will be visible when event starts
+        div.shadow-mb.p-10.flex.flex-col.justify-end.text-white.rounded-lg(style="flex-basis: 40%; background: linear-gradient(0deg, black, #3d3d3d);")
           section(v-if="submitFormState.enabled")
             form(v-on:submit.prevent="handleSubmitProject")
               h2.text-3xl.mb-1 Submit a Project
@@ -47,83 +56,32 @@ div
           p No submissions yet. Be the first to submit a project!
         mb-project-grid(v-else :projects="projects")
 
-
-
-//- div
-//-   div(v-if="mbEvent")
-//-     div.relative.bg-fixed.min-h-screen(class="bg-no-repeat bg-center" :style="{'background-image': `url(${mbEvent.cover_image_url})`, 'background-size': 'cover'}" ref="cover")
-//-       div.rounded.inline-block.gradient-blue-mint.p-1.absolute(style="top: 30vh; left: 10vw; max-width: 40vw")
-//-         div.bg-white.p-12.rounded
-//-           h1.text-5xl.font-semibold {{ mbEvent.title }}
-//-           p.text-xl.py-2 {{ prettyDate }}
-//-     p {{ mbEvent.description }}
-//-     h3 Submissions
-//-     section(v-if="projects && projects.length === 0")
-//-       p No submissions yet. Be the first to submit a project!
-//-     mb-project-grid(v-else :projects="projects")
-//-     section(v-if="submitFormState.enabled")
-//-       form.submit-project-form(v-on:submit.prevent="handleSubmitProject")
-//-         h1 Submit a Project
-//-         div.flex
-//-           label Title
-//-             input(name="title", v-model="title")
-//-           label Source Code URL
-//-             input(name="source_code_url", v-model="source_code_url")
-//-           label Deployment URL
-//-             input(name="live_url", v-model="live_url")
-//-           button(type="submit") Submit
-//-         div.flex
-//-           label Screenshots & Videos
-//-             mb-file-upload(:files="myFiles" name="files" ref="mbFileUpload")
-//-
-//-     section(v-else)
-//-       h1 {{ submitFormState.disabledMessage }}
-//-     section(v-if="submitFormState.showLoginButton")
-//-       mb-internal-link(to="/auth/login")
-//-         button Login
-//- //-
-//- div.event-wrapper
-//-   div.event-wrapper-inner
-//-     div.background-banner
-//-     main.event
-//-       div(v-if="!!mbEvent")
-//-         h1 {{ mbEvent.title }}
-//-         h3 Description
-//-         p {{ mbEvent.description }}
-//-         h3 Instructions
-//-         p {{ mbEvent.instructions }}
-//-         h3 Date & Time
-//-         p {{ prettyDate }}
-//-         h3 Submissions
-//-         section(v-if="projects && projects.length === 0")
-//-           p No submissions yet. Be the first to submit a project!
-//-         mb-project-grid(v-else :projects="projects")
-//-         section(v-if="submitFormState.enabled")
-//-           form.submit-project-form(v-on:submit.prevent="handleSubmitProject")
-//-             h1 Submit a Project
-//-             div.flex
-//-               label Title
-//-                 input(name="title", v-model="title")
-//-               label Source Code URL
-//-                 input(name="source_code_url", v-model="source_code_url")
-//-               label Deployment URL
-//-                 input(name="live_url", v-model="live_url")
-//-               button(type="submit") Submit
-//-             div.flex
-//-               label Screenshots & Videos
-//-                 mb-file-upload(:files="myFiles" name="files" ref="mbFileUpload")
-//-
-//-         section(v-else)
-//-           h1 {{ submitFormState.disabledMessage }}
-//-         section(v-if="submitFormState.showLoginButton")
-//-           mb-internal-link(to="/auth/login")
-//-             button Login
-
-
 </template>
+
+<style lang="scss" scoped>
+// phones
+@media only screen and (max-width: 638px) {
+  ._title-box {
+    max-width: 70vw;
+  }
+}
+// tablets
+@media only screen and (min-width: 639px) {
+  ._title-box {
+    width: 60vw;
+  }
+}
+// larger than tablets
+@media only screen and (min-width: 1023px) {
+  ._title-box {
+    max-width: 40vw;
+  }
+}
+</style>
 
 <script>
 import moment from "moment";
+import prettyESTDate from "../helpers/prettyDate";
 
 // @ is an alias to /src
 export default {
@@ -142,14 +100,47 @@ export default {
     // projects: function() {
     //   return this.mbEvent && this.mbEvent.Projects;
     // },
-    prettyDate: function() {
+    startTime: function() {
+      return this.mbEvent && this.mbEvent.start_time;
+    },
+    endTime: function() {
+      return this.mbEvent && this.mbEvent.end_time;
+    },
+    isBeforeEvent() {
+      return new Date() < new Date(this.endTime);
+    },
+    hasInstructions() {
+      return !!(this.mbEvent && this.mbEvent.instructions);
+    },
+    shouldShowInstructions: function() {
+      // should show from start time to 24hrs after end time
+      // note: initializing a Date creates it relative to local timezone
+      const EXPIRATION_HR_THRESHOLD = 24;
+
+      const now = new Date();
+      const start = new Date(this.startTime);
+      const end = new Date(this.endTime);
+      const expiration = new Date(end); // copy
+      expiration.setHours(expiration.getHours() + EXPIRATION_HR_THRESHOLD); // +24 hrs
+
+      //- const fakeStart = new Date(
+      //-   new Date().setHours(new Date().getHours() + 2)
+      //- );
+      //-
+      //- const fakeexpiration = new Date(
+      //-   new Date().setHours(new Date().getHours() + 24)
+      //- );
+
+      const isShowTime = now >= start && now <= expiration;
+
+      return !!(this.hasInstructions && isShowTime);
+    },
+    prettyStartTime: function() {
       if (!this.mbEvent.start_time) {
         return "";
       }
-      return (
-        moment(this.mbEvent.start_time).format("dddd, MMMM Do YYYY, ha") +
-        " EST"
-      );
+      const datestr = this.mbEvent.start_time.toLocaleString();
+      return prettyESTDate(datestr, { weekday: "long" });
     },
     // mbEvent: function() {
     //   const { id } = this.$route.params;
@@ -198,6 +189,12 @@ export default {
         name: "Login",
         query: { redirect: this.$router.history.current.path }
       });
+    },
+    clearInputs() {
+      this.source_code_url = "";
+      this.title = "";
+      this.live_url = "";
+      this.myFiles = [];
     },
     fetchMbEvent() {
       const self = this;
@@ -259,7 +256,9 @@ Would you like to continue?`);
           MediaAssets
         })
         .then(() => {
+          this.clearInputs();
           self.fetchProjects();
+          this.$router.go(0);
         })
         .catch(e => {
           alert("Failed to submit project.");
@@ -270,7 +269,8 @@ Would you like to continue?`);
   mounted() {
     this.fetchMbEvent();
     this.fetchProjects();
-    this.$refs.cover.scrollIntoView();
+    //- this.$refs.cover.scrollIntoView();
+    this.startTime;
   }
 };
 </script>

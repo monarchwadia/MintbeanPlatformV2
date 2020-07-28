@@ -1,40 +1,26 @@
-<template>
-  <header class="px-12">
-    <div class="flex items-center justify-between">
-      <div>
-        <mb-internal-link to="/" class="block">
-          <img :src="mintbeanLogo" class="h-12" alt="Mintbean Logo" />
-        </mb-internal-link>
-      </div>
+<template lang="pug">
+  header.px-5.pt-2.pb-3.md_pt-0.md_pb-0.md_px-12
+    div.flex.items-center.justify-between
+      div
+        mb-internal-link(to="/")
+          img.h-12(:src="mintbeanLogo" alt="Mintbean Logo")
 
-      <div class="flex items-right justify-between px-4 py-3">
-        <mb-nav-links :links="links" />
+      div.flex.items-right.justify-between.px-4.py-3
+        mb-nav-links(:links="links")
 
-        <div class="md_hidden">
-          <button
-            @click="isOpen = !isOpen"
-            type="button"
-            class="block text-black focus:outline-none"
-          >
-            <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-              <path
-                v-if="isOpen"
+        div.md_hidden
+          button.block.text-black.focus_outline-none(@click="isOpen = !isOpen" type="button")
+
+            svg.h-6.w-6.fill-current(viewBox="0 0 24 24")
+              path(v-if="isOpen"
                 fill-rule="evenodd"
-                d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"
-              />
-              <path
-                v-if="!isOpen"
-                fill-rule="evenodd"
-                d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
+                d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z")
+              path(v-if="!isOpen"
+              fill-rule="evenodd"
+              d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z")
 
-    <mb-nav-links :links="links" v-if="isOpen" :forResponsive="true" />
-  </header>
+    mb-nav-links(:links="links" v-if="isOpen" :forResponsive="true")
+
 </template>
 
 <script>

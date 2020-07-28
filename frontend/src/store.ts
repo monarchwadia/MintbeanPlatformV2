@@ -77,6 +77,9 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
         commit("setProperty", ["user", user || undefined]);
         if (user) {
           $router.push("/");
+          alert(
+            `Welcome to Mintbean, ${user.firstname}! Please check your email to complete your account registration.`
+          );
         }
       })
       .catch(e => {

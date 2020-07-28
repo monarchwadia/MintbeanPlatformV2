@@ -1,30 +1,48 @@
 <template lang="pug">
-div.shadow-mb.m-2.mb-10(style="width: 400px; background: #3d3d3d;")
-  div.inner
-    div.screenshot.relative
-      div.overlay-top.absolute.text-white.p-3.pb-3.top-0.z-50.w-full(style="background: linear-gradient(180deg, #3d3d3d, transparent);")
-        h3.text-xl.font-semibold {{ project.title }}
-      div.overlay-bottom.absolute.flex.items-center.justify-between.text-white.py-2.px-3.pt-3.bottom-0.text-right.z-50.w-full(style="background: linear-gradient(0deg, #3d3d3d,transparent);")
-        div.flex.items-center
-          //- mb-avatar.mr-2(size="sm")
-          //- p {{ username }}
-        div
-          div.inline.mr-2
-            fa.icon.text-mb-mint-500(icon="comment")
-            | &nbsp; {{ voteCount }}
-          div.inline
-            fa.icon.text-mb-mint-500(icon="star")
-            | &nbsp; {{ voteAverage }}
+mb-external-link(:href="projectDeployedUrl")
+  div.shadow-mb.m-2.mb-10.hover_shadow-2xl.cursor-pointer(style="max-width: 400px; background: #3d3d3d;")
+    div.inner
+      div.screenshot.relative(:style="{background: urlFor(project.mbevent_cover_image_url), backgroundPosition: 'center', backgroundSize: 'cover', minHeight: !cloudinaryPublicId ? '300px' : 0}")
+        div.overlay-top.absolute.text-white.py-3.top-0.z-50.w-full(style="background: linear-gradient(180deg, #3d3d3d, transparent);")
 
-      mb-image-display.relative(:publicId="cloudinaryPublicId" height="300" width="400")
-    div.p-3.flex.flex-grow
-      div.flex.flex-none.text-white.items-center
-        mb-avatar.mr-2(size="sm")
-        p {{ username }}
-      div.flex.w-full.justify-end
-        mb-a-button.mr-2(isExternal :href="projectPlatformUrl") Comments
-        mb-a-button(isExternal :href="projectDeployedUrl") Demo
+        div.overlay-bottom.absolute.flex.items-center.justify-between.text-white.py-2.bottom-0.text-right.z-50.w-full(style="background: linear-gradient(0deg, #3d3d3d,transparent);")
+
+        mb-image-display.relative(v-if="!!cloudinaryPublicId" :publicId="cloudinaryPublicId" height="300" width="400")
+        div(v-else)
+          div._hide-on-sm(style="width: 400px")
+          div._show-on-sm.hidden
+
+      div.p-4.text-white.flex.flex-col.justify-between(style="min-height:166px")
+        div
+          div.flex.justify-between.items-start.mb-2
+            h3.text-lg.font-semibold {{ project.title }}
+            div.flex.justify-end(style="min-width:100px;")
+              div.inline.mr-2
+                fa.icon.text-mb-mint-500(icon="comment")
+                | &nbsp; {{ voteCount }}
+              div.inline
+                fa.icon.text-mb-mint-500(icon="star")
+                | &nbsp; {{ voteAverage }}
+        div.flex.items-center.mb-2
+          mb-avatar.flex-none.mr-2(size="sm")
+          p.flex.flex-wrap {{ username }}
+        div.flex.justify-center
+          mb-a-button.w-full.text-center(isExternal :href="projectPlatformUrl" ) Comments
+          //- mb-a-button(isExternal :href="projectDeployedUrl") Demo
 </template>
+
+<style lang="scss" scoped>
+// spacers for cards with no cloudinary image
+@media only screen and (max-width: 457px) {
+  ._hide-on-sm {
+    display: none;
+  }
+  ._show-on-sm {
+    display: block;
+    width: calc(100vw - 4rem);
+  }
+}
+</style>
 
 <script>
 export default {
@@ -50,7 +68,7 @@ export default {
     },
     cloudinaryPublicId() {
       const { cloudinaryPublicId, mbevent_cover_image_url } = this.project;
-      return cloudinaryPublicId || mbevent_cover_image_url;
+      return cloudinaryPublicId || null;
     }
   },
   methods: {
@@ -58,6 +76,9 @@ export default {
       const { project } = this;
       if (!project) return;
       this.$router.push("/project/" + project.id);
+    },
+    urlFor: function(url) {
+      return `url(${url})`;
     }
   }
 };

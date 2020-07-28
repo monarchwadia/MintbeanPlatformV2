@@ -10,6 +10,11 @@ module.exports = {
     //   'md': {'max': '767px'},
     //   'sm': {'max': '639px'},
     // },
+    container: {
+      padding: {
+        default: "0.5rem"
+      }
+    },
     fontFamily: {
       main: ["Montserrat"]
     },

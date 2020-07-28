@@ -16,8 +16,7 @@ export class MbEventService {
 
   getUpcomingMbEvents(): Promise<MbEvent> {
     return this.apiService.get("/api/v1/mb-event").then((events) => {
-      console.log(events.data);
-      return events.data.filter((e: MbEvent) => isUpcoming(e.end_time));
+      return events.data.filter((e: any) => isUpcoming(e.end_time));
     });
 
     // events.data.sort((a: any, b: any) => {

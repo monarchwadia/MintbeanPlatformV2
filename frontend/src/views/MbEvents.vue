@@ -1,6 +1,10 @@
 <template lang="pug">
   div
-    mb-banner(title="Events")
+    mb-banner(
+      title="Events"
+      backRefTitle="Home",
+      backRefPath="/"
+    )
     div.container.m-auto.pt-24
       mb-event-section(:events="events")
 </template>

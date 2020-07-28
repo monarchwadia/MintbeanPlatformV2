@@ -1,19 +1,26 @@
 <template lang="pug">
 div
-  div.h-40.w-screen.text-white(style="background: linear-gradient(180deg, black, #3d3d3d);")
-    div.container.m-auto.flex.justify-between
+  div.pb-4.w-screen.text-white(style="background: linear-gradient(180deg, black, #3d3d3d);")
+    div.container.m-auto.flex.flex-col.lg_flex-row.justify-between
       div
-        mb-back-button.mt-4
-        h1.text-5xl {{ project.title }}
-        p.text-xl by {{ project.User.firstname }} {{ project.User.lastname }}
-      div.flex.self-end
+        mb-internal-link-arrow.mt-4.mb-2.m-auto(
+          :to="eventPage"
+          text="Projects"
+          left
+        )
+        h1.text-center.text-4xl.md_text-left.md_text-5xl {{ project.title }}
+        p.text-center.md_text-left.text-xl by {{ authorFullname }}
+      div.flex.self-center.md_self-end.mt-5.text-center
         mb-a-button.mr-4.h-auto.z-99.right-0(isExternal v-if="project.source_code_url" :href="project.source_code_url" ) Source Code
         mb-a-button.h-auto.z-99.right-0(isExternal v-if="project.live_url" :href="project.live_url" ) View Project
 
   div.container.m-auto
     div(v-if="!!project")
       div
-        section.mt-4.p-6.shadow-mb
+        //- p.relative.pt-10.text-3xl.sm_text-5xl(
+        //-   style="top: 100px;margin-left: auto;margin-right: auto;left: 0;right: 0;text-align: center;"
+        //- ) Loading...
+        section._media-asset-container.mt-4.p-6.shadow-mb
           aside(v-for="mediaAsset in project.MediaAssets")
             mb-image-display(v-if="mediaAsset.cloudinaryPublicId" :publicId="mediaAsset.cloudinaryPublicId", width="980")
             div.flex.justify-end(v-if="isAdmin")
@@ -27,7 +34,7 @@ div
                   mb-file-upload(:files="[]" name="files" ref="mbFileUpload")
                   button(v-on:click.prevent="handleUploadMediaAssets()") Submit
 
-      div.mt-6.flex
+      div.mt-6.flex.flex-col.md_flex-row
         //- left column
         div(style="flex-basis: 40%;")
 
@@ -36,11 +43,11 @@ div
             div.flex.items-start
               mb-avatar(size="md")
               div.ml-2
-                p.text-xl {{ project.User.firstname }} {{ project.User.lastname }}
-                mb-external-link(:href="project.User.linkedin_id") Linkedin
+                p.text-xl {{ authorFullname }}
+                mb-external-link(v-if="project.User.linkedin_id" :href="project.User.linkedin_id") Linkedin
                 mb-external-link(v-if="project.User.github_id" :href="project.User.github_id") GitHub
                 mb-external-link(v-if="project.User.stackoverflow_id" :href="project.User.stackoverflow_id") StackOverflow
-          div.flex.flex-col.p-6.shadow-mb
+          div.flex.flex-col.p-6.shadow-mb.mt-4
             section(v-if="$store.state.user")
               form.w-full.flex.flex-col(v-on:submit.prevent="function(evt){ handleVoteProject(project.id) }")
                 h2.text-2xl.mb-4 {{ userVote ? 'Edit your' : 'Submit a' }} vote
@@ -73,23 +80,28 @@ div
 
         //- right column
         div(style="flex-basis: 60%;")
-          div.p-6.shadow-mb
-            div.flex.justify-between
-              h2.text-2xl.mb-4 Votes
-              h2.text-right.text-2xl Average Score:  {{averageScore}} / 10
+          div.p-6.shadow-mb.h-full.mt-4.md_mt-0
+            div.flex.justify-between.items-center.mb-4
+              h2.text-2xl Votes
+              h2.text-lg.text-right.sm_text-2xl Average Score:  {{averageScore ? averageScore : ' -- ' }} / 10
             section(v-if="!project.Votes || project.Votes.length === 0")
-              p No comments yet
+              p No votes or comments yet.
             section(v-else)
               div(v-for="vote in project.Votes" style="width: 100%;")
-                div.flex.mb-3
+                div.flex.mb-5
                   div.flex-shrink-0
                     mb-avatar.self-center(size="md")
-                  div.pl-2
-                    b.mb-2 {{vote.User.firstname + ' ' + vote.User.lastname}}
-                    em.ml-2.text-sm.mb-2 - {{getMoment(vote.createdAt)}}
+                  div.pl-4
+                    b.mb-2 {{ vote.User.firstname + ' ' + vote.User.lastname }}
+                    em.ml-2.text-sm.mb-2 - {{ getMoment(vote.createdAt) }}
                     p {{ vote.comment }}
-
 </template>
+
+<style lang="css">
+._media-asset-container img {
+  max-height: 600px;
+}
+</style>
 
 <script>
 import moment from "moment";
@@ -125,8 +137,15 @@ export default {
         Votes.reduce((prev, curr) => prev + curr.rating, 0) / Votes.length;
       return score.toPrecision(2);
     },
+    authorFullname() {
+      return `${this.project.User.firstname} ${this.project.User.lastname}`;
+    },
     project: function() {
       return this.$store.state.project;
+    },
+    eventPage: function() {
+      const eventId = this.project && this.project.MbEventId;
+      return `/mb-event/${eventId}`;
     },
     isAdmin: function() {
       return this.$store.state.user && this.$store.state.user.isAdmin;
@@ -147,8 +166,6 @@ export default {
         comment,
         rating
       };
-
-      console.log(obj);
       this.$store.dispatch("vote", obj);
     },
     handleDeleteMediaAsset(MediaAsset) {
@@ -196,7 +213,9 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("fetchProject", this.$route.params.id);
+    this.$store
+      .dispatch("fetchProject", this.$route.params.id)
+      .then(res => console.log(res));
   }
 };
 </script>

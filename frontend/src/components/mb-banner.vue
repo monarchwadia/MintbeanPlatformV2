@@ -1,7 +1,12 @@
 <template lang="pug">
-  div.text-white.py-12.shadow-mb(style="background: linear-gradient(180deg, black, rgb(61, 61, 61));")
-    div.container.m-auto
-      mb-back-button.mb-2
+  div.text-white.pt-4.pb-10.shadow-mb(style="background: linear-gradient(180deg, black, rgb(61, 61, 61));")
+    div.container.m-auto.relative
+      mb-internal-link-arrow.mb-2.realtive.text-white(
+        v-if="backRefTitle && backRefPath"
+        :to="backRefPath"
+        :text="backRefTitle"
+        left
+      )
       h1.text-4xl {{ title }}
 </template>
 
@@ -9,7 +14,9 @@
 export default {
   name: "mb-banner",
   props: {
-    title: String
+    title: String,
+    backRefTitle: String,
+    backRefPath: String
   }
 };
 </script>

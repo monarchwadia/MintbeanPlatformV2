@@ -17,6 +17,7 @@
       //- )
     div.sliding-section.flex.justify-between.overflow-x-auto(:class="sliderIsDown ? 'active' : null" ref="projectSectionContainer")
       mb-project-card.mr-4(
+        v-if="project"
         v-for="project in projects"
         :key="project.id"
         :id="project.id"

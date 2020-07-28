@@ -1,26 +1,31 @@
-'use strict';
+"use strict";
 
-const {hash, compare} = require('../../utils/encryption');
+const { hash, compare } = require("../../utils/encryption");
 
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
-    firstname: DataTypes.STRING,
-    lastname: DataTypes.STRING,
-    isAdmin: DataTypes.BOOLEAN,
-    email: DataTypes.STRING,
-    password_hash: DataTypes.STRING,
-    linkedin_id: DataTypes.STRING,
-    github_id: DataTypes.STRING,
-    twitter_id: DataTypes.STRING,
-    stackoverflow_id: DataTypes.STRING
-  }, 
-  {
-    hooks: {
-      beforeCreate: async (user) => {
-        user.password_hash = await hash(user.password_hash);
+  const User = sequelize.define(
+    "User",
+    {
+      firstname: DataTypes.STRING,
+      lastname: DataTypes.STRING,
+      isAdmin: DataTypes.BOOLEAN,
+      email: DataTypes.STRING,
+      password_hash: DataTypes.STRING,
+      linkedin_id: DataTypes.STRING,
+      github_id: DataTypes.STRING,
+      twitter_id: DataTypes.STRING,
+      stackoverflow_id: DataTypes.STRING,
+      reset_token: DataTypes.STRING,
+      reset_token_created_at: DataTypes.DATE
+    },
+    {
+      hooks: {
+        beforeCreate: async user => {
+          user.password_hash = await hash(user.password_hash);
+        }
       }
     }
-  });
+  );
 
   User.associate = function(models) {
     // associations can be defined here
@@ -30,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
 
   User.prototype.toString = function() {
     return this.toJSON();
-  }
+  };
 
   User.prototype.toJSON = function() {
     const values = Object.assign({}, this.get());
@@ -43,12 +48,12 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     return values;
-  }
-  
+  };
+
   User.prototype.checkPassword = async function(password) {
     if (!password) return false;
     return await compare(password, this.password_hash);
-  }
+  };
 
   return User;
 };
