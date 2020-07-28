@@ -17,7 +17,7 @@ import NotFound from "./views/NotFound.vue";
 
 Vue.use(VueRouter);
 
-// TODO: type to an from
+// TODO: type to and from
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const ifAdmin = (to: any, from: any, next: (route?: string) => void) => {
   /* eslint-enable @typescript-eslint/no-explicit-any */
