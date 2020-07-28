@@ -224,7 +224,7 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
   };
 
   const errorPush: Action<MbState, MbState> = async (
-    { commit, dispatch, state },
+    { commit, state },
     newError: MbError
   ) => {
     const mbErrors = state.mbErrors;
@@ -269,8 +269,6 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
 };
 
 export const createStore = (mbContext: MbContext) => {
-  const { authService, mbEventService } = mbContext;
-
   return new Vuex.Store({
     state,
     mutations,

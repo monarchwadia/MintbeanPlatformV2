@@ -54,7 +54,7 @@ export default {
       if (data.password === data.password_confirm) {
         const decodedToken = base64ToObj(this.token).token;
         const email = this.email;
-        const response = this.$mbContext.authService
+        this.$mbContext.authService
           .resetPassword(data.password, decodedToken, email)
           .then(res => {
             console.log(res);
@@ -65,7 +65,7 @@ export default {
             }
             this.$router.push("/auth/login");
           })
-          .catch(err => {
+          .catch(() => {
             alert(`Reset token is either invalid or expired. Send a new token`);
             this.$router.push("/auth/reset");
           });

@@ -62,7 +62,7 @@ export default {
     };
   },
   methods: {
-    onSubmit(evt) {
+    onSubmit() {
       const { email, password, firstname, lastname, $router } = this;
       this.$store.dispatch("register", {
         email,

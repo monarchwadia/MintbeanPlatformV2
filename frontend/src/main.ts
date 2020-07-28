@@ -1,8 +1,10 @@
 import Vue from "vue";
 import Vuex, { Store } from "vuex";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const Cloudinary: any = require("cloudinary-vue");
 const Intercom: any = require("vue-intercom");
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 import makeContext from "./config/makeContext";
 import registerComponents from "./config/registerComponents";

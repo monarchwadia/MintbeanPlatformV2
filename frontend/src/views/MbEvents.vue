@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import moment from "moment";
-
 // @ is an alias to /src
 export default {
   name: "Events",
@@ -23,7 +21,6 @@ export default {
   methods: {
     fetchEvents() {
       const self = this;
-      const nowUTC = moment(new Date());
 
       this.$mbContext.mbEventService
         .getMbEvents()

@@ -26,7 +26,7 @@ export default {
     };
   },
   methods: {
-    onSubmit(evt) {
+    onSubmit() {
       const { email } = this;
       this.$mbContext.authService.sendResetToken(email);
       this.emailIsSent = true;

@@ -29,74 +29,74 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: Home
   },
   {
     path: "/auth/login",
     name: "Login",
-    component: Login,
+    component: Login
   },
   {
     path: "/auth/reset",
     name: "Reset",
-    component: Reset,
+    component: Reset
   },
   {
     path: "/auth/reset/:token",
     name: "ResetNewPassword",
-    component: ResetNewPassword,
+    component: ResetNewPassword
   },
   {
     path: "/project/:id",
     name: "Project",
-    component: Project,
+    component: Project
   },
   {
     path: "/auth/register",
     name: "Register",
-    component: Register,
+    component: Register
   },
   {
     path: "/auth/logout",
     name: "Logout",
-    component: Logout,
+    component: Logout
   },
   {
     path: "/mb-event/:id",
     name: "Event",
-    component: MbEvent,
+    component: MbEvent
   },
   {
     path: "/mb-events",
     name: "Events",
-    component: MbEvents,
+    component: MbEvents
   },
   {
     path: "/user-profile/:id",
     name: "User Profile",
-    component: UserProfile,
+    component: UserProfile
   },
   {
     path: "/admin",
     name: "Admin Panel",
     component: Admin,
-    beforeEnter: ifAdmin,
+    beforeEnter: ifAdmin
   },
   {
     path: "/legal/terms-of-service",
     name: "Terms Of Service",
-    component: TermsOfService,
+    component: TermsOfService
   },
   {
     path: "/legal/privacy-policy",
     name: "Privacy Policy",
-    component: PrivacyPolicy,
+    component: PrivacyPolicy
   },
   {
     path: "*",
     name: "Not Found",
-    component: NotFound,
-  },
+    component: NotFound
+  }
 ];
 
 const router = new VueRouter({
@@ -105,7 +105,7 @@ const router = new VueRouter({
   routes,
   scrollBehavior() {
     return { x: 0, y: 0 };
-  },
+  }
 });
 
 export default router;

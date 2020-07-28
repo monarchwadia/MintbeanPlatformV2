@@ -5,7 +5,7 @@ import isUpcoming from "../helpers/isUpcoming";
 export class MbEventService {
   constructor(private apiService: ApiService) {}
   getMbEvents(): Promise<MbEvent> {
-    return this.apiService.get("/api/v1/mb-event").then((resp) =>
+    return this.apiService.get("/api/v1/mb-event").then(resp =>
       resp.data.sort((a: any, b: any) => {
         return (
           new Date(a.start_time).getTime() - new Date(b.start_time).getTime()
@@ -15,7 +15,7 @@ export class MbEventService {
   }
 
   getUpcomingMbEvents(): Promise<MbEvent> {
-    return this.apiService.get("/api/v1/mb-event").then((events) => {
+    return this.apiService.get("/api/v1/mb-event").then(events => {
       return events.data.filter((e: any) => isUpcoming(e.end_time));
     });
 

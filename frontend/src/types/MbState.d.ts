@@ -2,6 +2,7 @@ import { MbUser } from "./MbUser";
 import { MbEvent } from "./MbEvent";
 import { Project } from "./Project";
 import { MbError } from "./MbError";
+import { MbVote } from "./MbVote";
 
 export interface MbState {
   user?: MbUser;
@@ -11,6 +12,6 @@ export interface MbState {
   mbEvents: MbEvent[];
   project?: Project;
   // TODO; fix types;
-  votes: any[];
+  votes: MbVote[];
   mbErrors: MbError[];
 }

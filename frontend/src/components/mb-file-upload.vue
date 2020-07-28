@@ -46,7 +46,6 @@ export default {
   name: "mb-file-upload",
   props: ["name"],
   data: function() {
-    const self = this;
     return {
       myFiles: [],
       server: {
@@ -54,7 +53,14 @@ export default {
         //   // no-op
         //   load();
         // },
-        process: (fieldName, file, metadata, load, error, progress, abort) => {
+        process: (
+          fieldName,
+          file,
+          metadata,
+          load,
+          error,
+          progress /*, _abort */
+        ) => {
           const cloudName = "mintbean";
           const unsignedUploadPreset = "mintbean-public";
 
@@ -70,7 +76,7 @@ export default {
             progress(e.lengthComputable, e.loaded, e.total);
           });
 
-          xhr.onreadystatechange = e => {
+          xhr.onreadystatechange = _ => {
             if (xhr.readyState !== 4) {
               return;
             }
@@ -109,6 +115,7 @@ export default {
       // FilePond instance methods are available on `this.$refs.pond`
     },
     handleProcessFile: function(error, file) {
+      console.log(error, file);
       // debugger;
       // if (error) {
       //   alert('An error occurred while processing the file.');
@@ -118,6 +125,7 @@ export default {
       // }
     },
     handleRemoveFile: function(error, file) {
+      console.log(error, file);
       // debugger;
       // if (error) {
       //   alert('An error occurred while removingthe file.');

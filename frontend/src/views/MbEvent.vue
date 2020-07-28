@@ -80,7 +80,6 @@ div
 </style>
 
 <script>
-import moment from "moment";
 import prettyESTDate from "../helpers/prettyDate";
 
 // @ is an alias to /src

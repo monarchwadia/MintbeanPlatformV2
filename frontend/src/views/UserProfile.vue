@@ -24,7 +24,7 @@ export default {
       .then(userProfile => {
         this.userProfile = userProfile;
       })
-      .catch(e => alert("Failed to fetch user profile"));
+      .catch(() => alert("Failed to fetch user profile"));
   }
 };
 </script>

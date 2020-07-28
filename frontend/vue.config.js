@@ -14,7 +14,7 @@ module.exports = {
     },
     disableHostCheck: true // required for nginx to recognize the devserver in local dev mode
   },
-  chainWebpack: config => {
+  chainWebpack: (/*config*/) => {
     // // markdown Loader
     // config.module
     //   .rule("markdown")

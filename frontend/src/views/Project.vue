@@ -158,7 +158,7 @@ export default {
     getMoment(datetime) {
       return moment(datetime, "YYYYMMDD").fromNow();
     },
-    handleVoteProject(ProjectId) {
+    handleVoteProject() {
       const { id } = this.$store.state.project;
       const { comment, rating } = this;
       const obj = {

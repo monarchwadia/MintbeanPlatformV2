@@ -46,7 +46,9 @@ export class AuthService {
       .post("/api/v1/auth/register", { firstname, lastname, email, password })
       .then(resp => resp.data);
   }
-  logout(): Promise<any> {
-    return this.apiService.post("/api/v1/auth/logout", null);
+  logout(): Promise<void> {
+    return this.apiService
+      .post("/api/v1/auth/logout", null)
+      .then(() => undefined);
   }
 }
