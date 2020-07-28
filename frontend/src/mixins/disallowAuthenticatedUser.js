@@ -7,7 +7,7 @@ export default {
     }
   },
   created() {
-    this.unsubscribe = this.$store.subscribe((mutation, state) => {
+    this.unsubscribe = this.$store.subscribe((/*mutation, state*/) => {
       this.redirectOnLoggedIn();
     });
   },

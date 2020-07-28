@@ -7,7 +7,7 @@ const errorHandlerPlugin = (store: Store<MbState>) => {
   store.subscribe((mutation, state) => {
     // called after every mutation.
     // The mutation comes in the format of `{ type, payload }`.
-    const type: string = mutation.type;
+    // const type: string = mutation.type;
     const payload: MbError = mutation.payload;
 
     switch (mutation.type) {

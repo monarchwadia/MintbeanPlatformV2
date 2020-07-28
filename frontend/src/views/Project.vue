@@ -49,7 +49,7 @@ div
                 mb-external-link(v-if="project.User.stackoverflow_id" :href="project.User.stackoverflow_id") StackOverflow
           div.flex.flex-col.p-6.shadow-mb.mt-4
             section(v-if="$store.state.user")
-              form.w-full.flex.flex-col(v-on:submit.prevent="function(evt){ handleVoteProject(project.id) }")
+              form.w-full.flex.flex-col(v-if="!userVote" v-on:submit.prevent="function(evt){ handleVoteProject(project.id) }")
                 h2.text-2xl.mb-4 {{ userVote ? 'Edit your' : 'Submit a' }} vote
                 div.flex.items-center.mb-2
                   mb-avatar(size="sm")

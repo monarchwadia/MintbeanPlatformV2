@@ -87,7 +87,7 @@ export default {
     }
   },
   methods: {
-    logout(evt) {
+    logout(/*evt*/) {
       this.$store.dispatch("logout");
     }
   },

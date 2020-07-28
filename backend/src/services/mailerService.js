@@ -1,6 +1,6 @@
 const config = require("../utils/config.js");
 const sgMail = require("@sendgrid/mail");
-const { rootDomain } = require('../utils/config');
+const { rootDomain } = require("../utils/config");
 
 const SENDER_EMAIL = "claire.froelich@mintbean.io"; // TODO: use correct sender address
 const MINTBEAN_URL = "https://www.mintbean.io/";
@@ -32,7 +32,6 @@ background: rgb(2, 237, 157);
   );
   `;
 
-
 sgMail.setApiKey(config.sendgridKey());
 
 const send = function(mailObj) {
@@ -43,8 +42,11 @@ const send = function(mailObj) {
   //   subject: <email_subject>,
   //   html: <html_body>,             // For sending HTML emails
   // }
-  return sgMail.send(mailObj)
-    .catch(err => console.log("ERROR when using sgMail.send()", err.response.body.errors));
+  return sgMail
+    .send(mailObj)
+    .catch(err =>
+      console.log("ERROR when using sgMail.send()", err.response.body.errors)
+    );
 };
 
 // TODOCLAIRE: check if the reset token is working
@@ -57,9 +59,10 @@ const sendResetTokenLink = function(email, tokenContainer) {
     <p>Hello,</p>
     <p>A password reset was requested for the Mintbean account with this email address.</p>
     <p>Please click the link below to reset your password.</p>
-    <a style="${BUTTON_STYLE}" href="${rootDomain()}/reset/${tokenContainer}">Create a new password</a>
+    <a href="${rootDomain()}/auth/reset/${tokenContainer}" style="${BUTTON_STYLE}">Create a new password</a>
     `
   };
+  console.log(`${rootDomain()}/reset/${tokenContainer}`);
   return send(mailObj);
 };
 const sendWelcomeMessage = function(user) {

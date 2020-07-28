@@ -76,7 +76,7 @@ export default {
             progress(e.lengthComputable, e.loaded, e.total);
           });
 
-          xhr.onreadystatechange = _ => {
+          xhr.onreadystatechange = () => {
             if (xhr.readyState !== 4) {
               return;
             }

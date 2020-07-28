@@ -1,5 +1,7 @@
 import { ApiService } from "./apiService";
 import { Project, ProjectSearchResult } from "@/types/Project";
+import { MbMediaAsset } from "@/types/MbMediaAsset";
+import { MbVote } from "@/types/MbVote";
 
 // filter_userId: Joi.string().uuid().min(1).optional(),
 // filter_mbEventId: Joi.string().uuid().min(1).optional(),
@@ -20,6 +22,12 @@ interface ProjectSearchOptions {
   sortField: "CREATED_AT" | "RATING_AVERAGE" | "RATING_COUNT";
   limit: number;
   offset: number;
+}
+
+interface VoteObj {
+  ProjectId: string;
+  comment: string;
+  rating: string;
 }
 
 const mapProjectSearchOptions = (pso: ProjectSearchOptions) => {
@@ -78,7 +86,8 @@ export class ProjectService {
   }
 
   // TODO; install types
-  async vote(obj: any): Promise<any> {
+
+  async vote(obj: VoteObj): Promise<MbVote> {
     const { ProjectId, rating, comment } = obj;
 
     const queryResponse = await this.apiService.post("/api/v1/vote", {
@@ -102,7 +111,7 @@ export class ProjectService {
 
   async uploadMediaAssets(obj: {
     ProjectId: string;
-    MediaAssets: any[];
+    MediaAssets: MbMediaAsset[];
   }): Promise<void> {
     const queryResponse = await this.apiService.post(
       "/api/v1/project/uploadMediaAssets",

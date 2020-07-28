@@ -30,7 +30,7 @@ const hoc = (key, _opts = {}) => {
   if (opts.validator && !opts.validator(val)) {
     throw new Error(
       `CRITICAL ERROR: Custom validation failed for config variable [${key}]. Check env file.`
-    )
+    );
   }
 
   // return the getter
@@ -51,8 +51,13 @@ module.exports = {
   appSessionSecret: hoc("APP_SESSION_SECRET"),
   cloudinaryUrl: hoc("CLOUDINARY_URL"),
   sendgridKey: hoc("SENDGRID_KEY"),
-  rootDomain: hoc("ROOT_DOMAIN", { 
+  rootDomain: hoc("ROOT_DOMAIN", {
     // ensure https for everything, unless running localhost
-    validator: rootDomain => rootDomain.indexOf('localhost') === 0 || rootDomain.indexOf('https://') === 0
+    // validator: rootDomain => rootDomain.indexOf('localhost') === 0 || rootDomain.indexOf('https://') === 0
+
+    // Claire: link functionality requires protocol
+    validator: rootDomain =>
+      rootDomain.indexOf("http://localhost") === 0 ||
+      rootDomain.indexOf("https://") === 0
   })
 };

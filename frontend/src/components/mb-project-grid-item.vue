@@ -67,7 +67,7 @@ export default {
       return "/project/" + this.project.id;
     },
     cloudinaryPublicId() {
-      const { cloudinaryPublicId, mbevent_cover_image_url } = this.project;
+      const { cloudinaryPublicId } = this.project;
       return cloudinaryPublicId || null;
     }
   },

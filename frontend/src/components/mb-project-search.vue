@@ -109,19 +109,19 @@ export default {
     }
   },
   watch: {
-    "search.searchQuery"(val) {
+    "search.searchQuery"(/*val*/) {
       this.doSearch();
     },
-    "search.sortField"(val) {
+    "search.sortField"(/*val*/) {
       this.doSearch();
     },
-    "search.sortDirection"(val) {
+    "search.sortDirection"(/*val*/) {
       this.doSearch();
     },
-    "search.ratingCountMin"(val) {
+    "search.ratingCountMin"(/*val*/) {
       this.doSearch();
     },
-    "search.ratingAverageMin"(val) {
+    "search.ratingAverageMin"(/*val*/) {
       this.doSearch();
     }
   },

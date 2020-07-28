@@ -23,9 +23,9 @@
 import {
   CldContext,
   CldImage,
-  CldVideo,
-  CldTransformation,
-  CldPoster
+  CldTransformation
+  // CldVideo,
+  // CldPoster
 } from "cloudinary-vue";
 
 export default {

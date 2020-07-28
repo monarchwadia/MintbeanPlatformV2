@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosRequestConfig } from "axios";
 
 export class ApiService {
@@ -15,3 +16,4 @@ export class ApiService {
     return axios.patch(url, data);
   }
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */

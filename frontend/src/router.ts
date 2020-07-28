@@ -17,7 +17,13 @@ import NotFound from "./views/NotFound.vue";
 
 Vue.use(VueRouter);
 
-const ifAdmin = (to: any, from: any, next: (route?: string) => any) => {
+// to/from are set to undefined bc we are not using them
+const ifAdmin = (
+  to: undefined,
+  from: undefined,
+  next: (route?: string) => void
+) => {
+  debugger;
   if (window.store.state.user && window.store.state.user.isAdmin) {
     next();
     return;

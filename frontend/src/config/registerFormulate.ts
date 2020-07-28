@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { VueConstructor } from "vue";
 import { BUTTON_CLASSES } from "../constants";
 
@@ -10,7 +11,7 @@ export default (Vue: VueConstructor<Vue>) => {
       wrapper: [],
       label: "cursor-pointer",
       element: [],
-      input: (context: any, classes: any) => {
+      input: (context: any /*, classes: any*/) => {
         const DEFAULTS =
           "border-gray-300 border-2 rounded-sm mb-4 p-2 cursor-pointer w-full";
 
@@ -32,3 +33,4 @@ export default (Vue: VueConstructor<Vue>) => {
     }
   });
 };
+/* eslint-enable @typescript-eslint/no-explicit-any */

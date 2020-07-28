@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const VueCountdown: any = require("@chenfengyuan/vue-countdown");
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 import { VueConstructor } from "vue";
 

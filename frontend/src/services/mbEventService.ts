@@ -6,7 +6,7 @@ export class MbEventService {
   constructor(private apiService: ApiService) {}
   getMbEvents(): Promise<MbEvent> {
     return this.apiService.get("/api/v1/mb-event").then(resp =>
-      resp.data.sort((a: any, b: any) => {
+      resp.data.sort((a: MbEvent, b: MbEvent) => {
         return (
           new Date(a.start_time).getTime() - new Date(b.start_time).getTime()
         );
@@ -16,7 +16,7 @@ export class MbEventService {
 
   getUpcomingMbEvents(): Promise<MbEvent> {
     return this.apiService.get("/api/v1/mb-event").then(events => {
-      return events.data.filter((e: any) => isUpcoming(e.end_time));
+      return events.data.filter((e: MbEvent) => isUpcoming(e.end_time));
     });
 
     // events.data.sort((a: any, b: any) => {

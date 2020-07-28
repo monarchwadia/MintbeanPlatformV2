@@ -1,11 +1,18 @@
 import Vuex, { MutationTree, ActionTree, Action } from "vuex";
 
-import { AuthService } from "./services/authService";
+// import { AuthService } from "./services/authService";
 import { MbState } from "./types/MbState";
 import { MbContext } from "./types/MbContext";
+import { MbMediaAsset } from "./types/MbMediaAsset";
 import { Project } from "./types/Project";
 import errorHandlerPlugin from "./errorHandlerPlugin";
 import { MbError } from "./types/MbError";
+
+interface VoteObj {
+  ProjectId: string;
+  comment: string;
+  rating: string;
+}
 
 const state: MbState = {
   user: undefined,
@@ -126,12 +133,12 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
   // };
 
   const submitProject: Action<MbState, MbState> = async (
-    { commit, dispatch },
+    { /*commit,*/ dispatch },
     obj: Project
   ) => {
     mbContext.projectService
       .submitProject(obj)
-      .then(dto => {
+      .then((/*dto*/) => {
         dispatch("fetchMbEvents");
       })
       .catch(e => {
@@ -143,7 +150,7 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
   };
 
   const fetchProject: Action<MbState, MbState> = async (
-    { commit, dispatch },
+    { commit /*, dispatch */ },
     projectId: string
   ) => {
     mbContext.projectService
@@ -161,12 +168,12 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
 
   // TODO: remove any
   const vote: Action<MbState, MbState> = async (
-    { commit, dispatch },
-    obj: any
+    { /* commit,*/ dispatch },
+    obj: VoteObj
   ) => {
     mbContext.projectService
       .vote(obj)
-      .then(dto => {
+      .then((/*dto*/) => {
         alert("Thanks for voting!");
         dispatch("fetchProject", obj.ProjectId);
       })
@@ -182,7 +189,7 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
   };
 
   const deleteMediaAsset: Action<MbState, MbState> = async (
-    { commit, dispatch },
+    { /*commit,*/ dispatch },
     obj: { ProjectId: string; MediaAssetId: string }
   ) => {
     mbContext.projectService
@@ -203,8 +210,8 @@ const createActions = (mbContext: MbContext): ActionTree<MbState, MbState> => {
   };
 
   const uploadMediaAssets: Action<MbState, MbState> = async (
-    { commit, dispatch },
-    obj: { ProjectId: string; MediaAssets: any }
+    { /*commit,*/ dispatch },
+    obj: { ProjectId: string; MediaAssets: MbMediaAsset[] }
   ) => {
     mbContext.projectService
       .uploadMediaAssets(obj)

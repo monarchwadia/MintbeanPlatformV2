@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Vue, { VNode } from "vue";
+/* eslint-enable @typescript-eslint/no-unused-vars */
 
 declare global {
   namespace JSX {

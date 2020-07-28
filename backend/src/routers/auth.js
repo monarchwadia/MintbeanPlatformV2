@@ -53,10 +53,10 @@ authRoute.post("/reset", async (req, res, next) => {
     if (user) {
       // if user exists: a password reset token is generated.
       const resetToken = uuidv4();
-    
+
       // The bcrypt of the token is saved on the user object.
       const hashedResetToken = await hash(resetToken);
-    
+
       await user.update({
         reset_token: hashedResetToken,
         reset_token_created_at: new Date()
@@ -67,7 +67,7 @@ authRoute.post("/reset", async (req, res, next) => {
         email,
         token: resetToken
       });
-    
+
       sendResetTokenLink(user.email, tokenContainer);
     }
 
@@ -222,7 +222,6 @@ authRoute.post(
       if (user) {
         sendWelcomeMessage(user);
       }
-      console.log({ user });
     } catch (e) {
       next(e);
     }
