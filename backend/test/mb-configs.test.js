@@ -245,6 +245,7 @@ describe("MbConfig Model", () => {
         expect(response.body.configKey).toMatch(
           TEST_CONFIG_FEATURED_SECTIONS.key
         );
+        // ensure updated config value is returned
         expect(response.body.configValue).toMatchObject(
           FEATURED_SECTIONS_PAYLOAD.configValue
         );
