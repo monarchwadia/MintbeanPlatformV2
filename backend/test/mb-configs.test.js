@@ -222,33 +222,32 @@ describe("MbConfig Model", () => {
 
       it("can PATCH /mb-config/:key", async done => {
         // fetch while logged in as admin
-        const response = await agent.patch(
-          "/api/v1/mb-config/" + TEST_CONFIG_FEATURED_SECTIONS.key,
-          FEATURED_SECTIONS_PAYLOAD
-        );
+        const response = await agent
+          .patch("/api/v1/mb-config/" + TEST_CONFIG_FEATURED_SECTIONS.key)
+          .send(FEATURED_SECTIONS_PAYLOAD);
 
         expect(response.statusCode).toBe(200);
+
         expect(response.body).toBeTruthy();
-        expect(typeof response.body).toBe("object");
         expect(response.body.id).toBeTruthy();
-        expect(typeof response.body.id).toBe("string");
+        expect(response.body.configValue).toBeTruthy();
         expect(response.body.configKey).toBeTruthy();
+        expect(response.body.createdAt).toBeTruthy();
+        expect(response.body.updatedAt).toBeTruthy();
+
+        expect(typeof response.body).toBe("object");
+        expect(typeof response.body.id).toBe("string");
         expect(typeof response.body.configKey).toBe("string");
+        expect(typeof response.body.configValue).toBe("object");
+        expect(typeof response.body.createdAt).toBe("string");
+        expect(typeof response.body.updatedAt).toBe("string");
+
         expect(response.body.configKey).toMatch(
           TEST_CONFIG_FEATURED_SECTIONS.key
         );
-
-        // TODO: get this to work
-        // expect(response.body.configValue).toBeTruthy();
-        // expect(typeof response.body.configValue).toBe("object");
-        // expect(response.body.configValue).toMatchObject(
-        //   FEATURED_SECTIONS_PAYLOAD.configValue
-        // );
-
-        expect(response.body.createdAt).toBeTruthy();
-        expect(typeof response.body.createdAt).toBe("string");
-        expect(response.body.updatedAt).toBeTruthy();
-        expect(typeof response.body.updatedAt).toBe("string");
+        expect(response.body.configValue).toMatchObject(
+          FEATURED_SECTIONS_PAYLOAD.configValue
+        );
 
         done();
       });
