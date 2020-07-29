@@ -22,7 +22,6 @@ Vue.use(VueRouter);
 const ifAdmin = (to: any, from: any, next: (route?: string) => void) => {
   /* eslint-enable @typescript-eslint/no-explicit-any */
 
-  debugger;
   if (window.store.state.user && window.store.state.user.isAdmin) {
     next();
     return;
