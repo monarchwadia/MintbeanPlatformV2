@@ -72,7 +72,7 @@ authRoute.post("/reset", async (req, res, next) => {
     }
 
     // always return ambiguous message
-    res.status(200);
+    res.sendStatus(200);
   } catch (e) {
     next(e);
   }
