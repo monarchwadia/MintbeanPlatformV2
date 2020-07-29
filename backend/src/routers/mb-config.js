@@ -47,7 +47,7 @@ mbConfigRoute.patch(
   ),
   async (req, res, next) => {
     const { key } = req.params;
-    console.log(req.body);
+    console.log(key);
 
     try {
       let config = await MbConfig.findOne({ where: { configKey: key } });
