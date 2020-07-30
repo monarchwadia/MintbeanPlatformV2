@@ -8,7 +8,7 @@
         mb-avatar.mr-1(size="sm")
         | {{ authorName }}
       div.hidden.text-gray-700.text-base.my-5(style="min-height: 60px; max-height: 60px; height: 60px;") {{ description }}
-      mb-internal-link(:to="'/project/' + id")
+      mb-internal-link(:to="'/project/' + id" target="_blank")
         mb-button.float-right View
       div.flex.justify-left
         div.inline-block.bg-gray-200.rounded-full.px-3.py-1.text-sm.font-semibold.text-gray-700.mr-2(v-for="tag in tags") {{`#${tag}`}}
