@@ -53,8 +53,26 @@ describe("User auth reset routes", () => {
         await User.destroy({ where: {} });
         clear(done);
       });
-      // if user exists, expect reset_token and reset_token_created_at to update on user
-      it("assigns reset_token and reset_token_created_at on user with valid email", async done => {
+
+      it("assigns reset_token and reset_token_created_at on user", async done => {
+        const response = await agent
+          .post("/api/v1/auth/reset")
+          .send({ email: user.email });
+
+        // re-fetch user with given email
+        user = await User.findOne({ where: { email: user.email } });
+
+        expect(response.body).toMatchObject({});
+        expect(response.statusCode).toBe(200);
+        expect(user.reset_token).toBeTruthy();
+        expect(user.reset_token_created_at).toBeTruthy();
+        expect(typeof user.reset_token).toBe("string");
+        expect(new Date(user.reset_token_created_at.toString())).toBeTruthy();
+
+        done();
+      });
+
+      it("updates reset_token and reset_token_created_at on user on subsequent requests", async done => {
         const response1 = await agent
           .post("/api/v1/auth/reset")
           .send({ email: user.email });
@@ -105,8 +123,6 @@ describe("User auth reset routes", () => {
 
         done();
       });
-
-      // if user already had token, expect token to be overwritten
     });
   });
 
