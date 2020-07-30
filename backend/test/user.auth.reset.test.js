@@ -43,27 +43,65 @@ describe("User auth reset routes", () => {
     });
     describe("when valid email requested", () => {
       beforeEach(async done => {
-        console.log("each");
         user = await User.create(
           userFactory.one({ email: TEST_EMAIL, password: TEST_PASSWORD })
         );
         done();
       });
+
+      afterEach(async done => {
+        await User.destroy({ where: {} });
+        clear(done);
+      });
       // if user exists, expect reset_token and reset_token_created_at to update on user
       it("assigns reset_token and reset_token_created_at on user with valid email", async done => {
-        const response = await agent
+        const response1 = await agent
           .post("/api/v1/auth/reset")
           .send({ email: user.email });
 
-        // re-fetch user with given email
-        user = await User.findOne({ where: { email: user.email } });
+        let userSnapshot1;
+        let userSnapshot2;
 
-        expect(response.body).toMatchObject({});
-        expect(response.statusCode).toBe(200);
-        expect(user.reset_token).toBeTruthy();
-        expect(user.reset_token_created_at).toBeTruthy();
-        expect(typeof user.reset_token).toBe("string");
-        expect(new Date(user.reset_token_created_at.toString())).toBeTruthy();
+        // snapshot of user on first reset
+        try {
+          userSnapshot1 = await User.findOne({
+            where: { email: user.email }
+          });
+        } catch (e) {
+          console.log(e);
+        }
+
+        // request second reset token on same user
+        const response2 = await agent
+          .post("/api/v1/auth/reset")
+          .send({ email: user.email });
+
+        // snapshot of user on second reset
+        try {
+          userSnapshot2 = await User.findOne({
+            where: { email: user.email }
+          });
+        } catch (e) {
+          console.log(e);
+        }
+
+        expect(response2.body).toMatchObject({});
+        expect(response2.statusCode).toBe(200);
+        expect(userSnapshot2.reset_token).toBeTruthy();
+        expect(userSnapshot2.reset_token_created_at).toBeTruthy();
+        expect(typeof userSnapshot2.reset_token).toBe("string");
+        expect(
+          new Date(userSnapshot2.dataValues.reset_token_created_at.toString())
+        ).toBeTruthy();
+        expect(
+          new Date(
+            userSnapshot2.dataValues.reset_token_created_at.toString()
+          ) >=
+            new Date(userSnapshot1.dataValues.reset_token_created_at.toString())
+        ).toBeTruthy();
+        expect(userSnapshot2.dataValues.reset_token).not.toMatch(
+          userSnapshot1.dataValues.reset_token
+        );
 
         done();
       });

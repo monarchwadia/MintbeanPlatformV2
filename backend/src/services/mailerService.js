@@ -62,7 +62,6 @@ const sendResetTokenLink = function(email, tokenContainer) {
     <a href="${rootDomain()}/auth/reset/${tokenContainer}" style="${BUTTON_STYLE}">Create a new password</a>
     `
   };
-  console.log(`${rootDomain()}/reset/${tokenContainer}`);
   return send(mailObj);
 };
 const sendWelcomeMessage = function(user) {
