@@ -5,7 +5,7 @@ div
       div
         mb-internal-link-arrow.mt-4.mb-2.m-auto(
           :to="eventPage"
-          text="Projects"
+          text="Projects from event"
           left
         )
         h1.text-center.text-4xl.md_text-left.md_text-5xl {{ project.title }}
