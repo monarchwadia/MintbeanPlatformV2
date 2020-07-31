@@ -22,7 +22,7 @@ auth-wrapper
         type="email"
         name="email"
         label="Email"
-        validation='email'
+        validation="email"
         v-model="email"
       )
 
