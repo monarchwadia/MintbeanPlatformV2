@@ -61,18 +61,11 @@ authRoute.post("/reset", async (req, res, next) => {
         reset_token: hashedResetToken,
         reset_token_created_at: new Date()
       });
-
-      // Send link to user's email in the form of a URL: `https://mintbean.io/auth/reset/:data` where data is base64 of {email, token}
-      const tokenContainer = objToBase64({
-        email,
-        token: resetToken
-      });
-
-      sendResetTokenLink(user.email, tokenContainer);
+      sendResetTokenLink(user.email, resetToken);
     }
 
     // always return ambiguous message
-    res.status(200);
+    res.sendStatus(200);
   } catch (e) {
     next(e);
   }
@@ -96,20 +89,24 @@ authRoute.post(
     try {
       user = await User.findOne({ where: { email } });
       if (!user) {
-        return res.status(404).json({ error: "Invalid or expired token." });
+        return res.status(401).json({ err: "Invalid or expired token." });
       }
     } catch (e) {
       next(e);
     }
 
-    const isValidToken = isValidUserToken(user, token, TOKEN_EXPIRE_HOURS);
+    const isValidToken = await isValidUserToken(
+      user,
+      token,
+      TOKEN_EXPIRE_HOURS
+    );
 
     if (isValidToken) {
-      console.log("valid!");
+      // console.log("valid!");
       res.status(200).json({ email });
     } else {
-      console.log("invalid!");
-      res.status(403).json({ err: "Invalid or expired token." });
+      // console.log("invalid!");
+      res.status(401).json({ err: "Invalid or expired token." });
     }
   }
 );

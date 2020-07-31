@@ -2,10 +2,19 @@
 auth-wrapper
   form.flex.rounded-md.flex-col.p-12.bg-white.align-center.justify-center(style="min-height: 400px;" v-on:submit.prevent="onSubmit")
     h1(class="text-xl pb-6") Reset your password
-    mb-label Email
-      mb-input(:value.sync="email" name="email", ref="emailInput" type="email" style="min-width: 280px;")
+    FormulateForm(@submit="onSubmit($event)")
+      FormulateInput(
+        type="email"
+        name="email"
+        label="Email"
+        v-model="email"
+        validation="email"
+        v-focus-input
+      )
     auth-you-agree
-    p.font-semibold.text-mb-tone-500(v-if="emailIsSent") A reset token was sent to this email address.
+    div(v-if="emailIsSent")
+      p.font-semibold.text-mb-tone-500.text-center A reset token was sent to this email address,
+      p.font-semibold.text-mb-tone-500.text-center if it belongs to a valid Mintbean account
     mb-button.my-4(v-if="!emailIsSent" type="submit") Send reset link
     mb-button.my-4(v-else type="submit") Resend reset link
     mb-internal-link(to="/auth/register").text-sm.text-center Not a member yet? Sign Up
@@ -33,8 +42,15 @@ export default {
       this.$forceUpdate();
     }
   },
-  mounted() {
-    this.$refs.emailInput.$el && this.$refs.emailInput.$el.focus();
+  directives: {
+    focusInput: {
+      inserted: function(el) {
+        const input = el.querySelector("input");
+        if (input) {
+          input.focus();
+        }
+      }
+    }
   },
   components: {
     "auth-wrapper": authWrapper,

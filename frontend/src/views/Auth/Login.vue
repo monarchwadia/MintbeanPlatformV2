@@ -12,8 +12,6 @@ auth-wrapper
     mb-internal-link(to="/auth/register").text-sm.text-center Not a member yet? Sign Up
 </template>
 
-<style lang="scss" scoped></style>
-
 <script>
 import authWrapper from "./auth-wrapper";
 import authYouAgree from "./auth-you-agree.vue";
