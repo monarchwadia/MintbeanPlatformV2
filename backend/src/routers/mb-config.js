@@ -47,7 +47,6 @@ mbConfigRoute.patch(
   ),
   async (req, res, next) => {
     const { key } = req.params;
-    console.log(req.body);
 
     try {
       let config = await MbConfig.findOne({ where: { configKey: key } });
@@ -63,7 +62,9 @@ mbConfigRoute.patch(
         };
         config = await MbConfig.create(params);
       }
+      // re-jsonify configValue for response
 
+      config.configValue = JSON.parse(config.configValue);
       res.json(config);
     } catch (e) {
       return next(e);

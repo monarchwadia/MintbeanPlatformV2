@@ -1,8 +1,9 @@
-const config = require("../utils/config.js");
-const sgMail = require("@sendgrid/mail");
+// const sgMail = require("@sendgrid/mail");
 const { rootDomain } = require("../utils/config");
+const { send } = require("../daos/MailerDao");
+const { objToBase64 } = require("../utils/encryption");
 
-const SENDER_EMAIL = "claire.froelich@mintbean.io"; // TODO: use correct sender address
+const EmailDao = require;
 const MINTBEAN_URL = "https://www.mintbean.io/";
 const EVENTBRITE_URL = "https://www.eventbrite.ca/o/mintbean-28752300031";
 const BUTTON_STYLE = `
@@ -32,43 +33,26 @@ background: rgb(2, 237, 157);
   );
   `;
 
-sgMail.setApiKey(config.sendgridKey());
-
-const send = function(mailObj) {
-  // sample mail Obj:
-  //   {
-  //   to: <to_email@domain.com>,
-  //   from: <from_email@domain.com>, // Totally up to you
-  //   subject: <email_subject>,
-  //   html: <html_body>,             // For sending HTML emails
-  // }
-  return sgMail
-    .send(mailObj)
-    .catch(err =>
-      console.log("ERROR when using sgMail.send()", err.response.body.errors)
-    );
-};
-
 // TODOCLAIRE: check if the reset token is working
-const sendResetTokenLink = function(email, tokenContainer) {
+const sendResetTokenLink = function(email, token) {
+  const tokenContainer = objToBase64({ email, token });
+  const url = `${rootDomain()}/auth/reset/${tokenContainer}`;
   const mailObj = {
     to: email,
-    from: SENDER_EMAIL,
     subject: "Reset your Mintbean password",
     html: `
     <p>Hello,</p>
     <p>A password reset was requested for the Mintbean account with this email address.</p>
     <p>Please click the link below to reset your password.</p>
-    <a href="${rootDomain()}/auth/reset/${tokenContainer}" style="${BUTTON_STYLE}">Create a new password</a>
+    <a id="btn_reset_link" href="${url}" style="${BUTTON_STYLE}">Create a new password</a>
     `
   };
-  console.log(`${rootDomain()}/reset/${tokenContainer}`);
   return send(mailObj);
 };
+
 const sendWelcomeMessage = function(user) {
   const mailObj = {
     to: user.email,
-    from: SENDER_EMAIL,
     subject: "Confirm your Mintbean account",
     html: `
     <p>Welcome to Mintbean, ${user.firstname}!</p>
@@ -82,7 +66,6 @@ const sendWelcomeMessage = function(user) {
 };
 
 module.exports = {
-  send,
   sendResetTokenLink,
   sendWelcomeMessage
 };
