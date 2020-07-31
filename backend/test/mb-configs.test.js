@@ -229,18 +229,10 @@ describe("MbConfig Model", () => {
         expect(response.statusCode).toBe(200);
 
         expect(response.body).toBeTruthy();
-        expect(response.body.id).toBeTruthy();
-        expect(response.body.configValue).toBeTruthy();
-        expect(response.body.configKey).toBeTruthy();
-        expect(response.body.createdAt).toBeTruthy();
-        expect(response.body.updatedAt).toBeTruthy();
 
         expect(typeof response.body).toBe("object");
         expect(typeof response.body.id).toBe("string");
-        expect(typeof response.body.configKey).toBe("string");
         expect(typeof response.body.configValue).toBe("object");
-        expect(typeof response.body.createdAt).toBe("string");
-        expect(typeof response.body.updatedAt).toBe("string");
 
         expect(response.body.configKey).toMatch(
           TEST_CONFIG_FEATURED_SECTIONS.key

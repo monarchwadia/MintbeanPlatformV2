@@ -21,7 +21,7 @@ const donify = (promise, done) => {
     });
 };
 
-const base64ToObj = function(base64) {
+const btoa = function(base64) {
   let obj;
   try {
     obj = JSON.parse(Buffer.from(base64, "base64").toString());
@@ -35,5 +35,5 @@ module.exports = {
   createUser,
   destroyUsers,
   donify,
-  base64ToObj
+  btoa
 };

@@ -61,14 +61,7 @@ authRoute.post("/reset", async (req, res, next) => {
         reset_token: hashedResetToken,
         reset_token_created_at: new Date()
       });
-
-      // Send link to user's email in the form of a URL: `https://mintbean.io/auth/reset/:data` where data is base64 of {email, token}
-      const tokenContainer = objToBase64({
-        email,
-        token: resetToken
-      });
-
-      sendResetTokenLink({ email: user.email, tokenContainer });
+      sendResetTokenLink(user.email, resetToken);
     }
 
     // always return ambiguous message
