@@ -8,7 +8,7 @@ const {
 const userFactory = require("../src/db/factories/user.factory");
 const { User } = require("../src/db/models");
 const mailer = require("../src/services/mailerService");
-const sendgrid = require("@sendgrid/mail");
+const sgMail = require("@sendgrid/mail");
 // const { base64ToObj } = require("./test.util");
 
 const ABSURD_EMAIL = "iswearthisaddressisntinthedatabase@noway.io";
@@ -132,12 +132,13 @@ describe("User auth reset routes", () => {
 
       it.only("sends and email to user containing tokenized link to password reset", async done => {
         // mock sendGrid mailer
-        const mockSendToken = jest.spyOn(mailer, "sendResetTokenLink");
-        // .mockImplementationOnce(args => {
-        //   console.log(args);
-        //   return mailer.sendResetTokenLink({ ...args, isSandbox: true });
-        // });
-        mockSendToken({ email: user.email, isSandbox: true });
+        const mockSendResetTokenLink = jest.spyOn(sgMail, "send");
+        mockSendResetTokenLink.mockImplementationOnce(args => {
+          console.log(args);
+          return Promise.reject("Monarch threw this.");
+        });
+
+        // mockSendToken({ email: user.email, isSandbox: true });
         const response = await agent
           .post("/api/v1/auth/reset")
           .send({ email: user.email });
@@ -148,9 +149,9 @@ describe("User auth reset routes", () => {
         } catch (e) {
           console.log(e);
         }
-        const mockedReturn = await mockSendToken.mock.results[0].value;
+        const mockedReturn = await mockSendResetTokenLink.mock.results[0].value;
         console.log(mockedReturn);
-        console.log(mockSendToken.mock.calls.length);
+        console.log(mockSendResetTokenLink.mock.calls.length);
 
         // const mockSendgrid = jest
         //   .spyOn(sendgrid, "send")
