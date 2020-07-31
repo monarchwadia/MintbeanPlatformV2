@@ -1,6 +1,5 @@
-const config = require("../utils/config.js");
 const sgMail = require("@sendgrid/mail");
-const { rootDomain } = require("../utils/config");
+const { rootDomain, sendgridKey } = require("../utils/config");
 
 const SENDER_EMAIL = "claire.froelich@mintbean.io"; // TODO: use correct sender address
 const MINTBEAN_URL = "https://www.mintbean.io/";
@@ -32,7 +31,13 @@ background: rgb(2, 237, 157);
   );
   `;
 
-sgMail.setApiKey(config.sendgridKey());
+if (!sendgridKey()) {
+  throw new Error(
+    "The sendgrid api key has not been set in the environment variables"
+  );
+}
+
+sgMail.setApiKey(sendgridKey());
 
 const send = function(mailObj) {
   // sample mail Obj:
@@ -44,13 +49,11 @@ const send = function(mailObj) {
   // }
   return sgMail
     .send(mailObj)
-    .catch(err =>
-      console.log("ERROR when using sgMail.send()", err.response.body.errors)
-    );
+    .catch(err => console.log("ERROR when using sgMail.send(): ", err));
 };
 
 // TODOCLAIRE: check if the reset token is working
-const sendResetTokenLink = function(email, tokenContainer) {
+const sendResetTokenLink = function({ email, tokenContainer, isSandbox }) {
   const mailObj = {
     to: email,
     from: SENDER_EMAIL,
@@ -60,7 +63,8 @@ const sendResetTokenLink = function(email, tokenContainer) {
     <p>A password reset was requested for the Mintbean account with this email address.</p>
     <p>Please click the link below to reset your password.</p>
     <a href="${rootDomain()}/auth/reset/${tokenContainer}" style="${BUTTON_STYLE}">Create a new password</a>
-    `
+    `,
+    mail_settings: { sandbox_mode: { enable: !!isSandbox } } // for testing - if true does not send actual email
   };
   return send(mailObj);
 };
