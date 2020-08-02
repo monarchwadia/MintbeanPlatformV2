@@ -58,7 +58,7 @@ const sendWelcomeMessage = function(user) {
     <p>Welcome to Mintbean, ${user.firstname}!</p>
     <p>Please click the link below to confirm your new account.</p>
     <a style="${BUTTON_STYLE}" href="${MINTBEAN_URL}">Confirm your new account</a>
-    <p>Be sure to check out our <a href="${EVENTBRITE_URL} rel="noopener noreferrer" target="_blank">upcoming events</a> to get started hacking!</p>
+    <p>Be sure to check out our <a href="${EVENTBRITE_URL}" rel="noopener noreferrer" target="_blank">upcoming events</a> to get started hacking!</p>
     <p>Mintbean team</p>
     `
   };
