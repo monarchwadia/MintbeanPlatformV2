@@ -1,7 +1,7 @@
 const sgMail = require("@sendgrid/mail");
 const { sendgridKey } = require("../utils/config");
 
-const SENDER_EMAIL = "claire.froelich@mintbean.io"; // TODO: use correct sender address
+const SENDER_EMAIL = "noreply@mintbean.io"; // TODO: use correct sender address
 
 if (!sendgridKey()) {
   throw new Error(
