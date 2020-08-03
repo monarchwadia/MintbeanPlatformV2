@@ -226,7 +226,7 @@ authRoute.post(
         await user.update({
           confirmation_token: hashedConfirmationToken
         });
-        sendWelcomeMessage(user);
+        sendWelcomeMessage(user, confirmationToken);
       }
     } catch (e) {
       next(e);

@@ -11,8 +11,8 @@ module.exports = {
           allowNull: true
         }
       ),
-      queryInterface.addColumn("confirmed", {
-        type: Sequelize.Boolean,
+      queryInterface.addColumn("Users", "confirmed", {
+        type: Sequelize.BOOLEAN,
         defaultValue: false
       })
     ]);
