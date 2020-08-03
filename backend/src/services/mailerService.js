@@ -52,7 +52,7 @@ const sendResetTokenLink = function(email, token) {
 
 const sendWelcomeMessage = function(user, token) {
   const tokenContainer = objToBase64({ email: user.email, token });
-  const url = `${rootDomain()}/confirm/${tokenContainer}`;
+  const url = `${rootDomain()}/auth/confirm/${tokenContainer}`;
 
   const mailObj = {
     to: user.email,
