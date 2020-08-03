@@ -14,7 +14,7 @@ const {
 
 const TOKEN_EXPIRE_HOURS = 48;
 
-const isValidUserToken = async function(user, token, hrsThreshold) {
+const isValidResetToken = async function(user, token, hrsThreshold) {
   if (!user.reset_token_created_at) return false;
   if (!user.reset_token) return false;
 
@@ -95,7 +95,7 @@ authRoute.post(
       next(e);
     }
 
-    const isValidToken = await isValidUserToken(
+    const isValidToken = await isValidResetToken(
       user,
       token,
       TOKEN_EXPIRE_HOURS
@@ -138,7 +138,7 @@ authRoute.post(
       return res.status(403).json({ err: "Invalid token" });
     }
     // confirm token
-    const isValidToken = await isValidUserToken(
+    const isValidToken = await isValidResetToken(
       user,
       token,
       TOKEN_EXPIRE_HOURS
@@ -208,24 +208,22 @@ authRoute.post(
         .json({ message: "User with that email address already exists" });
     }
 
+    // generate confirmation token
+    const confirmationToken = uuidv4();
+
+    // The bcrypt of the token is saved on the user object.
+    const hashedConfirmationToken = await hash(confirmationToken);
+
     try {
       user = await User.create({
         email,
         password_hash: password,
         firstname,
         lastname,
-        isAdmin
+        isAdmin,
+        confirmation_token: hashedConfirmationToken
       });
       if (user) {
-        // generate confirmation token
-        const confirmationToken = uuidv4();
-
-        // The bcrypt of the token is saved on the user object.
-        const hashedConfirmationToken = await hash(confirmationToken);
-
-        await user.update({
-          confirmation_token: hashedConfirmationToken
-        });
         sendWelcomeMessage(user, confirmationToken);
       }
     } catch (e) {
@@ -239,6 +237,54 @@ authRoute.post(
         return res.json(user);
       }
     });
+  }
+);
+
+authRoute.post(
+  "/confirm",
+  validator.body(
+    Joi.object({
+      email: Joi.string().required(),
+      token: Joi.string().required()
+    })
+  ),
+  async (req, res, next) => {
+    console.log(req.user);
+    const { email, token } = req.body;
+    let user;
+    try {
+      user = await User.findOne({ where: { email } });
+    } catch (e) {
+      next(e);
+    }
+
+    if (user.confirmed) {
+      return res.status(200).json({
+        type: "already-confirmed",
+        message: "User already confirmed"
+      });
+    }
+
+    const isValidToken = await compare(token, user.confirmation_token);
+
+    if (!email || !token || !user || !isValidToken) {
+      return res.status(422).json({ message: "Invalid email or token" });
+    }
+
+    try {
+      user = await user.update({
+        confirmation_token: null,
+        confirmed: true
+      });
+      if (user) {
+        return res.status(200).json({
+          type: "success",
+          message: "Account confirmation successful!"
+        });
+      }
+    } catch (e) {
+      next(e);
+    }
   }
 );
 

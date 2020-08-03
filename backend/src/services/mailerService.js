@@ -51,7 +51,11 @@ const sendResetTokenLink = function(email, token) {
 };
 
 const sendWelcomeMessage = function(user, token) {
-  const tokenContainer = objToBase64({ email: user.email, token });
+  const tokenContainer = objToBase64({
+    email: user.email,
+    firstname: user.firstname,
+    token
+  });
   const url = `${rootDomain()}/auth/confirm/${tokenContainer}`;
 
   const mailObj = {
