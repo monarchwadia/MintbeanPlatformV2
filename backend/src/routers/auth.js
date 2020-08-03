@@ -217,6 +217,15 @@ authRoute.post(
         isAdmin
       });
       if (user) {
+        // generate confirmation token
+        const confirmationToken = uuidv4();
+
+        // The bcrypt of the token is saved on the user object.
+        const hashedConfirmationToken = await hash(resetToken);
+
+        await user.update({
+          confirmation_token: hashedConfirmationToken
+        });
         sendWelcomeMessage(user);
       }
     } catch (e) {

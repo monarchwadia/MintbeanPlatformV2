@@ -1,9 +1,8 @@
 // const sgMail = require("@sendgrid/mail");
 const { rootDomain } = require("../utils/config");
-const { send } = require("../daos/MailerDao");
 const { objToBase64 } = require("../utils/encryption");
 
-const EmailDao = require;
+const EmailDao = require("../daos/MailerDao");
 const MINTBEAN_URL = "https://www.mintbean.io/";
 const EVENTBRITE_URL = "https://www.eventbrite.ca/o/mintbean-28752300031";
 const BUTTON_STYLE = `
@@ -47,7 +46,7 @@ const sendResetTokenLink = function(email, token) {
     <a id="btn_reset_link" href="${url}" style="${BUTTON_STYLE}">Create a new password</a>
     `
   };
-  return send(mailObj);
+  return EmailDao.send(mailObj);
 };
 
 const sendWelcomeMessage = function(user) {
@@ -62,7 +61,7 @@ const sendWelcomeMessage = function(user) {
     <p>Mintbean team</p>
     `
   };
-  return send(mailObj);
+  return EmailDao.send(mailObj);
 };
 
 module.exports = {
