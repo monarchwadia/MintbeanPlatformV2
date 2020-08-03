@@ -221,7 +221,7 @@ authRoute.post(
         const confirmationToken = uuidv4();
 
         // The bcrypt of the token is saved on the user object.
-        const hashedConfirmationToken = await hash(resetToken);
+        const hashedConfirmationToken = await hash(confirmationToken);
 
         await user.update({
           confirmation_token: hashedConfirmationToken

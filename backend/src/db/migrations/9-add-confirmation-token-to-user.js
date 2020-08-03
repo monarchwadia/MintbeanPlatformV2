@@ -10,13 +10,18 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: true
         }
-      )
+      ),
+      queryInterface.addColumn("confirmed", {
+        type: Sequelize.Boolean,
+        defaultValue: false
+      })
     ]);
   },
 
   down: (queryInterface, Sequelize) => {
     return Promise.all([
-      queryInterface.removeColumn("Users", "confirmation_token")
+      queryInterface.removeColumn("Users", "confirmation_token"),
+      queryInterface.removeColumn("Users", "confirmed")
     ]);
   }
 };
