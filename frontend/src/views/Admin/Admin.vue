@@ -33,6 +33,7 @@ main.container.m-auto
     FormulateInput(type="textarea" name="description" label="Event Description" validation="required")
     FormulateInput(type="text" name="cover_image_url" label="Image URL" validation="required")
     FormulateInput(type="textarea" name="instructions" label="Instructions" validation="required")
+    FormulateInput(type="text" name="register_link" label="Registration link" validation="required")
     FormulateInput(type="datetime-local" name="start_time" label="Start Time" validation="required")
     FormulateInput(type="datetime-local" name="end_time" label="End Time" validation="required")
     FormulateInput(type="submit") Submit
@@ -89,7 +90,8 @@ export default {
         cover_image_url: "",
         instructions: "",
         start_time: new Date(),
-        end_time: new Date()
+        end_time: new Date(),
+        register_link: ""
       },
       featuredSectionsJSONstr: "",
       featuredSectionsJSONstrSample: JSON.stringify(

@@ -5,6 +5,7 @@ export interface MbEvent {
   instructions: string;
   start_time: Date;
   end_time: Date;
+  register_link: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

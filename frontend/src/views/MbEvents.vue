@@ -8,8 +8,9 @@
     div.container.m-auto.pt-24
       div
         h2.mb-2.text-2xl.md_text-4xl Upcoming Events
-        mb-event-section(:events="futureEvents")
-      div.mt-6
+        mb-event-section(v-if="futureEvents.length > 0" :events="futureEvents")
+        p.text-2xl.mb-6(v-else) No events at the moment... Stay tuned!
+      div.mt-6(v-if="pastEvents.length > 0")
         h2.mb-2.text-2xl.md_text-4xl Past Events
         mb-event-section(:events="pastEvents")
 </template>
