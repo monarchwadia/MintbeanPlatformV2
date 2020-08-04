@@ -30,7 +30,6 @@ main.container.m-auto
   h1.text-2xl.mt-12 Create Event
   FormulateForm(v-model="mbEvent" @submit="onSubmit")
     FormulateInput(type="text" name="title" label="Event Title" validation="required")
-    FormulateInput(type="text" name="description" label="Event Description" validation="required")
     FormulateInput(type="textarea" name="description" label="Event Description" validation="required")
     FormulateInput(type="text" name="cover_image_url" label="Image URL" validation="required")
     FormulateInput(type="textarea" name="instructions" label="Instructions" validation="required")
@@ -117,7 +116,8 @@ export default {
         .catch(e => {
           const message =
             // eslint-disable-next-line prettier/prettier
-          (e && e.response && e.response.data && e.response.data.message) || "";
+            (e && e.response && e.response.data && e.response.data.message) ||
+            "";
           console.log("Failed to create event", message, e);
           alert("Failed to create event. " + message);
         });
