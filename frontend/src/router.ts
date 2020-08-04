@@ -8,6 +8,7 @@ import Logout from "./views/Auth/Logout.vue";
 import Register from "./views/Auth/Register.vue";
 import Reset from "./views/Auth/Reset.vue";
 import ResetNewPassword from "./views/Auth/ResetNewPassword.vue";
+import Confirm from "./views/Auth/Confirm.vue";
 import Project from "./views/Project.vue";
 import UserProfile from "./views/UserProfile.vue";
 import Admin from "./views/Admin/Admin.vue";
@@ -59,6 +60,11 @@ const routes: Array<RouteConfig> = [
     path: "/auth/register",
     name: "Register",
     component: Register
+  },
+  {
+    path: "/auth/confirm/:token",
+    name: "Confirm",
+    component: Confirm
   },
   {
     path: "/auth/logout",

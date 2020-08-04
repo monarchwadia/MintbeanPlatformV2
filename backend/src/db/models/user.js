@@ -16,7 +16,9 @@ module.exports = (sequelize, DataTypes) => {
       twitter_id: DataTypes.STRING,
       stackoverflow_id: DataTypes.STRING,
       reset_token: DataTypes.STRING,
-      reset_token_created_at: DataTypes.DATE
+      reset_token_created_at: DataTypes.DATE,
+      confirmation_token: DataTypes.STRING,
+      confirmed: DataTypes.BOOLEAN
     },
     {
       hooks: {

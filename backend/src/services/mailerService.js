@@ -1,9 +1,9 @@
 // const sgMail = require("@sendgrid/mail");
 const { rootDomain } = require("../utils/config");
-const { send } = require("../daos/MailerDao");
 const { objToBase64 } = require("../utils/encryption");
 
-const EmailDao = require;
+const EmailDao = require("../daos/MailerDao");
+
 const MINTBEAN_URL = "https://www.mintbean.io/";
 const EVENTBRITE_URL = "https://www.eventbrite.ca/o/mintbean-28752300031";
 const BUTTON_STYLE = `
@@ -47,22 +47,29 @@ const sendResetTokenLink = function(email, token) {
     <a id="btn_reset_link" href="${url}" style="${BUTTON_STYLE}">Create a new password</a>
     `
   };
-  return send(mailObj);
+  return EmailDao.send(mailObj);
 };
 
-const sendWelcomeMessage = function(user) {
+const sendWelcomeMessage = function(user, token) {
+  const tokenContainer = objToBase64({
+    email: user.email,
+    firstname: user.firstname,
+    token
+  });
+  const url = `${rootDomain()}/auth/confirm/${tokenContainer}`;
+
   const mailObj = {
     to: user.email,
     subject: "Confirm your Mintbean account",
     html: `
     <p>Welcome to Mintbean, ${user.firstname}!</p>
     <p>Please click the link below to confirm your new account.</p>
-    <a style="${BUTTON_STYLE}" href="${MINTBEAN_URL}">Confirm your new account</a>
+    <a style="${BUTTON_STYLE}" href="${url}">Confirm your new account</a>
     <p>Be sure to check out our <a href="${EVENTBRITE_URL}" rel="noopener noreferrer" target="_blank">upcoming events</a> to get started hacking!</p>
     <p>Mintbean team</p>
     `
   };
-  return send(mailObj);
+  return EmailDao.send(mailObj);
 };
 
 module.exports = {
