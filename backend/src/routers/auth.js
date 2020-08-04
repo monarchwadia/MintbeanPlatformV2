@@ -249,7 +249,6 @@ authRoute.post(
     })
   ),
   async (req, res, next) => {
-    console.log(req.user);
     const { email, token } = req.body;
     let user;
     try {
