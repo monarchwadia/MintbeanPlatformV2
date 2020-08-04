@@ -51,7 +51,7 @@ import authYouAgree from "./auth-you-agree.vue";
 import disallowAuthenticatedUser from "../../mixins/disallowAuthenticatedUser";
 
 export default {
-  name: "Login",
+  name: "Register",
   mixins: [disallowAuthenticatedUser],
   data() {
     return {

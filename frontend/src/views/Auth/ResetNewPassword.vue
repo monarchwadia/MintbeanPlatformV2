@@ -57,7 +57,6 @@ export default {
         this.$mbContext.authService
           .resetPassword(data.password, decodedToken, email)
           .then(res => {
-            console.log(res);
             if (res.err) {
               alert(`Error: ${res.err}`);
             } else {
@@ -108,7 +107,6 @@ export default {
       this.token = token;
       this.showPasswordFormMsg();
     } catch {
-      console.log("error");
       alert("Something went wrong");
     }
   },

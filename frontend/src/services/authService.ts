@@ -1,6 +1,11 @@
 import { MbUser } from "@/types/MbUser";
 import { ApiService } from "./apiService";
 
+interface TokenObj {
+  email: string;
+  token: string;
+}
+
 export class AuthService {
   constructor(private apiService: ApiService) {}
   checkAuth(): Promise<MbUser> {
@@ -11,12 +16,17 @@ export class AuthService {
       .post("/api/v1/auth/login", { email, password })
       .then(resp => resp.data);
   }
+  confirmUser(tokenObj: TokenObj): Promise<MbUser> {
+    return this.apiService
+      .post("/api/v1/auth/confirm", tokenObj)
+      .then(resp => resp.data);
+  }
   sendResetToken(email: string): Promise<MbUser> {
     return this.apiService
       .post("/api/v1/auth/reset", { email })
       .then(resp => resp.data);
   }
-  checkPasswordResetToken(tokenObj: object): Promise<MbUser> {
+  checkPasswordResetToken(tokenObj: TokenObj): Promise<MbUser> {
     return this.apiService
       .post("/api/v1/auth/reset/check-token", { tokenObj })
       .then(resp => resp.data);
