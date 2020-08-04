@@ -6,8 +6,6 @@ const { User } = require("../src/db/models");
 const { v4: uuidv4 } = require("uuid");
 const { hash, compare } = require("../src/utils/encryption");
 
-const FIRST_NAME = "Monarch";
-
 let agent = null;
 let user;
 
@@ -35,7 +33,6 @@ describe("User auth confirm routes", () => {
         const hashedToken = await hash(uuid);
         user = await User.create(
           userFactory.one({
-            firstname: FIRST_NAME,
             email: TEST_EMAIL,
             password: TEST_PASSWORD,
             confirmation_token: hashedToken
@@ -58,9 +55,7 @@ describe("User auth confirm routes", () => {
         const updatedUser = await User.findOne({
           where: { email: user.email }
         });
-
         expect(response.statusCode).toBe(200);
-        expect(response.firstname).toMatch(FIRST_NAME);
         expect(updatedUser.confirmed).toBe(true);
         expect(updatedUser.confirmation_token).toBe(null);
 
@@ -72,7 +67,6 @@ describe("User auth confirm routes", () => {
       beforeEach(async done => {
         user = await User.create(
           userFactory.one({
-            firstname: "Monarch",
             email: TEST_EMAIL,
             password: TEST_PASSWORD,
             confirmation_token: null,
@@ -103,21 +97,17 @@ describe("User auth confirm routes", () => {
         done();
       });
     });
-    // TODO: add test cases for invalid token/email
-    describe("when invalid token/email requested", () => {
+    describe("when invalid token requested", () => {
       beforeEach(async done => {
-        const uuid = uuidv4();
-        const hashedToken = await hash(uuid);
+        const hashedToken = await hash(uuidv4());
         user = await User.create(
           userFactory.one({
-            firstname: FIRST_NAME,
             email: TEST_EMAIL,
             password: TEST_PASSWORD,
-            confirmation_token: null,
-            confirmed: true
+            confirmation_token: hashedToken,
+            confirmed: false
           })
         );
-        user.uuid = uuid;
 
         done();
       });
@@ -126,19 +116,17 @@ describe("User auth confirm routes", () => {
         done();
       });
 
-      it("responds status 200 with { type: 'already-confirmed' }", async done => {
+      it("responds status 422 with { type: 'already-confirmed' }", async done => {
         const response = await agent
           .post("/api/v1/auth/confirm")
           .send({ email: user.email, token: "whocareswhatthisis" });
 
         // re-fetch user with given email
-        const updatedUser = await User.findOne({
+        const refetchedUser = await User.findOne({
           where: { email: user.email }
         });
-        expect(response.statusCode).toBe(200);
-        expect(response.body.type).toMatch("already-confirmed");
-        expect(updatedUser.confirmed).toBe(true);
-        expect(updatedUser.confirmation_token).toBe(null);
+        expect(response.statusCode).toBe(422);
+        expect(refetchedUser.confirmed).toBe(false);
 
         done();
       });

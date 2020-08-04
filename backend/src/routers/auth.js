@@ -265,7 +265,6 @@ authRoute.post(
     }
 
     const isValidToken = await compare(token, user.confirmation_token);
-
     if (!email || !token || !user || !isValidToken) {
       return res.status(422).json({ message: "Invalid email or token" });
     }
