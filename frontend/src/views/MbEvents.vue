@@ -6,11 +6,11 @@
       backRefPath="/"
     )
     div.container.m-auto.pt-24
-      div
+      div.mb-4.md_mb-0.md_mr-4.shadow-mb.p-10.flex.flex-col.justify-center.text-white.rounded-lg(style="flex-basis: 60%; background: linear-gradient(0deg, black, #3d3d3d);")
         h2.mb-2.text-2xl.md_text-4xl Upcoming Events
         mb-event-section(v-if="futureEvents.length > 0" :events="futureEvents")
         p.text-2xl.mb-6(v-else) No events at the moment... Stay tuned!
-      div.mt-6(v-if="pastEvents.length > 0")
+      div.p-10.mt-6(v-if="pastEvents.length > 0")
         h2.mb-2.text-2xl.md_text-4xl Past Events
         mb-event-section(:events="pastEvents")
 </template>

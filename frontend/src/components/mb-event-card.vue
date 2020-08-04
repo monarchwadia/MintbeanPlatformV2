@@ -1,5 +1,5 @@
 <template lang="pug">
-  mb-internal-link.w-full(:to="'/mb-event/' + id" style="margin: 0.5rem;")
+  mb-internal-link.w-full.max-w-full(:to="'/mb-event/' + id" style="margin: 0.5rem;")
     div._event-card.rounded.overflow-hidden.h-full.shadow-xl.hover_shadow-2xl.w-full
       div.w-full.relative(
         style="background-size: cover; background-position:center; height: 250px;"
@@ -11,7 +11,7 @@
           :href="registerLink"
           @click.stop
         ) Register
-      div.px-4.py-4.text-gray-700.lg_flex.lg_justify-between.items-center
+      div.bg-white.px-4.py-4.text-gray-700.lg_flex.lg_justify-between.items-center
         div.text-xl.mr-2 {{ eventTitle }}
         div.text-sm {{prettyESTDate(startTime)}}
 </template>
