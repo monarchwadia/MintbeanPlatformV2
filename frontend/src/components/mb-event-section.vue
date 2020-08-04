@@ -35,7 +35,6 @@
 export default {
   name: "mb-event-section",
   props: {
-    title: String,
     events: {
       type: Array,
       // TODO: remove this dummy data once hooked up to real events (MbConfig)

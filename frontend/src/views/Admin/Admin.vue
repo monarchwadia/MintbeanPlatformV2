@@ -44,6 +44,7 @@ main.container.m-auto
 
 <script>
 import mbProjectSearch from "../../components/mb-project-search";
+//- import dateService from "../../helpers/dateService";
 
 const sampleFeaturedSectionsFormat = {
   sections: [
@@ -104,9 +105,9 @@ export default {
   computed: {},
   methods: {
     onSubmit() {
+      //- dateService.dbDateToTimezone(this.mbEvent.start_time, )
       const self = this;
       const { mbEventService } = this.$mbContext;
-
       mbEventService
         .create(this.mbEvent)
         .then(mbEvent => {

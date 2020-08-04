@@ -6,16 +6,25 @@
       backRefPath="/"
     )
     div.container.m-auto.pt-24
-      mb-event-section(:events="events")
+      div
+        h2.mb-2.text-2xl.md_text-4xl Upcoming Events
+        mb-event-section(:events="futureEvents")
+      div.mt-6
+        h2.mb-2.text-2xl.md_text-4xl Past Events
+        mb-event-section(:events="pastEvents")
 </template>
 
 <script>
 // @ is an alias to /src
+import isPast from "../helpers/isPast";
+import isUpcoming from "../helpers/isUpcoming";
+
 export default {
   name: "Events",
   data() {
     return {
-      events: []
+      pastEvents: [],
+      futureEvents: []
     };
   },
   methods: {
@@ -25,7 +34,6 @@ export default {
       this.$mbContext.mbEventService
         .getMbEvents()
         .then(events => {
-          // TODO: remove this map in prod, adds fake image
           events = events.sort((a, b) => {
             // to reverse chronological
             return (
@@ -34,7 +42,17 @@ export default {
             );
           });
 
-          self.events = events;
+          self.pastEvents = events.filter(e => isPast(e.end_time));
+          self.futureEvents = events
+            .filter(e => isUpcoming(e.end_time))
+            // to chronological order
+            .sort((b, a) => {
+              return a.end_time > b.end_time
+                ? 1
+                : a.end_time < b.end_time
+                ? -1
+                : 0;
+            });
         })
         .catch(e => {
           console.error(e);
