@@ -34,24 +34,24 @@ export default {
       this.$mbContext.mbEventService
         .getMbEvents()
         .then(events => {
-          events = events.sort((a, b) => {
-            // to reverse chronological
-            return (
-              new Date(b.start_time).getTime() -
-              new Date(a.start_time).getTime()
-            );
-          });
-
-          self.pastEvents = events.filter(e => isPast(e.end_time));
+          self.pastEvents = events
+            .filter(e => isPast(e.end_time))
+            .sort((a, b) => {
+              // to reverse chronological
+              return (
+                new Date(b.start_time).getTime() -
+                new Date(a.start_time).getTime()
+              );
+            });
           self.futureEvents = events
             .filter(e => isUpcoming(e.end_time))
-            // to chronological order
-            .sort((b, a) => {
-              return a.end_time > b.end_time
-                ? 1
-                : a.end_time < b.end_time
-                ? -1
-                : 0;
+            // to chronological
+            .sort((a, b) => {
+              // to reverse chronological
+              return (
+                new Date(a.start_time).getTime() -
+                new Date(b.start_time).getTime()
+              );
             });
         })
         .catch(e => {
