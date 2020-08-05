@@ -35,7 +35,7 @@ main.container.m-auto.max-w-screen-md
     FormulateInput(type="textarea" name="instructions" label="Instructions" validation="required")
     FormulateInput(type="text" name="register_link" label="Registration link" validation="required")
     FormulateInput(type="select" name="region" :options="options" label="Region of event" validation="required")
-    FormulateInput(type="datetime-local" name="start_time" label="Start Time" validation="required")
+    FormulateInput(type="datetime-local" @input="handleChange" name="start_time" label="Start Time" validation="required")
     FormulateInput(type="datetime-local" name="end_time" label="End Time" validation="required")
     FormulateInput(type="submit") Submit
 
@@ -46,7 +46,7 @@ main.container.m-auto.max-w-screen-md
 
 <script>
 import mbProjectSearch from "../../components/mb-project-search";
-//- import dateService from "../../helpers/dateService";
+import dateService from "../../helpers/dateService";
 
 const sampleFeaturedSectionsFormat = {
   sections: [
@@ -111,25 +111,51 @@ export default {
   },
   computed: {},
   methods: {
+    handleChange() {
+      const d = new Date(this.mbEvent.start_time);
+      console.log(this.mbEvent.start_time);
+      console.log(dateService.buildUTCTimestampStrFromDate(d));
+
+      //- console.log(
+      //-   dateService.buildTimestampStr({
+      //-     year: now.getFullYear(),
+      //-     month: now.getMonth(),
+      //-     date: now.getDate(),
+      //-     hour: hr,
+      //-     min: min
+      //-   })
+      //- );
+    },
     onSubmit() {
-      //- dateService.dbDateToTimezone(this.mbEvent.start_time, )
-      const self = this;
+      //- const self = this;
+      //- const { mbEventService } = this.$mbContext;
+
+      const { buildUTCTimestampStrFromDate } = dateService;
+      const startDate = new Date(this.mbEvent.start_time);
+      const endDate = new Date(this.mbEvent.end_time);
+
+      // overwrite start_time and end_time to UTC timestamps
+      this.mbEvent = {
+        ...this.mbEvent,
+        start_time: buildUTCTimestampStrFromDate(startDate),
+        end_time: buildUTCTimestampStrFromDate(endDate)
+      };
       console.log(this.mbEvent);
-      const { mbEventService } = this.$mbContext;
-      mbEventService
-        .create(this.mbEvent)
-        .then(mbEvent => {
-          alert("Success! Navigating to the event.");
-          self.$router.push("/mb-event/" + mbEvent.id);
-        })
-        .catch(e => {
-          const message =
-            // eslint-disable-next-line prettier/prettier
-            (e && e.response && e.response.data && e.response.data.message) ||
-            "";
-          console.log("Failed to create event", message, e);
-          alert("Failed to create event. " + message);
-        });
+
+      //- mbEventService
+      //-   .create(this.mbEvent)
+      //-   .then(mbEvent => {
+      //-     alert("Success! Navigating to the event.");
+      //-     self.$router.push("/mb-event/" + mbEvent.id);
+      //-   })
+      //-   .catch(e => {
+      //-     const message =
+      //-       // eslint-disable-next-line prettier/prettier
+      //-       (e && e.response && e.response.data && e.response.data.message) ||
+      //-       "";
+      //-     console.log("Failed to create event", message, e);
+      //-     alert("Failed to create event. " + message);
+      //-   });
     },
     async updateFeaturedProjectsSections() {
       const confirmed = confirm("Are you sure you want to make this change?");
@@ -149,14 +175,13 @@ export default {
     },
     defaultTime(hr = 12, min = 0) {
       const now = new Date();
-      if (min > 59) min = 0;
-      // prepend 0 if needed
-      hr = ("0" + hr).slice(-2);
-      min = ("0" + min).slice(-2);
-      const month = ("0" + (now.getMonth() + 1)).slice(-2);
-      const date = ("0" + now.getDate()).slice(-2);
-      console.log(`${now.getFullYear()}-${month}-${date}T${hr}:${min}`);
-      return `${now.getFullYear()}-${month}-${date}T${hr}:${min}`;
+      return dateService.buildTimestampStr({
+        year: now.getFullYear(),
+        month: now.getMonth(),
+        date: now.getDate(),
+        hour: hr,
+        min: min
+      });
     }
   },
   mounted() {

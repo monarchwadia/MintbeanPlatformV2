@@ -83,6 +83,7 @@ div
 
 <script>
 import prettyESTDate from "../helpers/prettyDate";
+import moment from "moment-timezone";
 
 // @ is an alias to /src
 export default {
@@ -205,6 +206,14 @@ export default {
         .fetchMbEvent(id)
         .then(mbEvent => {
           self.mbEvent = mbEvent;
+          console.log(mbEvent.start_time);
+          console.log(mbEvent.region);
+          console.log(
+            moment
+              .tz(new Date(mbEvent.start_time), mbEvent.region)
+              .tz("America/Seattle")
+              .format()
+          );
         })
         .catch(e => {
           console.error(e);
