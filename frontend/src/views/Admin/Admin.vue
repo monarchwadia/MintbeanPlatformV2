@@ -35,7 +35,7 @@ main.container.m-auto.max-w-screen-md
     FormulateInput(type="textarea" name="instructions" label="Instructions" validation="required")
     FormulateInput(type="text" name="register_link" label="Registration link" validation="required")
     FormulateInput(type="select" name="region" :options="options" label="Region of event" validation="required")
-    FormulateInput(type="datetime-local" @input="handleChange" name="start_time" label="Start Time" validation="required")
+    FormulateInput(type="datetime-local" name="start_time" label="Start Time" validation="required")
     FormulateInput(type="datetime-local" name="end_time" label="End Time" validation="required")
     FormulateInput(type="submit") Submit
 
@@ -46,7 +46,7 @@ main.container.m-auto.max-w-screen-md
 
 <script>
 import mbProjectSearch from "../../components/mb-project-search";
-import dateService from "../../helpers/dateService";
+import dates from "../../helpers/dates";
 
 const sampleFeaturedSectionsFormat = {
   sections: [
@@ -111,27 +111,11 @@ export default {
   },
   computed: {},
   methods: {
-    handleChange() {
-      const d = new Date(this.mbEvent.start_time);
-      console.log(this.mbEvent.start_time);
-      console.log(dateService.buildUTCTimestampStrFromDate(d));
-    },
     onSubmit() {
       const self = this;
       const { mbEventService } = this.$mbContext;
 
-      //- const { buildUTCTimestampStrFromDate } = dateService;
-      //- const startDate = new Date(this.mbEvent.start_time);
-      //- const endDate = new Date(this.mbEvent.end_time);
-      //- console.log(startDate)
-      //-
-      //- // overwrite start_time and end_time to UTC timestamps
-      //- this.mbEvent = {
-      //-   ...this.mbEvent,
-      //-   start_time: buildUTCTimestampStrFromDate(startDate),
-      //-   end_time: buildUTCTimestampStrFromDate(endDate)
-      //- };
-      console.log(this.mbEvent)
+      console.log(this.mbEvent);
       mbEventService
         .create(this.mbEvent)
         .then(mbEvent => {
@@ -165,7 +149,7 @@ export default {
     },
     defaultTime(hr = 12, min = 0) {
       const now = new Date();
-      return dateService.buildTimestampStr({
+      return dates.buildTimestampStr({
         year: now.getFullYear(),
         month: now.getMonth(),
         date: now.getDate(),

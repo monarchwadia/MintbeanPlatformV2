@@ -83,7 +83,7 @@ div
 
 <script>
 //- import prettyESTDate from "../helpers/prettyDate";
-import dateService from "../helpers/dateService";
+import dates from "../helpers/dates";
 
 // @ is an alias to /src
 export default {
@@ -139,7 +139,7 @@ export default {
     },
     prettyStartTime: function() {
       const { start_time, region } = this.mbEvent;
-      return dateService.prettyLocalDate(start_time, region);
+      return dates.prettyLocalDate(start_time, region);
       //- const datestr = this.mbEvent.start_time.toLocaleString();
       //- return prettyESTDate(datestr, { weekday: "long" });
     },

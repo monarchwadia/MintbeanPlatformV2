@@ -8,10 +8,12 @@ const dates = require("../utils/dates");
 
 const mbEventRoute = new Router();
 
-mbEventRoute.get("/", async (req, res, next) => {
-  const start = new Date() - 4 * 24 * 60 * 60 * 1000; // 4 days before
-  const end = new Date() + 14 * 24 * 60 * 60 * 1000; // 14 days into the future
+// IMPORTANT: events storage/retrieval must adjust start/end time for wallclock time
+// (../utils/dates.js)
+// storage: toWallclockTime(datetimeStr)
+// retrieval: toDatetimeStr(wallclockTime)
 
+mbEventRoute.get("/", async (req, res, next) => {
   MbEvent.findAll({
     include: [
       {
@@ -41,7 +43,9 @@ mbEventRoute.get("/", async (req, res, next) => {
               exclude: [
                 "password_hash",
                 "reset_token",
-                "reset_token_created_at"
+                "reset_token_created_at",
+                "confirmed",
+                "confirmation_token"
               ]
             }
           },
@@ -64,7 +68,26 @@ mbEventRoute.get("/", async (req, res, next) => {
     ],
     subQuery: false
   })
-    .then(events => res.json(events))
+    .then(events => {
+      // wallclock time adjusted
+      // const adjusted = events.map(event => {
+      //   const adjustedStart = dates.toDatetimeStr(event.start_time);
+      //   const adjustedEnd = dates.toDatetimeStr(event.start_time);
+      //   return { ...event, start_time: adjustedStart, end_time: adjustedEnd };
+      // });
+      // console.log(adjusted);
+      const adjusted = events.map(e => {
+        const eJson = e.toJSON();
+        return {
+          ...eJson,
+          start_time: dates.toDatetimeStr(eJson.start_time),
+          end_time: dates.toDatetimeStr(eJson.end_time)
+        };
+      });
+
+      console.log(adjusted);
+      res.json(adjusted);
+    })
     .catch(err => {
       next(err);
     });
@@ -87,6 +110,7 @@ mbEventRoute.get(
         start_time: dates.toDatetimeStr(event.start_time),
         end_time: dates.toDatetimeStr(event.end_time)
       };
+
       res.status(200).json(walltimeAdjustedEvent);
     } catch (e) {
       console.log(e);
