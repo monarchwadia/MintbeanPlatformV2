@@ -70,12 +70,6 @@ mbEventRoute.get("/", async (req, res, next) => {
   })
     .then(events => {
       // wallclock time adjusted
-      // const adjusted = events.map(event => {
-      //   const adjustedStart = dates.toDatetimeStr(event.start_time);
-      //   const adjustedEnd = dates.toDatetimeStr(event.start_time);
-      //   return { ...event, start_time: adjustedStart, end_time: adjustedEnd };
-      // });
-      // console.log(adjusted);
       const adjusted = events.map(e => {
         const eJson = e.toJSON();
         return {
