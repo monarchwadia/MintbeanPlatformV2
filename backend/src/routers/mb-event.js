@@ -124,14 +124,13 @@ mbEventRoute.post(
     })
   ),
   async (req, res, next) => {
-    // console.log(req.body.dataValues);
+    // convert datetime strings to UTC wallclock
     const wallclockAdjustedEvent = {
       ...req.body,
       start_time: dates.toWallclockTime(req.body.start_time),
       end_time: dates.toWallclockTime(req.body.end_time)
     };
     try {
-      // convert datetime strings to UTC wallclock
       const event = await MbEvent.create(wallclockAdjustedEvent);
       res.status(200).json(event);
     } catch (e) {
