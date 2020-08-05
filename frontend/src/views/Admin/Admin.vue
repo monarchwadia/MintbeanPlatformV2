@@ -115,20 +115,10 @@ export default {
       const d = new Date(this.mbEvent.start_time);
       console.log(this.mbEvent.start_time);
       console.log(dateService.buildUTCTimestampStrFromDate(d));
-
-      //- console.log(
-      //-   dateService.buildTimestampStr({
-      //-     year: now.getFullYear(),
-      //-     month: now.getMonth(),
-      //-     date: now.getDate(),
-      //-     hour: hr,
-      //-     min: min
-      //-   })
-      //- );
     },
     onSubmit() {
-      //- const self = this;
-      //- const { mbEventService } = this.$mbContext;
+      const self = this;
+      const { mbEventService } = this.$mbContext;
 
       const { buildUTCTimestampStrFromDate } = dateService;
       const startDate = new Date(this.mbEvent.start_time);
@@ -142,20 +132,20 @@ export default {
       };
       console.log(this.mbEvent);
 
-      //- mbEventService
-      //-   .create(this.mbEvent)
-      //-   .then(mbEvent => {
-      //-     alert("Success! Navigating to the event.");
-      //-     self.$router.push("/mb-event/" + mbEvent.id);
-      //-   })
-      //-   .catch(e => {
-      //-     const message =
-      //-       // eslint-disable-next-line prettier/prettier
-      //-       (e && e.response && e.response.data && e.response.data.message) ||
-      //-       "";
-      //-     console.log("Failed to create event", message, e);
-      //-     alert("Failed to create event. " + message);
-      //-   });
+      mbEventService
+        .create(this.mbEvent)
+        .then(mbEvent => {
+          alert("Success! Navigating to the event.");
+          self.$router.push("/mb-event/" + mbEvent.id);
+        })
+        .catch(e => {
+          const message =
+            // eslint-disable-next-line prettier/prettier
+            (e && e.response && e.response.data && e.response.data.message) ||
+            "";
+          console.log("Failed to create event", message, e);
+          alert("Failed to create event. " + message);
+        });
     },
     async updateFeaturedProjectsSections() {
       const confirmed = confirm("Are you sure you want to make this change?");

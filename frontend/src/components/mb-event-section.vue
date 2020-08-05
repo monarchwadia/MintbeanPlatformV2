@@ -10,6 +10,7 @@
         :startTime="event.start_time"
         :endTime="event.end_time"
         :registerLink="event.register_link"
+        :region="event.region"
       )
 </template>
 

@@ -82,8 +82,8 @@ div
 </style>
 
 <script>
-import prettyESTDate from "../helpers/prettyDate";
-import moment from "moment-timezone";
+//- import prettyESTDate from "../helpers/prettyDate";
+import dateService from "../helpers/dateService";
 
 // @ is an alias to /src
 export default {
@@ -138,11 +138,10 @@ export default {
       return !!(this.hasInstructions && isShowTime);
     },
     prettyStartTime: function() {
-      if (!this.mbEvent.start_time) {
-        return "";
-      }
-      const datestr = this.mbEvent.start_time.toLocaleString();
-      return prettyESTDate(datestr, { weekday: "long" });
+      const { start_time, region } = this.mbEvent;
+      return dateService.prettyLocalDate(start_time, region);
+      //- const datestr = this.mbEvent.start_time.toLocaleString();
+      //- return prettyESTDate(datestr, { weekday: "long" });
     },
     // mbEvent: function() {
     //   const { id } = this.$route.params;
@@ -206,14 +205,6 @@ export default {
         .fetchMbEvent(id)
         .then(mbEvent => {
           self.mbEvent = mbEvent;
-          console.log(mbEvent.start_time);
-          console.log(mbEvent.region);
-          console.log(
-            moment
-              .tz(new Date(mbEvent.start_time), mbEvent.region)
-              .tz("America/Seattle")
-              .format()
-          );
         })
         .catch(e => {
           console.error(e);

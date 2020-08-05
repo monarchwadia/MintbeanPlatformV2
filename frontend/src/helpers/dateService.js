@@ -6,14 +6,14 @@ const getLocalTimezone = function() {
 };
 
 // TODO: remove hardcoding of Toronto
-const dbDateToTimezone = function(
-  dbDatestring,
-  dbTimezone = "America/Toronto",
-  localTimezone = getLocalTimezone()
-) {
-  const m = moment.tz(dbDatestring, dbTimezone).tz(localTimezone);
-  return m.toDate();
-};
+// const dbDateToTimezone = function(
+//   dbDatestring,
+//   dbTimezone = "America/Toronto",
+//   localTimezone = getLocalTimezone()
+// ) {
+//   const m = moment.tz(dbDatestring, dbTimezone).tz(localTimezone);
+//   return m.toDate();
+// };
 
 // const buildUtcTimestampByRegion = function(datestr, region) {
 //   // convert to region moment
@@ -59,23 +59,34 @@ const buildUTCTimestampStrFromDate = date => {
     min: date.getUTCMinutes()
   });
 };
-
-const buildUtcDateByRegion = function(datestr, region) {
-  return new Date(this.buildUtcTimestampByRegion(datestr, region));
-};
+//
+// const buildUtcDateByRegion = function(datestr, region) {
+//   return new Date(buildUtcTimestampByRegion(datestr, region));
+// };
 
 // returns the format required for saving to DB
-const convertLocalDatetimeToRegion = function(datestr, region) {
-  const convertedDate = this.buildUtcDateByRegion(datestr, region);
-  // "yyyy-MM-ddThh:mm"
-  return moment(convertedDate).format("yyyy-MM-DDThh:mm");
+// const convertLocalDatetimeToRegion = function(datestr, region) {
+//   const convertedDate = buildUtcDateByRegion(datestr, region);
+//   // "yyyy-MM-ddThh:mm"
+//   return moment(convertedDate).format("yyyy-MM-DDThh:mm");
+// };
+
+const prettyLocalDate = function(
+  masterDate,
+  masterRegion,
+  userRegion = "America/Toronto" // TODO : dynamic timezone retreival. JS's Intl returns some IANA not covered by moment
+) {
+  if (!masterDate || !masterRegion) throw "Must pass valid utc date and region";
+  const m = moment.tz(masterDate,masterRegion).tz(userRegion)
+  return m.format("dddd, MMM Do YYYY, h:mm z");
 };
 
 module.exports = {
   buildTimestampStr,
   buildUTCTimestampStrFromDate,
+  prettyLocalDate,
   getLocalTimezone,
-  dbDateToTimezone,
-  buildUtcDateByRegion,
-  convertLocalDatetimeToRegion
+  // dbDateToTimezone,
+  // buildUtcDateByRegion,
+  // convertLocalDatetimeToRegion
 };
