@@ -15,6 +15,8 @@ div
         div.bg-white.p-12.rounded.text-center
           h1.text-lg.sm_text-2xl.md_text-5xl.font-semibold {{ mbEvent.title }}
           p.md_text-xl.py-2 {{ prettyStartTime }}
+          mb-external-link(v-if="isBeforeEvent && mbEvent.register_link" :href="mbEvent.register_link")
+            mb-button.mt-6 Register
     div.p-2.md_p-0.container.m-auto.mb-32
       div.md_flex.mb-16
         div.mb-4.md_mb-0.md_mr-4.shadow-mb.p-10.flex.flex-col.justify-center.text-white.rounded-lg(style="flex-basis: 60%; background: linear-gradient(0deg, black, #3d3d3d);")

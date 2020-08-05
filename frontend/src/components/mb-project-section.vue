@@ -41,10 +41,7 @@ export default {
   },
   data() {
     return {
-      editTitle: this.title,
-      sliderIsDown: false,
-      startX: null,
-      scrollLeft: null
+      editTitle: this.title
     };
   },
   methods: {
@@ -66,42 +63,11 @@ export default {
     isAdmin: function() {
       return this.$store.state.user && this.$store.state.user.isAdmin;
     }
-  },
-  mounted() {
-    // listen for horizontal scroll drag (https://codepen.io/thenutz/pen/VwYeYEE)
-    this.$refs.projectSectionContainer.addEventListener("mousedown", e => {
-      this.sliderIsDown = true;
-      this.startX = e.pageX - this.$refs.projectSectionContainer.offsetLeft;
-      this.scrollLeft = this.$refs.projectSectionContainer.scrollLeft;
-    });
-    this.$refs.projectSectionContainer.addEventListener("mouseleave", () => {
-      this.sliderIsDown = false;
-    });
-    this.$refs.projectSectionContainer.addEventListener("mouseup", () => {
-      this.sliderIsDown = false;
-    });
-    this.$refs.projectSectionContainer.addEventListener("mousemove", e => {
-      if (!this.sliderIsDown) return;
-      e.preventDefault();
-      const x = e.pageX - this.$refs.projectSectionContainer.offsetLeft;
-      const walk = (x - this.startX) * 3; //scroll-fast
-      this.$refs.projectSectionContainer.scrollLeft = this.scrollLeft - walk;
-    });
   }
 };
 </script>
 
 <style lang="css" scoped>
-.sliding-section.active {
-  cursor: ew-resize;
-  transform: scale(1.01);
-  transition: ease 0.2s;
-}
-.sliding-section {
-  transition: ease 0.2s;
-  cursor: ew-resize;
-}
-
 /* width */
 ::-webkit-scrollbar {
   width: 10px;

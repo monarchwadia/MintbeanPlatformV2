@@ -103,6 +103,9 @@ mbEventRoute.post(
       instructions: Joi.string()
         .min(1)
         .required(),
+      register_link: Joi.string()
+        .min(1)
+        .required(),
       start_time: Joi.date().required(),
       end_time: Joi.date().required()
     })

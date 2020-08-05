@@ -104,7 +104,7 @@ div
 </style>
 
 <script>
-import moment from "moment";
+import moment from "moment-timezone";
 
 // @ is an alias to /src
 export default {

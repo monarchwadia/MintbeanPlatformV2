@@ -1,4 +1,5 @@
 <template lang="pug">
+mb-internal-link(:to="'/project/' + id" target="_blank")
   div.rounded.shadow-xl.hover_shadow-2xl(style="width: 400px;")
     //- div.w-full(style="height: 225px; width: 400px;" :style="{ backgroundImage: cloudinaryUrlFor(cloudinaryPublicId) }")
     mb-image-display(:publicId="cloudinaryPublicId" height="225" width="400" crop="fill" style="width:400px; height: 225px;")
@@ -8,8 +9,7 @@
         mb-avatar.mr-1(size="sm")
         | {{ authorName }}
       div.hidden.text-gray-700.text-base.my-5(style="min-height: 60px; max-height: 60px; height: 60px;") {{ description }}
-      mb-internal-link(:to="'/project/' + id" target="_blank")
-        mb-button.float-right View
+
       div.flex.justify-left
         div.inline-block.bg-gray-200.rounded-full.px-3.py-1.text-sm.font-semibold.text-gray-700.mr-2(v-for="tag in tags") {{`#${tag}`}}
 </template>

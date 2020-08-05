@@ -1,6 +1,7 @@
 import { MbEvent } from "@/types/MbEvent";
 import { ApiService } from "./apiService";
 import isUpcoming from "../helpers/isUpcoming";
+import isPast from "../helpers/isPast";
 
 export class MbEventService {
   constructor(private apiService: ApiService) {}
@@ -18,13 +19,12 @@ export class MbEventService {
     return this.apiService.get("/api/v1/mb-event").then(events => {
       return events.data.filter((e: MbEvent) => isUpcoming(e.end_time));
     });
+  }
 
-    // events.data.sort((a: any, b: any) => {
-    //   return (
-    //     new Date(a.start_time).getTime() - new Date(b.start_time).getTime()
-    //   );
-    // })
-    // );
+  getPastMbEvents(): Promise<MbEvent> {
+    return this.apiService.get("/api/v1/mb-event").then(events => {
+      return events.data.filter((e: MbEvent) => isPast(e.end_time));
+    });
   }
 
   async fetchMbEvent(mbEventId: string): Promise<MbEvent> {

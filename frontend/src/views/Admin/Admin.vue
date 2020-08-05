@@ -30,10 +30,10 @@ main.container.m-auto
   h1.text-2xl.mt-12 Create Event
   FormulateForm(v-model="mbEvent" @submit="onSubmit")
     FormulateInput(type="text" name="title" label="Event Title" validation="required")
-    FormulateInput(type="text" name="description" label="Event Description" validation="required")
     FormulateInput(type="textarea" name="description" label="Event Description" validation="required")
     FormulateInput(type="text" name="cover_image_url" label="Image URL" validation="required")
     FormulateInput(type="textarea" name="instructions" label="Instructions" validation="required")
+    FormulateInput(type="text" name="register_link" label="Registration link" validation="required")
     FormulateInput(type="datetime-local" name="start_time" label="Start Time" validation="required")
     FormulateInput(type="datetime-local" name="end_time" label="End Time" validation="required")
     FormulateInput(type="submit") Submit
@@ -45,6 +45,7 @@ main.container.m-auto
 
 <script>
 import mbProjectSearch from "../../components/mb-project-search";
+//- import dateService from "../../helpers/dateService";
 
 const sampleFeaturedSectionsFormat = {
   sections: [
@@ -89,7 +90,8 @@ export default {
         cover_image_url: "",
         instructions: "",
         start_time: new Date(),
-        end_time: new Date()
+        end_time: new Date(),
+        register_link: ""
       },
       featuredSectionsJSONstr: "",
       featuredSectionsJSONstrSample: JSON.stringify(
@@ -105,9 +107,9 @@ export default {
   computed: {},
   methods: {
     onSubmit() {
+      //- dateService.dbDateToTimezone(this.mbEvent.start_time, )
       const self = this;
       const { mbEventService } = this.$mbContext;
-
       mbEventService
         .create(this.mbEvent)
         .then(mbEvent => {
@@ -117,7 +119,8 @@ export default {
         .catch(e => {
           const message =
             // eslint-disable-next-line prettier/prettier
-          (e && e.response && e.response.data && e.response.data.message) || "";
+            (e && e.response && e.response.data && e.response.data.message) ||
+            "";
           console.log("Failed to create event", message, e);
           alert("Failed to create event. " + message);
         });
