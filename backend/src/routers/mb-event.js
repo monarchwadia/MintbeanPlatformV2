@@ -84,8 +84,6 @@ mbEventRoute.get("/", async (req, res, next) => {
           end_time: dates.toDatetimeStr(eJson.end_time)
         };
       });
-
-      console.log(adjusted);
       res.json(adjusted);
     })
     .catch(err => {
