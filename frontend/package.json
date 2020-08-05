@@ -23,7 +23,7 @@
     "filepond-plugin-file-validate-size": "^2.2.1",
     "filepond-plugin-file-validate-type": "^1.2.5",
     "filepond-plugin-image-preview": "^4.6.4",
-    "moment": "^2.26.0",
+    "moment-timezone": "^0.5.31",
     "tailwindcss": "^1.4.6",
     "vue": "^2.6.11",
     "vue-filepond": "^6.0.2",

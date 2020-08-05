@@ -4,13 +4,16 @@ const { MbEvent, User, Project, Vote, MediaAsset } = require("../db/models");
 const Joi = require("@hapi/joi");
 const validator = require("../validator");
 const sequelize = require("sequelize");
+const dates = require("../utils/dates");
 
 const mbEventRoute = new Router();
 
-mbEventRoute.get("/", async (req, res, next) => {
-  const start = new Date() - 4 * 24 * 60 * 60 * 1000; // 4 days before
-  const end = new Date() + 14 * 24 * 60 * 60 * 1000; // 14 days into the future
+// IMPORTANT: events storage/retrieval must adjust start/end time for wallclock time
+// (../utils/dates.js)
+// storage: toWallclockTime(datetimeStr)
+// retrieval: toDatetimeStr(wallclockTime)
 
+mbEventRoute.get("/", async (req, res, next) => {
   MbEvent.findAll({
     include: [
       {
@@ -40,7 +43,9 @@ mbEventRoute.get("/", async (req, res, next) => {
               exclude: [
                 "password_hash",
                 "reset_token",
-                "reset_token_created_at"
+                "reset_token_created_at",
+                "confirmed",
+                "confirmation_token"
               ]
             }
           },
@@ -63,7 +68,18 @@ mbEventRoute.get("/", async (req, res, next) => {
     ],
     subQuery: false
   })
-    .then(events => res.json(events))
+    .then(events => {
+      // wallclock time adjusted
+      const adjusted = events.map(e => {
+        const eJson = e.toJSON();
+        return {
+          ...eJson,
+          start_time: dates.toDatetimeStr(eJson.start_time),
+          end_time: dates.toDatetimeStr(eJson.end_time)
+        };
+      });
+      res.json(adjusted);
+    })
     .catch(err => {
       next(err);
     });
@@ -76,12 +92,22 @@ mbEventRoute.get(
       id: Joi.string().required()
     })
   ),
-  (req, res, next) => {
+  async (req, res, next) => {
     const { id } = req.params;
 
-    MbEvent.findOne({ where: { id } })
-      .then(obj => res.json(obj))
-      .catch(e => next(e));
+    try {
+      const event = await MbEvent.findOne({ where: { id } });
+      const walltimeAdjustedEvent = {
+        ...event.dataValues,
+        start_time: dates.toDatetimeStr(event.start_time),
+        end_time: dates.toDatetimeStr(event.end_time)
+      };
+
+      res.status(200).json(walltimeAdjustedEvent);
+    } catch (e) {
+      console.log(e);
+      next(e);
+    }
   }
 );
 
@@ -103,27 +129,30 @@ mbEventRoute.post(
       instructions: Joi.string()
         .min(1)
         .required(),
-      start_time: Joi.date().required(),
-      end_time: Joi.date().required()
+      register_link: Joi.string()
+        .min(1)
+        .required(),
+      start_time: Joi.string().required(),
+      end_time: Joi.string().required(),
+      region: Joi.string()
+        .min(1)
+        .required()
     })
   ),
   async (req, res, next) => {
-    console.log(req.body);
-    MbEvent.create(
-      ({
-        title,
-        description,
-        cover_image_url,
-        instructions,
-        start_time,
-        end_time
-      } = req.body)
-    )
-      .then(resp => res.json(resp))
-      .catch(err => {
-        console.log(err);
-        next(err);
-      });
+    // convert datetime strings to UTC wallclock
+    const wallclockAdjustedEvent = {
+      ...req.body,
+      start_time: dates.toWallclockTime(req.body.start_time),
+      end_time: dates.toWallclockTime(req.body.end_time)
+    };
+    try {
+      const event = await MbEvent.create(wallclockAdjustedEvent);
+      res.status(200).json(event);
+    } catch (e) {
+      console.log(e);
+      next(e);
+    }
   }
 );
 

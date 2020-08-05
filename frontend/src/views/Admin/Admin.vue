@@ -1,9 +1,9 @@
 <template lang="pug">
-main.container.m-auto
+main.container.m-auto.max-w-screen-md
   h1.text-5xl Admin Panel
 
   h1.text-2xl.mt-12 Edit Featured Projects Sections
-  mb-modal-button.ml-2(btnText="Show me an example" btnVariant="default")
+  mb-modal-button(btnText="Show me an example" btnVariant="default")
     template(v-slot:title) Example format for featured projects sections
     template(v-slot:body)
       textarea.text-xs.w-full(rows="25" :value="featuredSectionsJSONstrSample")
@@ -30,10 +30,11 @@ main.container.m-auto
   h1.text-2xl.mt-12 Create Event
   FormulateForm(v-model="mbEvent" @submit="onSubmit")
     FormulateInput(type="text" name="title" label="Event Title" validation="required")
-    FormulateInput(type="text" name="description" label="Event Description" validation="required")
     FormulateInput(type="textarea" name="description" label="Event Description" validation="required")
     FormulateInput(type="text" name="cover_image_url" label="Image URL" validation="required")
     FormulateInput(type="textarea" name="instructions" label="Instructions" validation="required")
+    FormulateInput(type="text" name="register_link" label="Registration link" validation="required")
+    FormulateInput(type="select" name="region" :options="options" label="Region of event" validation="required")
     FormulateInput(type="datetime-local" name="start_time" label="Start Time" validation="required")
     FormulateInput(type="datetime-local" name="end_time" label="End Time" validation="required")
     FormulateInput(type="submit") Submit
@@ -45,6 +46,7 @@ main.container.m-auto
 
 <script>
 import mbProjectSearch from "../../components/mb-project-search";
+import dates from "../../helpers/dates";
 
 const sampleFeaturedSectionsFormat = {
   sections: [
@@ -88,8 +90,13 @@ export default {
         description: "",
         cover_image_url: "",
         instructions: "",
-        start_time: new Date(),
-        end_time: new Date()
+        start_time: this.defaultTime(12),
+        end_time: this.defaultTime(16),
+        register_link: "",
+        region: "America/Toronto"
+      },
+      options: {
+        "America/Toronto": "America/Toronto"
       },
       featuredSectionsJSONstr: "",
       featuredSectionsJSONstrSample: JSON.stringify(
@@ -108,6 +115,7 @@ export default {
       const self = this;
       const { mbEventService } = this.$mbContext;
 
+      console.log(this.mbEvent);
       mbEventService
         .create(this.mbEvent)
         .then(mbEvent => {
@@ -117,7 +125,8 @@ export default {
         .catch(e => {
           const message =
             // eslint-disable-next-line prettier/prettier
-          (e && e.response && e.response.data && e.response.data.message) || "";
+            (e && e.response && e.response.data && e.response.data.message) ||
+            "";
           console.log("Failed to create event", message, e);
           alert("Failed to create event. " + message);
         });
@@ -137,6 +146,16 @@ export default {
       } else {
         return;
       }
+    },
+    defaultTime(hr = 12, min = 0) {
+      const now = new Date();
+      return dates.buildTimestampStr({
+        year: now.getFullYear(),
+        month: now.getMonth(),
+        date: now.getDate(),
+        hour: hr,
+        min: min
+      });
     }
   },
   mounted() {

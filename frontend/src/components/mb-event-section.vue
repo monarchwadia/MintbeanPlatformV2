@@ -10,6 +10,7 @@
         :startTime="event.start_time"
         :endTime="event.end_time"
         :registerLink="event.register_link"
+        :region="event.region"
       )
 </template>
 
@@ -35,7 +36,6 @@
 export default {
   name: "mb-event-section",
   props: {
-    title: String,
     events: {
       type: Array,
       // TODO: remove this dummy data once hooked up to real events (MbConfig)

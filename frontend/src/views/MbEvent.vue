@@ -15,6 +15,8 @@ div
         div.bg-white.p-12.rounded.text-center
           h1.text-lg.sm_text-2xl.md_text-5xl.font-semibold {{ mbEvent.title }}
           p.md_text-xl.py-2 {{ prettyStartTime }}
+          mb-external-link(v-if="isBeforeEvent && mbEvent.register_link" :href="mbEvent.register_link")
+            mb-button.mt-6 Register
     div.p-2.md_p-0.container.m-auto.mb-32
       div.md_flex.mb-16
         div.mb-4.md_mb-0.md_mr-4.shadow-mb.p-10.flex.flex-col.justify-center.text-white.rounded-lg(style="flex-basis: 60%; background: linear-gradient(0deg, black, #3d3d3d);")
@@ -80,7 +82,8 @@ div
 </style>
 
 <script>
-import prettyESTDate from "../helpers/prettyDate";
+//- import prettyESTDate from "../helpers/prettyDate";
+import dates from "../helpers/dates";
 
 // @ is an alias to /src
 export default {
@@ -135,11 +138,10 @@ export default {
       return !!(this.hasInstructions && isShowTime);
     },
     prettyStartTime: function() {
-      if (!this.mbEvent.start_time) {
-        return "";
-      }
-      const datestr = this.mbEvent.start_time.toLocaleString();
-      return prettyESTDate(datestr, { weekday: "long" });
+      const { start_time, region } = this.mbEvent;
+      return dates.prettyLocalDate(start_time, region);
+      //- const datestr = this.mbEvent.start_time.toLocaleString();
+      //- return prettyESTDate(datestr, { weekday: "long" });
     },
     // mbEvent: function() {
     //   const { id } = this.$route.params;
