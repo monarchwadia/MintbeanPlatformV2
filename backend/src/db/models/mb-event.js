@@ -25,17 +25,5 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
   };
 
-  // MbEvent.beforeCreate(mbEvent => mbEvent.id = uuid());
-  // MbEvent.prototype.setTimeForResponse = function({ start, end }) {
-  //   this.start_time = dates.toDatetimeStr(start);
-  //   this.end_time = dates.toDatetimeStr(end);
-  //   return this;
-  // };
-  // MbEvent.prototype.setTimeForStorage = function({ start, end }) {
-  //   this.start_time = dates.toWallclockTime(start);
-  //   this.end_time = dates.toWallclockTime(end);
-  //   return this;
-  // };
-
   return MbEvent;
 };
