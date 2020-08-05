@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
       instructions: DataTypes.TEXT,
       start_time: DataTypes.DATE,
       end_time: DataTypes.DATE,
-      register_link: DataTypes.STRING
+      register_link: DataTypes.STRING,
+      region: DataTypes.STRING
     },
     {}
   );

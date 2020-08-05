@@ -107,7 +107,10 @@ mbEventRoute.post(
         .min(1)
         .required(),
       start_time: Joi.date().required(),
-      end_time: Joi.date().required()
+      end_time: Joi.date().required(),
+      region: Joi.string()
+        .min(1)
+        .required()
     })
   ),
   async (req, res, next) => {
@@ -119,7 +122,9 @@ mbEventRoute.post(
         cover_image_url,
         instructions,
         start_time,
-        end_time
+        end_time,
+        region,
+        register_link
       } = req.body)
     )
       .then(resp => res.json(resp))

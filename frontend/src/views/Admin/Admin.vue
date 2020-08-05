@@ -1,9 +1,9 @@
 <template lang="pug">
-main.container.m-auto
+main.container.m-auto.max-w-screen-md
   h1.text-5xl Admin Panel
 
   h1.text-2xl.mt-12 Edit Featured Projects Sections
-  mb-modal-button.ml-2(btnText="Show me an example" btnVariant="default")
+  mb-modal-button(btnText="Show me an example" btnVariant="default")
     template(v-slot:title) Example format for featured projects sections
     template(v-slot:body)
       textarea.text-xs.w-full(rows="25" :value="featuredSectionsJSONstrSample")
@@ -34,6 +34,7 @@ main.container.m-auto
     FormulateInput(type="text" name="cover_image_url" label="Image URL" validation="required")
     FormulateInput(type="textarea" name="instructions" label="Instructions" validation="required")
     FormulateInput(type="text" name="register_link" label="Registration link" validation="required")
+    FormulateInput(type="select" name="region" :options="options" label="Region of event" validation="required")
     FormulateInput(type="datetime-local" name="start_time" label="Start Time" validation="required")
     FormulateInput(type="datetime-local" name="end_time" label="End Time" validation="required")
     FormulateInput(type="submit") Submit
@@ -89,9 +90,13 @@ export default {
         description: "",
         cover_image_url: "",
         instructions: "",
-        start_time: new Date(),
-        end_time: new Date(),
-        register_link: ""
+        start_time: this.defaultTime(12),
+        end_time: this.defaultTime(16),
+        register_link: "",
+        region: "America/Toronto"
+      },
+      options: {
+        "America/Toronto": "America/Toronto"
       },
       featuredSectionsJSONstr: "",
       featuredSectionsJSONstrSample: JSON.stringify(
@@ -109,6 +114,7 @@ export default {
     onSubmit() {
       //- dateService.dbDateToTimezone(this.mbEvent.start_time, )
       const self = this;
+      console.log(this.mbEvent);
       const { mbEventService } = this.$mbContext;
       mbEventService
         .create(this.mbEvent)
@@ -140,6 +146,17 @@ export default {
       } else {
         return;
       }
+    },
+    defaultTime(hr = 12, min = 0) {
+      const now = new Date();
+      if (min > 59) min = 0;
+      // prepend 0 if needed
+      hr = ("0" + hr).slice(-2);
+      min = ("0" + min).slice(-2);
+      const month = ("0" + (now.getMonth() + 1)).slice(-2);
+      const date = ("0" + now.getDate()).slice(-2);
+      console.log(`${now.getFullYear()}-${month}-${date}T${hr}:${min}`);
+      return `${now.getFullYear()}-${month}-${date}T${hr}:${min}`;
     }
   },
   mounted() {
