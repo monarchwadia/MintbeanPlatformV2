@@ -120,18 +120,18 @@ export default {
       const self = this;
       const { mbEventService } = this.$mbContext;
 
-      const { buildUTCTimestampStrFromDate } = dateService;
-      const startDate = new Date(this.mbEvent.start_time);
-      const endDate = new Date(this.mbEvent.end_time);
-
-      // overwrite start_time and end_time to UTC timestamps
-      this.mbEvent = {
-        ...this.mbEvent,
-        start_time: buildUTCTimestampStrFromDate(startDate),
-        end_time: buildUTCTimestampStrFromDate(endDate)
-      };
-      console.log(this.mbEvent);
-
+      //- const { buildUTCTimestampStrFromDate } = dateService;
+      //- const startDate = new Date(this.mbEvent.start_time);
+      //- const endDate = new Date(this.mbEvent.end_time);
+      //- console.log(startDate)
+      //-
+      //- // overwrite start_time and end_time to UTC timestamps
+      //- this.mbEvent = {
+      //-   ...this.mbEvent,
+      //-   start_time: buildUTCTimestampStrFromDate(startDate),
+      //-   end_time: buildUTCTimestampStrFromDate(endDate)
+      //- };
+      console.log(this.mbEvent)
       mbEventService
         .create(this.mbEvent)
         .then(mbEvent => {

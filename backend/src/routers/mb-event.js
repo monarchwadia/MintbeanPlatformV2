@@ -4,6 +4,7 @@ const { MbEvent, User, Project, Vote, MediaAsset } = require("../db/models");
 const Joi = require("@hapi/joi");
 const validator = require("../validator");
 const sequelize = require("sequelize");
+const dates = require("../utils/dates");
 
 const mbEventRoute = new Router();
 
@@ -76,12 +77,21 @@ mbEventRoute.get(
       id: Joi.string().required()
     })
   ),
-  (req, res, next) => {
+  async (req, res, next) => {
     const { id } = req.params;
 
-    MbEvent.findOne({ where: { id } })
-      .then(obj => res.json(obj))
-      .catch(e => next(e));
+    try {
+      const event = await MbEvent.findOne({ where: { id } });
+      const walltimeAdjustedEvent = {
+        ...event.dataValues,
+        start_time: dates.toDatetimeStr(event.start_time),
+        end_time: dates.toDatetimeStr(event.end_time)
+      };
+      res.status(200).json(walltimeAdjustedEvent);
+    } catch (e) {
+      console.log(e);
+      next(e);
+    }
   }
 );
 
@@ -106,32 +116,28 @@ mbEventRoute.post(
       register_link: Joi.string()
         .min(1)
         .required(),
-      start_time: Joi.date().required(),
-      end_time: Joi.date().required(),
+      start_time: Joi.string().required(),
+      end_time: Joi.string().required(),
       region: Joi.string()
         .min(1)
         .required()
     })
   ),
   async (req, res, next) => {
-    console.log(req.body);
-    MbEvent.create(
-      ({
-        title,
-        description,
-        cover_image_url,
-        instructions,
-        start_time,
-        end_time,
-        region,
-        register_link
-      } = req.body)
-    )
-      .then(resp => res.json(resp))
-      .catch(err => {
-        console.log(err);
-        next(err);
-      });
+    // console.log(req.body.dataValues);
+    const wallclockAdjustedEvent = {
+      ...req.body,
+      start_time: dates.toWallclockTime(req.body.start_time),
+      end_time: dates.toWallclockTime(req.body.end_time)
+    };
+    try {
+      // convert datetime strings to UTC wallclock
+      const event = await MbEvent.create(wallclockAdjustedEvent);
+      res.status(200).json(event);
+    } catch (e) {
+      console.log(e);
+      next(e);
+    }
   }
 );
 

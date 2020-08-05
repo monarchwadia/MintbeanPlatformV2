@@ -50,7 +50,7 @@ const buildTimestampStr = function({ year, month, date, hour, min, sec }) {
 };
 
 const buildUTCTimestampStrFromDate = date => {
-  if (!date) throw "must pass adate";
+  if (!date) throw "must pass a date";
   return buildTimestampStr({
     year: date.getUTCFullYear(),
     month: date.getUTCMonth(),
@@ -77,15 +77,21 @@ const prettyLocalDate = function(
   userRegion = "America/Toronto" // TODO : dynamic timezone retreival. JS's Intl returns some IANA not covered by moment
 ) {
   if (!masterDate || !masterRegion) throw "Must pass valid utc date and region";
-  const m = moment.tz(masterDate,masterRegion).tz(userRegion)
+  const m = moment.tz(masterDate, masterRegion).tz(userRegion)
   return m.format("dddd, MMM Do YYYY, h:mm z");
 };
+
+const convertDateToTimezone = function(date, ianaTimezone) {
+  if (!date) throw "Must pass date"
+  return moment(date).tz(ianaTimezone)
+}
 
 module.exports = {
   buildTimestampStr,
   buildUTCTimestampStrFromDate,
   prettyLocalDate,
   getLocalTimezone,
+  convertDateToTimezone,
   // dbDateToTimezone,
   // buildUtcDateByRegion,
   // convertLocalDatetimeToRegion
