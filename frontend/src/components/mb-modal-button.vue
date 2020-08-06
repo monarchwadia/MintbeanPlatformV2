@@ -21,6 +21,9 @@ export default {
   methods: {
     openModal() {
       this.$refs.modal.open();
+    },
+    closeModal() {
+      this.$refs.modal.close();
     }
   }
 };

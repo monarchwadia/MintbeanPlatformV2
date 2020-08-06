@@ -38,11 +38,11 @@ export default {
   methods: {
     emitConfirmAndClose() {
       this.$emit("confirm");
-      this.$refs.modalBtn.$refs.modal.close();
+      this.$refs.modalBtn.closeModal();
     },
     emitCancelAndClose() {
       this.$emit("cancel");
-      this.$refs.modalBtn.$refs.modal.close();
+      this.$refs.modalBtn.closeModal();
     }
   }
 };
