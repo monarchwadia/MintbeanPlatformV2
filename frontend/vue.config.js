@@ -14,7 +14,13 @@ module.exports = {
     },
     disableHostCheck: true // required for nginx to recognize the devserver in local dev mode
   },
-  chainWebpack: (/*config*/) => {
+  chainWebpack: config => {
+    // disable cache in dev and prod (for now)
+    // TODO: reimplement caching by intercepting build version + comparingconfig.module.rule('vue').uses.delete('cache-loader');
+    config.module.rule("vue").uses.delete("cache-loader");
+    config.module.rule("js").uses.delete("cache-loader");
+    config.module.rule("ts").uses.delete("cache-loader");
+    config.module.rule("tsx").uses.delete("cache-loader");
     // // markdown Loader
     // config.module
     //   .rule("markdown")
