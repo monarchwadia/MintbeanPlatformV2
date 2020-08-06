@@ -1,7 +1,6 @@
 <template lang="pug">
 main.container.m-auto
   h1.text-5xl Admin Panel
-
   h1.text-2xl.mt-12 Edit Featured Projects Sections
   mb-modal-button.ml-2(btnText="Show me an example" btnVariant="default")
     template(v-slot:title) Example format for featured projects sections
@@ -117,7 +116,8 @@ export default {
         .catch(e => {
           const message =
             // eslint-disable-next-line prettier/prettier
-          (e && e.response && e.response.data && e.response.data.message) || "";
+            (e && e.response && e.response.data && e.response.data.message) ||
+            "";
           console.log("Failed to create event", message, e);
           alert("Failed to create event. " + message);
         });
