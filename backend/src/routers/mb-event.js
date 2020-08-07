@@ -1,12 +1,13 @@
 const { Router } = require("express");
+const mbEventRoute = new Router();
 const { requireAdmin } = require("./routers.util");
 const { MbEvent, User, Project, Vote, MediaAsset } = require("../db/models");
+const MbEventDao = require("../daos/MbEventDao");
 const Joi = require("@hapi/joi");
 const validator = require("../validator");
 const sequelize = require("sequelize");
 const dates = require("../utils/dates");
-
-const mbEventRoute = new Router();
+const mbEventService = require("../services/mbEventService");
 
 // IMPORTANT: events storage/retrieval must adjust start/end time for wallclock time
 // (../utils/dates.js)
@@ -94,16 +95,9 @@ mbEventRoute.get(
   ),
   async (req, res, next) => {
     const { id } = req.params;
-
     try {
-      const event = await MbEvent.findOne({ where: { id } });
-      const walltimeAdjustedEvent = {
-        ...event.dataValues,
-        start_time: dates.toDatetimeStr(event.start_time),
-        end_time: dates.toDatetimeStr(event.end_time)
-      };
-
-      res.status(200).json(walltimeAdjustedEvent);
+      const event = await mbEventService.findById(id);
+      res.status(200).json(event);
     } catch (e) {
       console.log(e);
       next(e);
