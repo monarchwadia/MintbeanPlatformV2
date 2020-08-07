@@ -15,13 +15,13 @@
       //-   title="Confirm"
       //-   message="Are you sure you want to delete this section?"
       //- )
-    div.sliding-section.flex.justify-between.overflow-x-auto(:class="sliderIsDown ? 'active' : null" ref="projectSectionContainer")
+    div.sliding-section.flex.justify-between.overflow-x-auto(ref="projectSectionContainer")
       mb-project-card.mr-4(
-        v-if="project"
+        v-if="!!project"
         v-for="project in projects"
         :key="project.id"
         :id="project.id"
-        :cloudinaryPublicId="project.MediaAssets[0].cloudinaryPublicId"
+        :cloudinaryPublicId="project.MediaAssets[0].cloudinaryPublicId "
         :projectTitle="project.title"
         :authorName="getFullname(project.User)"
         :description="project.description"

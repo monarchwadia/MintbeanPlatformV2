@@ -1,7 +1,7 @@
 <template>
   <div class="mb-image-display flex justify-center">
     <cld-context cloudName="mintbean">
-      <cld-image :publicId="publicId" secure="true">
+      <cld-image v-if="publicId" :publicId="publicId" secure="true">
         <cld-transformation
           :width="width"
           :height="height"

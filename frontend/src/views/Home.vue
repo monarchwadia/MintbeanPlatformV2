@@ -68,7 +68,10 @@ export default {
       const self = this;
       this.$mbContext.mbConfigService
         .getAscFeaturedSections()
-        .then(res => (self.sections = res))
+        .then(res => {
+          console.log(res);
+          self.sections = res;
+        })
         .catch(err => console.log(err));
     },
     getUpcomingEvents(limit = 2) {
@@ -85,6 +88,7 @@ export default {
   },
   mounted() {
     this.getUpcomingEvents();
+    this.getAscFeaturedSections();
   },
   computed: {
     isAdmin: function() {
