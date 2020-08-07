@@ -1,7 +1,6 @@
 <template lang="pug">
 main.container.m-auto.max-w-screen-md
   h1.text-5xl Admin Panel
-
   h1.text-2xl.mt-12 Edit Featured Projects Sections
   mb-modal-button(btnText="Show me an example" btnVariant="default")
     template(v-slot:title) Example format for featured projects sections
