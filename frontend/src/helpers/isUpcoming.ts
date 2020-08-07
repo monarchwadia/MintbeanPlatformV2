@@ -1,3 +1,5 @@
+// TODO: import date helper and do this with moment
+
 export default function(datestring: string | Date) {
   const endTimeISO = +new Date(new Date(datestring).toISOString());
   const nowISO = +new Date(new Date().toISOString());

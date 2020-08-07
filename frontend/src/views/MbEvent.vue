@@ -82,7 +82,6 @@ div
 </style>
 
 <script>
-//- import prettyESTDate from "../helpers/prettyDate";
 import dates from "../helpers/dates";
 
 // @ is an alias to /src

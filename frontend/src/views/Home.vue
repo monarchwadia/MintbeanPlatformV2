@@ -5,7 +5,7 @@ div
     div.mb-32.flex.flex-col
       h1.text-center.md_text-left.text-4xl.mb-4 Upcoming Events
       p.text-2xl.mb-6(v-if="!eventsAreFetched") Loading...
-      mb-event-section.mx-2.md_mx-0.mb-12(v-else :events="[]")
+      mb-event-section.mx-2.md_mx-0.mb-12(v-else :events="upcomingEvents")
       mb-internal-link-arrow.m-auto.md_m-0(
         to="/mb-events"
         text="See all past and future events"
@@ -45,6 +45,7 @@ div
 
 <script>
 import mbHomeHeader from "./Home/mb-home-header.vue";
+// import dates from "../helpers/dates";
 
 export default {
   name: "Home",
@@ -74,7 +75,9 @@ export default {
       const self = this;
       this.$mbContext.mbEventService
         .getUpcomingMbEvents()
-        .then(res => (self.upcomingEvents = res.slice(0, limit)))
+        .then(res => {
+          self.upcomingEvents = res.slice(0, limit);
+        })
         .then(() => {
           self.eventsAreFetched = true;
         });
