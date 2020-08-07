@@ -24,7 +24,8 @@ module.exports = {
         "region",
         {
           type: Sequelize.STRING,
-          allowNull: false
+          allowNull: false,
+          defaultValue: "America/Toronto"
         }
       )
     ]);
