@@ -23,4 +23,4 @@
     repo: git@github.com:monarchwadia/MintbeanPlatformV2.git
     dest: "{{ root_dir }}"
     update: yes
-    version: master
+    version: "{{ src_branch }}"
