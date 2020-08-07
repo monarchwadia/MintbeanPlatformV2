@@ -82,7 +82,8 @@ div
 </style>
 
 <script>
-import prettyESTDate from "../helpers/prettyDate";
+//- import prettyESTDate from "../helpers/prettyDate";
+import dates from "../helpers/dates";
 
 // @ is an alias to /src
 export default {
@@ -137,11 +138,10 @@ export default {
       return !!(this.hasInstructions && isShowTime);
     },
     prettyStartTime: function() {
-      if (!this.mbEvent.start_time) {
-        return "";
-      }
-      const datestr = this.mbEvent.start_time.toLocaleString();
-      return prettyESTDate(datestr, { weekday: "long" });
+      const { start_time, region } = this.mbEvent;
+      return dates.prettyLocalDate(start_time, region);
+      //- const datestr = this.mbEvent.start_time.toLocaleString();
+      //- return prettyESTDate(datestr, { weekday: "long" });
     },
     // mbEvent: function() {
     //   const { id } = this.$route.params;

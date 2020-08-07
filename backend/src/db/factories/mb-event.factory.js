@@ -17,5 +17,6 @@ module.exports = factory({
   register_link:
     "https://www.eventbrite.com/e/selfless-hackers-covid-19-2-day-hackathon-tickets-101683403798?aff=erelexpmlt",
   createdAt: () => new Date(),
-  updatedAt: () => new Date()
+  updatedAt: () => new Date(),
+  region: "America/Toronto"
 });

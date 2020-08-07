@@ -109,9 +109,8 @@ export default {
   },
   methods: {
     handleFilePondInit: function() {
-      console.log("FilePond has initialized");
-      console.log(this.$refs.pond);
-
+      // console.log("FilePond has initialized");
+      // console.log(this.$refs.pond);
       // FilePond instance methods are available on `this.$refs.pond`
     },
     handleProcessFile: function(error, file) {

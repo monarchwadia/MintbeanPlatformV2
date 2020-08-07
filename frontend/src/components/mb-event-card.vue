@@ -13,20 +13,14 @@
         ) Register
       div.bg-white.px-4.py-4.text-gray-700.lg_flex.lg_justify-between.items-center
         div.text-xl.mr-2 {{ eventTitle }}
-        div.text-sm {{prettyESTDate(startTime)}}
+        div.text-sm {{prettyLocalDate(startTime, region)}}
 </template>
 
-<style lang="scss" scoped>
-// @media only screen and (max-width: 638px) {
-//   // ._event-card {
-//   //   min-width: 250px;
-//   // }
-// }
 </style>
 
 <script>
-import prettyESTDate from "../helpers/prettyDate";
 import isUpcoming from "../helpers/isUpcoming";
+import { prettyLocalDate } from "../helpers/dates";
 
 export default {
   name: "mb-event-card",
@@ -36,7 +30,8 @@ export default {
     eventTitle: String,
     startTime: String,
     endTime: String,
-    registerLink: String
+    registerLink: String,
+    region: String
   },
   data() {
     return {
@@ -52,10 +47,11 @@ export default {
     urlFor: function(url) {
       return `url(${url})`;
     },
-    prettyESTDate
+    prettyLocalDate
   },
   mounted() {
     this.isUpcoming = isUpcoming(this.endTime) ? true : false;
+    console.log(this.startTime)
   }
 };
 </script>

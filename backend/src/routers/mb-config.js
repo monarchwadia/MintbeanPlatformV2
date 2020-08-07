@@ -80,7 +80,11 @@ mbConfigRoute.get("/asc/featured-sections", async (req, res, next) => {
     const response = await MbConfig.findOne({
       where: { configKey: FEATURED_SECTIONS_KEY }
     });
-    val = JSON.parse(response.configValue);
+    if (response) {
+      val = JSON.parse(response.configValue);
+    } else {
+      return next();
+    }
   } catch (e) {
     return next(e);
   }

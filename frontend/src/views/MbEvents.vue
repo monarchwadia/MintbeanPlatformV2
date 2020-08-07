@@ -35,6 +35,7 @@ export default {
       this.$mbContext.mbEventService
         .getMbEvents()
         .then(events => {
+          console.log(events[1]);
           self.pastEvents = events
             .filter(e => isPast(e.end_time))
             .sort((a, b) => {
