@@ -4,8 +4,8 @@ div
   main.container.m-auto.pt-24
     div.mb-32.flex.flex-col
       h1.text-center.md_text-left.text-4xl.mb-4 Upcoming Events
-      p.text-2xl.mb-6(v-if="upcomingEvents.length == 0") No events at the moment... Stay tuned!
-      mb-event-section.mx-2.md_mx-0.mb-12(v-else :events="upcomingEvents")
+      p.text-2xl.mb-6(v-if="!eventsAreFetched") Loading...
+      mb-event-section.mx-2.md_mx-0.mb-12(v-else :events="[]")
       mb-internal-link-arrow.m-auto.md_m-0(
         to="/mb-events"
         text="See all past and future events"
@@ -52,7 +52,8 @@ export default {
     return {
       newSectionTitle: "",
       sections: [],
-      upcomingEvents: []
+      upcomingEvents: [],
+      eventsAreFetched: false
     };
   },
   methods: {
@@ -73,11 +74,13 @@ export default {
       const self = this;
       this.$mbContext.mbEventService
         .getUpcomingMbEvents()
-        .then(res => (self.upcomingEvents = res.slice(0, limit)));
+        .then(res => (self.upcomingEvents = res.slice(0, limit)))
+        .then(() => {
+          self.eventsAreFetched = true;
+        });
     }
   },
   mounted() {
-    console.log(this.getAscFeaturedSections());
     this.getUpcomingEvents();
   },
   computed: {

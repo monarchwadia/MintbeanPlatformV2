@@ -1,6 +1,8 @@
 <template lang="pug">
   div.md_w-full
     div.flex.flex-col.items-center.md_items-stretch.md_flex-row.flex-wrap(style="margin: -0.5rem;")
+      div(v-if="!events || events.length == 0")
+        p.text-2xl.mb-6 No upcoming events at the moment... stay tuned!
       mb-event-card._event-card(
         v-for="event in events"
         :key="event.id"
