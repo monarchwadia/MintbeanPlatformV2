@@ -38,8 +38,6 @@ mbConfigRoute.patch(
   validator.body(validations.mbConfig.mbConfigObj),
   async (req, res, next) => {
     const { key } = req.params;
-    console.log(req.body);
-
     try {
       const config = await mbConfigService.updateByKey(
         key,
@@ -50,27 +48,6 @@ mbConfigRoute.patch(
       console.log(e);
       next(e);
     }
-    //   try {
-    //     let config = await MbConfig.findOne({ where: { configKey: key } });
-    //
-    //     if (config) {
-    //       config = await config.update({
-    //         configValue: JSON.stringify(req.body.configValue)
-    //       });
-    //     } else {
-    //       const params = {
-    //         configKey: key,
-    //         configValue: JSON.stringify(req.body.configValue)
-    //       };
-    //       config = await MbConfig.create(params);
-    //     }
-    //     // re-jsonify configValue for response
-    //
-    //     config.configValue = JSON.parse(config.configValue);
-    //     res.json(config);
-    //   } catch (e) {
-    //     return next(e);
-    //   }
   }
 );
 
