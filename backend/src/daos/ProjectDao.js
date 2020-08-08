@@ -57,7 +57,7 @@ const associations = {
 
 // QUERYING DAOS *************************************
 const findOneWhere = (where = {}) => {
-  return Project.findOne({
+  return Project.findAll({
     where,
     raw: true,
     nest: true,

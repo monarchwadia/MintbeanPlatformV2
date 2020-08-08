@@ -235,7 +235,6 @@ projectRoute.get(
       .catch(e => next(e));
 
     // failed refactor
-
     // try {
     //   const project = await projectService.findById(id);
     //   console.log(project);
