@@ -1,12 +1,13 @@
-const { Project } = require('../db/models');
+// THIS MODULE FAILING - DAO unable to retrieve hasMany associations as array
 
-const search = (where = {}) => Project.findAll({ where });
-const findWhere = (where = {}) => Project.findOne({ where });
-const find = (options = {}) => Project.findOne(options);
+const ProjectDao = require("../daos/ProjectDao");
 
+const search = (where = {}) => ProjectDao.findAllWhere({ where });
+// const findWhere = (where = {}) => ProjectDao.findOne({ where });
+// const find = (options = {}) => ProjectDao.findOne(options);
+const findById = id => ProjectDao.findById(id);
 
 module.exports = {
   search,
-  findWhere,
-  find
-}
+  findById
+};
