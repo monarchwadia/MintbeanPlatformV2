@@ -34,31 +34,11 @@ mbConfigRoute.get(
 mbConfigRoute.patch(
   "/:key",
   requireAdmin,
-  // validator.params(Joi.object({ key: Joi.string().required() })),
-  // validator.body(
-  //   Joi.object({
-  //     id: Joi.string().required(),
-  //     createdAt: Joi.string().required(),
-  //     updatedAt: Joi.string().required(),
-  //     configValue: Joi.string()
-  //       .required()
-  //       .min(1),
-  //     configValue: Joi.object({
-  //       sections: Joi.array().items(
-  //         Joi.object({
-  //           title: Joi.string()
-  //             .required()
-  //             .min(1),
-  //           projectIds: Joi.array()
-  //             .min(1)
-  //             .items(Joi.string().required())
-  //         })
-  //       )
-  //     })
-  //   })
-  // ),
+  validator.params(validations.mbConfig.keyObj),
+  validator.body(validations.mbConfig.mbConfigObj),
   async (req, res, next) => {
     const { key } = req.params;
+    console.log(req.body);
 
     try {
       const config = await mbConfigService.updateByKey(

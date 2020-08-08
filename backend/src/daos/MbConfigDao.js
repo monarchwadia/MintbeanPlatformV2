@@ -12,6 +12,8 @@ const { MbConfig } = require("../db/models");
 //   id: STRING
 //   configKey: STRING,
 //   configValue: STRING
+//   updatedAt: STRING
+//   createdAt: STRING
 // }
 
 // UTILITIES ******************************************
