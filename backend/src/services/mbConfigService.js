@@ -10,6 +10,12 @@ const findByKey = key => {
   return MbConfigDao.findByKey(key);
 };
 
-module.export = {
-  findByKey
+// MUTATING SERVICES ***************************
+const updateByKey = (key, val) => {
+  return MbConfigDao.updateByKey(key, val);
+};
+
+module.exports = {
+  findByKey,
+  updateByKey
 };

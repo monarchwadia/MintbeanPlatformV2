@@ -15,6 +15,26 @@ const { MbConfig } = require("../db/models");
 // }
 
 // UTILITIES ******************************************
+function hasJsonStructure(str) {
+  if (typeof str !== "string") return false;
+  try {
+    const result = JSON.parse(str);
+    const type = Object.prototype.toString.call(result);
+    return type === "[object Object]" || type === "[object Array]";
+  } catch (err) {
+    return false;
+  }
+}
+
+const objWithParsedConfigValue = obj => {
+  const isJ = hasJsonStructure(obj.configValue);
+  return {
+    ...obj,
+    configValue: hasJsonStructure(obj.configValue)
+      ? JSON.parse(obj.configValue)
+      : obj.configValue
+  };
+};
 
 // QUERYING DAOS *************************************
 const findOneWhere = (where = {}) => {
@@ -22,24 +42,36 @@ const findOneWhere = (where = {}) => {
     where,
     raw: true,
     nest: true
-  }).then(c => {
-    console.log(c);
-    return c;
+  }).then(obj => {
+    return objWithParsedConfigValue(obj);
   });
 };
 
 const findByKey = key => findOneWhere({ configKey: key });
 
 // MUTATING DAOS *************************************
-// const create = event => {
-//   return MbEvent.create(event).then(raw => raw.get({ raw: true }));
-// };
+const updateWhere = (where = {}, val) => {
+  // stringify configValue if is obj
+  const strVal = typeof val === "object" ? JSON.stringify(val) : val;
+  return MbConfig.update({ configValue: strVal }, { returning: true, where })
+    .then(arr => {
+      return arr[1][0];
+    })
+    .then(obj => {
+      return objWithParsedConfigValue(obj.get({ raw: true }));
+    });
+};
+
+const updateByKey = (key, val) => {
+  return updateWhere({ configKey: key }, val);
+};
 
 module.exports = {
   // QUERY
   findOneWhere,
   // findAllWhere,
-  findByKey
+  findByKey,
   // MUTATE
-  // create
+  updateWhere,
+  updateByKey
 };

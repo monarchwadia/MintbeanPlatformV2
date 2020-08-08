@@ -34,47 +34,63 @@ mbConfigRoute.get(
 mbConfigRoute.patch(
   "/:key",
   requireAdmin,
-  validator.params(Joi.object({ key: Joi.string().required() })),
-  validator.body(
-    Joi.object({
-      configValue: Joi.object({
-        sections: Joi.array().items(
-          Joi.object({
-            title: Joi.string()
-              .required()
-              .min(1),
-            projectIds: Joi.array()
-              .min(1)
-              .items(Joi.string().required())
-          })
-        )
-      })
-    })
-  ),
+  // validator.params(Joi.object({ key: Joi.string().required() })),
+  // validator.body(
+  //   Joi.object({
+  //     id: Joi.string().required(),
+  //     createdAt: Joi.string().required(),
+  //     updatedAt: Joi.string().required(),
+  //     configValue: Joi.string()
+  //       .required()
+  //       .min(1),
+  //     configValue: Joi.object({
+  //       sections: Joi.array().items(
+  //         Joi.object({
+  //           title: Joi.string()
+  //             .required()
+  //             .min(1),
+  //           projectIds: Joi.array()
+  //             .min(1)
+  //             .items(Joi.string().required())
+  //         })
+  //       )
+  //     })
+  //   })
+  // ),
   async (req, res, next) => {
     const { key } = req.params;
 
     try {
-      let config = await MbConfig.findOne({ where: { configKey: key } });
-
-      if (config) {
-        config = await config.update({
-          configValue: JSON.stringify(req.body.configValue)
-        });
-      } else {
-        const params = {
-          configKey: key,
-          configValue: JSON.stringify(req.body.configValue)
-        };
-        config = await MbConfig.create(params);
-      }
-      // re-jsonify configValue for response
-
-      config.configValue = JSON.parse(config.configValue);
-      res.json(config);
+      const config = await mbConfigService.updateByKey(
+        key,
+        req.body.configValue
+      );
+      return res.status(200).json(config);
     } catch (e) {
-      return next(e);
+      console.log(e);
+      next(e);
     }
+    //   try {
+    //     let config = await MbConfig.findOne({ where: { configKey: key } });
+    //
+    //     if (config) {
+    //       config = await config.update({
+    //         configValue: JSON.stringify(req.body.configValue)
+    //       });
+    //     } else {
+    //       const params = {
+    //         configKey: key,
+    //         configValue: JSON.stringify(req.body.configValue)
+    //       };
+    //       config = await MbConfig.create(params);
+    //     }
+    //     // re-jsonify configValue for response
+    //
+    //     config.configValue = JSON.parse(config.configValue);
+    //     res.json(config);
+    //   } catch (e) {
+    //     return next(e);
+    //   }
   }
 );
 
