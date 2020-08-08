@@ -9,19 +9,25 @@ const {
 } = require("../db/models");
 const Joi = require("@hapi/joi");
 const validator = require("../validator");
+const validations = require("../validations");
 const mbConfigRoute = new Router();
+const mbConfigService = require("../services/mbConfigService");
 
 const FEATURED_SECTIONS_KEY = "featuredSections";
 
 mbConfigRoute.get(
   "/:key",
-  validator.params(Joi.object({ key: Joi.string().required() })),
+  validator.params(validations.mbConfig.keyObj),
   async (req, res, next) => {
     const { key } = req.params;
 
-    MbConfig.findOne({ where: { configKey: key } })
-      .then(config => res.json(JSON.parse(config.configValue)))
-      .catch(err => next(err));
+    try {
+      const value = await mbConfigService.findByKey(key);
+      res.status(200).json(value);
+    } catch (e) {
+      console.log(e);
+      next(e);
+    }
   }
 );
 

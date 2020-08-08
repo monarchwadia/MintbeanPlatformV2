@@ -18,8 +18,11 @@ const projectRoute = new Router();
 projectRoute.get("/", requireAuth, async (req, res, next) => {
   projectService
     .search({ UserId: req.user.id })
-    .then(projects => res.json(projects))
-    .catch(e => next(err));
+    .then(projects => {
+      console.log(projects);
+      res.json(projects);
+    })
+    .catch(e => next(e));
 });
 
 const VALID_SORT_FIELDS = {
@@ -228,10 +231,19 @@ projectRoute.get(
         { model: MbEvent }
       ]
     })
-      .then(project => {
-        res.json(project);
-      })
-      .catch(err => next(err));
+      .then(project => res.json(project))
+      .catch(e => next(e));
+
+    // failed refactor
+
+    // try {
+    //   const project = await projectService.findById(id);
+    //   console.log(project);
+    //   res.json(project);
+    // } catch (e) {
+    //   console.log(e);
+    //   next(e);
+    // }
   }
 );
 

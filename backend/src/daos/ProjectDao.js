@@ -1,4 +1,5 @@
-const { MbEvent, Project, User, Vote, MediaAsset } = require("../db/models");
+// THIS MODULE FAILING - unable to retrieve hasMany associations as array
+const { Project, Vote, User, MbEvent, MediaAsset } = require("../db/models");
 
 ("use strict");
 // THE WAY OF DAO
@@ -7,26 +8,21 @@ const { MbEvent, Project, User, Vote, MediaAsset } = require("../db/models");
 // - return standardized objects (not raw ORM models)
 // - only send bare minimum
 
-// MbEvent object interface (in lieu of typescript for now)
+// Project object interface (in lieu of typescript for now)
 // {
-//   id: STRING
-//   title: STRING,
-//   description: STRING,
-//   cover_image_url: STRING,
-//   instructions: STRING,
-//   start_time: STRING        //  * walltime 'YYYY-MM-DDTHH-MM'
-//   end_time: STRING          //  * walltime 'YYYY-MM-DDTHH-MM'
-//   register_link: STRING,
-//   region: STRING,
-//   (for single Event:)
-//   Projects: Project[],
+// id: STRING
+// title: STRING,
+// source_code_url: STRING,
+// live_url: STRING,
+// ratingAverage: NUMBER
+// ratingCount: NUMBER
 // }
 
 // UTILITIES ******************************************
 const associations = {
   include: [
     {
-      model: Project,
+      model: Vote,
       include: [
         {
           model: User,
@@ -35,25 +31,33 @@ const associations = {
               "password_hash",
               "reset_token",
               "reset_token_created_at",
-              "confirmed",
-              "confirmation_token"
+              "confirmation_token",
+              "confirmed"
             ]
           }
-        },
-        {
-          model: Vote
-        },
-        {
-          model: MediaAsset
         }
       ]
-    }
+    },
+    {
+      model: User,
+      attributes: {
+        exclude: [
+          "password_hash",
+          "reset_token",
+          "reset_token_created_at",
+          "confirmation_token",
+          "confirmed"
+        ]
+      }
+    },
+    { model: MediaAsset },
+    { model: MbEvent }
   ]
 };
 
 // QUERYING DAOS *************************************
 const findOneWhere = (where = {}) => {
-  return MbEvent.findOne({
+  return Project.findOne({
     where,
     raw: true,
     nest: true,
@@ -63,17 +67,21 @@ const findOneWhere = (where = {}) => {
 
 // does not return associations
 const findAllWhere = (where = {}) => {
-  return MbEvent.findAll({
-    where,
-    raw: true
+  return Project.findAll({
+    where
+    // raw: true,
+    // nest: true
+  }).then(p => {
+    console.log(p);
+    return p;
   });
 };
 
 const findById = id => findOneWhere({ id });
 
 // MUTATING DAOS *************************************
-const create = event => {
-  return MbEvent.create(event).then(raw => raw.get({ raw: true }));
+const create = project => {
+  return Project.create(project).then(raw => raw.get({ raw: true }));
 };
 
 module.exports = {

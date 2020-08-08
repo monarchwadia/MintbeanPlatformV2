@@ -9,6 +9,7 @@ const dates = require("../utils/dates");
 
 // MbEvent object interface (in lieu of typescript for now)
 // {
+//   id: STRING
 //   title: STRING,
 //   description: STRING,
 //   cover_image_url: STRING,
