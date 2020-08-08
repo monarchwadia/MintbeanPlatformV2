@@ -1,4 +1,10 @@
-const { MbConfig } = require("../db/models");
+const {
+  MbConfig,
+  Project,
+  User,
+  MbEvent,
+  MediaAsset
+} = require("../db/models");
 ("use strict");
 
 // THE WAY OF DAO
@@ -51,6 +57,71 @@ const findOneWhere = (where = {}) => {
 
 const findByKey = key => findOneWhere({ configKey: key });
 
+const getAscFeaturedSectionsArr = () => {
+  // returns shape:
+  // [
+  //   {
+  //     title: section.title,
+  //     projects: projs
+  //   }
+  // ]
+  return new Promise(async (resolve, reject) => {
+    let val;
+    try {
+      const response = await MbConfig.findOne({
+        where: { configKey: "featuredSections" }
+      });
+      if (response) {
+        val = JSON.parse(response.configValue);
+      } else {
+        reject('error fetching MbConfig with configKey: "featedSections" ');
+      }
+    } catch (e) {
+      reject(e);
+    }
+
+    let pids = new Set();
+    val.sections.forEach(s => {
+      s.projectIds.forEach(pid => pids.add(pid));
+    });
+
+    const pidsArray = Array.from(pids);
+    let projects = [];
+    try {
+      projects = await Project.findAll({
+        where: { id: pidsArray },
+        include: [
+          {
+            model: User,
+            attributes: {
+              exclude: [
+                "password_hash",
+                "reset_token",
+                "reset_token_created_at"
+              ]
+            }
+          },
+          { model: MbEvent },
+          { model: MediaAsset }
+        ]
+      });
+    } catch (e) {
+      reject(e);
+    }
+
+    const responseObj = val.sections.map(section => {
+      const projs = section.projectIds.map(pid =>
+        projects.find(p => p.id === pid)
+      );
+      return {
+        title: section.title,
+        projects: projs
+      };
+    });
+    resolve(responseObj);
+  });
+};
+
 // MUTATING DAOS *************************************
 const updateWhere = (where = {}, val) => {
   // stringify configValue if is obj
@@ -71,7 +142,7 @@ const updateByKey = (key, val) => {
 module.exports = {
   // QUERY
   findOneWhere,
-  // findAllWhere,
+  getAscFeaturedSectionsArr,
   findByKey,
   // MUTATE
   updateWhere,
