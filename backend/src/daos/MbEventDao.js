@@ -1,25 +1,27 @@
 const { MbEvent, Project, User, Vote, MediaAsset } = require("../db/models");
 
 ("use strict");
-// HOW TO DAO
+// THE WAY OF DAO
+// - first/last point of contact with 'the external' (db, apis, etc)
 // - return promises
-// - return standardized objects (not raw models)
+// - return standardized objects (not raw ORM models)
 // - only send bare minimum
 
-// MbEvent object interface:
+// MbEvent object interface (in lieu of typescript for now)
 // {
 //   title: STRING,
 //   description: STRING,
 //   cover_image_url: STRING,
 //   instructions: STRING,
-//   start_time: STRING        //  * wall clock 'YYYY-MM-DDTHH-MM'
-//   end_time: STRING          //  * wall clock 'YYYY-MM-DDTHH-MM'
+//   start_time: STRING        //  * walltime 'YYYY-MM-DDTHH-MM'
+//   end_time: STRING          //  * walltime 'YYYY-MM-DDTHH-MM'
 //   register_link: STRING,
 //   region: STRING,
+//   (for single Event:)
 //   Projects: Project[],
 // }
 
-// const findAllWhere = (where = {}) => MbEvent.findAll({ where });
+// UTILITIES ******************************************
 const associations = {
   include: [
     {
@@ -48,6 +50,7 @@ const associations = {
   ]
 };
 
+// QUERYING DAOS *************************************
 const findOneWhere = (where = {}) => {
   return MbEvent.findOne({
     where,
@@ -57,32 +60,36 @@ const findOneWhere = (where = {}) => {
   });
 };
 
-// TODO: find out why this returns over 400 records... (expect 10 in seeds)
+// does not return associations
 const findAllWhere = (where = {}) => {
   return MbEvent.findAll({
     where,
-    raw: true,
-    nest: true,
-    ...associations,
-    group: [
-      "MbEvent.id",
-      "Projects.id",
-      "Projects.User.id",
-      "Projects.MediaAssets.id",
-      "Projects.MediaAssets.ProjectMediaAsset.id",
-      "Projects.Votes.id"
-    ],
-    subQuery: false
-  }).then(d => {
-    console.log(d.length);
-    return d;
+    raw: true
   });
 };
 
 const findById = id => findOneWhere({ id });
 
-module.exports = {
-  findOneWhere,
-  findById,
-  findAllWhere
+// MUTATING DAOS *************************************
+const create = event => {
+  return MbEvent.create(event).then(raw => raw.get({ raw: true }));
 };
+
+module.exports = {
+  // QUERY
+  findOneWhere,
+  findAllWhere,
+  findById,
+  // MUTATE
+  create
+};
+
+// save for now:
+// group: [
+//   "MbEvent.id",
+//   "Projects.id",
+//   "Projects.User.id",
+//   "Projects.MediaAssets.id",
+//   "Projects.MediaAssets.ProjectMediaAsset.id",
+//   "Projects.Votes.id"
+// ],

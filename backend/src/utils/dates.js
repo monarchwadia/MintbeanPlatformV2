@@ -1,3 +1,4 @@
+// SUB-UTILITIES ****************************************************
 // ensure leading 0 where necessary
 const prepend = unit => {
   return ("0" + unit).slice(-2);
@@ -15,6 +16,8 @@ const parseDatetimeStr = datetimeStr => {
   };
 };
 
+// MUTATING UTILITIES ****************************************************
+// for saving to DB - transforms datetime string to UTC date ISO forced to walltime
 const toWallclockTime = datetimeStr => {
   if (!datetimeStr) return datetimeStr;
   const timeObj = parseDatetimeStr(datetimeStr);
@@ -22,6 +25,7 @@ const toWallclockTime = datetimeStr => {
   return Date.UTC(year, month, date, hours, mins);
 };
 
+// for retrieval - parses UTC date parts to build datetime string preserving walltime
 const toDatetimeStr = wallclockTime => {
   if (!wallclockTime) return wallclockTime;
 
