@@ -9,81 +9,15 @@ const sequelize = require("sequelize");
 const dates = require("../utils/dates");
 const mbEventService = require("../services/mbEventService");
 
-// IMPORTANT: events storage/retrieval must adjust start/end time for wallclock time
-// (../utils/dates.js)
-// storage: toWallclockTime(datetimeStr)
-// retrieval: toDatetimeStr(wallclockTime)
-
 mbEventRoute.get("/", async (req, res, next) => {
-  MbEvent.findAll({
-    include: [
-      {
-        model: Project,
-        attributes: {
-          include: [
-            [
-              sequelize.cast(
-                sequelize.fn("AVG", sequelize.col("Projects.Votes.rating")),
-                "float"
-              ),
-              "ratingAverage"
-            ],
-            [
-              sequelize.cast(
-                sequelize.fn("COUNT", sequelize.col("Projects.Votes.id")),
-                "int"
-              ),
-              "ratingCount"
-            ]
-          ]
-        },
-        include: [
-          {
-            model: User,
-            attributes: {
-              exclude: [
-                "password_hash",
-                "reset_token",
-                "reset_token_created_at",
-                "confirmed",
-                "confirmation_token"
-              ]
-            }
-          },
-          {
-            model: Vote
-          },
-          {
-            model: MediaAsset
-          }
-        ]
-      }
-    ],
-    group: [
-      "MbEvent.id",
-      "Projects.id",
-      "Projects.User.id",
-      "Projects.MediaAssets.id",
-      "Projects.MediaAssets.ProjectMediaAsset.id",
-      "Projects.Votes.id"
-    ],
-    subQuery: false
-  })
-    .then(events => {
-      // wallclock time adjusted
-      const adjusted = events.map(e => {
-        const eJson = e.toJSON();
-        return {
-          ...eJson,
-          start_time: dates.toDatetimeStr(eJson.start_time),
-          end_time: dates.toDatetimeStr(eJson.end_time)
-        };
-      });
-      res.json(adjusted);
-    })
-    .catch(err => {
-      next(err);
-    });
+  try {
+    const events = await mbEventService.listAll();
+
+    res.status(200).json(events);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
 });
 
 mbEventRoute.get(

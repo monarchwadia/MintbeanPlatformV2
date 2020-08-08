@@ -20,43 +20,69 @@ const { MbEvent, Project, User, Vote, MediaAsset } = require("../db/models");
 // }
 
 // const findAllWhere = (where = {}) => MbEvent.findAll({ where });
-const findOneWhere = (where = {}) =>
-  MbEvent.findOne({
+const associations = {
+  include: [
+    {
+      model: Project,
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: [
+              "password_hash",
+              "reset_token",
+              "reset_token_created_at",
+              "confirmed",
+              "confirmation_token"
+            ]
+          }
+        },
+        {
+          model: Vote
+        },
+        {
+          model: MediaAsset
+        }
+      ]
+    }
+  ]
+};
+
+const findOneWhere = (where = {}) => {
+  return MbEvent.findOne({
     where,
     raw: true,
     nest: true,
-    include: [
-      {
-        model: Project,
-        include: [
-          {
-            model: User,
-            attributes: {
-              exclude: [
-                "password_hash",
-                "reset_token",
-                "reset_token_created_at",
-                "confirmed",
-                "confirmation_token"
-              ]
-            }
-          },
-          {
-            model: Vote
-          },
-          {
-            model: MediaAsset
-          }
-        ]
-      }
-    ]
+    ...associations
   });
-const findById = id => findOneWhere({ id });
+};
 
-// const find = (options = {}) => MbEvent.findOne(options);
+// TODO: find out why this returns over 400 records... (expect 10 in seeds)
+const findAllWhere = (where = {}) => {
+  return MbEvent.findAll({
+    where,
+    raw: true,
+    nest: true,
+    ...associations,
+    group: [
+      "MbEvent.id",
+      "Projects.id",
+      "Projects.User.id",
+      "Projects.MediaAssets.id",
+      "Projects.MediaAssets.ProjectMediaAsset.id",
+      "Projects.Votes.id"
+    ],
+    subQuery: false
+  }).then(d => {
+    console.log(d.length);
+    return d;
+  });
+};
+
+const findById = id => findOneWhere({ id });
 
 module.exports = {
   findOneWhere,
-  findById
-  // find
+  findById,
+  findAllWhere
 };

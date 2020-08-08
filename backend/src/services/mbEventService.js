@@ -19,16 +19,32 @@ const dates = require("../utils/dates");
 //   Projects: Project[],
 // }
 
+// UTILITIES ******************************************
+const eventWalltimeAdjusted = event => {
+  return {
+    ...event,
+    start_time: dates.toDatetimeStr(event.start_time), // to walltime
+    end_time: dates.toDatetimeStr(event.end_time) // to walltime
+  };
+};
+
+// QUERYING SERVICES **********************************
+
 const findById = id => {
   return MbEventDao.findById(id).then(event => {
-    return {
-      ...event,
-      start_time: dates.toDatetimeStr(event.start_time), // to walltime
-      end_time: dates.toDatetimeStr(event.end_time) // to walltime
-    };
+    return eventWalltimeAdjusted(event);
   });
 };
 
+const listAll = () => {
+  return MbEventDao.findAllWhere().then(events => {
+    return events.map(event => eventWalltimeAdjusted(event));
+  });
+};
+
+// MUTATING SERVICES **********************************
+
 module.exports = {
-  findById
+  findById,
+  listAll
 };
