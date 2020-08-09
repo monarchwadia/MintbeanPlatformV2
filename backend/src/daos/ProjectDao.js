@@ -126,7 +126,6 @@ const create = projectParams => {
         where: { id: project.id },
         ...associations
       }).then(p => p.get({ plain: true }));
-      console.log(project);
       resolve(project);
     } catch (e) {
       reject(e);
