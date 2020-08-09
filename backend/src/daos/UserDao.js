@@ -1,7 +1,8 @@
 const { User } = require("../db/models");
 ("use strict");
 
-// public User object interface (in lieu of typescript for now)
+// User object interface (in lieu of typescript for now)
+// IMPORTANT: sanitize obj in service layer to prevent sensitive data from going public
 // {
 //   firstname: STRING,
 //   lastname: STRING,
@@ -9,7 +10,12 @@ const { User } = require("../db/models");
 //   linkedin_id: STRING,
 //   github_id: STRING,
 //   twitter_id: STRING,
-//   stackoverflow_id: STRING,
+// ***** sanitize below ************
+//   password_hash: STRING,
+//   confirmation_token: STRING,
+//   confirmed: STRING,
+//   reset_token: STRING,
+//   reset_token_created_at: DATE,
 // }
 
 // UTILITIES ******************************************

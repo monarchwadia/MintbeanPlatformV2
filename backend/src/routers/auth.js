@@ -12,7 +12,8 @@ const {
   sendWelcomeMessage
 } = require("../services/mailerService");
 const authService = require("../services/authService");
-
+const validations = require("../validations/index");
+//
 const TOKEN_EXPIRE_HOURS = 48;
 
 const isValidUserToken = async function(user, token, hrsThreshold) {
@@ -57,16 +58,19 @@ authRoute.post("/reset", async (req, res, next) => {
 // check if supplied pw reset token is valid and return user email if true
 authRoute.post(
   "/reset/check-token",
-  validator.body(
-    Joi.object({
-      tokenObj: Joi.object({
-        email: Joi.string().required(),
-        token: Joi.string().required()
-      })
-    })
-  ),
+  validator.body(validations.auth.tokenObj),
   async (req, res, next) => {
     const { email, token } = req.body.tokenObj;
+
+    // TODO: repair this daoified version -failing
+    // try {
+    //   const response = await authService.checkResetToken({ email, token });
+    //   console.log({ routeresp: repsonse });
+    //   res.status(200).json({ response });
+    // } catch (e) {
+    //   console.log(e);
+    //   next(e);
+    // }
 
     let user;
     try {
