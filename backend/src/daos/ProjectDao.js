@@ -1,6 +1,13 @@
 // THIS MODULE FAILING - unable to retrieve hasMany associations as array
-const { Project, Vote, User, MbEvent, MediaAsset } = require("../db/models");
-
+const {
+  Project,
+  Vote,
+  User,
+  MbEvent,
+  MediaAsset,
+  ProjectMediaAsset
+} = require("../db/models");
+const { sequelize } = require("../db/models");
 ("use strict");
 // THE WAY OF DAO
 // - first/last point of contact with 'the external' (db, apis, etc)
@@ -82,8 +89,55 @@ const findAllWhere = (where = {}) => {
 const findById = id => findOneWhere({ id });
 
 // MUTATING DAOS *************************************
-const create = project => {
-  return Project.create(project).then(raw => raw.get({ raw: true }));
+// projectParams: { title, source_code_url, live_url, mb_event_id, MbEventId, UserId }
+const create = projectParams => {
+  // return Project.create(projectParams).then(raw => raw.get({ raw: true }));
+  return new Promise(async (resolve, reject) => {
+    const { UserId } = projectParams;
+    let project;
+
+    const result = await sequelize.transaction(async transaction => {
+      project = await Project.create({ ...projectParams }, { transaction });
+      const mediaAssets = await MediaAsset.bulkCreate(
+        MediaAssets.map(({ cloudinaryPublicId }) => ({
+          cloudinaryPublicId,
+          UserId
+        })),
+        { transaction }
+      );
+      const projectMediaAssets = await ProjectMediaAsset.bulkCreate(
+        mediaAssets.map((ma, i) => ({
+          MediaAssetId: ma.id,
+          ProjectId: project.id,
+          UserId
+        })),
+        { transaction }
+      );
+    });
+
+    try {
+      project = await Project.findOne({
+        where: { id: project.id },
+        include: [
+          { model: MbEvent },
+          {
+            model: User,
+            attributes: {
+              exclude: [
+                "password_hash",
+                "reset_token",
+                "reset_token_created_at"
+              ]
+            }
+          },
+          { model: MediaAsset }
+        ]
+      }).then(p => p.get({ plain: true }));
+      resolve(project);
+    } catch (e) {
+      reject(e);
+    }
+  });
 };
 
 module.exports = {

@@ -220,7 +220,7 @@ projectRoute.post(
       MediaAssets
     } = req.body);
     const UserId = req.user.id;
-
+    // const project = await projectService.({UserId, ...params})
     let existingProject;
     try {
       existingProject = await Project.findOne({
@@ -235,51 +235,52 @@ projectRoute.post(
         message: "You have already submitted a project to this event."
       });
     }
-
-    let project;
-    const result = await sequelize.transaction(async transaction => {
-      project = await Project.create(
-        { title, source_code_url, live_url, mb_event_id, MbEventId, UserId },
-        { transaction }
-      );
-      const mediaAssets = await MediaAsset.bulkCreate(
-        MediaAssets.map(({ cloudinaryPublicId }) => ({
-          cloudinaryPublicId,
-          UserId
-        })),
-        { transaction }
-      );
-      const projectMediaAssets = await ProjectMediaAsset.bulkCreate(
-        mediaAssets.map((ma, i) => ({
-          MediaAssetId: ma.id,
-          ProjectId: project.id,
-          UserId
-        })),
-        { transaction }
-      );
-    });
-
-    try {
-      project = await Project.findOne({
-        where: { id: project.id },
-        include: [
-          { model: MbEvent },
-          {
-            model: User,
-            attributes: {
-              exclude: [
-                "password_hash",
-                "reset_token",
-                "reset_token_created_at"
-              ]
-            }
-          },
-          { model: MediaAsset }
-        ]
-      });
-    } catch (e) {
-      return next(e);
-    }
+    //
+    // let project;
+    // const result = await sequelize.transaction(async transaction => {
+    //   project = await Project.create(
+    //     { title, source_code_url, live_url, mb_event_id, MbEventId, UserId },
+    //     { transaction }
+    //   );
+    //   const mediaAssets = await MediaAsset.bulkCreate(
+    //     MediaAssets.map(({ cloudinaryPublicId }) => ({
+    //       cloudinaryPublicId,
+    //       UserId
+    //     })),
+    //     { transaction }
+    //   );
+    //   const projectMediaAssets = await ProjectMediaAsset.bulkCreate(
+    //     mediaAssets.map((ma, i) => ({
+    //       MediaAssetId: ma.id,
+    //       ProjectId: project.id,
+    //       UserId
+    //     })),
+    //     { transaction }
+    //   );
+    // });
+    //
+    // try {
+    //   project = await Project.findOne({
+    //     where: { id: project.id },
+    //     include: [
+    //       { model: MbEvent },
+    //       {
+    //         model: User,
+    //         attributes: {
+    //           exclude: [
+    //             "password_hash",
+    //             "reset_token",
+    //             "reset_token_created_at"
+    //           ]
+    //         }
+    //       },
+    //       { model: MediaAsset }
+    //     ]
+    //   });
+    // } catch (e) {
+    //   return next(e);
+    // }
+    const project = await projectService.create({ UserId, ...params });
 
     return res.json(project);
   }
