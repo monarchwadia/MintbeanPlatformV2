@@ -18,8 +18,10 @@ let agent = null;
 let user;
 
 const clear = async done => {
+  jest.clearAllMocks();
   await User.destroy({ where: {} });
   user = undefined;
+
   done();
 };
 
@@ -31,6 +33,7 @@ describe("User auth reset routes", () => {
 
   afterEach(async done => {
     clear(done);
+    jest.clearAllMocks();
     done();
   });
 
@@ -201,6 +204,7 @@ describe("User auth reset routes", () => {
 
     afterEach(async done => {
       await User.destroy({ where: {} });
+      jest.clearAllMocks();
       clear(done);
     });
 

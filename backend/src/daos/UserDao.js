@@ -33,5 +33,17 @@ const findAllWhere = (where = {}) => {
 const findById = id => findOneWhere({ id });
 
 // MUTATING DAOS *************************************
+const updateOneWhere = (where = {}, valuesHash = {}) => {
+  return User.update(valuesHash, { returning: true, where })
+    .then(arr => {
+      return arr[1][0];
+    })
+    .then(obj => {
+      if (!!obj) {
+        return obj.get({ raw: true });
+      }
+      return obj;
+    });
+};
 
-module.exports = { findOneWhere, findAllWhere, findById };
+module.exports = { findOneWhere, findAllWhere, findById, updateOneWhere };

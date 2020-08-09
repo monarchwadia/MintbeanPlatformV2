@@ -11,6 +11,7 @@ const {
   sendResetTokenLink,
   sendWelcomeMessage
 } = require("../services/mailerService");
+const authService = require("../services/authService");
 
 const TOKEN_EXPIRE_HOURS = 48;
 
@@ -44,29 +45,11 @@ authRoute.post("/logout", requireAuth, (req, res) => {
 
 authRoute.post("/reset", async (req, res, next) => {
   try {
-    // check if user with that email exists
-    const email = req.body.email;
-
-    let user;
-    user = await User.findOne({ where: { email } });
-
-    if (user) {
-      // if user exists: a password reset token is generated.
-      const resetToken = uuidv4();
-
-      // The bcrypt of the token is saved on the user object.
-      const hashedResetToken = await hash(resetToken);
-
-      await user.update({
-        reset_token: hashedResetToken,
-        reset_token_created_at: new Date()
-      });
-      sendResetTokenLink(user.email, resetToken);
-    }
-
+    await authService.sendResetEmail(req.body.email);
     // always return ambiguous message
     res.sendStatus(200);
   } catch (e) {
+    console.log(e);
     next(e);
   }
 });
