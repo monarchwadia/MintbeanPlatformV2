@@ -20,7 +20,6 @@ projectRoute.get("/", requireAuth, async (req, res, next) => {
   projectService
     .search({ UserId: req.user.id })
     .then(projects => {
-      console.log(projects);
       res.json(projects);
     })
     .catch(e => next(e));
@@ -192,12 +191,6 @@ projectRoute.get(
   }
 );
 
-// projectRoute.get("/frontpage", async (req, res, next) => {
-//   Project.findAll({ where: {}, include: ["MediaAssets", "User", "Votes"] })
-//     .then(projects => res.json(projects))
-//     .catch(err => next(err));
-// });
-
 projectRoute.get(
   "/:id",
   validator.params(validations.common.id),
@@ -205,7 +198,6 @@ projectRoute.get(
     const { id } = req.params;
     try {
       const project = await projectService.findById(id);
-      console.log(project);
       res.json(project);
     } catch (e) {
       console.log(e);
@@ -217,37 +209,7 @@ projectRoute.get(
 projectRoute.post(
   "/",
   requireAuth,
-  validator.body(
-    Joi.object({
-      title: Joi.string()
-        .min(1)
-        .required(),
-      source_code_url: Joi.string()
-        .min(1)
-        .uri()
-        .required(),
-      live_url: Joi.string()
-        .min(1)
-        .uri()
-        .required(),
-      MbEventId: Joi.string()
-        .min(1)
-        .uuid()
-        .required(),
-      MediaAssets: Joi.array()
-        .items(
-          Joi.object({
-            cloudinaryPublicId: Joi.string()
-              .min(5)
-              .max(20)
-              .required()
-          })
-        )
-        .min(1)
-        .max(5)
-        .required()
-    })
-  ),
+  validator.body(validations.project.projectObj),
   async (req, res, next) => {
     const params = ({
       title,

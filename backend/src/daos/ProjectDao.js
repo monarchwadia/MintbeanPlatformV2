@@ -75,7 +75,6 @@ const findAllWhere = (where = {}) => {
   return Project.findAll({
     where
   }).then(p => {
-    console.log(p);
     return p;
   });
 };
