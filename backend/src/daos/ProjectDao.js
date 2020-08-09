@@ -22,7 +22,13 @@ const { sequelize } = require("../db/models");
 // source_code_url: STRING,
 // live_url: STRING,
 // ratingAverage: NUMBER
-// ratingCount: NUMBER
+// ratingCount: NUMBER,
+// MbEventId: STRING,
+// UserId: String,
+// MbEvent: MbEvent,
+// User: User,
+// MediaAssets: MediaAsset[]
+// Votes: Vote[],
 // }
 
 // UTILITIES ******************************************
@@ -89,9 +95,9 @@ const findAllWhere = (where = {}) => {
 const findById = id => findOneWhere({ id });
 
 // MUTATING DAOS *************************************
+
 // projectParams: { title, source_code_url, live_url, mb_event_id, MbEventId, UserId }
 const create = projectParams => {
-  // return Project.create(projectParams).then(raw => raw.get({ raw: true }));
   return new Promise(async (resolve, reject) => {
     const { UserId } = projectParams;
     let project;
@@ -118,21 +124,9 @@ const create = projectParams => {
     try {
       project = await Project.findOne({
         where: { id: project.id },
-        include: [
-          { model: MbEvent },
-          {
-            model: User,
-            attributes: {
-              exclude: [
-                "password_hash",
-                "reset_token",
-                "reset_token_created_at"
-              ]
-            }
-          },
-          { model: MediaAsset }
-        ]
+        ...associations
       }).then(p => p.get({ plain: true }));
+      console.log(project);
       resolve(project);
     } catch (e) {
       reject(e);
