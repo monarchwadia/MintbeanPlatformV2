@@ -231,29 +231,24 @@ projectRoute.post(
   }
 );
 
+// NOT TESTED!
 projectRoute.post(
   "/uploadMediaAssets",
   requireAdmin,
-  validator.body(
-    Joi.object({
-      ProjectId: Joi.string()
-        .uuid()
-        .required(),
-      MediaAssets: Joi.array()
-        .items(
-          Joi.object({
-            cloudinaryPublicId: Joi.string()
-              .min(5)
-              .max(20)
-              .required()
-          })
-        )
-        .required()
-        .min(1)
-        .max(1)
-    })
-  ),
+  validator.body(validations.uploadMediaAssets),
   async (req, res, next) => {
+    // TODO: implement this Daoified route once tested:
+    // try {
+    //   const { ProjectId, MediaAssets } = req.body;
+    //   const project = await projectService.addMediaAssetsToProject(
+    //     ProjectId,
+    //     MediaAssets
+    //   );
+    // } catch (e) {
+    //   console.log(e);
+    //   next(e);
+    // }
+
     try {
       const params = ({ ProjectId, MediaAssets } = req.body);
 
@@ -292,17 +287,21 @@ projectRoute.post(
 projectRoute.post(
   "/deleteMediaAsset",
   requireAdmin,
-  validator.body(
-    Joi.object({
-      ProjectId: Joi.string()
-        .uuid()
-        .required(),
-      MediaAssetId: Joi.string()
-        .uuid()
-        .required()
-    })
-  ),
+  validator.body(validations.project.deleteMediaAsset),
   async (req, res, next) => {
+    // TODO: implement this Daoified route once tested:
+    // try {
+    //   const { ProjectId, MediaAssetId } = req.body;
+    //   const response = projectService.deleteProjectMediaAsset(
+    //     ProjectId,
+    //     MediaAssetId
+    //   );
+    //   res.status(200).json(response);
+    // } catch (e) {
+    //   console.log(e);
+    //   next(e);
+    // }
+
     try {
       const { ProjectId, MediaAssetId } = req.body;
 

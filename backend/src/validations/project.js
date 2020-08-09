@@ -47,4 +47,13 @@ const uploadMediaAssets = Joi.object({
     .min(1)
     .max(1)
 });
+
+const deleteMediaAsset = Joi.object({
+  ProjectId: Joi.string()
+    .uuid()
+    .required(),
+  MediaAssetId: Joi.string()
+    .uuid()
+    .required()
+});
 module.exports = { createProject, uploadMediaAssets };

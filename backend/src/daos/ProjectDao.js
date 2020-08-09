@@ -138,11 +138,40 @@ const create = projectParams => {
   });
 };
 
+// NOT TESTED!
+const addMediaAssetsToProject = (projectId, mediaAssets) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const result = await sequelize.transaction(async transaction => {
+        const mediaAssets = await MediaAsset.bulkCreate(
+          mediaAssets.map(({ cloudinaryPublicId }) => ({
+            cloudinaryPublicId,
+            UserId
+          })),
+          { transaction }
+        );
+        const projectMediaAssets = await ProjectMediaAsset.bulkCreate(
+          mediaAssets.map((ma, i) => ({
+            MediaAssetId: ma.id,
+            ProjectId: project.id,
+            UserId
+          })),
+          { transaction }
+        );
+      });
+      resolve(result); // TODO: convert 'result' to standard obj
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
 module.exports = {
   // QUERY
   findOneWhere,
   findAllWhere,
   findById,
   // MUTATE
-  create
+  create,
+  addMediaAssetsToProject
 };

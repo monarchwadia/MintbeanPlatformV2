@@ -1,4 +1,5 @@
 const ProjectDao = require("../daos/ProjectDao");
+const ProjectMediaAssetDao = require("../daos/ProjectMediaAssetDao");
 
 // QUERYING ***************************************************
 const search = (where = {}) => ProjectDao.findAllWhere(where);
@@ -26,8 +27,37 @@ const create = projectParams => {
   });
 };
 
+// NOT TESTED!
+const addMediaAssetsToProject = (projectId, mediaAssets) => {
+  return ProjectDao.addMediaAssetsToProject(projectId, mediaAssets);
+};
+// NOT TESTED!
+const deleteProjectMediaAsset = (ProjectId, MediaAssetId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const projectMediaAsset = await ProjectMediaAssetDao.findOneWhere({
+        where: { ProjectId, MediaAssetId }
+      });
+
+      if (!projectMediaAsset) {
+        reject("No such assets found");
+      } else {
+        const deleted = await projectMediaAsset.destroy();
+        resolve(deleted);
+      }
+    } catch {
+      reject(
+        `Error while deleting media asset, ProjectId=[${ProjectId}] MediaAssetId=[${MediaAssetId}]`
+      );
+    }
+  });
+};
+
 module.exports = {
+  // QUERY
   search,
   findById,
-  create
+  // MUTATE
+  create,
+  addMediaAssetsToProject
 };
