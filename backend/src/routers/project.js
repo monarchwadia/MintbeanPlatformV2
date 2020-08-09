@@ -220,21 +220,7 @@ projectRoute.post(
       MediaAssets
     } = req.body);
     const UserId = req.user.id;
-    //
-    // let existingProject;
-    // try {
-    //   existingProject = await Project.findOne({
-    //     where: { UserId, MbEventId }
-    //   });
-    // } catch (e) {
-    //   return next(e);
-    // }
-    //
-    // if (existingProject) {
-    //   return res.status(403).json({
-    //     message: "You have already submitted a project to this event."
-    //   });
-    // }
+
     try {
       const project = await projectService.create({ UserId, ...params });
       return res.json(project);
