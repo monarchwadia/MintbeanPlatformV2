@@ -51,7 +51,10 @@ const findOneWhere = (where = {}) => {
     raw: true,
     nest: true
   }).then(obj => {
-    return objWithParsedConfigValue(obj);
+    if (!!obj) {
+      return objWithParsedConfigValue(obj);
+    }
+    return obj;
   });
 };
 
@@ -124,7 +127,7 @@ const getAscFeaturedSectionsArr = () => {
 
 // MUTATING DAOS *************************************
 const updateWhere = (where = {}, val) => {
-  // stringify configValue if is obj
+  // store objects as strings
   const strVal = typeof val === "object" ? JSON.stringify(val) : val;
   return MbConfig.update({ configValue: strVal }, { returning: true, where })
     .then(arr => {

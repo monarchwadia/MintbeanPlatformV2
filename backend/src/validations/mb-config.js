@@ -21,4 +21,8 @@ const mbConfigObj = Joi.object({
   })
 });
 
-module.exports = { keyObj, mbConfigObj };
+const patchMbConfig = Joi.object({
+  configValue: [Joi.string().required(), Joi.object()]
+});
+
+module.exports = { keyObj, mbConfigObj, patchMbConfig };

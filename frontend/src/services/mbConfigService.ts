@@ -10,9 +10,12 @@ export class MbConfigService {
       .then(resp => resp.data);
   }
 
-  async patchValueByKey(key: string, newValue: object): Promise<MbConfig> {
+  async patchValueByKey(
+    key: string,
+    newValue: object | string
+  ): Promise<MbConfig> {
     return this.apiService
-      .patch("/api/v1/mb-config/" + key, newValue)
+      .patch("/api/v1/mb-config/" + key, { configValue: newValue })
       .then(resp => resp.data);
   }
 

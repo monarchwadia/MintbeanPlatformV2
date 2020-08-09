@@ -25,7 +25,7 @@ mbConfigRoute.patch(
   "/:key",
   requireAdmin,
   validator.params(validations.mbConfig.keyObj),
-  validator.body(validations.mbConfig.mbConfigObj),
+  validator.body(validations.mbConfig.patchMbConfig),
   async (req, res, next) => {
     const { key } = req.params;
     try {

@@ -80,7 +80,12 @@ const findOneWhere = (where = {}) => {
   return Project.findOne({
     where,
     ...associations
-  }).then(p => p.get({ plain: true }));
+  }).then(p => {
+    if (!!p) {
+      return p.get({ plain: true });
+    }
+    return p;
+  });
 };
 
 // does not return associations
@@ -96,7 +101,7 @@ const findById = id => findOneWhere({ id });
 
 // MUTATING DAOS *************************************
 
-// projectParams: { title, source_code_url, live_url, mb_event_id, MbEventId, UserId }
+// projectParams shape: { title, source_code_url, live_url, mb_event_id, MbEventId, UserId }
 const create = projectParams => {
   return new Promise(async (resolve, reject) => {
     const { UserId } = projectParams;

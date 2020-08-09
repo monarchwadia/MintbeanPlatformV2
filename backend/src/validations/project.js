@@ -1,6 +1,6 @@
 const Joi = require("@hapi/joi");
 
-const projectObj = Joi.object({
+const createProject = Joi.object({
   title: Joi.string()
     .min(1)
     .required(),
@@ -29,4 +29,22 @@ const projectObj = Joi.object({
     .max(5)
     .required()
 });
-module.exports = { projectObj };
+
+const uploadMediaAssets = Joi.object({
+  ProjectId: Joi.string()
+    .uuid()
+    .required(),
+  MediaAssets: Joi.array()
+    .items(
+      Joi.object({
+        cloudinaryPublicId: Joi.string()
+          .min(5)
+          .max(20)
+          .required()
+      })
+    )
+    .required()
+    .min(1)
+    .max(1)
+});
+module.exports = { createProject, uploadMediaAssets };

@@ -48,8 +48,6 @@ import mbProjectSearch from "../../components/mb-project-search";
 import dates from "../../helpers/dates";
 
 const sampleFeaturedSectionsFormat = {
-  id: "826cbfea-0665-4357-b100-8dad8b3e2adb",
-  configKey: "featuredSections",
   configValue: {
     sections: [
       {
@@ -71,9 +69,7 @@ const sampleFeaturedSectionsFormat = {
         ]
       }
     ]
-  },
-  createdAt: "2020-08-08T00:05:57.788Z",
-  updatedAt: "2020-08-08T22:57:38.130Z"
+  }
 };
 // @ is an alias to /src
 export default {
@@ -135,7 +131,7 @@ export default {
         );
 
         await this.$mbContext.mbConfigService
-          .patchValueByKey("featuredSections", newVal)
+          .patchValueByKey("featuredSections", newVal.configValue)
           .then(() => alert("Updated featured projects sections!"))
           .then(() => this.$refs.modalEditSections.closeModal())
           .catch(() => alert("Failed to update. Check object formatting"));

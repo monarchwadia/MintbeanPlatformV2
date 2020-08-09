@@ -73,7 +73,12 @@ const findById = id => findOneWhere({ id });
 
 // MUTATING DAOS *************************************
 const create = event => {
-  return MbEvent.create(event).then(e => e.get({ raw: true }));
+  return MbEvent.create(event).then(e => {
+    if (!!e) {
+      e.get({ raw: true });
+    }
+    return e;
+  });
 };
 
 module.exports = {
