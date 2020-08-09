@@ -23,9 +23,13 @@ const associations = {
   include: [
     {
       model: Vote,
+      raw: true,
+      nest: true,
       include: [
         {
           model: User,
+          raw: true,
+          nest: true,
           attributes: {
             exclude: [
               "password_hash",
@@ -40,6 +44,8 @@ const associations = {
     },
     {
       model: User,
+      raw: true,
+      nest: true,
       attributes: {
         exclude: [
           "password_hash",
@@ -50,27 +56,24 @@ const associations = {
         ]
       }
     },
-    { model: MediaAsset },
-    { model: MbEvent }
+    { model: MediaAsset, raw: true, nest: true },
+    { model: MbEvent, raw: true, nest: true }
   ]
 };
 
 // QUERYING DAOS *************************************
 const findOneWhere = (where = {}) => {
-  return Project.findAll({
+  // Sequelize note: for nested 1:n associations - use { raw: true, nest: true } IN "include" ASSOCIATION ONLY, not at find*() root. Then take result and execute result.get({plain: true}) for returning only JSON
+  return Project.findOne({
     where,
-    raw: true,
-    nest: true,
     ...associations
-  });
+  }).then(p => p.get({ plain: true }));
 };
 
 // does not return associations
 const findAllWhere = (where = {}) => {
   return Project.findAll({
     where
-    // raw: true,
-    // nest: true
   }).then(p => {
     console.log(p);
     return p;
@@ -92,13 +95,3 @@ module.exports = {
   // MUTATE
   create
 };
-
-// save for now:
-// group: [
-//   "MbEvent.id",
-//   "Projects.id",
-//   "Projects.User.id",
-//   "Projects.MediaAssets.id",
-//   "Projects.MediaAssets.ProjectMediaAsset.id",
-//   "Projects.Votes.id"
-// ],

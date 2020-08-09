@@ -11,6 +11,7 @@ const {
 } = require("../db/models");
 const Joi = require("@hapi/joi");
 const validator = require("../validator");
+const validations = require("../validations");
 const projectService = require("../services/projectService");
 
 const projectRoute = new Router();
@@ -199,50 +200,17 @@ projectRoute.get("/frontpage", async (req, res, next) => {
 
 projectRoute.get(
   "/:id",
-  validator.params(Joi.object({ id: Joi.string().required() })),
+  validator.params(validations.common.id),
   async (req, res, next) => {
     const { id } = req.params;
-
-    Project.findOne({
-      where: { id },
-      include: [
-        {
-          model: Vote,
-          include: [
-            {
-              model: User,
-              attributes: {
-                exclude: [
-                  "password_hash",
-                  "reset_token",
-                  "reset_token_created_at"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          model: User,
-          attributes: {
-            exclude: ["password_hash", "reset_token", "reset_token_created_at"]
-          }
-        },
-        { model: MediaAsset },
-        { model: MbEvent }
-      ]
-    })
-      .then(project => res.json(project))
-      .catch(e => next(e));
-
-    // failed refactor
-    // try {
-    //   const project = await projectService.findById(id);
-    //   console.log(project);
-    //   res.json(project);
-    // } catch (e) {
-    //   console.log(e);
-    //   next(e);
-    // }
+    try {
+      const project = await projectService.findById(id);
+      console.log(project);
+      res.json(project);
+    } catch (e) {
+      console.log(e);
+      next(e);
+    }
   }
 );
 
