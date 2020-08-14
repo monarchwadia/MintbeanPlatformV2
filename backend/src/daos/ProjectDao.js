@@ -5,9 +5,9 @@ const {
   User,
   MbEvent,
   MediaAsset,
-  ProjectMediaAsset
+  ProjectMediaAsset,
+  sequelize
 } = require("../db/models");
-const { sequelize } = require("../db/models");
 ("use strict");
 // THE WAY OF DAO
 // - first/last point of contact with 'the external' (db, apis, etc)

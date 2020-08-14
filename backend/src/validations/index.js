@@ -5,9 +5,9 @@ const project = require("./project");
 const auth = require("./auth");
 
 module.exports = {
-  common: { ...common },
-  mbEvent: { ...mbEvent },
-  mbConfig: { ...mbConfig },
-  project: { ...project },
-  auth: { ...auth }
+  common,
+  mbEvent,
+  mbConfig,
+  project,
+  auth
 };

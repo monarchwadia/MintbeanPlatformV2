@@ -72,12 +72,12 @@ const findAllWhere = (where = {}) => {
 const findById = id => findOneWhere({ id });
 
 // MUTATING DAOS *************************************
-const create = event => {
-  return MbEvent.create(event).then(e => {
-    if (!!e) {
-      e.get({ raw: true });
+const create = mbEvent => {
+  return MbEvent.create(mbEvent).then(mbe => {
+    if (!!mbe) {
+      return mbe.get({ raw: true });
     }
-    return e;
+    return mbe;
   });
 };
 
