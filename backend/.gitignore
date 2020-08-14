@@ -1,3 +1,4 @@
+/build
 node_modules/
 devtools/db/data
 .yarn/*
