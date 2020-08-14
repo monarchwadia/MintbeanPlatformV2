@@ -166,11 +166,96 @@ const addMediaAssetsToProject = (projectId, mediaAssets) => {
   });
 };
 
+const search = bindings => {
+  return new Promise(async (resolve, reject) => {
+    let sql = `
+      SELECT
+      p.id AS "id",
+      u.id AS "user_id",
+      p."title" AS "title",
+      p."live_url" AS "live_url",
+      mbe."cover_image_url" AS "mbevent_cover_image_url",
+      ma."cloudinaryPublicId" AS "cloudinaryPublicId",
+      (u."firstname" || ' ' || u."lastname") AS "user_fullname",
+      COUNT(v.*) AS "ratingCount",
+      TRUNC(AVG(v.rating), 2) AS "ratingAverage"
+      FROM "Projects" AS p
+      LEFT JOIN "Users" AS u ON p."UserId" = u."id"
+      LEFT JOIN "MbEvents" AS mbe ON p."MbEventId" = mbe.id
+      LEFT JOIN "Votes" AS v ON v."ProjectId" = p.id
+      LEFT JOIN "ProjectMediaAssets" AS pma ON pma."ProjectId" = p.id
+      LEFT JOIN "MediaAssets" AS ma ON pma."MediaAssetId" = ma.id
+      WHERE 1 = 1
+      ${
+        bindings.search_query !== undefined
+          ? '\
+        AND((u."firstname" || \' \' || u."lastname") ILIKE $search_query \
+        OR (p."title" ILIKE $search_query)) \
+        '
+          : ""
+      }
+      ${
+        bindings.filter_userId !== undefined
+          ? "AND  u.id = COALESCE($filter_userId, u.id)"
+          : ""
+      }
+      ${
+        bindings.filter_mbEventId !== undefined
+          ? "AND  mbe.id = COALESCE($filter_mbEventId, mbe.id)"
+          : ""
+      }
+      GROUP BY p."id", u."id", mbe."id", ma."cloudinaryPublicId"
+      HAVING 1 = 1
+      ${
+        bindings.filter_ratingCount_min !== undefined
+          ? "AND COUNT(v.*) >= COALESCE($filter_ratingCount_min, 0)"
+          : ""
+      }
+      ${
+        bindings.filter_ratingAverage_min !== undefined
+          ? "AND  TRUNC(AVG(v.rating), 2) >= COALESCE($filter_ratingAverage_min, 0)"
+          : ""
+      }
+      ORDER BY ${bindings.sort_field} ${bindings.sort_direction}
+      LIMIT $limit OFFSET $offset;
+      `;
+
+    try {
+      const results = await sequelize.query(sql, {
+        model: Project,
+        mapToModel: true,
+        bind: bindings,
+        // raw: true,
+        // nest: true,  // TODO: why does this not render in frontend when raw: true
+        include: [
+          {
+            model: User,
+            attributes: {
+              exclude: [
+                "password_hash",
+                "reset_token",
+                "reset_token_created_at",
+                "confirmed",
+                "confirmation_token"
+              ]
+            }
+          }
+        ]
+      });
+
+      resolve(results); // TODO return standard object (currently sequelize obj)
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 module.exports = {
   // QUERY
   findOneWhere,
   findAllWhere,
   findById,
+  search,
   // MUTATE
   create,
   addMediaAssetsToProject

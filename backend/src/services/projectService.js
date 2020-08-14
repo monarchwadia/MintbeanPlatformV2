@@ -2,7 +2,6 @@ const ProjectDao = require("../daos/ProjectDao");
 const ProjectMediaAssetDao = require("../daos/ProjectMediaAssetDao");
 
 // QUERYING ***************************************************
-const search = (where = {}) => ProjectDao.findAllWhere(where);
 const findById = id => ProjectDao.findById(id);
 
 // MUTATING ***************************************************
@@ -59,6 +58,71 @@ const deleteProjectMediaAsset = (ProjectId, MediaAssetId) => {
       reject(
         `Error while deleting media asset, ProjectId=[${ProjectId}] MediaAssetId=[${MediaAssetId}]`
       );
+    }
+  });
+};
+
+// search queryObj example:
+// {
+//   filter_mbEventId: 'b539e709-b630-424b-b032-30d603500049',
+//   filter_ratingCount_min: 0,
+//   sort_direction: 'desc',
+//   sort_field: 'RATING_AVERAGE',
+//   limit: 50,
+//   offset: 0,
+//   search_query: ''
+// }
+const search = queryObj => {
+  const VALID_SORT_FIELDS = {
+    CREATED_AT: 'p."createdAt"',
+    RATING_AVERAGE: "TRUNC(AVG(v.rating), 2)",
+    RATING_COUNT: "COUNT(v.*)"
+  };
+  const VALID_SORT_DIRECTIONS = {
+    desc: "desc",
+    asc: "asc"
+  };
+  return new Promise(async (resolve, reject) => {
+    const defaults = {
+      search_query: undefined,
+      filter_userId: undefined,
+      filter_mbEventId: undefined,
+      filter_ratingCount_min: undefined,
+      filter_ratingAverage_min: undefined,
+      sort_direction: "desc",
+      sort_field: "RATING_AVERAGE",
+      limit: 10,
+      offset: 0
+    };
+
+    // generate defaults
+    const bindings = {};
+    Object.entries(defaults).forEach(([field, defaultValue]) => {
+      const queryValue = queryObj[field];
+      bindings[field] = queryValue === undefined ? defaultValue : queryValue;
+    });
+
+    // clean search_query to trim && remove empty strings
+    bindings.search_query = bindings.search_query
+      ? bindings.search_query.trim()
+      : undefined;
+
+    // coerce '' and other falseys to undefined
+    if (!bindings.search_query) {
+      bindings.search_query = undefined;
+    } else {
+      bindings.search_query = `%${bindings.search_query}%`;
+    }
+    // set sort field
+    bindings.sort_field =
+      VALID_SORT_FIELDS[bindings.sort_field || defaults.sort_field];
+    bindings.sort_direction =
+      VALID_SORT_DIRECTIONS[bindings.sort_direction || defaults.sort_direction];
+    try {
+      const response = await ProjectDao.search(bindings);
+      resolve(response);
+    } catch (e) {
+      reject(e);
     }
   });
 };
