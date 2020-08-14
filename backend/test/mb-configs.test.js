@@ -238,7 +238,7 @@ describe("MbConfig Model", () => {
         done();
       });
 
-      it.only("can PATCH /mb-config/:key", async done => {
+      it("can PATCH /mb-config/:key", async done => {
         // fetch while logged in as admin
         const response = await agent
           .patch("/api/v1/mb-config/" + TEST_CONFIG_FEATURED_SECTIONS.key)

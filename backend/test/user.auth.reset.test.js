@@ -27,6 +27,13 @@ const clear = async done => {
 
 describe("User auth reset routes", () => {
   beforeEach(async done => {
+    let msgObj;
+    // mock sendGrid mailer
+    const mockSendResetTokenLink = jest.spyOn(sgMail, "send");
+    mockSendResetTokenLink.mockImplementation(args => {
+      msgObj = args;
+      return Promise.resolve();
+    });
     agent = supertest.agent(app);
     done();
   });
@@ -63,6 +70,7 @@ describe("User auth reset routes", () => {
       afterEach(async done => {
         await User.destroy({ where: {} });
         clear(done);
+        jest.clearAllMocks();
       });
 
       it("assigns reset_token and reset_token_created_at on user", async done => {
