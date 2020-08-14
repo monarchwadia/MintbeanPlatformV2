@@ -1,5 +1,6 @@
-const { MbEvent, Project, User, Vote, MediaAsset } = require("../db/models");
-
+import * as models from "../db/models";
+import { MbEventWithProjects } from "../types/MbEvent";
+const { Project, User, Vote, MbEvent, MediaAsset } = models;
 ("use strict");
 // THE WAY OF DAO
 // - first/last point of contact with 'the external' (db, apis, etc)
@@ -69,11 +70,11 @@ const findAllWhere = (where = {}) => {
   });
 };
 
-const findById = id => findOneWhere({ id });
+const findById = (id: string) => findOneWhere({ id });
 
 // MUTATING DAOS *************************************
-const create = mbEvent => {
-  return MbEvent.create(mbEvent).then(mbe => {
+const create = (mbEvent: MbEventWithProjects) => {
+  return MbEvent.create(mbEvent).then((mbe: any) => {
     if (!!mbe) {
       return mbe.get({ raw: true });
     }

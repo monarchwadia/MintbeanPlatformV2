@@ -1,4 +1,4 @@
-const c = require('../../utils/config');
+import * as c from "../../utils/config";
 
 module.exports = {
   username: c.dbUsername(),
@@ -7,5 +7,5 @@ module.exports = {
   database: c.dbDatabase(),
   logging: c.dbTestLogSql() === "true",
   port: c.dbPort(),
-  dialect: 'postgres'
-}
+  dialect: "postgres"
+};

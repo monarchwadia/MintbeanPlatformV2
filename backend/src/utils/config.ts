@@ -1,15 +1,15 @@
 const CONVERTERS = {
-  toNumber: val => +val
+  toNumber: (val: any) => +val
 };
 
-const getValue = key => process.env[key];
+const getValue = (key: string) => process.env[key];
 
-const hoc = (key, _opts = {}) => {
+const hoc = (key: string, _opts = {}) => {
   // defaults
   const defaults = {
     required: true,
     defaultValue: undefined,
-    convert: val => val,
+    convert: (val: any) => val,
     validator: null
   };
 
