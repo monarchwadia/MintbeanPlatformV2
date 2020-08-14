@@ -235,8 +235,9 @@ projectRoute.post(
 projectRoute.post(
   "/uploadMediaAssets",
   requireAdmin,
-  validator.body(validations.uploadMediaAssets),
+  // validator.body(validations.uploadMediaAssets),
   async (req, res, next) => {
+    console.log({ req });
     // TODO: implement this Daoified route once tested:
     // try {
     //   const { ProjectId, MediaAssets } = req.body;
@@ -244,6 +245,7 @@ projectRoute.post(
     //     ProjectId,
     //     MediaAssets
     //   );
+    //   res.status(200).json({ message: "OK" });
     // } catch (e) {
     //   console.log(e);
     //   next(e);

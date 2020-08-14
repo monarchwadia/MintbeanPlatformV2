@@ -1,8 +1,13 @@
 const supertest = require("supertest");
 const app = require("../src/app");
-const { TEST_EMAIL, TEST_PASSWORD } = require("./test.constants");
+const {
+  TEST_EMAIL,
+  TEST_PASSWORD,
+  TEST_ADMIN_EMAIL
+} = require("./test.constants");
 const userFactory = require("../src/db/factories/user.factory");
 const mbEventFactory = require("../src/db/factories/mb-event.factory");
+const mediaAssetFactory = require("../src/db/factories/media-asset.factory");
 const projectFactory = require("../src/db/factories/project.factory");
 const voteFactory = require("../src/db/factories/vote.factory");
 const {
@@ -544,6 +549,58 @@ describe("Projects route", () => {
 
         done();
       });
+      it("/uploadMediaAssets cannot add media assets to a project as regular user", async done => {
+        const projectPayload = projectFactory.one({
+          UserId: user.id,
+          MbEventId: mbEvent.id
+        });
+
+        project = await Project.create(projectPayload);
+        const mediaAsset = mediaAssetFactory.one();
+        const response = await agent
+          .post("/api/v1/project/uploadMediaAssets")
+          .send(project.id, [mediaAsset]);
+        expect(response.statusCode).toBe(401);
+        done();
+      });
     });
+    // describe("When logged in as admin", () => {
+    //   let admin;
+    //   beforeEach(async done => {
+    //     admin = await User.create(
+    //       userFactory.one({ isAdmin: true, email: TEST_ADMIN_EMAIL })
+    //     );
+    //     user = await User.create(userFactory.one({ email: TEST_EMAIL }));
+    //     await agent
+    //       .post("/api/v1/auth/login")
+    //       .send({ email: TEST_ADMIN_EMAIL, password: TEST_PASSWORD });
+    //
+    //     done();
+    //   });
+    //
+    //   afterEach(async done => {
+    //     await User.destroy({ where: {} });
+    //   });
+
+    // NOT CONFIGURED PROPERLY
+    // it("/uploadMediaAssets can add media assets to a project", async done => {
+    //   const projectPayload = projectFactory.one({
+    //     UserId: user.id,
+    //     MbEventId: mbEvent.id
+    //   });
+    //
+    //   project = await Project.create(projectPayload);
+    //   // console.log({ user, admin });
+    //   const mediaAssets = mediaAssetFactory.bulk(2, { UserId: user.id });
+    //
+    //   console.log({ mediaAssets });
+    //   const response = await agent
+    //     .post("/api/v1/project/uploadMediaAssets")
+    //     .send(project.id, mediaAssets);
+    //   // console.log(response);
+    //   // expect(response.statusCode).toBe(401);
+    //   done();
+    // });
+    // });
   });
 });

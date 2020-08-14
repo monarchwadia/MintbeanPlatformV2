@@ -41,6 +41,7 @@ const uploadMediaAssets = Joi.object({
           .min(5)
           .max(20)
           .required()
+        // UserId: Joi.string().required()
       })
     )
     .required()
@@ -56,4 +57,4 @@ const deleteMediaAsset = Joi.object({
     .uuid()
     .required()
 });
-module.exports = { createProject, uploadMediaAssets };
+module.exports = { createProject, uploadMediaAssets, deleteMediaAsset };

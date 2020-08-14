@@ -29,7 +29,17 @@ const create = projectParams => {
 
 // NOT TESTED!
 const addMediaAssetsToProject = (projectId, mediaAssets) => {
-  return ProjectDao.addMediaAssetsToProject(projectId, mediaAssets);
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = ProjectDao.addMediaAssetsToProject(
+        projectId,
+        mediaAssets
+      );
+      resolve(response);
+    } catch (e) {
+      reject(e);
+    }
+  });
 };
 // NOT TESTED!
 const deleteProjectMediaAsset = (ProjectId, MediaAssetId) => {
