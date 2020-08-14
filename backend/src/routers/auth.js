@@ -11,7 +11,9 @@ const {
   sendResetTokenLink,
   sendWelcomeMessage
 } = require("../services/mailerService");
-
+const authService = require("../services/authService");
+const validations = require("../validations/index");
+//
 const TOKEN_EXPIRE_HOURS = 48;
 
 const isValidUserToken = async function(user, token, hrsThreshold) {
@@ -44,29 +46,11 @@ authRoute.post("/logout", requireAuth, (req, res) => {
 
 authRoute.post("/reset", async (req, res, next) => {
   try {
-    // check if user with that email exists
-    const email = req.body.email;
-
-    let user;
-    user = await User.findOne({ where: { email } });
-
-    if (user) {
-      // if user exists: a password reset token is generated.
-      const resetToken = uuidv4();
-
-      // The bcrypt of the token is saved on the user object.
-      const hashedResetToken = await hash(resetToken);
-
-      await user.update({
-        reset_token: hashedResetToken,
-        reset_token_created_at: new Date()
-      });
-      sendResetTokenLink(user.email, resetToken);
-    }
-
+    await authService.sendResetEmail(req.body.email);
     // always return ambiguous message
     res.sendStatus(200);
   } catch (e) {
+    console.log(e);
     next(e);
   }
 });
@@ -74,16 +58,19 @@ authRoute.post("/reset", async (req, res, next) => {
 // check if supplied pw reset token is valid and return user email if true
 authRoute.post(
   "/reset/check-token",
-  validator.body(
-    Joi.object({
-      tokenObj: Joi.object({
-        email: Joi.string().required(),
-        token: Joi.string().required()
-      })
-    })
-  ),
+  validator.body(validations.auth.tokenObj),
   async (req, res, next) => {
     const { email, token } = req.body.tokenObj;
+
+    // TODO: repair this daoified version -failing
+    // try {
+    //   const response = await authService.checkResetToken({ email, token });
+    //   console.log({ routeresp: repsonse });
+    //   res.status(200).json({ response });
+    // } catch (e) {
+    //   console.log(e);
+    //   next(e);
+    // }
 
     let user;
     try {

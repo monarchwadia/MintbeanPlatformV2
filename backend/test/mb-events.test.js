@@ -1,9 +1,9 @@
 const supertest = require("supertest");
 const app = require("../src/app");
 const { TEST_EMAIL, TEST_PASSWORD } = require("./test.constants");
-const userCreated = require('./stories/user.created');
-const mbEventFactory = require('../src/db/factories/mb-event.factory');
-const { MbEvent } = require('../src/db/models');
+const userCreated = require("./stories/user.created");
+const mbEventFactory = require("../src/db/factories/mb-event.factory");
+const { MbEvent } = require("../src/db/models");
 
 let agent = null;
 
@@ -16,15 +16,23 @@ describe("MbEvents route", () => {
   });
 
   afterEach(done => {
-    MbEvent.destroy({where: {}}).then(() => done()).catch(done);
+    MbEvent.destroy({ where: {} })
+      .then(() => done())
+      .catch(done);
   });
 
   test("GET / should fetch all the events", async () => {
-    const response = await agent
-    .get("/api/v1/mb-event");
+    const response = await agent.get("/api/v1/mb-event");
 
     expect(response.statusCode).toBe(200);
     expect(response.body.length).toBe(10);
+  });
+
+  test("GET /:id should return an event with that id", async () => {
+    const thisEvent = await MbEvent.findOne();
+    const response = await agent.get(`/api/v1/mb-event/${thisEvent.id}`);
+    expect(response).toBeTruthy();
+    // expect(response.statusCode).toBe(200);
   });
 
   // test("CREATE: should create an event", async () => {

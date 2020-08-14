@@ -11,6 +11,7 @@ const {
 } = require("../db/models");
 const Joi = require("@hapi/joi");
 const validator = require("../validator");
+const validations = require("../validations");
 const projectService = require("../services/projectService");
 
 const projectRoute = new Router();
@@ -18,8 +19,10 @@ const projectRoute = new Router();
 projectRoute.get("/", requireAuth, async (req, res, next) => {
   projectService
     .search({ UserId: req.user.id })
-    .then(projects => res.json(projects))
-    .catch(e => next(err));
+    .then(projects => {
+      res.json(projects);
+    })
+    .catch(e => next(e));
 });
 
 const VALID_SORT_FIELDS = {
@@ -188,87 +191,25 @@ projectRoute.get(
   }
 );
 
-projectRoute.get("/frontpage", async (req, res, next) => {
-  Project.findAll({ where: {}, include: ["MediaAssets", "User", "Votes"] })
-    .then(projects => res.json(projects))
-    .catch(err => next(err));
-});
-
 projectRoute.get(
   "/:id",
-  validator.params(Joi.object({ id: Joi.string().required() })),
+  validator.params(validations.common.id),
   async (req, res, next) => {
     const { id } = req.params;
-
-    Project.findOne({
-      where: { id },
-      include: [
-        {
-          model: Vote,
-          include: [
-            {
-              model: User,
-              attributes: {
-                exclude: [
-                  "password_hash",
-                  "reset_token",
-                  "reset_token_created_at"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          model: User,
-          attributes: {
-            exclude: ["password_hash", "reset_token", "reset_token_created_at"]
-          }
-        },
-        { model: MediaAsset },
-        { model: MbEvent }
-      ]
-    })
-      .then(project => {
-        res.json(project);
-      })
-      .catch(err => next(err));
+    try {
+      const project = await projectService.findById(id);
+      res.json(project);
+    } catch (e) {
+      console.log(e);
+      next(e);
+    }
   }
 );
 
 projectRoute.post(
   "/",
   requireAuth,
-  validator.body(
-    Joi.object({
-      title: Joi.string()
-        .min(1)
-        .required(),
-      source_code_url: Joi.string()
-        .min(1)
-        .uri()
-        .required(),
-      live_url: Joi.string()
-        .min(1)
-        .uri()
-        .required(),
-      MbEventId: Joi.string()
-        .min(1)
-        .uuid()
-        .required(),
-      MediaAssets: Joi.array()
-        .items(
-          Joi.object({
-            cloudinaryPublicId: Joi.string()
-              .min(5)
-              .max(20)
-              .required()
-          })
-        )
-        .min(1)
-        .max(5)
-        .required()
-    })
-  ),
+  validator.body(validations.project.createProject),
   async (req, res, next) => {
     const params = ({
       title,
@@ -280,93 +221,34 @@ projectRoute.post(
     } = req.body);
     const UserId = req.user.id;
 
-    let existingProject;
     try {
-      existingProject = await Project.findOne({
-        where: { UserId, MbEventId }
-      });
-    } catch (e) {
-      return next(e);
+      const project = await projectService.create({ UserId, ...params });
+      return res.json(project);
+    } catch (err) {
+      console.log({ err });
+      return res.status(403).json({ err });
     }
-
-    if (existingProject) {
-      return res.status(403).json({
-        message: "You have already submitted a project to this event."
-      });
-    }
-
-    let project;
-    const result = await sequelize.transaction(async transaction => {
-      project = await Project.create(
-        { title, source_code_url, live_url, mb_event_id, MbEventId, UserId },
-        { transaction }
-      );
-      const mediaAssets = await MediaAsset.bulkCreate(
-        MediaAssets.map(({ cloudinaryPublicId }) => ({
-          cloudinaryPublicId,
-          UserId
-        })),
-        { transaction }
-      );
-      const projectMediaAssets = await ProjectMediaAsset.bulkCreate(
-        mediaAssets.map((ma, i) => ({
-          MediaAssetId: ma.id,
-          ProjectId: project.id,
-          UserId
-        })),
-        { transaction }
-      );
-    });
-
-    try {
-      project = await Project.findOne({
-        where: { id: project.id },
-        include: [
-          { model: MbEvent },
-          {
-            model: User,
-            attributes: {
-              exclude: [
-                "password_hash",
-                "reset_token",
-                "reset_token_created_at"
-              ]
-            }
-          },
-          { model: MediaAsset }
-        ]
-      });
-    } catch (e) {
-      return next(e);
-    }
-
-    return res.json(project);
   }
 );
 
+// NOT TESTED!
 projectRoute.post(
   "/uploadMediaAssets",
   requireAdmin,
-  validator.body(
-    Joi.object({
-      ProjectId: Joi.string()
-        .uuid()
-        .required(),
-      MediaAssets: Joi.array()
-        .items(
-          Joi.object({
-            cloudinaryPublicId: Joi.string()
-              .min(5)
-              .max(20)
-              .required()
-          })
-        )
-        .required()
-        .min(1)
-        .max(1)
-    })
-  ),
+  validator.body(validations.uploadMediaAssets),
   async (req, res, next) => {
+    // TODO: implement this Daoified route once tested:
+    // try {
+    //   const { ProjectId, MediaAssets } = req.body;
+    //   const project = await projectService.addMediaAssetsToProject(
+    //     ProjectId,
+    //     MediaAssets
+    //   );
+    // } catch (e) {
+    //   console.log(e);
+    //   next(e);
+    // }
+
     try {
       const params = ({ ProjectId, MediaAssets } = req.body);
 
@@ -405,17 +287,21 @@ projectRoute.post(
 projectRoute.post(
   "/deleteMediaAsset",
   requireAdmin,
-  validator.body(
-    Joi.object({
-      ProjectId: Joi.string()
-        .uuid()
-        .required(),
-      MediaAssetId: Joi.string()
-        .uuid()
-        .required()
-    })
-  ),
+  validator.body(validations.project.deleteMediaAsset),
   async (req, res, next) => {
+    // TODO: implement this Daoified route once tested:
+    // try {
+    //   const { ProjectId, MediaAssetId } = req.body;
+    //   const response = projectService.deleteProjectMediaAsset(
+    //     ProjectId,
+    //     MediaAssetId
+    //   );
+    //   res.status(200).json(response);
+    // } catch (e) {
+    //   console.log(e);
+    //   next(e);
+    // }
+
     try {
       const { ProjectId, MediaAssetId } = req.body;
 
