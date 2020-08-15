@@ -1,5 +1,5 @@
 import config from "../utils/config";
-import * as bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 const SALT_ROUNDS = config.bcryptSaltRounds();
 
 export default {

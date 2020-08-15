@@ -1,4 +1,7 @@
-import { MbConfig, Project, User, MbEvent, MediaAsset } from "../db/models";
+import models from "../db/models";
+import { Project } from "../types/Project";
+const { MbConfig, Project, User, MbEvent, MediaAsset } = models;
+
 ("use strict");
 
 // THE WAY OF DAO
@@ -7,29 +10,45 @@ import { MbConfig, Project, User, MbEvent, MediaAsset } from "../db/models";
 // - return standardized objects (not raw ORM models)
 // - only send bare minimum
 
-// MbConfig object interface (in lieu of typescript for now)
-// {
-//   id: STRING
-//   configKey: STRING,
-//   configValue: STRING
-//   updatedAt: STRING
-//   createdAt: STRING
-// }
+// INTERFACES
+interface MbConfigObjRaw {
+  id: string;
+  configKey: string;
+  configValue: string;
+  updatedAt: string;
+  createdAt: string;
+}
+
+interface MbConfigObjParsed {
+  id: string;
+  configKey: string;
+  configValue: string | object | Array<any> | number | boolean;
+  updatedAt: string;
+  createdAt: string;
+}
+
+interface FeaturedProjectSectionRaw {
+  title: string;
+  projectIds: Array<string>;
+}
+
+interface FeaturedProjectSectionParsed {
+  title: string;
+  projects: Array<Project>;
+}
 
 // UTILITIES ******************************************
-function hasJsonStructure(str) {
-  if (typeof str !== "string") return false;
+function hasJsonStructure(str: string) {
   try {
-    const result = JSON.parse(str);
-    const type = Object.prototype.toString.call(result);
+    const result: object = JSON.parse(str);
+    const type: string = Object.prototype.toString.call(result);
     return type === "[object Object]" || type === "[object Array]";
   } catch (err) {
     return false;
   }
 }
 
-const objWithParsedConfigValue = obj => {
-  const isJ = hasJsonStructure(obj.configValue);
+const objWithParsedConfigValue = (obj: MbConfigObjRaw): MbConfigObjParsed => {
   return {
     ...obj,
     configValue: hasJsonStructure(obj.configValue)
@@ -39,12 +58,12 @@ const objWithParsedConfigValue = obj => {
 };
 
 // QUERYING DAOS *************************************
-const findOneWhere = (where = {}) => {
+const findOneWhere = (where: object = {}) => {
   return MbConfig.findOne({
     where,
     raw: true,
     nest: true
-  }).then(obj => {
+  }).then((obj: any) => {
     if (!!obj) {
       return objWithParsedConfigValue(obj);
     }
@@ -52,7 +71,7 @@ const findOneWhere = (where = {}) => {
   });
 };
 
-const findByKey = key => findOneWhere({ configKey: key });
+const findByKey = (key: string) => findOneWhere({ configKey: key });
 
 const getAscFeaturedSectionsArr = () => {
   // returns shape:
@@ -65,7 +84,7 @@ const getAscFeaturedSectionsArr = () => {
   return new Promise(async (resolve, reject) => {
     let val;
     try {
-      const response = await MbConfig.findOne({
+      const response: any = await MbConfig.findOne({
         where: { configKey: "featuredSections" }
       });
       if (response) {
@@ -77,13 +96,13 @@ const getAscFeaturedSectionsArr = () => {
       reject(e);
     }
 
-    let pids = new Set();
-    val.sections.forEach(s => {
-      s.projectIds.forEach(pid => pids.add(pid));
+    let pids: any = new Set<string>();
+    val.sections.forEach((s: FeaturedProjectSectionRaw): void => {
+      s.projectIds.forEach((pid: string) => pids.add(pid));
     });
 
-    const pidsArray = Array.from(pids);
-    let projects = [];
+    const pidsArray: string[] = Array.from(pids);
+    let projects: Array<Project> = [];
     try {
       projects = await Project.findAll({
         where: { id: pidsArray },
@@ -106,33 +125,38 @@ const getAscFeaturedSectionsArr = () => {
       reject(e);
     }
 
-    const responseObj = val.sections.map(section => {
-      const projs = section.projectIds.map(pid =>
-        projects.find(p => p.id === pid)
-      );
-      return {
-        title: section.title,
-        projects: projs
-      };
-    });
+    const responseObj: FeaturedProjectSectionParsed = val.sections.map(
+      (section: FeaturedProjectSectionRaw) => {
+        const projs = section.projectIds.map((pid: string) =>
+          projects.find((p: Project) => p.id === pid)
+        );
+        return {
+          title: section.title,
+          projects: projs
+        };
+      }
+    );
     resolve(responseObj);
   });
 };
 
 // MUTATING DAOS *************************************
-const updateWhere = (where = {}, val) => {
+const updateWhere = (where: object = {}, val: object | string) => {
   // store objects as strings
-  const strVal = typeof val === "object" ? JSON.stringify(val) : val;
-  return MbConfig.update({ configValue: strVal }, { returning: true, where })
-    .then(arr => {
+  const strParsedVal = typeof val === "object" ? JSON.stringify(val) : val;
+  return MbConfig.update(
+    { configValue: strParsedVal },
+    { returning: true, where }
+  )
+    .then((arr: any) => {
       return arr[1][0];
     })
-    .then(obj => {
+    .then((obj: any) => {
       return objWithParsedConfigValue(obj.get({ raw: true }));
     });
 };
 
-const updateByKey = (key, val) => {
+const updateByKey = (key: string, val: string | object) => {
   return updateWhere({ configKey: key }, val);
 };
 

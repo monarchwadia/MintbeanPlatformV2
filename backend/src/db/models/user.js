@@ -1,8 +1,10 @@
 "use strict";
 
-const { hash, compare } = require("../../utils/encryption");
+import encryption from "../../utils/encryption";
 
-module.exports = (sequelize, DataTypes) => {
+const { hash, compare } = encryption;
+
+export default (sequelize, DataTypes) => {
   const User = sequelize.define(
     "User",
     {
