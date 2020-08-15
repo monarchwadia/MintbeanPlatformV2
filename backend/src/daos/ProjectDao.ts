@@ -1,4 +1,10 @@
 // THIS MODULE FAILING - unable to retrieve hasMany associations as array
+import models from "../db/models";
+// import { Project as ProjectType } from "../types/Project";
+import { MediaAsset as MediaAssetType } from "../types/MediaAsset";
+// import { Vote as VoteType } from "../types/Vote";
+// import { ProjectMediaAsset as ProjectMediaAssetType } from "../types/ProjectMediaAsset";
+
 const {
   Project,
   Vote,
@@ -7,7 +13,8 @@ const {
   MediaAsset,
   ProjectMediaAsset,
   sequelize
-} = require("../db/models");
+} = models;
+
 ("use strict");
 // THE WAY OF DAO
 // - first/last point of contact with 'the external' (db, apis, etc)
@@ -75,12 +82,12 @@ const associations = {
 };
 
 // QUERYING DAOS *************************************
-const findOneWhere = (where = {}) => {
+const findOneWhere = (where: object = {}) => {
   // Sequelize note: for nested 1:n associations - use { raw: true, nest: true } IN "include" ASSOCIATION ONLY, not at find*() root. Then take result and execute result.get({plain: true}) for returning only JSON
   return Project.findOne({
     where,
     ...associations
-  }).then(p => {
+  }).then((p: any) => {
     if (!!p) {
       return p.get({ plain: true });
     }
@@ -89,35 +96,43 @@ const findOneWhere = (where = {}) => {
 };
 
 // does not return associations
-const findAllWhere = (where = {}) => {
+const findAllWhere = (where: object = {}) => {
   return Project.findAll({
     where
-  }).then(p => {
+  }).then((p: any) => {
     return p;
   });
 };
 
-const findById = id => findOneWhere({ id });
+const findById = (id: string) => findOneWhere({ id });
 
 // MUTATING DAOS *************************************
 
-// projectParams shape: { title, source_code_url, live_url, mb_event_id, MbEventId, UserId }
-const create = projectParams => {
-  return new Promise(async (resolve, reject) => {
-    const { UserId } = projectParams;
-    let project;
+interface ProjectParams {
+  title: string;
+  source_code_url: string;
+  live_url: string;
+  MediaAssets: Array<MediaAssetType>;
+  MbEventId: string;
+  UserId: string;
+}
 
-    const result = await sequelize.transaction(async transaction => {
-      project = await Project.create({ ...projectParams }, { transaction });
-      const mediaAssets = await MediaAsset.bulkCreate(
+const create = (projectParams: ProjectParams) => {
+  return new Promise(async (resolve, reject) => {
+    const { UserId, MediaAssets } = projectParams;
+    let project: any;
+
+    await sequelize.transaction(async (transaction: any) => {
+      project = await Project.create(projectParams, { transaction });
+      const mediaAssets: Array<MediaAssetType> = await MediaAsset.bulkCreate(
         MediaAssets.map(({ cloudinaryPublicId }) => ({
           cloudinaryPublicId,
           UserId
         })),
         { transaction }
       );
-      const projectMediaAssets = await ProjectMediaAsset.bulkCreate(
-        mediaAssets.map((ma, i) => ({
+      await ProjectMediaAsset.bulkCreate(
+        mediaAssets.map((ma: MediaAssetType) => ({
           MediaAssetId: ma.id,
           ProjectId: project.id,
           UserId
@@ -130,7 +145,7 @@ const create = projectParams => {
       project = await Project.findOne({
         where: { id: project.id },
         ...associations
-      }).then(p => p.get({ plain: true }));
+      }).then((p: any) => p.get({ plain: true }));
       resolve(project);
     } catch (e) {
       reject(e);
@@ -139,32 +154,35 @@ const create = projectParams => {
 };
 
 // NOT TESTED!
-const addMediaAssetsToProject = (projectId, mediaAssets) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const result = await sequelize.transaction(async transaction => {
-        const mediaAssets = await MediaAsset.bulkCreate(
-          mediaAssets.map(({ cloudinaryPublicId }) => ({
-            cloudinaryPublicId,
-            UserId
-          })),
-          { transaction }
-        );
-        const projectMediaAssets = await ProjectMediaAsset.bulkCreate(
-          mediaAssets.map((ma, i) => ({
-            MediaAssetId: ma.id,
-            ProjectId: project.id,
-            UserId
-          })),
-          { transaction }
-        );
-      });
-      resolve(result); // TODO: convert 'result' to standard obj
-    } catch (err) {
-      reject(err);
-    }
-  });
-};
+// const addMediaAssetsToProject = (
+//   projectId: string,
+//   mediaAssets: Array<MediaAssetType>
+// ) => {
+//   return new Promise(async (resolve, reject) => {
+//     try {
+//       const result = await sequelize.transaction(async (transaction: any) => {
+//         await MediaAsset.bulkCreate(
+//           mediaAssets.map(({ cloudinaryPublicId }) => ({
+//             cloudinaryPublicId,
+//             UserId
+//           })),
+//           { transaction }
+//         );
+//         await ProjectMediaAsset.bulkCreate(
+//           mediaAssets.map((ma: MediaAssetType) => ({
+//             MediaAssetId: ma.id,
+//             ProjectId: projectId,
+//             UserId
+//           })),
+//           { transaction }
+//         );
+//       });
+//       resolve(result); // TODO: convert 'result' to standard obj
+//     } catch (err) {
+//       reject(err);
+//     }
+//   });
+// };
 
 module.exports = {
   // QUERY
@@ -172,6 +190,6 @@ module.exports = {
   findAllWhere,
   findById,
   // MUTATE
-  create,
-  addMediaAssetsToProject
+  create
+  // addMediaAssetsToProject
 };

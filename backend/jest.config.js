@@ -6,6 +6,7 @@ require("dotenv").config({
 
 // jest.config.js
 module.exports = {
-  verbose: false
+  verbose: false,
+  transform: { "\\.ts$": ["ts-jest"] }
   // preset: "ts-jest"
 };

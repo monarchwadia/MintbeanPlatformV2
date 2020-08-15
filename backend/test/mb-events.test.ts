@@ -1,11 +1,13 @@
-const supertest = require("supertest");
-const app = require("../src/app");
-const { TEST_EMAIL, TEST_PASSWORD } = require("./test.constants");
-const userCreated = require("./stories/user.created");
-const mbEventFactory = require("../src/db/factories/mb-event.factory");
-const { MbEvent } = require("../src/db/models");
+import supertest from "supertest";
+import app from "../src/app";
+// import { TEST_EMAIL, TEST_PASSWORD } from "./test.constants";
+// import userCreated from "./stories/user.created";
+import mbEventFactory from "../src/db/factories/mb-event.factory";
+import models from "../src/db/models";
 
-let agent = null;
+const { MbEvent } = models;
+
+let agent: supertest = null;
 
 describe("MbEvents route", () => {
   beforeEach(done => {
