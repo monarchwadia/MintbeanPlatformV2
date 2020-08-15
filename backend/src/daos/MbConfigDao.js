@@ -1,10 +1,4 @@
-const {
-  MbConfig,
-  Project,
-  User,
-  MbEvent,
-  MediaAsset
-} = require("../db/models");
+import { MbConfig, Project, User, MbEvent, MediaAsset } from "../db/models";
 ("use strict");
 
 // THE WAY OF DAO

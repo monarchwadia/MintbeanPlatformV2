@@ -1,5 +1,11 @@
-const { Router } = require("express");
-const { requireAuth, requireAdmin } = require("./routers.util");
+import { Router } from "express";
+import { requireAuth, requireAdmin } from "./routers.util";
+import db from "../db/models";
+import Joi from "@hapi/joi";
+import validator from "../validator";
+import validations from "../validations";
+import projectService from "../services/projectService";
+
 const {
   MbEvent,
   User,
@@ -8,11 +14,7 @@ const {
   MediaAsset,
   ProjectMediaAsset,
   sequelize
-} = require("../db/models");
-const Joi = require("@hapi/joi");
-const validator = require("../validator");
-const validations = require("../validations");
-const projectService = require("../services/projectService");
+} = db;
 
 const projectRoute = new Router();
 
@@ -166,6 +168,7 @@ projectRoute.get(
     `;
 
     try {
+      console.log(MbEvent, sequelize);
       const results = await sequelize.query(sql, {
         model: Project,
         mapToModel: true,
@@ -324,4 +327,4 @@ projectRoute.post(
   }
 );
 
-module.exports = projectRoute;
+export default projectRoute;
