@@ -1,16 +1,16 @@
 //app.js
-const config = require('./utils/config');
-const express = require("express");
-const expressSession = require('express-session')
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const authRoute = require('./routers/auth');
-const userProfileRoute = require('./routers/user-profile');
-const mbEventRoute = require('./routers/mb-event');
-const projectRoute = require('./routers/project');
-const voteRoute = require('./routers/vote');
-const mbConfigRoute = require('./routers/mb-config');
-const initializePassport = require('./passport/initialize');
+import config from "./utils/config";
+import express from "express";
+import expressSession from "express-session";
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import authRoute from "./routers/auth";
+import userProfileRoute from "./routers/user-profile";
+import mbEventRoute from "./routers/mb-event";
+import projectRoute from "./routers/project";
+import voteRoute from "./routers/vote";
+import mbConfigRoute from "./routers/mb-config";
+import initializePassport from "./passport/initialize";
 
 const app = express();
 const sessionOptions = { secret: config.appSessionSecret() };
@@ -22,19 +22,19 @@ app.use(bodyParser.json());
 initializePassport(app);
 
 const rootRouter = new express.Router();
-rootRouter.use('/auth', authRoute);
-rootRouter.use('/user-profile', userProfileRoute);
-rootRouter.use('/mb-event', mbEventRoute);
-rootRouter.use('/project', projectRoute);
-rootRouter.use('/vote', voteRoute);
-rootRouter.use('/mb-config', mbConfigRoute);
+rootRouter.use("/auth", authRoute);
+rootRouter.use("/user-profile", userProfileRoute);
+rootRouter.use("/mb-event", mbEventRoute);
+rootRouter.use("/project", projectRoute);
+rootRouter.use("/vote", voteRoute);
+rootRouter.use("/mb-config", mbConfigRoute);
 rootRouter.get("/", (req, res) => {
   res.json({
-    message: 'Welcome to the Mintbean Platform API'
-  })
+    message: "Welcome to the Mintbean Platform API"
+  });
 });
 
-app.use('/api/v1', rootRouter);
+app.use("/api/v1", rootRouter);
 
 // After your routes add a standard express error handler. This will be passed the Joi
 // error, plus an extra "type" field so we can tell what type of validation failed
@@ -52,5 +52,4 @@ app.use((err, req, res, next) => {
   }
 });
 
-
-module.exports = app;
+export default app;

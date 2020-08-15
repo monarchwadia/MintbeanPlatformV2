@@ -53,7 +53,7 @@ const associations = {
 };
 
 // QUERYING DAOS *************************************
-const findOneWhere = (where = {}) => {
+const findOneWhere = (where: object = {}) => {
   return MbEvent.findOne({
     where,
     raw: true,
@@ -63,7 +63,7 @@ const findOneWhere = (where = {}) => {
 };
 
 // does not return associations
-const findAllWhere = (where = {}) => {
+const findAllWhere = (where: object = {}) => {
   return MbEvent.findAll({
     where,
     raw: true

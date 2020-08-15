@@ -1,4 +1,4 @@
-const config = require("../utils/config.js");
+const config = require("../utils/config");
 const { Router } = require("express");
 const passport = require("passport");
 const Joi = require("@hapi/joi");

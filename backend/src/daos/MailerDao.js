@@ -1,15 +1,15 @@
-const sgMail = require("@sendgrid/mail");
-const { sendgridKey } = require("../utils/config");
+import sgMail from "@sendgrid/mail";
+import c from "../utils/config";
 
 const SENDER_EMAIL = "noreply@mintbean.io"; // TODO: use correct sender address
 
-if (!sendgridKey()) {
+if (!c.sendgridKey()) {
   throw new Error(
     "The sendgrid api key has not been set in the environment variables"
   );
 }
 
-sgMail.setApiKey(sendgridKey());
+sgMail.setApiKey(c.sendgridKey());
 
 // sample mail Obj:
 //   {
@@ -30,6 +30,6 @@ const send = function({ to, subject, html }) {
     .catch(err => console.log("ERROR when using sgMail.send(): ", err));
 };
 
-module.exports = {
+export default {
   send
 };

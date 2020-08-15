@@ -5,8 +5,8 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "start": "node ./index.js",
-    "dev": "nodemon ./index.js",
+    "start": "node ./index.ts",
+    "dev": "nodemon ./index.ts",
     "test": "jest --config ./jest.config.js       --runInBand --detectOpenHandles",
     "tdd": "jest --config ./jest.config.js --watch --runInBand --detectOpenHandles",
     "sly": "DOTENV_CONFIG_PATH=./.env node -r dotenv/config node_modules/sequelize-cli/lib/sequelize",

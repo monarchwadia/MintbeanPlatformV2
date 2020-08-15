@@ -2,7 +2,7 @@ require("dotenv").config();
 
 import configUtil from "./src/utils/config";
 
-import * as app from "./src/app";
+import app from "./src/app";
 
 process.on("unhandledRejection", (reason: any, p: any) => {
   console.log("Unhandled Rejection at: Promise", p, "reason:", reason);
