@@ -3,8 +3,8 @@
 import * as fs from "fs";
 import * as path from "path";
 import { Sequelize } from "sequelize";
-const basename: string = path.basename(__filename);
 import config from "../config/config";
+const basename: string = path.basename(__filename);
 const db: any = {};
 
 const sequelize = new Sequelize(
@@ -36,4 +36,4 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-export { db };
+export default db;

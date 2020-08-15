@@ -1,4 +1,4 @@
-import * as models from "../db/models";
+import models from "../db/models";
 import { MbEventWithProjects } from "../types/MbEvent";
 const { Project, User, Vote, MbEvent, MediaAsset } = models;
 ("use strict");

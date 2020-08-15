@@ -4,7 +4,7 @@ const CONVERTERS = {
 
 const getValue = (key: string) => process.env[key];
 
-const hoc = (key: string, _opts = {}) => {
+const hoc = (key: string, _opts: any = {}) => {
   // defaults
   const defaults = {
     required: true,
@@ -37,7 +37,7 @@ const hoc = (key: string, _opts = {}) => {
   return () => val || opts.defaultValue;
 };
 
-module.exports = {
+export default {
   // cloudinaryCloudName = hoc('CLOUDINARY_CLOUD_NAME'),
   nodeEnv: () => hoc("NODE_ENV"),
   dbDatabase: hoc("DB_DATABASE"),
@@ -56,7 +56,7 @@ module.exports = {
     // validator: rootDomain => rootDomain.indexOf('localhost') === 0 || rootDomain.indexOf('https://') === 0
 
     // Claire: link functionality requires protocol
-    validator: rootDomain =>
+    validator: (rootDomain: string) =>
       rootDomain.indexOf("http://localhost") === 0 ||
       rootDomain.indexOf("https://") === 0
   })
