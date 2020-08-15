@@ -1,11 +1,11 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const configUtil = require('./src/utils/config');
+import configUtil from "./src/utils/config";
 
-const app = require("./src/app");
+import * as app from "./src/app";
 
-process.on('unhandledRejection', (reason, p) => {
-  console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+process.on("unhandledRejection", (reason: any, p: any) => {
+  console.log("Unhandled Rejection at: Promise", p, "reason:", reason);
   console.dir(reason.stack);
   // application specific logging, throwing an error, or other logic here
 });
