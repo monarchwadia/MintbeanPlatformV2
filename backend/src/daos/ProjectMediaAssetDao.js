@@ -29,5 +29,16 @@ const findOneWhere = (where = {}) => {
 // };
 
 // MUTATING DAOS *************************************
+// const deleteWhere = (where = {}) => {
+//   return ProjectMediaAsset.delete({
+//     where,
+//     raw: true
+//   });
+// };
+// const deleteById = id => {
+//   return deleteWhere({ id });
+// };
 
-module.exports = { findOneWhere };
+module.exports = {
+  /*findOneWhere, deleteWhere, deleteById */
+};

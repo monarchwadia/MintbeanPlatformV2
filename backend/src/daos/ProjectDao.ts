@@ -1,9 +1,7 @@
 // THIS MODULE FAILING - unable to retrieve hasMany associations as array
 import models from "../db/models";
-// import { Project as ProjectType } from "../types/Project";
+import { ProjectExpl } from "../types/Project";
 import { MediaAsset as MediaAssetType } from "../types/MediaAsset";
-// import { Vote as VoteType } from "../types/Vote";
-// import { ProjectMediaAsset as ProjectMediaAssetType } from "../types/ProjectMediaAsset";
 
 const {
   Project,
@@ -76,13 +74,13 @@ const associations = {
         ]
       }
     },
-    { model: MediaAsset, raw: true, nest: true },
+    // { model: MediaAsset, raw: true, nest: true },
     { model: MbEvent, raw: true, nest: true }
   ]
 };
 
 // QUERYING DAOS *************************************
-const findOneWhere = (where: object = {}) => {
+const findOneWhere = async (where: object = {}): Promise<ProjectExpl> => {
   // Sequelize note: for nested 1:n associations - use { raw: true, nest: true } IN "include" ASSOCIATION ONLY, not at find*() root. Then take result and execute result.get({plain: true}) for returning only JSON
   return Project.findOne({
     where,
@@ -191,5 +189,4 @@ module.exports = {
   findById,
   // MUTATE
   create
-  // addMediaAssetsToProject
 };

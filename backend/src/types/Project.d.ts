@@ -14,7 +14,7 @@ export interface Project {
   updatedAt: date;
 }
 
-export interface ProjectWithAssociations {
+export interface ProjectExpl {
   id: string;
   title: string;
   source_code_url: string;

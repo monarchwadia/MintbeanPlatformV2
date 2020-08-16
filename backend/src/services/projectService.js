@@ -42,8 +42,8 @@ const create = projectParams => {
 //       if (!projectMediaAsset) {
 //         reject("No such assets found");
 //       } else {
-//         const deleted = await projectMediaAsset.destroy();
-//         resolve(deleted);
+//         await ProjectMediaAssetDao.deleteById(projectMediaAsset.id);
+//         resolve("OK");
 //       }
 //     } catch {
 //       reject(
@@ -59,5 +59,4 @@ module.exports = {
   findById,
   // MUTATE
   create
-  // addMediaAssetsToProject
 };

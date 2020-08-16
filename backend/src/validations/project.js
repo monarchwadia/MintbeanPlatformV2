@@ -56,4 +56,4 @@ const deleteMediaAsset = Joi.object({
     .uuid()
     .required()
 });
-module.exports = { createProject, uploadMediaAssets };
+module.exports = { createProject, uploadMediaAssets, deleteMediaAsset };

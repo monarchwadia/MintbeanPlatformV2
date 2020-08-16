@@ -286,44 +286,45 @@ projectRoute.post(
 //     }
 //   }
 // );
-//
+
 // projectRoute.post(
 //   "/deleteMediaAsset",
 //   requireAdmin,
-//   validator.body(validations.project.deleteMediaAsset),
+//   // validator.body(validations.project.deleteMediaAsset),
 //   async (req, res, next) => {
 //     // TODO: implement this Daoified route once tested:
-//     // try {
-//     //   const { ProjectId, MediaAssetId } = req.body;
-//     //   const response = projectService.deleteProjectMediaAsset(
-//     //     ProjectId,
-//     //     MediaAssetId
-//     //   );
-//     //   res.status(200).json(response);
-//     // } catch (e) {
-//     //   console.log(e);
-//     //   next(e);
-//     // }
-//
 //     try {
 //       const { ProjectId, MediaAssetId } = req.body;
-//
-//       const projectMediaAsset = await ProjectMediaAsset.findOne({
-//         where: { ProjectId, MediaAssetId }
-//       });
-//
-//       if (!projectMediaAsset) {
-//         return res.status(404).json({ message: "No such assets found" });
-//       } else {
-//         const deleted = await projectMediaAsset.destroy();
-//         return res.json(deleted);
-//       }
-//     } catch (e) {
-//       console.log(
-//         `Error while deleting media asset, ProjectId=[${ProjectId}] MediaAssetId=[${MediaAssetId}]`
+//       const response = projectService.deleteProjectMediaAsset(
+//         ProjectId,
+//         MediaAssetId
 //       );
+//       res.status(200).json(response);
+//     } catch (e) {
+//       console.log(e);
 //       next(e);
 //     }
+//
+//     // try {
+//     //   const { ProjectId, MediaAssetId } = req.body;
+//     //
+//     //   const projectMediaAsset = await ProjectMediaAsset.findOne({
+//     //     where: { ProjectId, MediaAssetId }
+//     //   });
+//     //
+//     //   if (!projectMediaAsset) {
+//     //     return res.status(404).json({ message: "No such assets found" });
+//     //   } else {
+//     //     const deleted = await projectMediaAsset.destroy();
+//     //     return res.json(deleted);
+//     //   }
+//     //   res.json("dummy");
+//     // } catch (e) {
+//     //   console.log(
+//     //     `Error while deleting media asset, ProjectId=[${ProjectId}] MediaAssetId=[${MediaAssetId}]`
+//     //   );
+//     //   next(e);
+//     // }
 //   }
 // );
 
