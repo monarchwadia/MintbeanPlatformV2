@@ -1,5 +1,5 @@
 import models from "../db/models";
-import { MbEventWithProjects } from "../types/MbEvent";
+import { MbEventExpl } from "../types/MbEvent";
 
 const { Project, User, Vote, MbEvent, MediaAsset } = models;
 ("use strict");
@@ -74,7 +74,7 @@ const findAllWhere = (where: object = {}) => {
 const findById = (id: string) => findOneWhere({ id });
 
 // MUTATING DAOS *************************************
-const create = (mbEvent: MbEventWithProjects) => {
+const create = (mbEvent: MbEventExpl) => {
   return MbEvent.create(mbEvent).then((mbe: any) => {
     if (!!mbe) {
       return mbe.get({ raw: true });
