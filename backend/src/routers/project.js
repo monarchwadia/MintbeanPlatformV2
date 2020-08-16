@@ -212,20 +212,20 @@ projectRoute.get(
 projectRoute.post(
   "/",
   requireAuth,
-  validator.body(validations.project.createProject),
+  // validator.body(validations.project.createProject),
   async (req, res, next) => {
-    const params = ({
-      title,
-      source_code_url,
-      live_url,
-      mb_event_id,
-      MbEventId,
-      MediaAssets
-    } = req.body);
+    console.log({ reqr: req.body });
+    // const params = ({
+    //   title,
+    //   source_code_url,
+    //   live_url,
+    //   MbEventId,
+    //   MediaAssets
+    // } = req.body);
     const UserId = req.user.id;
 
     try {
-      const project = await projectService.create({ UserId, ...params });
+      const project = await projectService.create({ UserId, ...req.body });
       return res.json(project);
     } catch (err) {
       console.log({ err });

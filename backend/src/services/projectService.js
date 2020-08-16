@@ -8,7 +8,7 @@ const findById = id => ProjectDao.findById(id);
 // MUTATING ***************************************************
 const create = projectParams => {
   return new Promise(async (resolve, reject) => {
-    const { UserId } = projectParams;
+    const { UserId, MbEventId } = projectParams;
     let existingProject;
     try {
       existingProject = await ProjectDao.findOneWhere({

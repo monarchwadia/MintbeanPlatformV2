@@ -74,7 +74,7 @@ const associations = {
         ]
       }
     },
-    // { model: MediaAsset, raw: true, nest: true },
+    { model: MediaAsset, raw: true, nest: true },
     { model: MbEvent, raw: true, nest: true }
   ]
 };
@@ -94,7 +94,7 @@ const findOneWhere = async (where: object = {}): Promise<ProjectExpl> => {
 };
 
 // does not return associations
-const findAllWhere = (where: object = {}) => {
+const findAllWhere = async (where: object = {}): Promise<ProjectExpl> => {
   return Project.findAll({
     where
   }).then((p: any) => {
@@ -102,7 +102,8 @@ const findAllWhere = (where: object = {}) => {
   });
 };
 
-const findById = (id: string) => findOneWhere({ id });
+const findById = async (id: string): Promise<ProjectExpl> =>
+  findOneWhere({ id });
 
 // MUTATING DAOS *************************************
 
@@ -119,7 +120,7 @@ const create = (projectParams: ProjectParams) => {
   return new Promise(async (resolve, reject) => {
     const { UserId, MediaAssets } = projectParams;
     let project: any;
-
+    console.log("pre transaction");
     await sequelize.transaction(async (transaction: any) => {
       project = await Project.create(projectParams, { transaction });
       const mediaAssets: Array<MediaAssetType> = await MediaAsset.bulkCreate(
@@ -137,6 +138,7 @@ const create = (projectParams: ProjectParams) => {
         })),
         { transaction }
       );
+      return null;
     });
 
     try {
