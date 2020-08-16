@@ -1,6 +1,6 @@
 // THIS MODULE FAILING - unable to retrieve hasMany associations as array
 import models from "../db/models";
-import { ProjectExpl } from "../types/Project";
+import { ProjectExpl, ProjectParams } from "../types/Project";
 import { MediaAsset as MediaAssetType } from "../types/MediaAsset";
 
 const {
@@ -107,16 +107,7 @@ const findById = async (id: string): Promise<ProjectExpl> =>
 
 // MUTATING DAOS *************************************
 
-interface ProjectParams {
-  title: string;
-  source_code_url: string;
-  live_url: string;
-  MediaAssets: Array<MediaAssetType>;
-  MbEventId: string;
-  UserId: string;
-}
-
-const create = (projectParams: ProjectParams) => {
+const create = (projectParams: ProjectParams): Promise<ProjectExpl> => {
   return new Promise(async (resolve, reject) => {
     const { UserId, MediaAssets } = projectParams;
     let project: any;
@@ -138,14 +129,21 @@ const create = (projectParams: ProjectParams) => {
         })),
         { transaction }
       );
-      return null;
     });
 
     try {
       project = await Project.findOne({
         where: { id: project.id },
         ...associations
-      }).then((p: any) => p.get({ plain: true }));
+      }).then(
+        (p: any): ProjectExpl => {
+          if (!!p) {
+            console.log(p.get({ plain: true }));
+            return p.get({ plain: true });
+          }
+          return p;
+        }
+      );
       resolve(project);
     } catch (e) {
       reject(e);

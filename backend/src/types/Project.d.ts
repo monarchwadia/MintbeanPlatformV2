@@ -2,6 +2,15 @@ import { MediaAsset } from "./MediaAsset";
 import { User } from "./User";
 import { Vote } from "./Vote";
 
+export interface ProjectParams {
+  title: string;
+  source_code_url: string;
+  live_url: string;
+  MediaAssets: Array<MediaAssetType>;
+  MbEventId: string;
+  UserId: string;
+}
+
 export interface Project {
   id: string;
   title: string;
