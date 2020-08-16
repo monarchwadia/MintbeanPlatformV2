@@ -23,16 +23,16 @@ div
         section._media-asset-container.mt-4.p-6.shadow-mb
           aside(v-for="mediaAsset in project.MediaAssets")
             mb-image-display(v-if="mediaAsset.cloudinaryPublicId" :publicId="mediaAsset.cloudinaryPublicId", width="980")
-            div.flex.justify-end(v-if="isAdmin")
-              button.self-right(v-if="mediaAsset.cloudinaryPublicId" v-on:click.prevent="handleDeleteMediaAsset(mediaAsset)") Delete
+            //- div.flex.justify-end(v-if="isAdmin")
+            //-   button.self-right(v-if="mediaAsset.cloudinaryPublicId" v-on:click.prevent="handleDeleteMediaAsset(mediaAsset)") Delete
         section(v-if="!project.MediaAssets.length")
           p No media uploaded.
-          section(v-if="isAdmin")
-            aside
-              div.flex
-                label Upload File
-                  mb-file-upload(:files="[]" name="files" ref="mbFileUpload")
-                  button(v-on:click.prevent="handleUploadMediaAssets()") Submit
+          //- section(v-if="isAdmin")
+          //-   aside
+          //-     div.flex
+          //-       label Upload File
+          //-         mb-file-upload(:files="[]" name="files" ref="mbFileUpload")
+          //-         button(v-on:click.prevent="handleUploadMediaAssets()") Submit
 
       div.mt-6.flex.flex-col.md_flex-row
         //- left column
@@ -167,50 +167,50 @@ export default {
         rating
       };
       this.$store.dispatch("vote", obj);
-    },
-    handleDeleteMediaAsset(MediaAsset) {
-      if (
-        !confirm(
-          "Are you sure you want to delete this media asset? This action is not reversible."
-        )
-      ) {
-        return;
-      }
-
-      const ProjectId = this.$store.state.project.id;
-      const MediaAssetId = MediaAsset.id;
-
-      if (ProjectId && MediaAssetId) {
-        this.$store.dispatch("deleteMediaAsset", { ProjectId, MediaAssetId });
-      }
-    },
-    handleUploadMediaAssets() {
-      const { mbFileUpload } = this.$refs;
-      const ProjectId = this.project.id;
-
-      if (!mbFileUpload) {
-        alert("Oops: Could not find file upload form");
-        return;
-      }
-
-      const MediaAssets = this.$refs.mbFileUpload.getFiles().map(f => ({
-        cloudinaryPublicId: f.public_id
-      }));
-
-      if (MediaAssets.length === 0) {
-        alert("Oops: Must have at least 1 file to submit");
-        return;
-      }
-
-      if (MediaAssets.length > 1) {
-        alert(
-          "Oops: Found more than 1 file. Currently we only support 1 file."
-        );
-        return;
-      }
-
-      this.$store.dispatch("uploadMediaAssets", { ProjectId, MediaAssets });
     }
+    // handleDeleteMediaAsset(MediaAsset) {
+    //   if (
+    //     !confirm(
+    //       "Are you sure you want to delete this media asset? This action is not reversible."
+    //     )
+    //   ) {
+    //     return;
+    //   }
+    //
+    //   const ProjectId = this.$store.state.project.id;
+    //   const MediaAssetId = MediaAsset.id;
+    //
+    //   if (ProjectId && MediaAssetId) {
+    //     this.$store.dispatch("deleteMediaAsset", { ProjectId, MediaAssetId });
+    //   }
+    // },
+    // handleUploadMediaAssets() {
+    //   const { mbFileUpload } = this.$refs;
+    //   const ProjectId = this.project.id;
+    //
+    //   if (!mbFileUpload) {
+    //     alert("Oops: Could not find file upload form");
+    //     return;
+    //   }
+    //
+    //   const MediaAssets = this.$refs.mbFileUpload.getFiles().map(f => ({
+    //     cloudinaryPublicId: f.public_id
+    //   }));
+    //
+    //   if (MediaAssets.length === 0) {
+    //     alert("Oops: Must have at least 1 file to submit");
+    //     return;
+    //   }
+    //
+    //   if (MediaAssets.length > 1) {
+    //     alert(
+    //       "Oops: Found more than 1 file. Currently we only support 1 file."
+    //     );
+    //     return;
+    //   }
+    //
+    //   this.$store.dispatch("uploadMediaAssets", { ProjectId, MediaAssets });
+    // }
   },
   mounted() {
     this.$store
