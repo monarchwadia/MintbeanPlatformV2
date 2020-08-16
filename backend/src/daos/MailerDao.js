@@ -1,7 +1,7 @@
 import sgMail from "@sendgrid/mail";
 import c from "../utils/config";
 
-const SENDER_EMAIL = "noreply@mintbean.io"; // TODO: use correct sender address
+const SENDER_EMAIL = "noreply@mintbean.io";
 
 if (!c.sendgridKey()) {
   throw new Error(
@@ -18,6 +18,7 @@ sgMail.setApiKey(c.sendgridKey());
 //   subject: <email_subject>,
 //   html: <html_body>,             // For sending HTML emails
 // }
+
 const send = function({ to, subject, html }) {
   const sgMailObj = {
     to,

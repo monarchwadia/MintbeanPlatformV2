@@ -55,7 +55,6 @@ export default {
     // ensure https for everything, unless running localhost
     // validator: rootDomain => rootDomain.indexOf('localhost') === 0 || rootDomain.indexOf('https://') === 0
 
-    // Claire: link functionality requires protocol
     validator: (rootDomain: string) =>
       rootDomain.indexOf("http://localhost") === 0 ||
       rootDomain.indexOf("https://") === 0

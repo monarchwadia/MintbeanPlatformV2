@@ -1,12 +1,16 @@
-import supertest from "supertest";
-import app from "../src/app";
-import { TEST_EMAIL, TEST_PASSWORD, TEST_ADMIN_EMAIL } from "./test.constants";
-import userFactory from "../src/db/factories/user.factory";
-import { User } from "../src/db/models";
-import sgMail from "@sendgrid/mail";
-import { parse } from "node-html-parser";
-import { btoa } from "./test.util";
-import encryption from "../src/utils/encryption";
+const supertest = require("supertest");
+const app = require("../src/app");
+const {
+  TEST_EMAIL,
+  TEST_PASSWORD,
+  TEST_ADMIN_EMAIL
+} = require("./test.constants");
+const userFactory = require("../src/db/factories/user.factory");
+const { User } = require("../src/db/models");
+const sgMail = require("@sendgrid/mail");
+const { parse } = require("node-html-parser");
+const { btoa } = require("./test.util");
+const encryption = require("../src/utils/encryption");
 
 const ABSURD_EMAIL = "iswearthisaddressisntinthedatabase@noway.io";
 

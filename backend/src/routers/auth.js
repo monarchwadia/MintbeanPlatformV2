@@ -45,6 +45,7 @@ authRoute.post("/logout", requireAuth, (req, res) => {
 });
 
 authRoute.post("/reset", async (req, res, next) => {
+  console.log(req.body.email);
   try {
     await authService.sendResetEmail(req.body.email);
     // always return ambiguous message
